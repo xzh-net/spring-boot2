@@ -14,7 +14,6 @@
 		<module>spring-boot-knife4j</module>
 		<module>spring-boot-webflux</module>
 		<module>spring-boot-hikaricp</module>
-		<module>spring-boot-ureport2</module>
 		<module>spring-boot-email</module>
 		<module>spring-boot-quartz</module>
 		<module>spring-boot-elk</module>
