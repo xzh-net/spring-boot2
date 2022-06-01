@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.xzh.activiti.mapper.DeptMapper">
+    <resultMap id="BaseResultMap" type="net.xzh.activiti.model.Dept">
+        <id column="dept_id" jdbcType="INTEGER" property="deptId"/>
+        <result column="dept_name" jdbcType="VARCHAR" property="deptName"/>
+        <result column="parent_id" jdbcType="INTEGER" property="parentId"/>
+        <result column="order_num" jdbcType="INTEGER" property="orderNum"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime"/>
+    </resultMap>
+
+
+    <resultMap id="TreeBaseResultMap" type="net.xzh.activiti.model.Dept">
+        <id column="dept_id" jdbcType="INTEGER" property="deptId"/>
+        <result column="dept_name" jdbcType="VARCHAR" property="deptName"/>
+        <result column="parent_id" jdbcType="INTEGER" property="parentId"/>
+        <result column="order_num" jdbcType="INTEGER" property="orderNum"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime"/>
+        <collection property="children" ofType="net.xzh.activiti.model.Dept" select="selectAllTree" column="{parent_id = dept_id}"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        dept_id, dept_name, parent_id, order_num, create_time, modify_time
+    </sql>
+
+    <select id="selectAllTree" resultMap="TreeBaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from dept
+        <where>
+            <choose>
+                <when test="parent_id!=null">
+                    and parent_id = #{parent_id}
+                </when>
+                <otherwise>
+                    and parent_id = 0
+                </otherwise>
+            </choose>
+        </where>
+        order by order_num
+    </select>
+
+</mapper>

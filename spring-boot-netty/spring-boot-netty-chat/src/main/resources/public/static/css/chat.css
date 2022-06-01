@@ -1,0 +1,64 @@
+/*
+ **********************************************
+ * 聊天页面样式
+ * @author Kevin
+ * @date 2020/12/29 11:02
+ **********************************************
+ */
+
+/* 聊天窗口容器  */
+.chat-container { border: solid 0px #03A9F4; padding: 0px 0px; background: #fff;  width:500px;height:600px; border-radius:3px; box-shadow:0 0 10px;position:absolute}
+.chat-container .chat-resize-bottom-right{ position: absolute; width: 14px; height: 14px; right: 0; bottom: 0; overflow: hidden; cursor: nw-resize;}
+
+
+
+/* ============================== 聊天头部 start ============================== */
+.chat-container .chat-head { background-color: #03A9F4;color: #ffffff;}
+.chat-container .chat-head .chat-head-title{text-align:center;}
+.chat-container .chat-head .chat-head-title span{display:inline-block;padding:5px 5px;}
+.chat-container .chat-head .chat-head-title .close{float:right;padding: 5px 11px; margin: 0px 0px;}
+.chat-container .chat-head .chat-head-title .close:hover{background:red;cursor:pointer;}
+/* ============================== 聊天头部 end ============================== */
+
+
+
+
+/* ============================== 消息内容主体 start ============================== */
+.chat-container .chat-body { background: #fdfdfd;  border: solid 1px #fdfdfd;height:60%; }
+.chat-container .chat-body .chat-body-content{height:100%}
+.chat-container .chat-body .chat-body-content ul{ list-style:none; padding: 0px 7px; }
+.chat-container .chat-body .chat-body-content ul>li{ padding-bottom:5px;}
+.chat-container .chat-body .chat-body-content .chat-system-info{text-align: center;padding:2px 0px;}
+.chat-container .chat-body .chat-body-content .chat-system-info .msg{text-align: center; background: #d8d8d8; border-radius: 2px; color: #fff;font-size:12px;padding:2px;}
+.chat-container .chat-body .chat-body-content{overflow:auto; word-wrap:break-word; }
+.chat-container .chat-body .chat-body-content::-webkit-scrollbar {width: 6px;background-color: rgb(255 255 255);}
+.chat-container .chat-body .chat-body-content::-webkit-scrollbar-thumb {-webkit-box-shadow: inset 0 0 6px rgb(210 210 210 / 30%);background-color: #c7c7c7;border-radius:3px   }
+.chat-container .chat-body .chat-body-content .chat-msg-title-me{ color:green;font-size:10px;}
+.chat-container .chat-body .chat-body-content .chat-msg-title-other{ color:blue;font-size:10px;}
+.chat-container .chat-body .chat-body-content .chat-msg-content{font-size:10px;}
+/* ============================== 消息内容主体 end ============================== */
+
+
+/* ============================== 聊天底部 start ============================== */
+.chat-container .chat-foot {height:31%;}
+.chat-container .chat-foot .chat-foot-text{ text-align:center;  padding:0px; margin:5px 5px;height:60%}
+.chat-container .chat-foot .chat-foot-head-tools {  background:#fdfdfd;  height:20px;  border-top:solid 1px #dcdcdc;}
+.chat-container .chat-foot .chat-foot-head-tools i{
+    padding: 3px;
+    color: #777;
+}
+.chat-container .chat-foot .chat-foot-head-tools i:hover{background:#efefef; }
+
+/* 设置发送消息文本样式 start */
+.chat-container .chat-foot .chat-foot-text .send-msg-text { width:98%; height:100%; resize:none; border:0px; outline:none;}
+.chat-container .chat-foot .chat-foot-text .send-msg-text::-webkit-scrollbar {width: 6px;background-color: rgb(255 255 255);}
+.chat-container .chat-foot .chat-foot-text .send-msg-text::-webkit-scrollbar-thumb {-webkit-box-shadow: inset 0 0 6px rgb(210 210 210 / 30%);background-color: #c7c7c7;border-radius:3px   }
+/* 设置发送消息文本样式 end */
+.chat-container .chat-foot .chat-foot-bottom-tools{ text-align:right; padding:0px 5px 10px 5px; }
+
+/* 发送按钮样式  start */
+.chat-container .chat-foot .chat-foot-bottom-tools .send{display:inine-block; padding:7px 25px; cursor:pointer; color:#fff; background:#03a9f4; border:none; outline:none; border-radius: 5px; box-shadow: 0 4px #999; font-size:14px;font-weight:bold;}
+.chat-container .chat-foot .chat-foot-bottom-tools .send:hover{background:#049ade;}
+.chat-container .chat-foot .chat-foot-bottom-tools .send:active{box-shadow: 0 2px #666; background-color: #03a9f4; transform: translateY(1px);}
+/* 发送按钮样式  end */
+/* ============================== 聊天底部 end ============================== */

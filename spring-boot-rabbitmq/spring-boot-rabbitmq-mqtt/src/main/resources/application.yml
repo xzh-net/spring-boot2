@@ -1,0 +1,13 @@
+server:
+  port: 8080
+rabbitmq:
+  mqtt:
+    url: tcp://xuzhihao:1883
+    username: guest
+    password: guest
+    clientid: mqttid1123
+    defaultTopic: test
+    
+spring:
+  thymeleaf:
+    cache: false

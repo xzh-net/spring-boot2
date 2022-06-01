@@ -1,0 +1,19 @@
+server:
+   port: 8080
+spring:
+   freemarker:
+      charset: UTF-8
+      request-context-attribute: request
+      settings:
+         classic_compatible: true
+         number_format: 0.##
+      suffix: .ftl
+      templateEncoding: UTF-8
+      templateLoaderPath: classpath:/templates/
+   mail:
+      host: smtp.qq.com
+      username: 307587787
+      password: abspkbdvydjgbjdc
+      default-encoding: UTF-8
+      fromAddr: 307587787@qq.com
+      nickName: young

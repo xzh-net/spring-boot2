@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统登录</title>
+
+<script th:inline="javascript">     
+        var contextPath= [[@{/}]];      
+</script>
+
+<script th:src="|${#servletContext.contextPath}/webjars/jquery/3.1.1/jquery.min.js|"></script>
+
+<script>
+	function login() {
+		$.ajax({
+			url : contextPath+'login',
+			data: {"loginName":$("#loginName").val()},
+			type : "POST",
+			success : function(data) {
+				location.href = contextPath+"dashboard";
+			}
+		});
+	}
+</script>
+</head>
+<body>
+<div><a href="?lang=en_US">English</a> | <a href="?lang=zh_CN">中文</a></div>
+<div><input type="text" id="loginName" /><input type="submit" onclick="login();" th:value="#{login.logon}"/></div>
+</body>
+</html>

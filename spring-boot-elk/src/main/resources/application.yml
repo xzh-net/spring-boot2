@@ -1,0 +1,7 @@
+server:
+   port: 8080
+spring:
+   application:
+      name: eltTest
+logstash:
+   host: 172.17.17.200

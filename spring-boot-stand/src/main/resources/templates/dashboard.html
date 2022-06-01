@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>我的工作台</title>
+
+<script th:inline="javascript">     
+        var contextPath= [[@{/}]];      
+</script>
+
+<script th:src="|${#servletContext.contextPath}/webjars/jquery/3.1.1/jquery.min.js|"></script>
+
+<script>
+	function logout() {
+		$.ajax({
+			url : contextPath+'logout',
+			type : "POST",
+			success : function(data) {
+				location.href = contextPath;
+			}
+		});
+	}
+</script>
+</head>
+<body>
+<div><a href="?lang=en_US">English</a> | <a href="?lang=zh_CN">中文</a></div>
+
+<body th:inline="text">
+    [[${session.user}]]，[[#{welcome}]]
+</body>
+<div>[[${#dates.format(new java.util.Date().getTime(), 'yyyy-MM-dd HH:mm:ss')}]]</div> 
+<div><input type="submit" onclick="logout();" th:value="#{login.logout}"/></div>
+</body>
+</html>

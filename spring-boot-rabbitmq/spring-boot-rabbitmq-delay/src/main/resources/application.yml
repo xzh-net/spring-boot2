@@ -1,0 +1,21 @@
+server:
+  port: 8080
+spring:
+  rabbitmq:
+    addresses: xuzhihao:5672
+    username: guest
+    password: guest
+    virtual-host: /
+    # 发送确认对应RabbitTemplate.ConfirmCallback接口
+    publisher-confirm-type: correlated
+    # 发送失败回退，对应RabbitTemplate.ReturnCallback接口
+    publisher-returns: true    
+    listener:
+      simple:  
+        acknowledge-mode: manual
+        concurrency: 10 # 消费端的监听个数,开启几个线程去处理数据
+        max-concurrency: 10 # 消费端的监听最大个数
+        prefetch: 10   # qos=1 默认250
+      direct:
+        acknowledge-mode: manual
+      

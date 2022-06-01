@@ -1,0 +1,8 @@
+server:
+   port: 9090
+channel:
+   id: 1327
+netty:
+   server:
+      host: 127.0.0.1
+      port: 9873

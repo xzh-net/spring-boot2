@@ -1,0 +1,20 @@
+server:
+  port: 8080
+
+spring:
+  data:
+    mongodb:
+      host: 172.17.17.137
+      port: 27018
+      database: mall-history
+      
+      # uri连接
+#      uri: mongodb://172.17.17.137:27018/mall-history
+      # 副本集的连接字符串
+#      uri: mongodb://192.168.3.200:27017,192.168.3.200:27018,192.168.3.200:27019/articledb?connect=replicaSet&slaveOk=true&replicaSet=myrs&readPreference=secondaryPreferred
+      # 副本集有认证的情况下，字符串连接
+#      uri: mongodb://xzh:123456@192.168.3.200:27017,192.168.3.200:27018,192.168.3.200:27019/articledb?connect=replicaSet&slaveOk=true&replicaSet=myrs
+      # 连接路由字符串
+#      uri: mongodb://192.168.3.199:27017,192.168.40.141:27117/articledb
+      # 分片集群有认证的情况下，字符串连接
+#      uri: mongodb://xzh:123456@192.168.3.199:27017,192.168.3.199:27117/articledb

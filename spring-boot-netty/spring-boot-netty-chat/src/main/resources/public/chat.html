@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<link>
+<meta charset="UTF-8">
+<title>简单群聊页面</title>
+<link rel="icon" href="static/img/log.png" type="image/png" >
+<head>
+<link rel="stylesheet" href="static/css/chat.css">
+<link rel="stylesheet" href="static/css/base.css">
+
+</head>
+<body>
+
+
+<!-- 聊天窗口 start -->
+<div class="chat-container">
+    <!-- 头部 -->
+    <div class="chat-head">
+        <div class="chat-head-title"><span>【${loginName!}】-在线人数</span><span id="total">0</span>
+            <span class="close" onclick="chatWin.close();">X</span>
+        </div>
+    </div>
+    <!-- 消息主体 -->
+    <div class="chat-body">
+        <div class="chat-body-content">
+        </div>
+    </div>
+    <!-- 底部 -->
+    <div class="chat-foot no-select">
+        <div class="chat-foot-head-tools">
+            <i class="fa fa-bold"></i>
+            <i class="fa fa-italic"></i>
+            <i class="fa fa-underline"></i>
+        </div>
+        <div class="chat-foot-text">
+            <textarea class="send-msg-text" id="sendMessage"></textarea>
+        </div>
+        <div class="chat-foot-bottom-tools">
+            <button class="send" onclick="chat.send()">发送</button>
+        </div>
+    </div>
+    <!-- 拖动改变窗口大小组件 -->
+    <div class="chat-resize-bottom-right"></div>
+    <!-- 登录名 -->
+    <input type="hidden" id="loginName" name="loginName" value="${loginName!}">
+</div>
+<!-- 聊天窗口 end -->
+</body>
+<script src="static/js/chat.js"></script>
+<script src="static/js/util.js"></script>
+<script>
+    chat.init();
+</script>
+</html>

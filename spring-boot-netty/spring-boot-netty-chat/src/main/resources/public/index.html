@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <link rel="icon" href="static/img/log.png" type="image/png" >
+    <script>
+        function login(){
+            var form=document.getElementById("loginForm");
+            form.submit();
+        }
+    </script>
+<style>
+ body{background:#fff}
+.login-panel{margin:10% auto 0 auto;background:#fff;width:25%;border-radius:3px;border:solid 1px #f3f3f3;box-shadow:4px 8px 10px 4px #b9b9b9;min-width:355px}form{margin:20px 20px}
+.login{border:solid 1px #03A9F4;border-radius:3px;}
+.login .login-head {background:#03A9F4;text-align:center;color:#fff;padding:10px;font-weight:bold;}
+.login .login-body {padding:50px;text-align:center;}
+.login .login-foot {padding:10px 10px 50px 10px;text-align:center}
+.login .login-foot .login-foot-tool button{display:inline-block;padding:10px 87px;background:#03a9f4;border:solid 1px #03a9f4;color:#fff;font-size:15px;border-radius:5px;box-shadow:2px 3px #007fb9;font-weight:bold;outline:0}
+.login .login-foot .login-foot-tool button:active{box-shadow:0 2px #666;background-color:#03a9f4;transform:translateY(1px)}
+.login .login-body input{font-size:15px;padding:9px 7px;color:#333;caret-color:brown;outline:0;border:solid 1px #03a9f4}
+.login .login-body input:focus{box-shadow:1px -1px 6px 0 #f5e708;border:solid 1px #ffeb3b}
+</style>
+</head>
+<body>
+    <div class="login-panel">
+        <form id="loginForm" action="doLogin" method="post">
+            <div class="login">
+                <div class="login-head">
+                    <div class="login-head-title"> My Chat V1.0.0 登录</div>
+                </div>
+                <div class="login-body">
+                    <input type="text" name="loginName" id="loginName" placeholder="昵称">
+                </div>
+                <div class="login-foot">
+                    <div class="login-foot-tool">
+                        <button onclick="login()">登录</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

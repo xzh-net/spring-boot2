@@ -1,0 +1,46 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>net.xzh</groupId>
+	<artifactId>xzh-springboot</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	
+	<modules>
+		<!--整合-->
+		<module>spring-boot-stand</module>
+		<module>spring-boot-swagger</module>
+		<module>spring-boot-knife4j</module>
+		<module>spring-boot-webflux</module>
+		<module>spring-boot-hikaricp</module>
+		<module>spring-boot-ureport2</module>
+		<module>spring-boot-email</module>
+		<module>spring-boot-quartz</module>
+		<module>spring-boot-elk</module>
+		<module>spring-boot-elasticsearch</module>
+		<module>spring-boot-mongo</module>
+		<module>spring-boot-hbase</module>
+		<module>spring-boot-jwt</module>
+		<module>spring-boot-redis</module>
+		<module>spring-boot-activiti</module>
+		<module>spring-boot-jenkins</module>
+		<!--starter-->
+		<module>spring-boot-log</module>
+		<module>spring-boot-oss</module>
+		<!--工具类-->
+		<module>spring-boot-generator</module>
+		<module>spring-boot-validation</module>
+		<!--消息中间件-->
+		<module>spring-boot-activemq</module>
+		<module>spring-boot-rabbitmq</module>
+		<module>spring-boot-rocketmq</module>	
+		<module>spring-boot-kafka</module>
+		<!--聊天-->
+		<module>spring-boot-netty</module>
+		<!--rpc-->
+		<module>spring-boot-dubbo</module>
+		<module>spring-boot-cxf</module>
+		
+	</modules>
+</project> 

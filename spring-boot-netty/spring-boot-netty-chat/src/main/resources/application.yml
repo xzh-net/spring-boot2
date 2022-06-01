@@ -1,0 +1,12 @@
+server:
+   port: 8080
+spring:
+   mvc:
+      static-path-pattern: /**
+   resources:
+      chain:
+         cache: false
+   freemarker:
+      template-loader-path: classpath:/public/
+      suffix: .html
+      cache: false

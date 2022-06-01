@@ -1,0 +1,9 @@
+server:
+   port: 8080
+dubbo:
+   application:
+      name: dubbo-provider
+   registry:
+      address: zookeeper://xuzhihao:2181 #N/A
+   scan:
+      base-packages: net.xzh.dubbo.service

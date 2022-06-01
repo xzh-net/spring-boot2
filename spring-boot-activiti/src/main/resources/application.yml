@@ -1,0 +1,49 @@
+#配置端口
+server:
+   port: 8080
+#配置数据源的属性
+spring:
+   datasource:
+      druid:
+         driver-class-name: com.mysql.cj.jdbc.Driver
+         url: jdbc:mysql://xuzhihao:3306/activiti?useSSL=false&characterEncoding=UTF8&serverTimezone=UTC
+         username: root
+         password: 123456
+         max-active: 100
+         max-wait: 5000
+         initial-size: 1
+         filters: stat,wall
+         validationQuery: SELECT 'x' #验证连接
+         enable: true #监控配置
+         stat-view-servlet:
+            enabled: true
+            login-username: root
+            login-password: root
+            allow: null
+            deny: null
+            url-pattern: /druid/*
+         test-on-borrow: true
+         test-while-idle: true
+   thymeleaf:
+      cache: false
+      enabled: true
+   jackson:
+      date-format: yyyy-MM-dd HH:mm:ss
+      time-zone: GMT+8
+   resources:
+      add-mappings: true
+   mvc:
+      hiddenmethod: 
+         filter: 
+            enabled: true
+mybatis:
+   mapper-locations:
+   - classpath*:net/**/mapper/*.xml
+   map-underscore-to-camel-case: true
+   
+xzh:
+   noAuthUrls:
+   - /
+   - /login
+   - /logout
+   - /captcha

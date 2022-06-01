@@ -1,0 +1,18 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>	
+	<groupId>net.xzh</groupId>
+	<artifactId>spring-boot-rabbitmq</artifactId>
+	<name>spring-boot-rabbitmq</name>
+	<description>spring-boot-rabbitmq</description>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	
+	<modules>
+		<module>spring-boot-rabbitmq-ampq</module>
+		<module>spring-boot-rabbitmq-delay</module>
+		<module>spring-boot-rabbitmq-mqtt</module>
+	</modules>
+	
+</project>
