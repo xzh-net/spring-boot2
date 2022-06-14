@@ -30,6 +30,7 @@ spring-boot-jwt
 spring-boot-redis
 spring-boot-activiti
 spring-boot-jenkins
+spring-boot-security
 ```
 
 ## 2. 自定义starter
