@@ -26,11 +26,11 @@ spring-boot-elk
 spring-boot-elasticsearch
 spring-boot-mongo
 spring-boot-hbase
-spring-boot-jwt
 spring-boot-redis
 spring-boot-activiti
 spring-boot-jenkins
-spring-boot-security
+spring-boot-jwt			登录认证
+spring-boot-security	动态授权
 ```
 
 ## 2. 自定义starter
