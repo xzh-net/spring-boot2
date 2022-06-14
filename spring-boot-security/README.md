@@ -4,17 +4,19 @@
 
 ```bash
 <parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.7.0</version>
-		<relativePath />
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-parent</artifactId>
+	<version>2.7.0</version>
+	<relativePath />
 </parent>
 	
 mvn clean compile
 mvn clean package
 ```
 
- ## 动态权限
+## 动态权限
+
+认证步骤：登录授权过滤器->动态权限过滤器，处理白名单->动态权限决策管理器
 
 1. 实现FilterInvocationSecurityMetadataSource类，获取动态权限数据源
    	- ```
