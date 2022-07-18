@@ -17,7 +17,6 @@
 		<module>spring-boot-email</module>
 		<module>spring-boot-quartz</module>
 		<module>spring-boot-elk</module>
-		<module>spring-boot-felk</module>
 		<module>spring-boot-elasticsearch</module>
 		<module>spring-boot-mongo</module>
 		<module>spring-boot-hbase</module>

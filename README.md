@@ -19,13 +19,12 @@ spring-boot-swagger		--整合swagger
 spring-boot-knife4j		--整合knife4j
 spring-boot-webflux		--异步非阻塞式Web框架
 spring-boot-hikaricp	--数据源
-spring-boot-email	--发送邮件
-spring-boot-quartz	--定时任务和线程池
-spring-boot-elk		--日志收集
-spring-boot-elk		--日志收集filebeat
+spring-boot-email		--发送邮件
+spring-boot-quartz		--定时任务和线程池
+spring-boot-elk			--日志收集
 spring-boot-elasticsearch	--商品搜索
 spring-boot-mongo		--浏览记录读写分离
-spring-boot-hbase
+spring-boot-hbase		--hbase
 spring-boot-redis		--常用操作整合
 spring-boot-activiti	--工作流设计器，groups验证分组，druid监控
 spring-boot-jenkins		--持续集成
