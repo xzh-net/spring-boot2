@@ -4,4 +4,4 @@ spring:
    application:
       name: elk
 logstash:
-   host: 172.17.17.137
+   host: 172.17.17.194
