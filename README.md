@@ -25,6 +25,7 @@ spring-boot-elk			--日志收集
 spring-boot-elasticsearch	--商品搜索
 spring-boot-mongo		--浏览记录读写分离
 spring-boot-hbase		--hbase
+spring-boot-hdfs		--hadoop
 spring-boot-redis		--常用操作整合
 spring-boot-activiti	--工作流设计器，groups验证分组，druid监控
 spring-boot-jenkins		--持续集成

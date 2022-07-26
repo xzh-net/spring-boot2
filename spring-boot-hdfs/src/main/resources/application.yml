@@ -1,0 +1,11 @@
+server:
+  port: 8080
+hadoop.name-node: hdfs://172.17.17.200:50070
+hadoop.namespace: /mydata
+logging:
+  level:
+    com.example.demo.mapper: debug
+    com.jackroy.www: ERROR
+    learning: trace
+log4j:
+  rootLogger: WARN
