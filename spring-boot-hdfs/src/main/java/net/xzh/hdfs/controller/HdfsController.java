@@ -1,41 +1,35 @@
 package net.xzh.hdfs.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import net.xzh.hdfs.config.HadoopTemplate;
+import net.xzh.hdfs.repository.HdfsService;
 
 
 @RestController
 public class HdfsController {
 
-    @Autowired
-    private HadoopTemplate hadoopTemplate;
+	@Autowired
+    private HdfsService hdfsService;
 
     /**
-     * 将本地文件srcFile,上传到hdfs
+     * 创建HDFS目录
      * @param srcFile
      * @return
      */
-    @PostMapping("/upload")
-    public String upload(String srcFile){
-        hadoopTemplate.uploadFile(srcFile);
-        return "copy";
+    @PostMapping("/mkdir")
+    public boolean mkdir(String dir){
+    	return hdfsService.mkdir(dir);
     }
-
-    @DeleteMapping("/delFile")
-    public String del(@RequestParam String fileName){
-        hadoopTemplate.delFile(fileName);
-        return "delFile";
-    }
-
-    @GetMapping("/download")
-    public String download(@RequestParam String fileName,@RequestParam String savePath){
-        hadoopTemplate.download(fileName,savePath);
-        return "download";
+    
+    /**
+     * 上传文件至HDFS
+     * @param dstPath
+     * @return
+     */
+    @PostMapping("/uploadFileToHdfs")
+    public void uploadFileToHdfs(String srcFile,String dstPath){
+    	hdfsService.uploadFileToHdfs(srcFile, dstPath);
     }
 }

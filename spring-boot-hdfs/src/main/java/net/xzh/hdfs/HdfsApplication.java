@@ -6,7 +6,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class HdfsApplication {
 	public static void main(String[] args) {
-		 System.setProperty("hadoop.home.dir", "D:\\tools\\hadoop-3.1.4");
 		SpringApplication.run(HdfsApplication.class, args);
 	}
 }
