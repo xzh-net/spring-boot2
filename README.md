@@ -2,10 +2,10 @@
 
 ```
 <parent>
-	<groupId>org.springframework.boot</groupId>
-	<artifactId>spring-boot-starter-parent</artifactId>
-	<version>2.3.0.RELEASE</version>
-	<relativePath />
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.3.0.RELEASE</version>
+    <relativePath />
 </parent>
 ```
 
@@ -14,23 +14,24 @@
 ## 1. 基础整合
 
 ```lua
-spring-boot-stand		--基础项目
-spring-boot-swagger		--整合swagger
-spring-boot-knife4j		--整合knife4j
-spring-boot-webflux		--异步非阻塞式Web框架
-spring-boot-hikaricp	--数据源
-spring-boot-email		--发送邮件
-spring-boot-quartz		--定时任务和线程池
-spring-boot-elk			--日志收集
-spring-boot-elasticsearch	--商品搜索
-spring-boot-mongo		--浏览记录读写分离
-spring-boot-hbase		--hbase
-spring-boot-hdfs		--hadoop
-spring-boot-redis		--常用操作整合
-spring-boot-activiti	--工作流设计器，groups验证分组，druid监控
-spring-boot-jenkins		--持续集成
-spring-boot-jwt			--登录认证
-spring-boot-security	--动态授权
+spring-boot-stand       --基础项目
+spring-boot-swagger     --整合swagger
+spring-boot-knife4j     --整合knife4j
+spring-boot-webflux     --异步非阻塞式Web框架
+spring-boot-hikaricp    --数据源
+spring-boot-email       --发送邮件
+spring-boot-quartz      --定时任务和线程池
+spring-boot-elk         --日志收集
+spring-boot-etl         --数据转换
+spring-boot-elasticsearch   --商品搜索
+spring-boot-mongo       --浏览记录读写分离
+spring-boot-hbase       --hbase
+spring-boot-hdfs        --hadoop
+spring-boot-redis       --常用操作整合
+spring-boot-activiti    --工作流设计器，groups验证分组，druid监控
+spring-boot-jenkins     --持续集成
+spring-boot-jwt         --登录认证
+spring-boot-security    --动态授权
 ```
 
 ## 2. 自定义starter
@@ -43,8 +44,8 @@ spring-boot-oss	--附件服务器
 ## 3. 工具类
 
 ```lua
-spring-boot-generator	--代码生成工具
-spring-boot-validation	--逻辑校验的三种方式
+spring-boot-generator   --代码生成工具
+spring-boot-validation  --逻辑校验的三种方式
 ```
 
 ## 4. 消息中间件
@@ -52,7 +53,7 @@ spring-boot-validation	--逻辑校验的三种方式
 ```lua
 spring-boot-activemq
 spring-boot-rabbitmq
-spring-boot-rocketmq	
+spring-boot-rocketmq
 spring-boot-kafka
 ```
 
