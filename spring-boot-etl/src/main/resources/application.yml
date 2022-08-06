@@ -1,0 +1,5 @@
+server:
+   port: 8080
+kettle:
+  script:
+    path: D:\xzh\spring-boot\spring-boot-etl
