@@ -20,139 +20,185 @@ public class HBaseUtilsTest {
     @Autowired
     private HBaseRepository hBaseRepository;
 
-    @Test
-    public void initTable() {
-        hBaseRepository.initRepository();
+    /**
+     * 创建命名空间
+     */
+    
+//    @Test
+    public void createNamespace() {
+        hBaseRepository.createNamespace("xzh");
+    }
+    
+    /**
+     * 创建多表
+     */
+    
+//    @Test
+    public void createTable() {
         Map<String, List<String>> tableMap = new HashMap<>();
-        tableMap.put("david_topic:actionFlow", Arrays.asList("info", "logs"));
-        tableMap.put("david_topic:recording", Arrays.asList("info", "logs"));
-        tableMap.put("david_topic:syncLog", Arrays.asList("info", "logs"));
-        tableMap.put("david_topic:uploadVersion", Arrays.asList("info", "logs"));
-        // hBaseRepository.createManyTable(tableMap);
+        tableMap.put("xzh:actionFlow", Arrays.asList("info", "logs"));
+        tableMap.put("xzh:recording", Arrays.asList("info", "logs"));
+        tableMap.put("xzh:syncLog", Arrays.asList("info", "logs"));
+        tableMap.put("xzh:uploadVersion", Arrays.asList("info", "logs"));
+        hBaseRepository.createManyTable(tableMap);
+        hBaseRepository.getAllTableNames();
+    }
+    /**
+     * 创建单表
+     */
+//     @Test
+    public void createOneTable() {
+        // 在指定命名空间创建表
+        hBaseRepository.createOneTable("xzh:order", "info", "log");
         hBaseRepository.getAllTableNames();
     }
 
-    // @Test
-    public void createOneTable() {
-        hBaseRepository.initRepository();
-        // 在指定命名空间创建表
-        hBaseRepository.createOneTable("david_topic:topictest", "info", "log");
-    }
-
-    // @Test
+    /**
+     * 删除表
+     */
+//    @Test
     public void deleteTable() {
-        hBaseRepository.deleteTable("david_topic:topictest");
+        hBaseRepository.deleteTable("xzh:actionFlow");
+        hBaseRepository.deleteTable("xzh:recording");
+        hBaseRepository.deleteTable("xzh:syncLog");
+        hBaseRepository.deleteTable("xzh:uploadVersion");
+        hBaseRepository.getAllTableNames();
     }
 
-    // @Test
+    /**
+     * 插入指定列族下具体列的值
+     */
+//     @Test
     public void insertManyColumnRecords() {
-        String tableName = "david_topic:topictest";
-        String rowNumber = "105155";
+        String tableName = "xzh:order";
+        String rowNumber = "100000";
         String columnFamily = "info";
         List<String> columns = Arrays.asList("id", "title", "poform", "dept", "level", "createUser");
-        List<String> values = Arrays.asList("105155", "瑞风S4品牌临时页面", "Mobile", "营销中心", "普通", "王丽");
+        List<String> values = Arrays.asList("100000", "我们都是好孩子", "Mobile", "开发部", "高级", "张三");
         hBaseRepository.insertManyColumnRecords(tableName, rowNumber, columnFamily, columns, values);
     }
-
-    // @Test
+    /**
+     * 指定rowkey指定列族下所有字段内容
+     */
+//     @Test
     public void selectTableByRowNumberAndColumnFamily() {
-        String tableName = "david_topic:topictest";
-        String rowNumber = "105155";
+        String tableName = "xzh:order";
+        String rowNumber = "100000";
         String columnFamily = "info";
         hBaseRepository.selectTableByRowNumberAndColumnFamily(tableName, rowNumber, columnFamily);
     }
 
+    /**
+     * 获取所有表
+     */
     // @Test
     public void getAllTableNames() {
         hBaseRepository.getAllTableNames();
     }
 
-    // @Test
+    /**
+     * 添加指定列族下具体列的值
+     */
+//     @Test
     public void insertOneColumnRecords() {
-        String tableName = "david_topic:topictest";
-        String rowNumber = "105155";
+        String tableName = "xzh:order";
+        String rowNumber = "100000";
         String columnFamily = "info";
         hBaseRepository.insertOneColumnRecords(tableName, rowNumber, columnFamily, "delete", "否");
     }
 
-    // @Test
+    /**
+     * 删除指定列族下具体列的值
+     */
+//     @Test
     public void deleteDataBycolumn() {
-        String tableName = "david_topic:topictest";
-        String rowNumber = "105155";
+        String tableName = "xzh:order";
+        String rowNumber = "100000";
         String columnFamily = "info";
         String column = "delete";
         hBaseRepository.deleteDataByColumn(tableName, rowNumber, columnFamily, column);
     }
-
-    // @Test
+    /**
+     * 获取指定列族下记录条数
+     */
+//     @Test
     public void getTableDataCount() {
-        String tableName = "david_topic:topictest";
-        hBaseRepository.getTableDataCount(tableName, "log");
+        String tableName = "xzh:order";
+        hBaseRepository.getTableDataCount(tableName, "info");
     }
 
-    // @Test
+    /**
+     * 删除指定rowkey的所有数据
+     */
+//     @Test
     public void deleteDataByRowNumber() {
-        String tableName = "david_topic:topictest";
-        String rowNumber = "105155";
+        String tableName = "xzh:order";
+        String rowNumber = "100000";
         hBaseRepository.deleteDataByRowNumber(tableName, rowNumber);
     }
 
-    // @Test
+    /**
+     * 查询所有数据
+     */
+//     @Test
     public void selectTableAllDataMap() {
-        String tableName = "david_topic:topictest";
+        String tableName = "xzh:order";
         hBaseRepository.selectTableAllDataMap(tableName);
     }
-
+    /**
+     * 根据表名和列簇查询所有数据
+     */
+    
     // @Test
     public void selectTableAllDataMapColumnFamily() {
-        String tableName = "david_topic:topictest";
+        String tableName = "xzh:order";
         String columnFamily = "log";
         hBaseRepository.selectTableAllDataMap(tableName, columnFamily);
     }
 
-    // @Test
+//     @Test
     public void selectOneRowDataMap() {
-        String tableName = "david_topic:topictest";
-        String rowNumber = "105155";
+        String tableName = "xzh:order";
+        String rowNumber = "100000";
         hBaseRepository.selectOneRowDataMap(tableName, rowNumber);
     }
 
-    // @Test
+//     @Test
     public void selectColumnValue() {
-        String tableName = "david_topic:topictest";
-        String rowNumber = "105155";
+        String tableName = "xzh:order";
+        String rowNumber = "100000";
         String columnFamily = "info";
         String column = "title";
         hBaseRepository.selectColumnValue(tableName, rowNumber, columnFamily, column);
     }
 
-    // @Test
+//     @Test
     public void deleteDataByRowNumberAndColumnFamily() {
-        String tableName = "david_topic:topictest";
-        String columnFamily = "info";
+        String tableName = "xzh:order";
+        String columnFamily = "log";
         hBaseRepository.deleteDataByColumnFamily(tableName, columnFamily);
     }
 
-    // @Test
+//     @Test
     public void selectTableDataByFilter() {
-        String tableName = "david_topic:topictest";
-        List<String> queryParam = Arrays.asList("id,105155", "dept,营销中心");
+        String tableName = "xzh:order";
+        List<String> queryParam = Arrays.asList("id,100000", "dept,开发部");//完全匹配
         hBaseRepository.selectTableDataByFilter(tableName, "info", queryParam, ",", true);
     }
 
-    // @Test
+//     @Test
     public void selectColumnValueDataByFilter() {
-        String tableName = "david_topic:topictest";
-        List<String> queryParam = Arrays.asList("topicFileId,6282");
+        String tableName = "xzh:order";
+        List<String> queryParam = Arrays.asList("topicFileId,100000");
         hBaseRepository.selectColumnValueDataByFilter(tableName, "info", queryParam, ",", "id", true);
     }
 
     /**
      * 分页方式一: 全表扫描并返回经过分页后的数据
      */
-    // @Test
+//     @Test
     public void selectTableAllDataMapAllPage() {
-        String tableName = "david_topic:topictest";
+        String tableName = "xzh:order";
         int pageSize = 3;
         String key = null;
         int dataCount = pageSize;
@@ -178,7 +224,7 @@ public class HBaseUtilsTest {
      */
     // @Test
     public void selectTableAllDataMapPage() {
-        String tableName = "david_topic:topictest";
+        String tableName = "xzh:order";
         int pageSize = 3;
         List<Map<String, Object>> result =
             hBaseRepository.selectTableAllDataMapPage(tableName, pageSize, "32956703305764864");
