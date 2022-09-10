@@ -2,6 +2,11 @@
 
 访问地址：http://127.0.0.1:8080/doc.html 
 
+```bash
+mvn clean compile
+mvn clean package
+```
+
 1. 同步消息,ack处理方式：throw new RuntimeException("模拟抛出的异常");
 2. 异步
 3. 单向消息
@@ -36,7 +41,7 @@ public class DefaultMessageListenerConcurrently implements MessageListenerConcur
 }
 ```
 
-7. 消息重试
+消息重试
 
 ```java
 public class MessageListenerImpl implements MessageListener {
@@ -70,9 +75,4 @@ public class MessageListenerImpl implements MessageListener {
         return Action.CommitMessage;
     }
 }
-```
-
-```bash
-mvn clean compile
-mvn clean package
 ```
