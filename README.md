@@ -55,6 +55,7 @@ spring-boot-activemq
 spring-boot-rabbitmq
 spring-boot-rocketmq
 spring-boot-kafka
+spring-boot-pulsar
 ```
 
 ## 5. 聊天
