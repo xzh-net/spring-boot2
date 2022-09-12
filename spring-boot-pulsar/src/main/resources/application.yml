@@ -1,0 +1,4 @@
+server:
+  port: 8080
+pulsar:
+  service-url: pulsar://node01:6650,node02:6650,node03:6650
