@@ -17,3 +17,4 @@ mvn clean package
 ```
 
 1. Ack设置未完
+2. 自定义function，编写FormatDateFunction.java后，打包将jar包上传至pusar服务器
