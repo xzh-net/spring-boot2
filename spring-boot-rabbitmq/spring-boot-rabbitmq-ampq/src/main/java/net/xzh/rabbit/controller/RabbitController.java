@@ -1,4 +1,4 @@
-package net.xzh.mq.controller;
+package net.xzh.rabbit.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import net.xzh.mq.common.model.CommonResult;
-import net.xzh.mq.direct.DirectSender;
-import net.xzh.mq.fanout.FanoutSender;
-import net.xzh.mq.simple.SimpleSender;
-import net.xzh.mq.topic.TopicSender;
-import net.xzh.mq.work.WorkSender;
+import net.xzh.rabbit.common.model.CommonResult;
+import net.xzh.rabbit.exchange.direct.DirectSender;
+import net.xzh.rabbit.exchange.fanout.FanoutSender;
+import net.xzh.rabbit.exchange.simple.SimpleSender;
+import net.xzh.rabbit.exchange.topic.TopicSender;
+import net.xzh.rabbit.exchange.work.WorkSender;
 
 /**
  * Created by macro on 2020/5/19.

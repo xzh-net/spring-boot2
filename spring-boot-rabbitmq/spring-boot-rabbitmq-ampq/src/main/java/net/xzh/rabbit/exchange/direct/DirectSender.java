@@ -13,31 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.xzh.mq.work;
+package net.xzh.rabbit.exchange.direct;
 
-import org.springframework.amqp.core.Queue;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Created by macro on 2020/5/19.
  */
-@Configuration
-public class WorkRabbitConfig {
+public class DirectSender {
 
-    @Bean
-    public Queue workQueue() {
-        return new Queue("work.hello");
-    }
+	@Autowired
+	private RabbitTemplate template;
 
-    @Bean
-    public WorkReceiver workReceiver() {
-        return new WorkReceiver();
-    }
+	private static final String exchangeName = "exchange.direct";
 
-    @Bean
-    public WorkSender workSender() {
-        return new WorkSender();
-    }
+	public void send(String message) {
+		String key = "";
+		if (message.startsWith("1")) {
+			key = "error";
+		} else if (message.startsWith("2")) {
+			key = "debug";
+		} else if (message.startsWith("3")) {
+			key = "info";
+		} else {
+			key = "warn";
+		}
+		template.convertAndSend(exchangeName, key, message);
+	}
 
 }

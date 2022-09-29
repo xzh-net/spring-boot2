@@ -1,4 +1,4 @@
-package net.xzh.mq.work;
+package net.xzh.rabbit.exchange.work;
 
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;

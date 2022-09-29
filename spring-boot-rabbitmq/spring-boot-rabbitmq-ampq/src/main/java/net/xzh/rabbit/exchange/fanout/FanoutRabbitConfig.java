@@ -1,4 +1,4 @@
-package net.xzh.mq.fanout;
+package net.xzh.rabbit.exchange.fanout;
 
 import org.springframework.amqp.core.AnonymousQueue;
 import org.springframework.amqp.core.Binding;

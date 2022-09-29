@@ -1,4 +1,4 @@
-package net.xzh.mq.topic;
+package net.xzh.rabbit.exchange.topic;
 
 import org.springframework.amqp.core.AnonymousQueue;
 import org.springframework.amqp.core.Binding;

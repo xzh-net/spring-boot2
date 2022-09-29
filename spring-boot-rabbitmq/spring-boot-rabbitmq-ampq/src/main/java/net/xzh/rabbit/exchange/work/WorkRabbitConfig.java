@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 the original author or authors.
+ * Copyright 2015-2018 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,22 +13,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.xzh.mq.work;
+package net.xzh.rabbit.exchange.work;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.amqp.core.Queue;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * Created by macro on 2020/5/19.
  */
-public class WorkReceiver {
+@Configuration
+public class WorkRabbitConfig {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(WorkReceiver.class);
+    @Bean
+    public Queue workQueue() {
+        return new Queue("work.hello");
+    }
 
-    @RabbitListener(queues = "work.hello")
-    public void receive(String message) {
-        LOGGER.info("WorkReceiver , {}", message);
+    @Bean
+    public WorkReceiver workReceiver() {
+        return new WorkReceiver();
+    }
+
+    @Bean
+    public WorkSender workSender() {
+        return new WorkSender();
     }
 
 }

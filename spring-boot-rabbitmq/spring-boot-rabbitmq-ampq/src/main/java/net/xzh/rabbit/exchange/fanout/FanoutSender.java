@@ -1,4 +1,4 @@
-package net.xzh.mq.fanout;
+package net.xzh.rabbit.exchange.fanout;
 
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;

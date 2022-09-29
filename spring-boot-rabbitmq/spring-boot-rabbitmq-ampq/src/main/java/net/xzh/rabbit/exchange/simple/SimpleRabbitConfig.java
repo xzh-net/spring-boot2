@@ -1,4 +1,4 @@
-package net.xzh.mq.simple;
+package net.xzh.rabbit.exchange.simple;
 
 import org.springframework.amqp.core.Queue;
 import org.springframework.context.annotation.Bean;

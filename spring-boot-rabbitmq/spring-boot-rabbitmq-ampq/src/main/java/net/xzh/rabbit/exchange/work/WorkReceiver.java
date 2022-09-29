@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.xzh.mq.fanout;
+package net.xzh.rabbit.exchange.work;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,20 +22,13 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 /**
  * Created by macro on 2020/5/19.
  */
-public class FanoutReceiver {
+public class WorkReceiver {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(FanoutReceiver.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(WorkReceiver.class);
 
-    @RabbitListener(queues = "#{fanoutQueue1.name}")
-    public void receive1(String message) {
-    	LOGGER.info("FanoutReceiver1 , {}", message);
+    @RabbitListener(queues = "work.hello")
+    public void receive(String message) {
+        LOGGER.info("WorkReceiver , {}", message);
     }
-
-    @RabbitListener(queues = "#{fanoutQueue2.name}")
-    public void receive2(String message) {
-    	LOGGER.info("FanoutReceiver2 , {}", message);
-    }
-
-    
 
 }

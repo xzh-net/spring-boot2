@@ -1,4 +1,4 @@
-package net.xzh.mq.simple;
+package net.xzh.rabbit.exchange.simple;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
