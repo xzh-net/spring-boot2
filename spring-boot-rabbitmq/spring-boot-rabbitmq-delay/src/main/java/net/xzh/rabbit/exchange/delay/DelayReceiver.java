@@ -1,4 +1,4 @@
-package net.xzh.mq.delay;
+package net.xzh.rabbit.exchange.delay;
 
 import java.io.IOException;
 import java.util.Map;

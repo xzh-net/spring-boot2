@@ -1,4 +1,4 @@
-package net.xzh.mq.delay;
+package net.xzh.rabbit.exchange.delay;
 
  
 import org.springframework.amqp.core.Binding;

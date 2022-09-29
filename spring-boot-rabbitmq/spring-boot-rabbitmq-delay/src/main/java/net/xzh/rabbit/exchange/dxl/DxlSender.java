@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.xzh.mq.delay;
+package net.xzh.rabbit.exchange.dxl;
 
 import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -21,27 +21,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import cn.hutool.json.JSONUtil;
-import net.xzh.mq.domain.OrderItem;
+import net.xzh.rabbit.domain.OrderItem;
 
 /**
  * Created by macro on 2020/5/19.
  */
 @Component
-public class DelaySender {
+public class DxlSender {
 
 	@Autowired
-	private RabbitTemplate template;
+	private RabbitTemplate rabbitTemplate;
 
-	public void send(String orderId,Long delayTimes) {
-		// 给延迟队列发送消息，彼此间隔不同无任何影响
+	public void send(String orderId, Long delayTimes) {
 		OrderItem order = new OrderItem();
 		order.setId(Long.valueOf(orderId));
-		order.setProductName("延迟战甲" + System.currentTimeMillis());
-		template.convertAndSend("delay_exchange", "delay_queue", JSONUtil.toJsonStr(order), message -> {
-			// 配置消息的过期时间
-			message.getMessageProperties().setHeader("x-delay", delayTimes);
-			return message;
-		}, new CorrelationData(orderId));
+		order.setProductName("死信头盔" + System.currentTimeMillis());
+		rabbitTemplate.convertAndSend(DxlRabbitConfig.DXL_EXCHANGE_NAME, DxlRabbitConfig.DXL_ROUTING_KEY, JSONUtil.toJsonStr(order),
+				message -> {
+					message.getMessageProperties().setExpiration("3000");
+					return message;
+				}, new CorrelationData(orderId));
 	}
 
 }

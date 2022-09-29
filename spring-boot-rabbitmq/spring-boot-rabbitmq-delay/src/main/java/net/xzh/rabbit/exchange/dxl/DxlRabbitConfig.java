@@ -1,4 +1,4 @@
-package net.xzh.mq.dxl;
+package net.xzh.rabbit.exchange.dxl;
 
 import java.util.HashMap;
 import java.util.Map;

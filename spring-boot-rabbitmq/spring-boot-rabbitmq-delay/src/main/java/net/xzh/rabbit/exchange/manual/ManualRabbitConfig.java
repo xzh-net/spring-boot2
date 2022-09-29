@@ -1,4 +1,4 @@
-package net.xzh.mq.manual;
+package net.xzh.rabbit.exchange.manual;
 
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;

@@ -1,4 +1,4 @@
-package net.xzh.mq.manual;
+package net.xzh.rabbit.exchange.manual;
 
 import java.io.IOException;
 import java.util.Map;

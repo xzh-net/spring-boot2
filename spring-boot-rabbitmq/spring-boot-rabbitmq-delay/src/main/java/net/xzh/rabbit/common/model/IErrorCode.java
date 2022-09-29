@@ -1,4 +1,4 @@
-package net.xzh.mq.common.model;
+package net.xzh.rabbit.common.model;
 
 /**
  * 封装API的错误码

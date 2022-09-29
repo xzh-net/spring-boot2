@@ -1,4 +1,4 @@
-package net.xzh.mq.domain;
+package net.xzh.rabbit.domain;
 
 import java.io.Serializable;
 
