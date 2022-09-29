@@ -1,4 +1,4 @@
-package net.xzh.mqtt.config;
+package net.xzh.rabbit.config;
 
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.springframework.beans.factory.annotation.Autowired;

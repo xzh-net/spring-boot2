@@ -1,4 +1,4 @@
-package net.xzh.mqtt.controller;
+package net.xzh.rabbit.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

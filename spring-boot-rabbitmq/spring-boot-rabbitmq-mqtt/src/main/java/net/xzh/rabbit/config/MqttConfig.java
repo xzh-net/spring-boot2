@@ -1,4 +1,4 @@
-package net.xzh.mqtt.config;
+package net.xzh.rabbit.config;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

@@ -1,4 +1,4 @@
-package net.xzh.mqtt.config;
+package net.xzh.rabbit.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,7 +29,7 @@ public class Swagger2Config {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("net.xzh.mqtt.controller"))
+                .apis(RequestHandlerSelectors.basePackage("net.xzh.rabbit.controller"))
                 .paths(PathSelectors.any())
                 .build()
                 //添加登录认证
