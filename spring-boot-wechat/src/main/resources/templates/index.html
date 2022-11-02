@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>微信首页</title>
+<script th:inline="javascript">     
+        var contextPath= [[@{/}]];      
+</script>
+
+<script>
+	location=contextPath+"wechat/authorize?returnUrl=https://digpm.vjsp.cn/cms/wechat/userInfo";
+</script>
+</head>
+<body>
+授权中...
+</body>
+</html>

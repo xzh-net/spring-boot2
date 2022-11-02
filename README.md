@@ -32,6 +32,7 @@ spring-boot-activiti    --工作流设计器，groups验证分组，druid监控
 spring-boot-jenkins     --持续集成
 spring-boot-jwt         --登录认证
 spring-boot-security    --动态授权
+spring-boot-wechat	    --微信网页授权
 ```
 
 ## 2. 自定义starter

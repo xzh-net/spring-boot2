@@ -1,0 +1,10 @@
+spring:
+   thymeleaf:
+      enabled: true
+      cache: false
+      encoding: UTF-8
+      prefix: classpath:/templates/
+      suffix: .html
+wechat:
+   wx_appid: xxxxxx
+   wx_pay_key: xxxxxx

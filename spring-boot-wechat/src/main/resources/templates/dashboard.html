@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>我的工作台</title>
+
+<script th:inline="javascript">     
+        var contextPath= [[@{/}]];      
+</script>
+
+<script th:src="|${#servletContext.contextPath}/webjars/jquery/3.1.1/jquery.min.js|"></script>
+
+<script>
+	function logout() {
+		$.ajax({
+			url : contextPath+'wechat/logout',
+			type : "post",
+			success : function(data) {
+				alert('登出');
+				location.href = contextPath;
+			}
+		});
+	}
+</script>
+</head>
+<body>
+<body th:inline="text">
+    [[${session.user}]]，[[${#dates.format(new java.util.Date().getTime(), 'yyyy-MM-dd HH:mm:ss')}]]
+</body>
+<input type="submit" onclick="logout();" th:value="退出"/></div>
+</body>
+</html>
