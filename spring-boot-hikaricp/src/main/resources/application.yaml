@@ -20,4 +20,4 @@ spring:
          connection-test-query: SELECT 1 #连接的测试语句
 mybatis:
   mapper-locations:
-    - classpath:mapper/*.xml
+    - classpath*:net/**/mapper/*.xml
