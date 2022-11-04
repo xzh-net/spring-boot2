@@ -1,0 +1,23 @@
+sharding:
+  jdbc:
+    datasource:
+      names: ds
+      ds:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: org.postgresql.Driver
+        url: jdbc:postgresql://172.17.17.29:5432/ec_demo_0?useUnicode=true&characterEncoding=utf8&currentSchema=public&stringtype=unspecified
+        username: postgres
+        password: vjsp2020
+    config:
+      sharding:
+        tables:
+          user:
+            actual-data-nodes: ds.user_$->{0..1}
+            table-strategy:
+              inline:
+                sharding-column: id
+                algorithm-expression: user_$->{id % 2}
+            key-generator-column-name: id
+      props:
+        sql:
+          show: true

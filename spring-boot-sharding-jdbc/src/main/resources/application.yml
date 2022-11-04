@@ -1,0 +1,14 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: sharding-jdbc
+  profiles:
+    active: sharding-databases4
+  main:
+    allow-bean-definition-overriding: true
+
+mybatis-plus:
+  mapper-locations: classpath:/net/**/mapper/*.xml
+  typeAliasesPackage: net.xzh.sharding.model

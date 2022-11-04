@@ -1,0 +1,31 @@
+sharding:
+  jdbc:
+    datasource:
+      names: ds-master,ds-slave-0,ds-slave-1
+      ds-master:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: org.postgresql.Driver
+        url: jdbc:postgresql://172.17.17.29:5432/ec_demo_0?useUnicode=true&characterEncoding=utf8&currentSchema=public&stringtype=unspecified
+        username: postgres
+        password: vjsp2020
+      ds-slave-0:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: org.postgresql.Driver
+        url: jdbc:postgresql://172.17.17.29:5432/ec_demo_1?useUnicode=true&characterEncoding=utf8&currentSchema=public&stringtype=unspecified
+        username: postgres
+        password: vjsp2020
+      ds-slave-1:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: org.postgresql.Driver
+        url: jdbc:postgresql://172.17.17.29:5432/ec_demo_2?useUnicode=true&characterEncoding=utf8&currentSchema=public&stringtype=unspecified
+        username: postgres
+        password: vjsp2020
+    config:
+      masterslave:
+        load-balance-algorithm-type: round_robin
+        name: ds_ms
+        master-data-source-name: ds-master
+        slave-data-source-names: ds-slave-0,ds-slave-1
+      props:
+        sql:
+          show: true
