@@ -21,7 +21,7 @@ sharding:
             sharding-column: company_id
             algorithm-expression: ds-$->{company_id}
         tables:
-          user:
+          user_info:
             actual-data-nodes: ds-$->{['alibaba','baidu']}.user_info
             key-generator-column-name: id
       props:

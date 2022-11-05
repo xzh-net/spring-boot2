@@ -11,12 +11,12 @@ sharding:
     config:
       sharding:
         tables:
-          user:
-            actual-data-nodes: ds.user_$->{0..1}
+          user_info:
+            actual-data-nodes: ds.user_info$->{0..1}
             table-strategy:
               inline:
                 sharding-column: id
-                algorithm-expression: user_$->{id % 2}
+                algorithm-expression: user_info$->{id % 2}
             key-generator-column-name: id
       props:
         sql:

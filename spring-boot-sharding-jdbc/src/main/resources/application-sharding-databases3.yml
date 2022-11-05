@@ -28,7 +28,7 @@ sharding:
             sharding-column: id
             algorithm-expression: ds-$->{id % 2}
         tables:
-          user:
+          user_info:
             actual-data-nodes: ds-$->{0..1}.user_info
             key-generator-column-name: id
       props:

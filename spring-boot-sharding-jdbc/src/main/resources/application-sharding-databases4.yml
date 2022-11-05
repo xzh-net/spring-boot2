@@ -22,11 +22,11 @@ sharding:
             algorithm-expression: ds-$->{user_id % 2}
         tables:
           order:
-            actual-data-nodes: ds-$->{0..1}.order_$->{0..4}
+            actual-data-nodes: ds-$->{0..1}.order$->{0..4}
             table-strategy:
               inline:
                 sharding-column: user_id
-                algorithm-expression: order_$->{(user_id % 5)}
+                algorithm-expression: order$->{(user_id % 5)}
             key-generator-column-name: user_id
           user_info:
             actual-data-nodes: ds-$->{0..1}.user_info

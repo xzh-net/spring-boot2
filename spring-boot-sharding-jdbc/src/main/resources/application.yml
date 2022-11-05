@@ -5,7 +5,7 @@ spring:
   application:
     name: sharding-jdbc
   profiles:
-    active: sharding-databases4
+    active: sharding-tables
   main:
     allow-bean-definition-overriding: true
 
