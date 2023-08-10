@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * 启动入口
+ * 
  * @author CR7
  *
  */

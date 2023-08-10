@@ -1,7 +1,24 @@
-# WeChat网页授权
+# 一. 申请测试微信公众号
 
-微信地址：https://digpm.vjsp.cn/cms/wechat/index
+https://mp.weixin.qq.com/debug/cgi-bin/sandboxinfo?action=showinfo&t=sandbox/index
 
+# 二. WeChat公众号网页授权
+
+## 1. 配置安全域名
+
+域名不能带端口号，备案通过同时上传验证文件txt
+
+![](doc/img/1.png)
+
+## 2. 添加网页授权
+
+![](doc/img/2.png)
+
+## 3. 开发者配置
+
+![](doc/img/3.png)
+
+## 4. 网页授权流程
 [1 第一步：用户同意授权，获取code](https://developers.weixin.qq.com/doc/offiaccount/OA_Web_Apps/Wechat_webpage_authorization.html#0)
 
 [2 第二步：通过 code 换取网页授权access_token](https://developers.weixin.qq.com/doc/offiaccount/OA_Web_Apps/Wechat_webpage_authorization.html#1)
@@ -12,9 +29,45 @@
 
 [5 附：检验授权凭证（access_token）是否有效](https://developers.weixin.qq.com/doc/offiaccount/OA_Web_Apps/Wechat_webpage_authorization.html#4)
 
+## 5. 访问地址
 
+https://digpm.vjsp.cn/cms/index
 
-```bash
-mvn clean compile
-mvn clean package
-```
+> 开发者工具无法收到消息，只能使用真机测试
+
+# 三. WeChat公众号发送消息
+
+## 1. 设置类目与模板
+
+![](doc/img/4.png)
+
+![](doc/img/5.png)
+
+![](doc/img/6.png)
+
+## 2. 模板消息接口
+
+https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Template_Message_Interface.html
+
+## 3. 文本消息接口
+
+https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Service_Center_messages.html#%E5%AE%A2%E6%9C%8D%E6%8E%A5%E5%8F%A3-%E5%8F%91%E6%B6%88%E6%81%AF
+
+# 四. JS-SDK
+
+## 1. 设置安全域名
+
+## 2. 引入JS
+
+http://res.wx.qq.com/open/js/jweixin-1.6.0.js
+
+![](doc/img/7.png)
+
+## 3. 说明文档
+
+https://developers.weixin.qq.com/doc/offiaccount/OA_Web_Apps/JS-SDK.html
+
+## 4. 分享
+
+## 5. 上传图片
+
