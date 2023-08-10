@@ -6,5 +6,6 @@ spring:
       prefix: classpath:/templates/
       suffix: .html
 wechat:
-   wx_appid: xxxxxx
-   wx_pay_key: xxxxxx
+   appid: xzh
+   appsecret: xzh
+   templateid: xzh
