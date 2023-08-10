@@ -42,6 +42,7 @@ public class WeChatSdkController {
             if(access_tokenMap != null){
                 accessToken = Convert.toStr(access_tokenMap.get("access_token"));
                 tokenExpireTime = Convert.toLong(access_tokenMap.get("expires_in"));
+                getTokenTime = System.currentTimeMillis();
             }
         }
         //判断jsApiTicket是否已经存在或者是否过期
