@@ -2,7 +2,7 @@
 
 https://mp.weixin.qq.com/debug/cgi-bin/sandboxinfo?action=showinfo&t=sandbox/index
 
-# 二. WeChat公众号网页授权
+# 二. 公众号网页授权
 
 ## 1. 配置安全域名
 
@@ -35,7 +35,7 @@ https://digpm.vjsp.cn/cms/index
 
 > 开发者工具无法收到消息，只能使用真机测试
 
-# 三. WeChat公众号发送消息
+# 三. 公众号发送消息
 
 ## 1. 设置类目与模板
 
