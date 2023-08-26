@@ -4,6 +4,7 @@
 - 官方地址：http://www.jasypt.org/
 
 ```lua
+net.xzh.jasypt.util.JasyptUtil          # 手动生成密文
 net.xzh.jasypt.config.MyBatisConfig     # 修改扫描路径
 net.xzh.jasypt.config.Swagger2Config    # 修改扫描路径
 ```
