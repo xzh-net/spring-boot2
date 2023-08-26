@@ -1,0 +1,21 @@
+server:
+   port: 8080
+spring:
+   application:
+      name: jasypt
+   datasource:
+      url: jdbc:mysql://xuzhihao:3306/mall?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+      username: root
+      password: ENC(EyLGFESC7ihUwSjMX0/kTg==)
+mybatis:
+  mapper-locations:
+    - classpath*:net/**/mapper/*.xml
+# 加密配置
+jasypt:
+  encryptor:
+    # 指定加密密钥，生产环境请放到启动参数里面
+    password: xzh
+    # 指定解密算法，需要和加密时使用的算法一致
+    algorithm: PBEWithMD5AndDES
+    # 指定initialization vector类型
+    iv-generator-classname: org.jasypt.iv.NoIvGenerator

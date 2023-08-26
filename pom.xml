@@ -31,6 +31,7 @@
 		<module>spring-boot-log</module>
 		<module>spring-boot-oss</module>
 		<!--工具类-->
+		<module>spring-boot-jasypt</module>
 		<module>spring-boot-generator</module>
 		<module>spring-boot-validation</module>
 		<!--消息中间件-->
