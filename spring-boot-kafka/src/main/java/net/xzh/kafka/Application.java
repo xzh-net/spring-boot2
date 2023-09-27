@@ -1,12 +1,12 @@
-package net.xzh.wechat;
+package net.xzh.kafka;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * 启动入口
+ * 整合KafkaTemplate<String, Object>
  * 
- * @author CR7
+ * @author Administrator
  *
  */
 @SpringBootApplication

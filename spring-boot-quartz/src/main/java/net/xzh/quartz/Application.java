@@ -1,15 +1,13 @@
-package net.xzh.wechat;
+package net.xzh.quartz;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
-/**
- * 启动入口
- * 
- * @author CR7
- *
- */
 @SpringBootApplication
+@EnableAsync	
+@EnableScheduling
 public class Application {
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
