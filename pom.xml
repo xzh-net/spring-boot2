@@ -40,6 +40,7 @@
 		<module>spring-boot-rocketmq</module>	
 		<module>spring-boot-kafka</module>
 		<module>spring-boot-pulsar</module>
+		<module>spring-boot-websocket</module>
 		<!--聊天-->
 		<module>spring-boot-netty</module>
 		<!--rpc-->
