@@ -34,7 +34,7 @@ spring-boot-jenkins     -- 持续集成
 spring-boot-jwt         -- 登录认证
 spring-boot-security    -- 动态授权
 spring-boot-wechat      -- 微信网页授权
-spring-boot-sharding-jdbc	--分库分表
+spring-boot-sharding-jdbc	-- 分库分表
 ```
 
 ## 2. 自定义starter
@@ -65,6 +65,7 @@ spring-boot-pulsar
 
 ```lua
 spring-boot-netty
+spring-boot-websocket	-- WebSocket
 ```
 
 ## 6. RPC
