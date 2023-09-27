@@ -17,6 +17,8 @@
 		<module>spring-boot-email</module>
 		<module>spring-boot-quartz</module>
 		<module>spring-boot-elk</module>
+		<module>spring-boot-etl</module>
+		<module>spring-boot-hdfs</module>
 		<module>spring-boot-elasticsearch</module>
 		<module>spring-boot-mongo</module>
 		<module>spring-boot-hbase</module>
@@ -25,7 +27,7 @@
 		<module>spring-boot-activiti</module>
 		<module>spring-boot-jenkins</module>
 		<module>spring-boot-security</module>
-		<module>spring-boot-webchat</module>
+		<module>spring-boot-wechat</module>
 		<module>spring-boot-sharding-jdbc</module>
 		<!--starter-->
 		<module>spring-boot-log</module>

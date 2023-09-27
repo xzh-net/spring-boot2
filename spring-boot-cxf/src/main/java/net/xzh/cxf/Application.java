@@ -12,8 +12,8 @@ import net.xzh.cxf.common.annotation.EnableWs;
  */
 @EnableWs
 @SpringBootApplication
-public class WsApplication {
+public class Application {
 	public static void main(String[] args) {
-		SpringApplication.run(WsApplication.class, args);
+		SpringApplication.run(Application.class, args);
 	}
 }
