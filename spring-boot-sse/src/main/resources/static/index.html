@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>server-sent events</title>
+    <script src="js/jquery.js"></script>
+</head>
+<body>
+    <div>
+        <button id="connect">连接</button>
+        <button id="disconnect" disabled="disabled">断开</button>
+    </div>
+    <div>
+        <h3>订阅</h3>
+        <label>状态：</label><input id="subscribeMsg" type="text" disabled="disabled">
+    </div>
+    <div>
+        <h3>消息</h3>
+        <button id="push">发送</button><input id="pushtxt" type="text">
+        <label>收到消息：</label><input id="message" type="text" disabled="disabled">
+    </div>
+    
+</body>
+<script>
+	let source;
+    $("#connect").click(function () {
+    	source = new EventSource('http://localhost:8080/connect');
+    	source.onopen = function() {
+    		setConnect(true);
+    		$("#subscribeMsg").val("success");
+        };
+	    source.onmessage = function (e) {
+	        if (e.data == '[done]') {
+	            source.close();
+	        } else {
+	            $("#message").val(e.data);
+	        }
+	    };
+	    source.onerror = function() {
+            console.error("sse error");
+            source.close();
+        }
+    });
+    
+    $("#disconnect").click(function () {
+    	if(source!=null){
+    		source.close();
+    		source=null;
+	    }
+        setConnect(false);
+        $("#subscribeMsg").val("");
+    });
+    //设置按钮
+    function setConnect(connectStatus) {
+        $("#connect").attr("disabled", connectStatus);
+        $("#disconnect").attr("disabled", !connectStatus);
+    }
+    //发送消息
+    $("#push").click(function () {
+    	$.get('send/all',{'message':$("#pushtxt").val()},function(res){
+    		alert(res);
+    	});
+    });
+
+</script>
+</html>

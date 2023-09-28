@@ -66,6 +66,7 @@ spring-boot-pulsar
 ```lua
 spring-boot-netty
 spring-boot-websocket	-- WebSocket
+spring-boot-sse			-- Server Sent Event
 ```
 
 ## 6. RPC
