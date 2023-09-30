@@ -2,9 +2,9 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>spring-boot-websocket</artifactId>
-	<name>spring-boot-websocket</name>
-	<description>spring-boot-websocket</description>
+	<artifactId>spring-boot-stomp</artifactId>
+	<name>spring-boot-stomp</name>
+	<description>spring-boot-stomp</description>
 	<packaging>jar</packaging>
 
     <properties>
