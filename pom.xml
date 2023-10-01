@@ -46,6 +46,7 @@
 		<module>spring-boot-netty</module>
 		<module>spring-boot-stomp</module>
 		<module>spring-boot-sse</module>
+		<module>spring-boot-websocket</module>
 		<!--rpc-->
 		<module>spring-boot-dubbo</module>
 		<module>spring-boot-cxf</module>
