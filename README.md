@@ -34,14 +34,14 @@ spring-boot-jenkins     -- 持续集成
 spring-boot-jwt         -- 登录认证
 spring-boot-security    -- 动态授权
 spring-boot-wechat      -- 微信网页授权
-spring-boot-sharding-jdbc	-- 分库分表
+spring-boot-sharding-jdbc   -- 分库分表
 ```
 
 ## 2. 自定义starter
 
 ```lua
-spring-boot-log	--日志拦截器
-spring-boot-oss	--附件服务器
+spring-boot-log --日志拦截器
+spring-boot-oss --附件服务器
 ```
 
 ## 3. 工具类
@@ -65,9 +65,9 @@ spring-boot-pulsar
 
 ```lua
 spring-boot-netty
-spring-boot-stomp		-- stomp
-spring-boot-websocket	-- websocket
-spring-boot-sse			-- Server Sent Event
+spring-boot-stomp       -- stomp
+spring-boot-websocket   -- websocket
+spring-boot-sse	        -- Server Sent Event
 ```
 
 ## 6. RPC
