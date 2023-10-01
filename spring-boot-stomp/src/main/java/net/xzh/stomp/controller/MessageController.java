@@ -1,4 +1,4 @@
-package net.xzh.websocket.controller;
+package net.xzh.stomp.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
@@ -9,7 +9,7 @@ import org.springframework.messaging.simp.annotation.SendToUser;
 import org.springframework.messaging.simp.annotation.SubscribeMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import net.xzh.websocket.model.RequestMsg;
+import net.xzh.stomp.model.RequestMsg;
 
 import java.security.Principal;
 

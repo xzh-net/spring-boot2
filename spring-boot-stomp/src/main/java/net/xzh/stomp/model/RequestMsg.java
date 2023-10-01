@@ -1,4 +1,4 @@
-package net.xzh.websocket.model;
+package net.xzh.stomp.model;
 
 /**
  * 接收消息

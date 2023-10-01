@@ -1,4 +1,4 @@
-package net.xzh.websocket.config;
+package net.xzh.stomp.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
