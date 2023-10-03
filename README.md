@@ -65,8 +65,8 @@ spring-boot-pulsar
 
 ```lua
 spring-boot-netty
-spring-boot-stomp       -- stomp
 spring-boot-websocket   -- websocket
+spring-boot-sockjs      -- sockjs
 spring-boot-sse	        -- Server Sent Event
 ```
 
