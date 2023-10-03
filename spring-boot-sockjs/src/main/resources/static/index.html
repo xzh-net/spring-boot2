@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title>快速入门</title>
+<script src="js/websocket.js"></script>
+<script src="js/jquery.min.js"></script>
+<script src="js/sockjs.min.js"></script>
+<script src="js/stomp.min.js"></script>
+<script id="code">
+	var DEBUG_FLAG = true;
+	$(function() {
+		connect();//启动websocket
+	});
+
+	function broadcast() {
+		var msg = $("#msg").val();
+		stompClient.send("/app/broadcast", {}, msg);
+	}
+
+	function to1() {
+		var msg = $("#msg").val();
+		var toUserId = $("#userId").val();
+		var data = {
+			"fromUserId" : userId,
+			"toUserId" : toUserId,
+			"msg" : msg
+		};
+		stompClient.send("/app/one", {}, JSON.stringify(data));
+	}
+	
+	function sendweb() {
+		var msg = $("#webText").val();
+		stompClient.send("/topic/web", {}, msg);
+	}
+
+</script>
+</head>
+
+<body style="margin: 0px; padding: 0px; overflow: hidden;">
+	<!-- 显示消息-->
+	<textarea id="debuggerInfo" style="width: 100%; height: 200px;"></textarea>
+	<!-- 发送消息-->
+	<div>
+		消息：<input type="text" id="msg"></input> <input type="button"
+			value="广播" onclick="broadcast()"></input>
+	</div>
+	<hr />
+	<div>
+		用户：<input type="text" id="userId"></input> <input type="button"
+			value="P2P发送" onclick="to1()"></input>
+	</div>
+	<hr />
+	<div>
+		web：<input id="webText" type="text"> <input
+			type="button" value="发送" onclick="sendweb()"> 无APP，直接客户端订阅
+	</div>
+	<hr />
+	
+</body>
+</html>
