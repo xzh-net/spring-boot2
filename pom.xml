@@ -44,7 +44,7 @@
 		<module>spring-boot-pulsar</module>
 		<!--聊天-->
 		<module>spring-boot-netty</module>
-		<module>spring-boot-stomp</module>
+		<module>spring-boot-sockjs</module>
 		<module>spring-boot-sse</module>
 		<module>spring-boot-websocket</module>
 		<!--rpc-->
