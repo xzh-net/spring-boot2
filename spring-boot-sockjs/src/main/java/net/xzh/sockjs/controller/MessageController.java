@@ -32,11 +32,10 @@ public class MessageController {
 	
 	/*P2P*/
 	@MessageMapping("/one")
-    public void sendToUserByTemplate(Map<String,String> params) {
-        String fromUserId = params.get("fromUserId");
-        String toUserId = params.get("toUserId");
-        String msg = "来自" + fromUserId + "消息:" + params.get("msg");
-        template.convertAndSendToUser(toUserId,"/topic", msg);
+    public void sendToUserByTemplate(Map<String,Object> params) {
+        String to = String.valueOf(params.get("to"));
+        params.put("sentTime", System.currentTimeMillis());
+        template.convertAndSendToUser(to,"/topic", params);
     }
 	
 	/**
@@ -45,8 +44,8 @@ public class MessageController {
      * @return
      */
     @SubscribeMapping("/subscribe/{id}")
-    public String subscribe(@DestinationVariable Long id) {
-        return "success";
+    public String subscribe(@DestinationVariable String id) {
+        return id;
     }
 
 }

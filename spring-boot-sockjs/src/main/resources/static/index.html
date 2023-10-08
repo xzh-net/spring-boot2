@@ -1,62 +1,102 @@
-<!DOCTYPE html>
-<html>
-
+<!DOCTYPE>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>快速入门</title>
-<script src="js/websocket.js"></script>
-<script src="js/jquery.min.js"></script>
-<script src="js/sockjs.min.js"></script>
-<script src="js/stomp.min.js"></script>
-<script id="code">
-	var DEBUG_FLAG = true;
+    <title>快速入门</title>
+	<meta charset="utf-8">
+	<script src="js/websocket.js"></script>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/sockjs.min.js"></script>
+	<script src="js/stomp.min.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">当前登录用户</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="list-group">
+                        <a href="#" class="list-group-item">你好，<span id="user"></span></a>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">系统广播</h3>
+                </div>
+                <div class="panel-body">
+                    <input type="text" class="form-control" id="msg"/><br>
+                    <button id="broadcast" type="button" class="btn btn-primary">发送</button>
+                </div>
+            </div>
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">web广播(无客户端)</h3>
+                </div>
+                <div class="panel-body">
+                    <input type="text" class="form-control" id="webmsg"/><br>
+                    <button id="webbroadcast" type="button" class="btn btn-primary">发送</button>
+                </div>
+            </div>
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">接收人</h3>
+                </div>
+                <div class="panel-body">
+                    <input type="text" class="form-control" id="toUserId"/><br>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title" id="talktitle"></h3>
+                </div>
+                <div class="panel-body">
+                    <div class="well" id="log-container" style="height:400px;overflow-y:scroll">
+
+                    </div>
+                    <input type="text" id="myinfo" class="form-control"/>
+                    <button id="send" type="button" class="btn btn-primary">发送</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
 	$(function() {
 		connect();//启动websocket
 	});
-
-	function broadcast() {
+	
+	$("#broadcast").click(function () {
 		var msg = $("#msg").val();
 		stompClient.send("/app/broadcast", {}, msg);
-	}
-
-	function to1() {
-		var msg = $("#msg").val();
-		var toUserId = $("#userId").val();
-		var data = {
-			"fromUserId" : userId,
-			"toUserId" : toUserId,
-			"msg" : msg
-		};
+	});
+	
+	$("#webbroadcast").click(function () {
+		var webmsg = $("#webmsg").val();
+		stompClient.send("/topic/web", {}, webmsg);
+	});
+	
+	$("#send").click(function () {
+		if ($("#toUserId").val() == '') {
+	        alert("请输入接收人");
+	        return false;
+	    }
+		var msg = $("#myinfo").val();
+		var toUserId = $("#toUserId").val();
+		var data = {};
+	    data["from"] = userId;
+	    data["to"] = toUserId;
+	    data["body"] = msg;
 		stompClient.send("/app/one", {}, JSON.stringify(data));
-	}
-	
-	function sendweb() {
-		var msg = $("#webText").val();
-		stompClient.send("/topic/web", {}, msg);
-	}
-
+		$("#log-container").append("<div class='bg-success'><label class='text-info'>我&nbsp;" + new Date().format("yyyy-MM-dd hh:mm:ss") + "</label><div class='text-info'>" + $("#myinfo").val() + "</div></div><br>");
+		scrollToBottom();
+	    $("#myinfo").val("");
+	});
 </script>
-</head>
-
-<body style="margin: 0px; padding: 0px; overflow: hidden;">
-	<!-- 显示消息-->
-	<textarea id="debuggerInfo" style="width: 100%; height: 200px;"></textarea>
-	<!-- 发送消息-->
-	<div>
-		消息：<input type="text" id="msg"></input> <input type="button"
-			value="广播" onclick="broadcast()"></input>
-	</div>
-	<hr />
-	<div>
-		用户：<input type="text" id="userId"></input> <input type="button"
-			value="P2P发送" onclick="to1()"></input>
-	</div>
-	<hr />
-	<div>
-		web：<input id="webText" type="text"> <input
-			type="button" value="发送" onclick="sendweb()"> 无APP，直接客户端订阅
-	</div>
-	<hr />
-	
 </body>
 </html>
