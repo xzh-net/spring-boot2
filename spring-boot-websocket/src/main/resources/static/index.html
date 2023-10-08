@@ -29,7 +29,7 @@
             </div>
             <div class="panel panel-primary" id="online">
                 <div class="panel-heading">
-                    <h3 class="panel-title">当前在线的其他用户</h3>
+                    <h3 class="panel-title">在线用户</h3>
                 </div>
                 <div class="panel-body">
                     <div class="list-group" id="users">
@@ -38,7 +38,7 @@
             </div>
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <h3 class="panel-title">群发系统广播</h3>
+                    <h3 class="panel-title">系统广播</h3>
                 </div>
                 <div class="panel-body">
                     <input type="text" class="form-control" id="msg"/><br>
@@ -138,7 +138,7 @@ $("#disconnect").click(function () {
 
 $("#broadcast").click(function () {
     var data = {};
-    data["from"] = "系统消息";
+    data["from"] = "系统广播";
     data["type"] = "broadcast";
     data["body"] = $("#msg").val();
     ws.send(JSON.stringify(data));
