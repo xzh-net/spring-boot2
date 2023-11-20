@@ -4,6 +4,7 @@
 
 - 访问地址：http://localhost:8080/
 - xmpp协议对象封装：https://github.com/igniterealtime/tinder
+- 未实现异常重连和心跳处理
 
 
 ```bash
