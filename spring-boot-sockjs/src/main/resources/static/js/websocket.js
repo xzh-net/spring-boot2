@@ -5,26 +5,26 @@ var userId = null;
 function connect() {
 	var host = window.location.host; // 带有端口号
 	userId = GetQueryString("userId");
-	var socket = new SockJS("http://" + host + "/webSocket");
+	var socket = new SockJS("http://" + host + "/websocket");
 	stompClient = Stomp.over(socket);
 	stompClient.connect({}, function(frame) {
 		$("#log-container").append("<div class='text-success'>" + frame + "</div></div><br>");
-		// 广播
+		// 后端广播模式
 		stompClient.subscribe('/topic/broadcast', function(response) {
 			$("#log-container").append("<div class='bg-info'><label class='text-danger'>" + "系统广播：" + "&nbsp;" + "</label><div class='text-success'>" + response.body + "</div></div><br>");
 		});
-
-		// 用户p2p
-		stompClient.subscribe("/queue/" + userId + "/topic", function(response) {
-			var data = JSON.parse(response.body);
-			$("#log-container").append("<div class='bg-info'><label class='text-danger'>" + data.from + "&nbsp;" + transformDate(data.sentTime) + "</label><div class='text-success'>" + data.body + "</div></div><br>");
-		});
-
-		// web模式
+		
+		// 前端广播模式
 		stompClient.subscribe('/topic/web', function(response) {
 			$("#log-container").append("<div class='bg-info'><label class='text-danger'>" + "web广播：" + "&nbsp;" + "</label><div class='text-success'>" + response.body + "</div></div><br>");
 		});
-
+		
+		// 点对点
+		stompClient.subscribe("/user/" + userId + "/topic", function(response) {
+			var data = JSON.parse(response.body);
+			$("#log-container").append("<div class='bg-info'><label class='text-danger'>" + data.from + "&nbsp;" + transformDate(data.sentTime) + "</label><div class='text-success'>" + data.body + "</div></div><br>");
+		});
+		
 		// 订阅，一般只有订阅的时候在返回
 		stompClient.subscribe("/app/subscribe/" + userId, function(response) {
 			$("#user").text(response.body);
