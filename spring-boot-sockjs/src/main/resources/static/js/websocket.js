@@ -9,14 +9,14 @@ function connect() {
 	stompClient = Stomp.over(socket);
 	stompClient.connect({}, function(frame) {
 		$("#log-container").append("<div class='text-success'>" + frame + "</div></div><br>");
-		// 后端广播模式
+		// 服务端广播
 		stompClient.subscribe('/topic/broadcast', function(response) {
-			$("#log-container").append("<div class='bg-info'><label class='text-danger'>" + "系统广播：" + "&nbsp;" + "</label><div class='text-success'>" + response.body + "</div></div><br>");
+			$("#log-container").append("<div class='bg-info'><label class='text-danger'>" + "服务端广播：" + "&nbsp;" + "</label><div class='text-success'>" + response.body + "</div></div><br>");
 		});
 		
-		// 前端广播模式
+		// 前端广播
 		stompClient.subscribe('/topic/web', function(response) {
-			$("#log-container").append("<div class='bg-info'><label class='text-danger'>" + "web广播：" + "&nbsp;" + "</label><div class='text-success'>" + response.body + "</div></div><br>");
+			$("#log-container").append("<div class='bg-info'><label class='text-danger'>" + "前端广播：" + "&nbsp;" + "</label><div class='text-success'>" + response.body + "</div></div><br>");
 		});
 		
 		// 点对点
@@ -26,7 +26,7 @@ function connect() {
 		});
 		
 		// 订阅，一般只有订阅的时候在返回
-		stompClient.subscribe("/app/subscribe/" + userId, function(response) {
+		stompClient.subscribe("/subscribe/" + userId, function(response) {
 			$("#user").text(response.body);
 			$("#log-container").append("<div class='bg-info'><label class='text-danger'>" + new Date().format("yyyy-MM-dd hh:mm:ss") + "&nbsp;" + "</label><div class='text-success'>" + userId + " 登录成功" + "</div></div><br>");
 		});
