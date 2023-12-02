@@ -26,7 +26,7 @@ function connect() {
 		});
 		
 		// 订阅，一般只有订阅的时候在返回
-		stompClient.subscribe("/subscribe/" + userId, function(response) {
+		stompClient.subscribe("/app/subscribe/" + userId, function(response) {
 			$("#user").text(response.body);
 			$("#log-container").append("<div class='bg-info'><label class='text-danger'>" + new Date().format("yyyy-MM-dd hh:mm:ss") + "&nbsp;" + "</label><div class='text-success'>" + userId + " 登录成功" + "</div></div><br>");
 		});
