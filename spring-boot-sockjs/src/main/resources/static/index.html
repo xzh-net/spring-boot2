@@ -34,10 +34,10 @@
                 </div>
                 <div class="panel-body">
                     <input type="text" class="form-control" id="msg"/><br>
-                    <button id="send" type="button" class="btn btn-primary">后端1</button>
-                    <button id="sendByTopic" type="button" class="btn btn-primary">后端2</button>
-                    <button id="sendByWeb" type="button" class="btn btn-primary">前端</button><br>
-                    <button id="sendByAjax" type="button" class="btn btn-primary">Ajax</button>
+                    <button id="sendToAll1" type="button" class="btn btn-primary">后端1</button>
+                    <button id="sendToAll2" type="button" class="btn btn-primary">后端2</button>
+                    <button id="sendToAll3" type="button" class="btn btn-primary">前端</button><br>
+                    <button id="sendToAll4" type="button" class="btn btn-primary">Ajax</button>
                 </div>
             </div>
             <div class="panel panel-primary">
@@ -71,27 +71,27 @@
 	});
 	
 	//后端调用1
-	$("#send").click(function () {
+	$("#sendToAll1").click(function () {
 		var msg = $("#msg").val();
-		stompClient.send("/app/send", {}, msg);
+		stompClient.send("/app/sendToAll1", {}, msg);
 	});
 	
 	//后端调用2
-	$("#sendByTopic").click(function () {
+	$("#sendToAll2").click(function () {
 		var msg = $("#msg").val();
-		stompClient.send("/app/sendToAllByTopic", {}, msg);
+		stompClient.send("/app/sendToAll2", {}, msg);
 	});
 	
 	//前端调用
-	$("#sendByWeb").click(function () {
+	$("#sendToAll3").click(function () {
 		var msg = $("#msg").val();
 		stompClient.send("/topic/web", {}, msg);
 	});
 	
 	//非客户端，ajax调用
-	$("#sendByAjax").click(function () {
+	$("#sendToAll4").click(function () {
 		var msg = $("#msg").val();
-		$.ajax({url:"/sendToAllByTopic?msg="+msg});
+		$.ajax({url:"/sendToAll4?msg="+msg});
 	});
 	
 	$("#sendToUser").click(function () {
