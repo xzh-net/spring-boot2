@@ -20,7 +20,7 @@ function connect() {
 		});
 		
 		// 点对点
-		stompClient.subscribe("/user/" + userId + "/topic", function(response) {
+		stompClient.subscribe("/queue/user_" + userId, function(response) {
 			var data = JSON.parse(response.body);
 			$("#log-container").append("<div class='bg-info'><label class='text-danger'>" + data.from + "&nbsp;" + transformDate(data.sentTime) + "</label><div class='text-success'>" + data.body + "</div></div><br>");
 		});
