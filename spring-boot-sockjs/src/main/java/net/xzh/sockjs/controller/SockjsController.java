@@ -24,15 +24,15 @@ public class SockjsController {
 	private SimpMessagingTemplate template;
 
 	// 后端调用，注解转发到具体broadcast主题上
-	@MessageMapping("/send")
+	@MessageMapping("/sendToAll1")
 	@SendTo("/topic/broadcast")
 	public String say(String msg) {
 		return msg;
 	}
 
 	// 后端调用的另外一种写法，代码识别转到主题
-	@GetMapping("/sendToAllByTopic")
-	@MessageMapping("/sendToAllByTopic")
+	@GetMapping("/sendToAll4")
+	@MessageMapping("/sendToAll2")
 	public void sendToAllByTemplate(@RequestParam String msg) {
 		template.convertAndSend("/topic/broadcast", msg);
 	}
@@ -44,12 +44,13 @@ public class SockjsController {
 		return msg;
 	}
 
-	//点对点
+	// 点对点
 	@MessageMapping("/sendToUser")
 	public void sendToUserByTemplate(Map<String, Object> params) {
 		String to = String.valueOf(params.get("to"));
 		params.put("sentTime", System.currentTimeMillis());
-		template.convertAndSendToUser(to, "/topic", params);
+		String destination = "/queue/user_" + to;
+		template.convertAndSend(destination, params);
 	}
 
 	/**
