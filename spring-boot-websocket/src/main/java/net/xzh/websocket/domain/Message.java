@@ -32,7 +32,7 @@ public class Message {
 	}
 	
 	public enum Type {
-
+		ping,
         /**
          * broadcast message used in email like interface.
          */

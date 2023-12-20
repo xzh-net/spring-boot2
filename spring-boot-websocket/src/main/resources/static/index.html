@@ -21,9 +21,9 @@
                 </div>
                 <div class="panel-body">
                     <div class="list-group">
-                        <a href="#" class="list-group-item">你好，<span id="user"></span></a>
+                        <a href="#" class="list-group-item">你好，<span id="userId"></span></a>
                         <button id="connect" type="button" class="btn btn-primary">连接</button>
-                        <button id="disconnect" type="button" class="btn btn-primary">关闭</button>
+                        <button id="disconnect" type="button" class="btn btn-primary">断开</button>
                     </div>
                 </div>
             </div>
@@ -64,7 +64,9 @@
 </div>
 <script>
 var ws;
-var user;
+var userId;
+var lockReconnect = false;//避免重复连接
+var wsCreateHandler = null;
 $(function () {
 	/*
 	模拟获取token
@@ -72,147 +74,176 @@ $(function () {
     $.ajax({
         url:"/currentuser",
         success:function (res) {
-        	user=res;
-        	$("#user").text(res);
+        	userId=res;
+        	$("#userId").text(res);
         },
         async:false //同步请求，只有上面好了才会接着下面
     });
 });
 
 $("#connect").click(function () {
+	createWebSocket();
+});
+
+function createWebSocket(){
 	if ("WebSocket" in window) {
-        ws = new WebSocket("ws://localhost:8080/chat/"+user);
-        ws.onopen = function (ev) {
-        	setConnect(true);
-        	$("#status").text("连接成功");
-            console.log("ws服务器连接成功");
-        }
-
-        /**服务器发送数据后，自动触发此方法，客户端进行获取数据，使用 evt.data 获取数据*/
-        ws.onmessage = function (evt) {
-            var data = JSON.parse(evt.data);
-            if (data.type == 'broadcast') {//广播消息
-                if (data.from != user) {
-                	if(data.dataType == 'online'){
-                		$("#users").append('<a href="#" onclick="talk(this)" class="list-group-item">' + data.from + '</a>');                		
-                		$("#log-container").append("<div class='bg-info'><label class='text-danger'>" + data.from + "&nbsp;" + transformDate(data.sentTime) + "</label><div class='text-success'>" + data.body + "</div></div><br>");
-                	}else if(data.dataType == 'offline'){
-                		$("#log-container").append("<div class='bg-info'><label class='text-danger'>" + data.from + "&nbsp;" + transformDate(data.sentTime) + "</label><div class='text-success'>" + data.body + "</div></div><br>");
-                		$("#users > a").remove(":contains('" + data.from + "')");
-                	}else{
-                		$("#log-container").append("<div class='bg-info'><label class='text-danger'>" + data.from + "&nbsp;" + transformDate(data.sentTime) + "</label><div class='text-success'>" + data.body + "</div></div><br>");
-                	}
-                }
-            } else if (data.type == 'chat') {//chat消息
-            	$("#log-container").append("<div class='bg-info'><label class='text-danger'>" + data.from + "&nbsp;" + transformDate(data.sentTime) + "</label><div class='text-success'>" + data.body + "</div></div><br>");
-            } else if (data.type == 'groupchat') {//groupchat消息
-            
-            } else {
-            	//错误消息todo
-            }
-            console.log("接收到服务器数据：" + data);
-        };
-
-        /**客户端与服务器数据传输错误时触发*/
-        ws.onerror = function (evt) {
-            console.log("客户端与服务器数据传输错误...");
-        };
-
-        /**web Socket 连接关闭时触发*/
-        ws.onclose = function () {
-        	setConnect(false);
-        	$("#status").text("连接关闭");
-            console.log("ws服务器连接关闭");
-        };
-    } else {
-        alert("您的浏览器不支持 WebSocket!");
-    }
-});
-
-$("#disconnect").click(function () {
-    if (ws != null) {
-    	ws.close();
-    }
-    setConnect(false);
-});
-
-$("#broadcast").click(function () {
-    var data = {};
-    data["from"] = "系统广播";
-    data["type"] = "broadcast";
-    data["body"] = $("#msg").val();
-    ws.send(JSON.stringify(data));
-});
-
-$("#send").click(function () {
-    if ($("body").data("to") == undefined) {
-        alert("请选择聊天对象");
-        return false;
-    }
-    var data = {};
-    data["from"] = user;
-    data["to"] = $("body").data("to");
-    data["type"] = "chat";
-    data["body"] = $("#myinfo").val();
-    ws.send(JSON.stringify(data));
-    $("#log-container").append("<div class='bg-success'><label class='text-info'>我&nbsp;" + new Date().format("yyyy-MM-dd hh:mm:ss") + "</label><div class='text-info'>" + $("#myinfo").val() + "</div></div><br>");
-    scrollToBottom();
-    $("#myinfo").val("");
-});
-
-function talk(a) {
-    $("#talktitle").text("与" + a.innerHTML + "的聊天");
-    $("body").data("to", a.innerHTML);
+		try {
+			ws = new WebSocket("ws://localhost:8080/websocket/"+userId);
+			initWsEventHandle();
+		} catch (e) {
+			console.log('WebSocket 初始化失败:', e);
+			reconnect();
+		}
+	}else{
+		alert("您的浏览器不支持 WebSocket!");
+	}
 }
 
-function scrollToBottom() {
-    var div = document.getElementById('log-container');
-    div.scrollTop = div.scrollHeight;
+function initWsEventHandle(){
+	ws.onopen = function (ev) {
+		setConnect(true);
+		heartCheck.start();
+	    console.log("WebSocket 连接成功");
+	}
+	
+	/**服务器发送数据后，自动触发此方法，客户端进行获取数据，使用 evt.data 获取数据*/
+	ws.onmessage = function (evt) {
+		heartCheck.start();
+	    var data = JSON.parse(evt.data);
+	    if (data.type == 'broadcast') {//广播消息
+	        if (data.from != userId) {
+	        	if(data.dataType == 'online'){
+	        		$("#users").append('<a href="#" onclick="talk(this)" class="list-group-item">' + data.from + '</a>');                		
+	        		$("#log-container").append("<div class='bg-info'><div class='text-success'>" + data.body + "</div></div><br>");
+	        	}else if(data.dataType == 'offline'){
+	        		$("#log-container").append("<div class='bg-info'><div class='text-success'>" + data.body + "</div></div><br>");
+	        		$("#users > a").remove(":contains('" + data.from + "')");
+	        	}else{
+	        		$("#log-container").append("<div class='bg-info'><div class='text-success'><label class='text-danger'>系统广播：</label>" + data.body + "</div></div><br>");
+	        	}
+	        }
+	    } else if (data.type == 'chat') {//chat消息
+	    	$("#log-container").append("<div class='bg-info'><label class='text-danger'>" + data.from + "&nbsp;" + "</label><div class='text-success'>" + data.body + "</div></div><br>");
+	    } else if (data.type == 'groupchat') {//groupchat消息
+	    
+	    } else {
+	    	//错误消息todo
+	    }
+	};
+	
+	/**客户端与服务器数据传输错误时触发*/
+	ws.onerror = function (evt) {
+		setConnect(false);
+		console.log('WebSocket 错误:', e);
+	};
+	
+	/**web Socket 连接关闭时触发*/
+	ws.onclose = function () {
+		setConnect(false);
+		console.log("WebSocket 已关闭");
+		reconnect();
+	};
 }
 
-//设置按钮
-function setConnect(connectStatus) {
-    $("#connect").attr("disabled", connectStatus);
-    $("#disconnect").attr("disabled", !connectStatus);
+function reconnect() {
+	if(lockReconnect) {
+		return;
+	};
+	console.log("1秒后重连");
+	lockReconnect = true;
+	//没连接上会一直重连，设置延迟避免请求过多
+	wsCreateHandler && clearTimeout(wsCreateHandler);
+	wsCreateHandler = setTimeout(function () {
+		console.log("WebSocket 尝试重新连接...");
+		createWebSocket();
+		lockReconnect = false;
+		console.log("WebSocket 重连完成");
+	}, 1000);
 }
 
-function transformDate(timestamp) {
-	let date = new Date(timestamp);
-	let y = date.getFullYear();
-	let m = date.getMonth() + 1; //月份从0开始，需要加1
-	m = m < 10 ? ('0' + m) : m   
-	let d = date.getDate();
-	d = d < 10 ? ('0' + d) : d  
-	let hh = date.getHours();
-	hh = hh < 10 ? ('0' + hh) : hh; 
-	let mm = date.getMinutes();
-	let ss = date.getSeconds();
-	mm = mm < 10 ? ('0' + mm) : mm;
-	ss = ss < 10 ? ('0' + ss) : ss;
-	return `${y}-${m}-${d} ${hh}:${mm}:${ss}`
-}
+var heartCheck = {
+	//15s之内如果没有收到后台的消息，则认为是连接断开了，需要再次连接
+	timeout: 15000,
+	timeoutObj: null,
+	serverTimeoutObj: null,
+	//重启
+	reset: function(){
+		clearTimeout(this.timeoutObj);
+		clearTimeout(this.serverTimeoutObj);
+		this.start();
+	},
+	//开启定时器
+	start: function(){
+		var self = this;
+		this.timeoutObj && clearTimeout(this.timeoutObj);
+		this.serverTimeoutObj && clearTimeout(this.serverTimeoutObj);
+		this.timeoutObj = setTimeout(function(){
+				console.log("发送ping到后台");
+				try {
+					var data = {};
+					data["type"] = "ping";
+					ws.send(JSON.stringify(data));
+				} catch (ee) {
+					console.log("发送ping异常");
+				}
+				//内嵌计时器
+				self.serverTimeoutObj = setTimeout(function() {
+					console.log("没有收到后台的数据，关闭连接");
+					ws.close();
+				}, self.timeout);
 
-Date.prototype.format = function (fmt) {
-    var o = {
-        "M+": this.getMonth() + 1,                 //月份
-        "d+": this.getDate(),                    //日
-        "h+": this.getHours(),                   //小时
-        "m+": this.getMinutes(),                 //分
-        "s+": this.getSeconds(),                 //秒
-        "q+": Math.floor((this.getMonth() + 3) / 3), //季度
-        "S": this.getMilliseconds()             //毫秒
-    };
-    if (/(y+)/.test(fmt)) {
-        fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
-    }
-    for (var k in o) {
-        if (new RegExp("(" + k + ")").test(fmt)) {
-            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
-        }
-    }
-    return fmt;
-}
+			}, this.timeout)
+		},
+	}
 
+	$("#disconnect").click(function() {
+		if (ws != null) {
+			ws.close();
+		}
+		setConnect(false);
+	});
+
+	$("#broadcast").click(function() {
+		var data = {};
+		data["type"] = "broadcast";
+		data["body"] = $("#msg").val();
+		ws.send(JSON.stringify(data));
+	});
+
+	$("#send").click(
+			function() {
+				if ($("body").data("to") == undefined) {
+					alert("请选择聊天对象");
+					return false;
+				}
+				var data = {};
+				data["to"] = $("body").data("to");
+				data["type"] = "chat";
+				data["body"] = $("#myinfo").val();
+				ws.send(JSON.stringify(data));
+				$("#log-container").append(
+						"<div class='bg-success'><label class='text-info'>我&nbsp;"
+								+ "</label><div class='text-info'>"
+								+ $("#myinfo").val() + "</div></div><br>");
+				scrollToBottom();
+				$("#myinfo").val("");
+			});
+
+	function talk(a) {
+		$("#talktitle").text("与" + a.innerHTML + "的聊天");
+		$("body").data("to", a.innerHTML);
+	}
+
+	function scrollToBottom() {
+		var div = document.getElementById('log-container');
+		div.scrollTop = div.scrollHeight;
+	}
+
+	//设置按钮
+	function setConnect(connectStatus) {
+		$("#connect").attr("disabled", connectStatus);
+		$("#disconnect").attr("disabled", !connectStatus);
+	}
 </script>
 
 </body>

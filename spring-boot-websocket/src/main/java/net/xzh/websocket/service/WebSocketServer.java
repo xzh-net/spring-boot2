@@ -1,6 +1,8 @@
 package net.xzh.websocket.service;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -18,7 +20,7 @@ import com.alibaba.fastjson.JSON;
 
 import net.xzh.websocket.domain.Message;
 
-@ServerEndpoint(value = "/chat/{token}")
+@ServerEndpoint(value = "/websocket/{userId}")
 @Component
 public class WebSocketServer {
 
@@ -30,33 +32,33 @@ public class WebSocketServer {
 
 	// 建立连接成功调用
 	@OnOpen
-	public void onOpen(Session session, @PathParam("token") String userName) {
-		sessionPools.put(userName, session);
+	public void onOpen(Session session, @PathParam("userId") String userId) {
+		sessionPools.put(userId, session);
 		addOnlineCount();
-		System.out.println(userName + "进入房间！当前人数为" + onlineNum);
+		System.out.println(userId + " 进入房间，当前人数：" + onlineNum);
 		// 广播上线消息
 		Message msg = new Message();
 		msg.setSentTime(System.currentTimeMillis());
 		msg.setType(Message.Type.broadcast);
 		msg.setDataType(Message.DataType.online);
-		msg.setFrom(userName);
-		msg.setBody(userName + "进入房间！当前人数为" + onlineNum);
+		msg.setFrom(userId);
+		msg.setBody(userId + " 进入房间，当前人数：" + onlineNum);
 		broadcast(JSON.toJSONString(msg, true));
 	}
 
 	// 关闭连接时调用
 	@OnClose
-	public void onClose(Session session, @PathParam("token") String userName) {
-		sessionPools.remove(userName);
+	public void onClose(Session session, @PathParam("userId") String userId) {
+		sessionPools.remove(userId);
 		subOnlineCount();
-		System.out.println(userName + "离开房间！当前人数为" + onlineNum);
+		System.out.println(userId + " 离开房间，当前人数：" + onlineNum);
 		// 广播下线消息
 		Message msg = new Message();
 		msg.setSentTime(System.currentTimeMillis());
 		msg.setType(Message.Type.broadcast);
 		msg.setDataType(Message.DataType.offline);
-		msg.setFrom(userName);
-		msg.setBody(userName + "离开房间！当前人数为" + onlineNum);
+		msg.setFrom(userId);
+		msg.setBody(userId + " 离开房间，当前人数：" + onlineNum);
 		broadcast(JSON.toJSONString(msg, true));
 	}
 
@@ -66,15 +68,19 @@ public class WebSocketServer {
 		throwable.printStackTrace();
 	}
 
-	// 收到客户端信息后，根据接收人的username把消息推下去或者群发
+	// 收到客户端信息后，根据接收人的userId把消息推下去或者群发
 	@OnMessage
-	public void onMessage(String message, Session session) {
-		System.out.println("收到数据：" + message);
+	public void onMessage(String message, Session session,@PathParam("userId") String userId) {
+		System.out.println("来自客户端的消息:" + message);
 		Message msg = JSON.parseObject(message, Message.class);
 		msg.setSentTime(System.currentTimeMillis());
-		if(msg.type.equals(Message.Type.broadcast)) {
+		
+		if(msg.type.equals(Message.Type.ping)) {//心跳
+			sendInfo(userId, JSON.toJSONString(msg, true));
+		} else if (msg.type.equals(Message.Type.broadcast)) {//广播
 			broadcast(JSON.toJSONString(msg, true));
-		} else {
+		} else {//单聊
+			msg.setFrom(userId);
 			sendInfo(msg.getTo(), JSON.toJSONString(msg, true));
 		}
 	}
