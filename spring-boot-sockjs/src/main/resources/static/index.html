@@ -106,7 +106,7 @@
 	    data["to"] = toUserId;
 	    data["body"] = msg;
 		stompClient.send("/app/sendToUser", {}, JSON.stringify(data));
-		$("#log-container").append("<div class='bg-success'><label class='text-info'>我&nbsp;" + new Date().format("yyyy-MM-dd hh:mm:ss") + "</label><div class='text-info'>" + $("#myinfo").val() + "</div></div><br>");
+		$("#log-container").append("<div class='bg-success'><label class='text-info'>我</label><div class='text-info'>" + $("#myinfo").val() + "</div></div><br>");
 		scrollToBottom();
 	    $("#myinfo").val("");
 	});
