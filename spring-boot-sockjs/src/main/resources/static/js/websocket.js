@@ -4,11 +4,15 @@ var userId = null;
 
 function connect() {
 	var host = window.location.host; // 带有端口号
-	userId = GetQueryString("userId");
 	var socket = new SockJS("http://" + host + "/websocket");
 	stompClient = Stomp.over(socket);
-	stompClient.connect({}, function(frame) {
+	var storage=window.localStorage;
+	var token = storage.getItem("token");
+	stompClient.connect({'token': token}, function(frame) {
+		console.log("连接成功");
 		$("#log-container").append("<div class='text-success'>" + frame + "</div></div><br>");
+		userId = frame.headers['user-name']
+		$("#user").text(userId);
 		// 服务端广播
 		stompClient.subscribe('/topic/broadcast', function(response) {
 			$("#log-container").append("<div class='bg-info'><div class='text-success'><label class='text-danger'>服务端广播：</label>" + response.body + "</div></div><br>");
@@ -22,21 +26,14 @@ function connect() {
 		// 点对点
 		stompClient.subscribe("/queue/user_" + userId, function(response) {
 			var data = JSON.parse(response.body);
-			$("#log-container").append("<div class='bg-info'><label class='text-danger'>" + data.from + ":</label><div class='text-success'>" + data.body + "</div></div><br>");
+			$("#log-container").append("<div class='bg-info'><label class='text-danger'>" + data.fromUserId + ":</label><div class='text-success'>" + data.msg + "</div></div><br>");
 		});
 		
-		// 订阅，一般只有订阅的时候在返回
-		stompClient.subscribe("/app/subscribe/" + userId, function(response) {
-			$("#user").text(response.body);
-			$("#log-container").append("<div class='bg-info'><div class='text-success'>" + userId + " 登录成功" + "</div></div><br>");
-		});
-
 	}, function(error) {
 		wsCreateHandler && clearTimeout(wsCreateHandler);
 		wsCreateHandler = setTimeout(function() {
 			console.log("重连...");
 			connect();
-			console.log("重连完成");
 		}, 1000);
 	})
 }

@@ -1,4 +1,4 @@
-# SockJS 
+# SpringBoot、SockJS、Stomp、RabbitMQ
 
 SockJS 是一种浏览器与服务器之间的通信协议，它可以在浏览器和服务器之间建立一个基于 HTTP 的双向通信通道。SockJS 的主要作用是提供一种 WebSocket 的兼容性解决方案，使得不支持 WebSocket 的浏览器也可以使用 WebSocket。
 
@@ -6,7 +6,7 @@ SockJS 实现了一个 WebSocket 的兼容层，它可以在浏览器和服务�
 
 相关资料：http://jmesnil.net/stomp-websocket/doc/
 
-## 为什么RabbitMQ作为STOMP消息代理
+## 为什么 RabbitMQ 作为 Stomp 消息代理
 
 - spring 是基于内存的，对 STOMP指令简单模拟
 - RabbitMQ 支持特性多，AMQP、STOMP、JMS、MQTT
@@ -19,7 +19,7 @@ rabbitmq需要开启rabbitmq_stomp插件
 
 ## 访问地址
 
-http://localhost:8080/?userId=admin
+http://localhost:8080/index.html
 
 ```bash
 mvn clean compile
