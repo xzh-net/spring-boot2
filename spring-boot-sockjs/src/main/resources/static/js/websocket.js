@@ -14,7 +14,7 @@ function connect() {
 		userId = frame.headers['user-name']
 		$("#user").text(userId);
 		// 服务端广播
-		stompClient.subscribe('/topic/broadcast', function(response) {
+		stompClient.subscribe('/topic/chat', function(response) {
 			$("#log-container").append("<div class='bg-info'><div class='text-success'><label class='text-danger'>服务端广播：</label>" + response.body + "</div></div><br>");
 		});
 		

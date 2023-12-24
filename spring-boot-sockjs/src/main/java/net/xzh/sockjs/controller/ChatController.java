@@ -27,7 +27,7 @@ public class ChatController {
 	 * @return
 	 */
 	@MessageMapping("/sendToAll1")
-	@SendTo("/topic/broadcast")
+	@SendTo("/topic/chat")
 	public String say(String msg) {
 		return msg;
 	}
@@ -39,7 +39,7 @@ public class ChatController {
 	@GetMapping("/sendToAll4")
 	@MessageMapping("/sendToAll2")
 	public void sendToAllByTemplate(@RequestParam String msg) {
-		template.convertAndSend("/topic/broadcast", msg);
+		template.convertAndSend("/topic/chat", msg);
 	}
 
 	/**

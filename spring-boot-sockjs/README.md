@@ -6,9 +6,11 @@ SockJS 实现了一个 WebSocket 的兼容层，它可以在浏览器和服务�
 
 相关资料：http://jmesnil.net/stomp-websocket/doc/
 
+扩展核心是ChannelInterceptor拦截器，针对不同指令做出判断
+
 ## 为什么 RabbitMQ 作为 Stomp 消息代理
 
-- spring 是基于内存的，对 STOMP指令简单模拟
+- Spring 是基于内存的，对 STOMP指令简单模拟
 - RabbitMQ 支持特性多，AMQP、STOMP、JMS、MQTT
 - 支持集群部署
 
@@ -20,6 +22,10 @@ rabbitmq需要开启rabbitmq_stomp插件
 ## 访问地址
 
 http://localhost:8080/index.html
+- admin 123456 有权限
+- test  123456 有权限
+- orderAdmin 123456 无权限 
+
 
 ```bash
 mvn clean compile
