@@ -65,9 +65,10 @@ spring-boot-pulsar
 
 ```lua
 spring-boot-netty
-spring-boot-websocket   -- websocket
-spring-boot-sockjs      -- sockjs
-spring-boot-sse	        -- Server Sent Event
+spring-boot-websocket     -- websocket
+spring-boot-sockjs        -- sockjs + rabbitmq
+spring-boot-sockjs-redis  -- sockjs + redis
+spring-boot-sse	          -- Server Sent Event
 ```
 
 ## 6. RPC

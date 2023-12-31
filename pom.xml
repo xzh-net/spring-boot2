@@ -45,6 +45,7 @@
 		<!--聊天-->
 		<module>spring-boot-netty</module>
 		<module>spring-boot-sockjs</module>
+		<module>spring-boot-sockjs-redis</module>
 		<module>spring-boot-sse</module>
 		<module>spring-boot-websocket</module>
 		<!--rpc-->
