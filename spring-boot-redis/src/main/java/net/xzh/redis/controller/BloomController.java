@@ -21,7 +21,7 @@ import net.xzh.redis.common.model.CommonResult;
  * @author Administrator
  *
  */
-@Api(tags = "布隆过滤器测试")
+@Api(tags = "布隆过滤器")
 @RestController
 @RequestMapping("/bloom")
 public class BloomController {
@@ -29,9 +29,9 @@ public class BloomController {
 	@Autowired
 	private StringRedisTemplate stringRedisTemplate;// 来模拟数据库存
 	
-	@ApiOperation("冲减库存+1")
+	@ApiOperation("+1库存")
     @RequestMapping(value = "/bloomSet", method = RequestMethod.GET)
-	@RedisBloomAdd(key = "testBloomFilter", value = "#id")
+	@RedisBloomAdd(key = "productBloom", value = "#id")
 	public CommonResult bloomSet(@RequestParam String id) {
 		int stock = Convert.toInt(stringRedisTemplate.opsForValue().get(id),0);
 		if(stock>0) {
@@ -42,9 +42,9 @@ public class BloomController {
 		return CommonResult.success(1);
 	}
 
-    @ApiOperation("穿透测试")
+    @ApiOperation("模拟穿透")
     @RequestMapping(value = "/bloomGet", method = RequestMethod.GET)
-    @RedisBloom(key = "testBloomFilter", value = "#id")
+    @RedisBloom(key = "productBloom", value = "#id")
 	public CommonResult bloomGet(@RequestParam String id) {
 		return CommonResult.success(stringRedisTemplate.opsForValue().get(id));
 	}

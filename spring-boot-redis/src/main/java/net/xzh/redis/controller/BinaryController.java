@@ -19,12 +19,12 @@ import io.swagger.annotations.ApiOperation;
 import net.xzh.redis.common.model.CommonResult;
 
 /**
- * 管道测试
+ * 将数据以二进制形式存入
  * 
  * @author Administrator
  *
  */
-@Api(tags = "二进制数据测试")
+@Api(tags = "二进制存储")
 @RestController
 @RequestMapping("/binary")
 public class BinaryController {
@@ -32,7 +32,7 @@ public class BinaryController {
 	@Autowired
 	private RedisTemplate<String, Object> serializeRedisTemplate;
 	
-	@ApiOperation("二进制set")
+	@ApiOperation("插入")
     @RequestMapping(value = "/byteSet", method = RequestMethod.GET)
 	public CommonResult byteSet(@RequestParam String id) {
 		ArrayList<HashMap<String, Object>> l = new ArrayList<HashMap<String, Object>>();
@@ -46,7 +46,7 @@ public class BinaryController {
 		return CommonResult.success(1);
 	}
 
-    @ApiOperation("二进制get")
+    @ApiOperation("读取")
     @RequestMapping(value = "/byteGet", method = RequestMethod.GET)
 	public CommonResult byteGet(@RequestParam String id) {
 		byte[] bytes = (byte[]) serializeRedisTemplate.opsForValue().get(id);

@@ -12,7 +12,7 @@ import org.springframework.data.redis.connection.MessageListener;
  */
 public class GlobalExpireListener implements MessageListener {
 	
-	private static final Logger LOGGER = LoggerFactory.getLogger(ExpireReceiver.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(GlobalExpireListener.class);
  
     @Override
     public void onMessage(Message message, byte[] pattern) {

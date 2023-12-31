@@ -21,7 +21,7 @@ import net.xzh.redis.common.model.CommonResult;
  * @author Administrator
  *
  */
-@Api(tags = "发布订阅测试")
+@Api(tags = "发布订阅")
 @RestController
 @RequestMapping("/message")
 public class PubSubController {
@@ -29,7 +29,7 @@ public class PubSubController {
 	@Autowired
 	private RedisTemplate<String, Object> redisTemplate;
 
-	@ApiOperation("按主题推送消息")
+	@ApiOperation("按主题")
     @RequestMapping(value = "/push", method = RequestMethod.GET)
     public CommonResult push(@RequestParam String id) {
 		redisTemplate.convertAndSend("redisChat", id + "room" );
@@ -37,7 +37,7 @@ public class PubSubController {
 		return CommonResult.success(1);
     }
     
-    @ApiOperation("key过期失效测试")
+    @ApiOperation("key失效过期")
     @RequestMapping(value = "/set", method = RequestMethod.GET)
 	public CommonResult set(String id) {
     	ArrayList<Object> msg = new ArrayList<Object>();

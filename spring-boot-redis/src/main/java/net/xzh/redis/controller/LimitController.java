@@ -17,7 +17,7 @@ import net.xzh.redis.common.model.LimitType;
  * @author Administrator
  *
  */
-@Api(tags = "限流测试")
+@Api(tags = "自定义限流")
 @RestController
 @RequestMapping("/limit")
 public class LimitController {

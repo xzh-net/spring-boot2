@@ -22,7 +22,7 @@ import net.xzh.redis.service.RedisService;
  * redis测试Controller
  * Created by macro on 2020/3/3.
  */
-@Api(tags = "数据5类型测试")
+@Api(tags = "基础数据读写")
 @RestController
 @RequestMapping("/redis")
 public class RedisController {
@@ -32,7 +32,7 @@ public class RedisController {
     @Autowired
     private PmsBrandService brandService;
 
-    @ApiOperation("测试简单缓存")
+    @ApiOperation("对象读写")
     @RequestMapping(value = "/simpleTest", method = RequestMethod.GET)
     public CommonResult<PmsBrand> simpleTest() {
         List<PmsBrand> brandList = brandService.list(1, 5);
@@ -43,7 +43,7 @@ public class RedisController {
         return CommonResult.success(cacheBrand);
     }
 
-    @ApiOperation("测试Hash结构的缓存")
+    @ApiOperation("Hash缓存")
     @RequestMapping(value = "/hashTest", method = RequestMethod.GET)
     public CommonResult<PmsBrand> hashTest() {
         List<PmsBrand> brandList = brandService.list(1, 5);
@@ -56,7 +56,7 @@ public class RedisController {
         return CommonResult.success(cacheBrand);
     }
 
-    @ApiOperation("测试Set结构的缓存")
+    @ApiOperation("Set缓存")
     @RequestMapping(value = "/setTest", method = RequestMethod.GET)
     public CommonResult<Set<Object>> setTest() {
         List<PmsBrand> brandList = brandService.list(1, 5);
@@ -67,7 +67,7 @@ public class RedisController {
         return CommonResult.success(cachedBrandList);
     }
 
-    @ApiOperation("测试List结构的缓存")
+    @ApiOperation("List缓存")
     @RequestMapping(value = "/listTest", method = RequestMethod.GET)
     public CommonResult<List<Object>> listTest() {
         List<PmsBrand> brandList = brandService.list(1, 5);

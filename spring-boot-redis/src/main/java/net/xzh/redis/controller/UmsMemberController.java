@@ -17,7 +17,7 @@ import net.xzh.redis.service.UmsMemberService;
  * Created by macro on 2018/8/3.
  */
 @Controller
-@Api(tags = "注册管理")
+@Api(tags = "验证码登录")
 @RequestMapping("/sso")
 public class UmsMemberController {
     @Autowired

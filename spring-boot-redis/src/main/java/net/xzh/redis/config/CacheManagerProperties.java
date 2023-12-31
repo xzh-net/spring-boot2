@@ -1,4 +1,4 @@
-package net.xzh.redis.properties;
+package net.xzh.redis.config;
 
 import java.util.List;
 

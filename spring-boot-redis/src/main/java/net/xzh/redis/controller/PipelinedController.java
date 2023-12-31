@@ -28,7 +28,7 @@ import net.xzh.redis.common.model.CommonResult;
  * @author Administrator
  *
  */
-@Api(tags = "管道测试")
+@Api(tags = "管道操作")
 @RestController
 @RequestMapping("/pipe")
 public class PipelinedController {
