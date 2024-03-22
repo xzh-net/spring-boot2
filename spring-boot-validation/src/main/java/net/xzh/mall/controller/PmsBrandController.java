@@ -29,7 +29,6 @@ import net.xzh.mall.service.PmsBrandService;
 
 /**
  * 品牌管理Controller
- * Created by xuzhihao 2019/4/19.
  */
 @Api(tags = "商品品牌管理")
 @Controller
