@@ -16,7 +16,7 @@ create table test as (
 
 创建索引
 ```bash
-create index test_idx ON test ("id");
+create index test_idx on test ("id");
 ```
 
 ## 2. 测试结果

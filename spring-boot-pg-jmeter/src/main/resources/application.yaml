@@ -10,22 +10,10 @@ spring:
    application:
       name: jmeter
    datasource:
-      url: jdbc:postgresql://127.0.0.1:5432/mydb
-      username: username
-      password: password
       driver-class-name: org.postgresql.Driver
-      type: com.alibaba.druid.pool.DruidDataSource
-      initialSize: 10
-      minIdle: 10
-      maxActive: 500
-      maxWait: 60000
-      timeBetweenEvictionRunsMillis: 60000
-      useSSL: false
-      filters: stat,wall,slf4j
-      maxPoolPreparedStatementPerConnectionSize: 100
-      useGlobalDataSourceStat: true
-      connectionoProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
-      useUnfairLock: true
+      url: jdbc:postgresql://127.0.0.1:5432/db
+      username: admin
+      password: 123456
 mybatis:
   mapper-locations:
     - classpath*:net/**/mapper/*.xml
