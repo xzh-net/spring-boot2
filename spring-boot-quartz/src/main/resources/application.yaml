@@ -3,11 +3,11 @@ server:
 
 spring:
   application:
-    name: xzh-quartz
+    name: quartz
   datasource:
-    url: jdbc:mysql://xuzhihao:3306/mall?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://127.0.0.1:3306/mall?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
     username: root
-    password: 123456
+    password: root
   quartz:
     job-store-type: jdbc # quartz任务存储类型：jdbc或memory
     wait-for-jobs-to-complete-on-shutdown: true # 关闭是等待任务完成
