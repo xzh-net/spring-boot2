@@ -45,7 +45,6 @@ secure:
       - /**/*.png
       - /favicon.ico
       - /actuator/**
-      - /druid/**
       - /admin/login
       - /admin/register
       - /admin/info
