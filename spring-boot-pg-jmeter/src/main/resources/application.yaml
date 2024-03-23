@@ -6,10 +6,27 @@ server:
       threads:
         max: 800
         min-spare: 10
+
 spring:
    application:
       name: jmeter
    datasource:
-      url: jdbc:postgresql://127.0.0.1:5432/jmeter
-      username: postgres
-      password: postgres
+      druid:
+         type: com.alibaba.druid.pool.DruidDataSourced
+         url: jdbc:postgresql://172.17.17.38:5432/aa
+         username: postgres
+         password: postgres
+         max-active: 100
+         max-wait: 60000
+         initial-size: 10
+         filters: stat,log,wall
+         validationQuery: SELECT 'x' #验证连接
+         stat-view-servlet:
+            enabled: false
+            login-username: root
+            login-password: root
+            allow: null
+            deny: null
+            url-pattern: /druid/*
+         test-on-borrow: true
+         test-while-idle: true
