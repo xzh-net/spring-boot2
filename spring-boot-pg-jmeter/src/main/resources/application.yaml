@@ -13,6 +13,3 @@ spring:
       url: jdbc:postgresql://127.0.0.1:5432/jmeter
       username: postgres
       password: postgres
-mybatis:
-  mapper-locations:
-    - classpath*:net/**/mapper/*.xml
