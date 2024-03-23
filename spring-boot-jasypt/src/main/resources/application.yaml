@@ -4,12 +4,9 @@ spring:
    application:
       name: jasypt
    datasource:
-      url: jdbc:mysql://xuzhihao:3306/mall?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+      url: jdbc:mysql://127.0.0.1:3306/mall?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
       username: root
       password: ENC(EyLGFESC7ihUwSjMX0/kTg==)
-mybatis:
-  mapper-locations:
-    - classpath*:net/**/mapper/*.xml
 # 加密配置
 jasypt:
   encryptor:
