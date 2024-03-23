@@ -3,30 +3,16 @@ spring:
     url: jdbc:mysql://172.17.17.137:3306/mall?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
     username: root
     password: root
-    druid:
-      initial-size: 5 #连接池初始化大小
-      min-idle: 10 #最小空闲连接数
-      max-active: 20 #最大连接数
-      web-stat-filter:
-        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*" #不统计这些请求数据
-      stat-view-servlet: #访问监控网页的登录用户名和密码
-        login-username: druid
-        login-password: druid
   redis:
-    host: 172.17.17.193 # Redis服务器地址
+    host: 172.17.17.201 # Redis服务器地址
     database: 9 # Redis数据库索引（默认为0）
-    port: 26380 # Redis服务器连接端口
-    password: redis26380 # Redis服务器连接密码（默认为空）
+    port: 6379 # Redis服务器连接端口
+    password: 123456 # Redis服务器连接密码（默认为空）
     timeout: 300ms # 连接超时时间（毫秒）
 
 rabbitmq:
-  relayHost: 172.17.17.161
+  relayHost: 172.17.17.137
   relayPort: 61613
   virtualHost: /
   login: admin
   passcode: 123456
-  
-logging:
-  level:
-    root: info
-    net.xzh.mall: debug

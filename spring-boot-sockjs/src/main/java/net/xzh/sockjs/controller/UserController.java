@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import net.xzh.sockjs.common.model.CommonResult;
 import net.xzh.sockjs.services.UmsAdminService;
 
@@ -22,7 +20,6 @@ import net.xzh.sockjs.services.UmsAdminService;
  * 后台用户管理
  */
 @Controller
-@Api(tags = "UmsAdminController", description = "后台用户管理")
 @RequestMapping("/admin")
 public class UserController {
     @Value("${jwt.tokenHeader}")
@@ -32,7 +29,6 @@ public class UserController {
     @Autowired
     private UmsAdminService adminService;
 
-    @ApiOperation(value = "登录以后返回token")
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult login(@RequestBody Map<String, Object> params) {
@@ -48,7 +44,6 @@ public class UserController {
         return CommonResult.success(tokenMap);
     }
 
-    @ApiOperation(value = "刷新token")
     @RequestMapping(value = "/refreshToken", method = RequestMethod.GET)
     @ResponseBody
     public CommonResult refreshToken(HttpServletRequest request) {
@@ -63,7 +58,6 @@ public class UserController {
         return CommonResult.success(tokenMap);
     }
 
-    @ApiOperation(value = "登出功能")
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult logout() {

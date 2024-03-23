@@ -10,11 +10,7 @@ spring:
 logging:
   level:
     root: info
-    net.xzh.mall: debug
-    
-mybatis:
-  mapper-locations:
-    - classpath*:net/**/mapper/*.xml
+    net.xzh.sockjs: debug
 
 jwt:
   tokenHeader: Authorization #JWT存储的请求头
@@ -43,7 +39,6 @@ secure:
       - /**/*.png
       - /favicon.ico
       - /actuator/**
-      - /druid/**
       - /admin/login
       - /admin/register
       - /admin/info
