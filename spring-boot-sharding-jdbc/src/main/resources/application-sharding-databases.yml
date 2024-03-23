@@ -3,17 +3,17 @@ sharding:
     datasource:
       names: ds-0,ds-1
       ds-0:
-        type: com.alibaba.druid.pool.DruidDataSource
+        type: com.zaxxer.hikari.HikariDataSource
         driver-class-name: org.postgresql.Driver
-        url: jdbc:postgresql://172.17.17.29:5432/ec_demo_0?useUnicode=true&characterEncoding=utf8&currentSchema=public&stringtype=unspecified
+        jdbcUrl: jdbc:postgresql://127.0.0.1:5432/ec_demo_0?useUnicode=true&characterEncoding=utf8&currentSchema=public&stringtype=unspecified
         username: postgres
-        password: vjsp2020
+        password: postgres
       ds-1:
-        type: com.alibaba.druid.pool.DruidDataSource
+        type: com.zaxxer.hikari.HikariDataSource
         driver-class-name: org.postgresql.Driver
-        url: jdbc:postgresql://172.17.17.29:5432/ec_demo_1?useUnicode=true&characterEncoding=utf8&currentSchema=public&stringtype=unspecified
+        jdbcUrl: jdbc:postgresql://127.0.0.1:5432/ec_demo_1?useUnicode=true&characterEncoding=utf8&currentSchema=public&stringtype=unspecified
         username: postgres
-        password: vjsp2020
+        password: postgres
     config:
       sharding:
         default-database-strategy:
