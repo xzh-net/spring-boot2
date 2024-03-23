@@ -13,7 +13,7 @@ spring:
    datasource:
       druid:
          type: com.alibaba.druid.pool.DruidDataSourced
-         url: jdbc:postgresql://172.17.17.38:5432/aa
+         url: jdbc:postgresql://127.0.0.1:5432/db
          username: postgres
          password: postgres
          max-active: 100
