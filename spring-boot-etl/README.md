@@ -5,7 +5,7 @@ mvn clean compile
 mvn clean package
 ```
 
-访问地址：http://127.0.0.1:8080/doc.html，所有任务实例和表结构见：https://www.xuzhihao.net/#/java/tools/etl
+访问地址：http://127.0.0.1:8080/doc.html，所有任务实例和表结构见：https://www.xuzhihao.net/#/deploy/kettle
 
 
 ## 1. Kettle无法下载jar修改maven配置
