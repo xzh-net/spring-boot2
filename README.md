@@ -45,7 +45,7 @@ spring-boot-sockjs          -- sockjs + rabbitmq
 spring-boot-sockjs-redis    -- sockjs + redis
 spring-boot-sse	            -- Server Sent Event
 spring-boot-stand       -- springboot2
-spring-boot-swagger     -- 整合swagger
+spring-boot-swagger     -- 脚手架整合swagger
 spring-boot-validation  -- 逻辑校验的三种方式
 spring-boot-webflux     -- 异步非阻塞式Web框架
 spring-boot-websocket   -- websocket原生html
