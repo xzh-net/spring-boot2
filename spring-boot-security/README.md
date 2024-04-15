@@ -19,13 +19,13 @@ mvn clean package
 认证步骤：登录授权过滤器->动态权限过滤器，处理白名单->动态权限决策管理器
 
 1. 实现FilterInvocationSecurityMetadataSource类，获取动态权限数据源
-   	- ```
+    - ```
       @PostConstruct
       public void loadDataSource() {
       	configAttributeMap = dynamicSecurityService.loadDataSource();
       }
       ```
-    
+      
     - 重写的support方法都返回true
     
 2. 实现AccessDecisionManager类，权限决策器
