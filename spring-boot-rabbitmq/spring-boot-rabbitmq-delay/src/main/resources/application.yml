@@ -13,9 +13,9 @@ spring:
     listener:
       simple:  
         acknowledge-mode: manual
-        concurrency: 10 # 消费端的监听个数,开启几个线程去处理数据
+        concurrency: 10     # 消费端的监听个数,开启几个线程去处理数据
         max-concurrency: 10 # 消费端的监听最大个数
-        prefetch: 10   # qos=1 默认250
+        prefetch: 10        # qos=1 默认250
       direct:
         acknowledge-mode: manual
       
