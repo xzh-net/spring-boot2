@@ -10,6 +10,9 @@ mvn clean package
 2. 安装elk7.6.2
 
 ```bash
+mkdir /data/elasticsearch/{plugins,data} -p
+mkdir /data/logstash
+chmod -R 777 /data
 docker-compose -f docker-compose-env.yml up -d  
 docker-compose -f docker-compose-env.yml down
 ```
