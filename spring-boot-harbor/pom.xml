@@ -14,11 +14,11 @@
 		<java.version>1.8</java.version>
 		<skipTests>true</skipTests>
 		<docker.baseImage>openjdk:8-jre-alpine</docker.baseImage>
-        <docker.volumes>/tmp</docker.volumes>
-        <docker.host>http://172.17.17.161:2375</docker.host>
-        <docker.image.prefix>172.17.17.161:88/ec_platform</docker.image.prefix>
-        <docker.java.security.egd>-Djava.security.egd=file:/dev/./urandom</docker.java.security.egd>
-        <docker.java.opts>-Xms128m -Xmx128m</docker.java.opts>
+		<docker.volumes>/tmp</docker.volumes>
+		<docker.host>http://172.17.17.161:2375</docker.host>
+		<docker.image.prefix>172.17.17.161:88/ec_platform</docker.image.prefix>
+		<docker.java.security.egd>-Djava.security.egd=file:/dev/./urandom</docker.java.security.egd>
+		<docker.java.opts>-Xms128m -Xmx128m</docker.java.opts>
 	</properties>
 
 	<parent>
@@ -46,51 +46,51 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-        <!--整合Knife4j-->
-        <dependency>
-            <groupId>com.github.xiaoymin</groupId>
-            <artifactId>knife4j-spring-boot-starter</artifactId>
-            <version>2.0.4</version>
-        </dependency>
+		<!--整合Knife4j -->
+		<dependency>
+			<groupId>com.github.xiaoymin</groupId>
+			<artifactId>knife4j-spring-boot-starter</artifactId>
+			<version>2.0.4</version>
+		</dependency>
 	</dependencies>
 	<build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>com.spotify</groupId>
-                <artifactId>docker-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>build-image</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>build</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <serverId>harbor88</serverId>
-                    <dockerHost>${docker.host}</dockerHost>
-                    <imageName>${docker.image.prefix}/${project.artifactId}:${project.version}</imageName>
-                    <pushImage>true</pushImage>
-                    <baseImage>${docker.baseImage}</baseImage>
-                    <volumes>${docker.volumes}</volumes>
-                    <env>
-                        <JAVA_OPTS>${docker.java.opts}</JAVA_OPTS>
-                    </env>
-                    <entryPoint>["sh","-c","java $JAVA_OPTS ${docker.java.security.egd} -jar /${project.build.finalName}.jar"]</entryPoint>
-                    <resources>
-                        <resource>
-                            <targetPath>/</targetPath>
-                            <directory>${project.build.directory}</directory>
-                            <include>${project.build.finalName}.jar</include>
-                        </resource>
-                    </resources>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>build-image</id>
+						<phase>package</phase>
+						<goals>
+							<goal>build</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<serverId>docker-hub88</serverId>
+					<dockerHost>${docker.host}</dockerHost>
+					<imageName>${docker.image.prefix}/${project.artifactId}:${project.version}</imageName>
+					<pushImage>true</pushImage>
+					<baseImage>${docker.baseImage}</baseImage>
+					<volumes>${docker.volumes}</volumes>
+					<env>
+						<JAVA_OPTS>${docker.java.opts}</JAVA_OPTS>
+					</env>
+					<entryPoint>["sh","-c","java $JAVA_OPTS ${docker.java.security.egd} -jar /${project.build.finalName}.jar"]</entryPoint>
+					<resources>
+						<resource>
+							<targetPath>/</targetPath>
+							<directory>${project.build.directory}</directory>
+							<include>${project.build.finalName}.jar</include>
+						</resource>
+					</resources>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
