@@ -1,4 +1,4 @@
-# docker-maven-plugin 构建镜像
+# 基于 docker-maven-plugin 构建镜像并推送到Harbor
 
 1. 安装Docker
 
