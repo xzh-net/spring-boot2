@@ -5,18 +5,16 @@
    ```bash\
    vi /etc/docker/daemon.json
    {
-       "registry-mirrors":["https://docker.mirrors.ustc.edu.cn"],
-       "insecure-registries": ["192.168.2.100:88"],
-       "exec-opts":["native.cgroupdriver=systemd"],
-       "data-root": "/data/docker"
-   }
-   
-   vim /usr/lib/systemd/system/docker.service
-   # 添加配置文件内容，-H之前是默认参数，追加 -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock
-   ExecStart=/usr/bin/dockerd  -H tcp://0.0.0.0:2375 -H unix://var/run/docker.sock
+    "registry-mirrors":["https://docker.mirrors.ustc.edu.cn"],
+    "insecure-registries": ["192.168.2.100:88"],
+    "exec-opts":["native.cgroupdriver=systemd"],
+    "hosts": ["tcp://0.0.0.0:2375", "unix:///var/run/docker.sock"]
+    "data-root": "/data/docker",   
+	}
    ```
+   
    ```bash
-   docker login -u admin -p Harbor12345 http://127.0.0.1:88
+   docker login -u admin -p Harbor12345 http://192.168.2.100:88
    ```
 
 2. 安装Harbor新建项目
@@ -41,7 +39,7 @@
 4. 推送镜像
 
    ```bash
-   mvn verify
+   mvn clean package
    ```
 
 5. 镜像拉取 
