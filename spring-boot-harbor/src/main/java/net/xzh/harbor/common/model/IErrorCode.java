@@ -1,4 +1,4 @@
-package net.xzh.jenkins.common.model;
+package net.xzh.harbor.common.model;
 
 /**
  * 封装API的错误码

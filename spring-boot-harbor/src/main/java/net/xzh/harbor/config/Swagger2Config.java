@@ -1,4 +1,4 @@
-package net.xzh.jenkins.config;
+package net.xzh.harbor.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,7 +29,7 @@ public class Swagger2Config {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("net.xzh.jenkins.controller"))
+                .apis(RequestHandlerSelectors.basePackage("net.xzh.harbor.controller"))
                 .paths(PathSelectors.any())
                 .build()
                 //添加登录认证

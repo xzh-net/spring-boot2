@@ -1,4 +1,4 @@
-package net.xzh.jenkins.common.model;
+package net.xzh.harbor.common.model;
 
 /**
  * 枚举了一些常用API操作码

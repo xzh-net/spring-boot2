@@ -41,19 +41,22 @@
 4. 推送镜像
 
    ```bash
-   mvn clean package
+   mvn verify
    ```
 
 5. 镜像拉取 
 
    ```bash
-   docker pull 192.168.2.100:88/ec_platform/spring-boot-jenkins:1.0
+   docker pull 192.168.2.100:88/ec_platform/spring-boot-harbor:1.0
    ```
 
 6. 运行镜像
 
    ```bash
-    docker run -dit -p 8080:8080 --name spring-boot-jenkins 192.168.2.100:88/ec_platform/spring-boot-jenkins:1.0
+    docker run -dit -p 8080:8080 --name spring-boot-harbor 192.168.2.100:88/ec_platform/spring-boot-harbor:1.0
    ```
+   
 7. 访问地址
-   http://127.0.0.1:8080/doc.html 
+   
+   - http://192.168.2.200:8080/doc.html 
+   - http://192.168.2.200:8080/login

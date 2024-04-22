@@ -1,4 +1,4 @@
-package net.xzh.jenkins.controller;
+package net.xzh.harbor.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import net.xzh.jenkins.common.model.CommonResult;
+import net.xzh.harbor.common.model.CommonResult;
 
 /**
  * 首页

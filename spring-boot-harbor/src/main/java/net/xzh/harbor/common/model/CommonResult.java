@@ -1,4 +1,4 @@
-package net.xzh.jenkins.common.model;
+package net.xzh.harbor.common.model;
 
 /**
  * 通用返回对象
