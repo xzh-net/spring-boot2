@@ -28,7 +28,7 @@
    ```conf
    <servers>
        <server>
-   		<id>harbor88</id>  
+   		<id>docker-hub88</id>  
    		<username>admin</username>  
    		<password>Harbor12345</password> 
    		<configuration>  
