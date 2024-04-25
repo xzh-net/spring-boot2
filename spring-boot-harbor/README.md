@@ -21,19 +21,13 @@
 
    ![](doc/assets/harbor.png)
 
-3. Maven配置
+3. 编写Dockerfile
 
-   ```conf
-   <servers>
-       <server>
-   		<id>docker-hub88</id>  
-   		<username>admin</username>  
-   		<password>Harbor12345</password> 
-   		<configuration>  
-   			<email>xzh@163.com</email> 
-   		</configuration>
-       </server>
-   </servers>
+   ```bash
+   FROM openjdk:8-jre-alpine
+   COPY target/*.jar /app.jar
+   EXPOSE 8080
+   ENTRYPOINT ["sh","-c","java -Xms128m -Xmx128m -Djava.security.egd=file:/dev/./urandom -jar /app.jar"]
    ```
 
 4. 推送镜像
@@ -53,8 +47,8 @@
    ```bash
     docker run -dit -p 8080:8080 --name spring-boot-harbor 192.168.2.100:88/ec_platform/spring-boot-harbor:1.0
    ```
-   
+
 7. 访问地址
-   
+
    - http://192.168.2.200:8080/doc.html 
    - http://192.168.2.200:8080/login
