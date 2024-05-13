@@ -1,4 +1,4 @@
-# pg百万性能查询调优
+# postgres百万性能查询调优
 
 
 ## 1. 创建表
@@ -27,3 +27,6 @@ create index test_idx on test ("id");
 mvn clean compile
 mvn clean package
 ```
+
+## 3. 数据库对比工具
+
