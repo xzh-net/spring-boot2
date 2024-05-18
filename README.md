@@ -19,6 +19,7 @@ spring-boot-cxf         -- CXF
 spring-boot-elasticsearch   --商品搜索
 spring-boot-elk         -- 日志收集
 spring-boot-email       -- 发送邮件
+spring-boot-emqx        -- 消息中间件
 spring-boot-etl         -- 数据转换
 spring-boot-generator   -- 代码生成工具
 spring-boot-hbase       -- hbase
