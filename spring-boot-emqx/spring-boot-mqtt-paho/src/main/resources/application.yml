@@ -1,0 +1,18 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: mqtt-paho
+    
+mqtt:
+  broker-url: tcp://192.168.2.201:1883
+  client-id: mqtt-paho
+  username: xzh
+  password: 123456
+  cleanSession: true
+  reconnect: true
+  timeout: 100
+  keepAlive: 100
+  defaultTopic: testtopic
+  serverTopic: testtopic
+  qos: 2
