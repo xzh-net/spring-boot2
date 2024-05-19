@@ -3,3 +3,8 @@ server:
 spring:
   application:
     name: emqx-auth
+    
+mqtt:
+  api-url: http://192.168.2.201:8081
+  username: admin
+  password: public
