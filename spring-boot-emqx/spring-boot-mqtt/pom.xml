@@ -2,9 +2,9 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>spring-boot-emqx-auth</artifactId>
-	<name>spring-boot-emqx-auth</name>
-	<description>spring-boot-emqx-auth</description>
+	<artifactId>spring-boot-mqtt</artifactId>
+	<name>spring-boot-mqtt</name>
+	<description>spring-boot-mqtt</description>
 	<packaging>jar</packaging>
 
 	<properties>
