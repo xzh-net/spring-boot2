@@ -1,4 +1,4 @@
-package net.xzh.emqx.controller;
+package net.xzh.mqtt.controller;
 
 import java.util.HashMap;
 import java.util.Map;

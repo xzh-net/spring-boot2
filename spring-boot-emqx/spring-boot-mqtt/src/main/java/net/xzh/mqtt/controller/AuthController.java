@@ -1,4 +1,4 @@
-package net.xzh.emqx.controller;
+package net.xzh.mqtt.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
