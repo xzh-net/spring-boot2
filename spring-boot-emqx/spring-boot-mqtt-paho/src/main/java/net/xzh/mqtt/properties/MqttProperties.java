@@ -49,10 +49,6 @@ public class MqttProperties {
      */
     private String  defaultTopic;
 
-    /**
-     * 默认服务器发送主题前缀
-     */
-    private String  serverTopic;
 
 	public String getBrokerUrl() {
 		return brokerUrl;
@@ -133,14 +129,4 @@ public class MqttProperties {
 	public void setDefaultTopic(String defaultTopic) {
 		this.defaultTopic = defaultTopic;
 	}
-
-	public String getServerTopic(String topic) {
-        return serverTopic + "/" + topic;
-    }
-
-
-	public void setServerTopic(String serverTopic) {
-		this.serverTopic = serverTopic;
-	}
-	
 }

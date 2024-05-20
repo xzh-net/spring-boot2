@@ -11,8 +11,6 @@ import org.springframework.stereotype.Component;
 
 import net.xzh.mqtt.properties.MqttProperties;
 
-import java.io.UnsupportedEncodingException;
-
 /**
  * MQTT接受服务的回调类
  * 
@@ -38,7 +36,7 @@ public class MessageCallback implements MqttCallbackExtended {
 	@Override
 	public void connectionLost(Throwable throwable) {
 		log.info("连接断开，可以重连");
-		if (emqClient.client == null || !emqClient.client.isConnected()) {
+		if (emqClient.getClient() == null || !emqClient.getClient().isConnected()) {
 			log.info("【emqx重新连接】....................................................");
 			emqClient.reconnection();
 		}
@@ -74,10 +72,10 @@ public class MessageCallback implements MqttCallbackExtended {
 	 */
 	@Override
 	public void connectComplete(boolean reconnect, String serverURI) {
-		log.info("客户端{}连接成功！", emqClient.client.getClientId());
+		log.info("客户端{}连接成功！", emqClient.getClient().getClientId());
 		// 以/#结尾表示订阅所有以testtopic开头的主题
 		try {
-			emqClient.client.subscribe(mqttProperties.getDefaultTopic(), mqttProperties.getQos());
+			emqClient.getClient().subscribe(mqttProperties.getDefaultTopic(), mqttProperties.getQos());
 		} catch (MqttException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -4,8 +4,10 @@ import javax.annotation.PostConstruct;
 
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
+import org.eclipse.paho.client.mqttv3.MqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
+import org.eclipse.paho.client.mqttv3.MqttTopic;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,30 +22,26 @@ import net.xzh.mqtt.properties.MqttProperties;
 @Component
 public class EmqClient {
 
-	private static final Logger logger = LoggerFactory.getLogger(MqttClient.class);
+	private static final Logger log = LoggerFactory.getLogger(MqttClient.class);
 
 	@Autowired
 	private MqttProperties mqttProperties;
 
 	@Autowired
 	private MessageCallback messageCallback;
-	
-	public static MqttClient client;
-	
-	public static MqttClient getClient() {
-        return client;
-    }
 
-    public static void setClient(MqttClient client) {
-    	EmqClient.client = client;
-    }
+	private MqttClient client;
+
+	
+	public MqttClient getClient() {
+		return client;
+	}
 
 	/**
 	 * 客户端连接
 	 */
-    @PostConstruct
-	public void connect() {
-		MqttClient client;
+	@PostConstruct
+	private void init() {
 		try {
 			client = new MqttClient(mqttProperties.getBrokerUrl(), mqttProperties.getClientId(),
 					new MemoryPersistence());
@@ -54,12 +52,16 @@ public class EmqClient {
 			options.setKeepAliveInterval(mqttProperties.getKeepAlive());
 			options.setAutomaticReconnect(mqttProperties.getReconnect());
 			options.setCleanSession(mqttProperties.getCleanSession());
-			EmqClient.setClient(client);
 			// 设置回调
 			client.setCallback(messageCallback);
 			client.connect(options);
-		} catch (Exception e) {
-			logger.error("MqttAcceptClient connect error,message:{}", e.getMessage());
+			if (!client.isConnected()) {
+				log.info("mqtt链接{}失败", mqttProperties.getBrokerUrl());
+			} else {
+				log.info("mqtt链接{}成功", mqttProperties.getBrokerUrl());
+			}
+		} catch (MqttException e) {
+			log.error("MqttAcceptClient connect error,message:{}", e.getMessage());
 			e.printStackTrace();
 		}
 	}
@@ -76,87 +78,58 @@ public class EmqClient {
 		message.setQos(mqttProperties.getQos());
 		message.setRetained(retained);
 		message.setPayload(content.getBytes());
+		MqttTopic mTopic = client.getTopic(topic);
+		MqttDeliveryToken token;
 		try {
-			client.publish(mqttProperties.getServerTopic(topic), message);
+			token = mTopic.publish(message);
+			token.waitForCompletion();
 		} catch (MqttException e) {
-			logger.error("MqttSendClient publish error,message:{}", e.getMessage());
-			e.printStackTrace();
-		} finally {
-			disconnect(client);
-			close(client);
-		}
-	}
-	
-	/**
-     * 订阅某个主题
-     *
-     * @param topic 主题
-     * @param qos   连接方式
-     */
-    public void subscribe(String topic, int qos) {
-        logger.info("========================【开始订阅主题:" + topic + "】========================");
-        try {
-        	client.subscribe(topic, qos);
-        } catch (MqttException e) {
-            logger.error("MqttAcceptClient subscribe error,message:{}", e.getMessage());
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * 取消订阅某个主题
-     *
-     * @param topic
-     */
-    public void unsubscribe(String topic) {
-        logger.info("========================【取消订阅主题:" + topic + "】========================");
-        try {
-            client.unsubscribe(topic);
-        } catch (MqttException e) {
-            logger.error("MqttAcceptClient unsubscribe error,message:{}", e.getMessage());
-            e.printStackTrace();
-        }
-    }
-    
-    /**
-     * 重新连接
-     */
-    public void reconnection() {
-        try {
-            client.connect();
-        } catch (MqttException e) {
-            logger.error("MqttAcceptClient reconnection error,message:{}", e.getMessage());
-            e.printStackTrace();
-        }
-    }
-    
-	/**
-	 * 关闭连接
-	 *
-	 * @param mqttClient
-	 */
-	public static void disconnect(MqttClient mqttClient) {
-		try {
-			if (mqttClient != null)
-				mqttClient.disconnect();
-		} catch (MqttException e) {
-			logger.error("MqttSendClient disconnect error,message:{}", e.getMessage());
+			log.error("MqttSendClient publish error,message:{}", e.getMessage());
 			e.printStackTrace();
 		}
 	}
 
 	/**
-	 * 释放资源
+	 * 订阅某个主题
 	 *
-	 * @param mqttClient
+	 * @param topic 主题
+	 * @param qos   连接方式
 	 */
-	public static void close(MqttClient mqttClient) {
+	public void subscribe(String topic, int qos) {
+		log.info("========================【开始订阅主题:" + topic + "】========================");
 		try {
-			if (mqttClient != null)
-				mqttClient.close();
+			client.subscribe(topic, qos);
 		} catch (MqttException e) {
-			logger.error("MqttSendClient close error,message:{}", e.getMessage());
+			log.error("MqttAcceptClient subscribe error,message:{}", e.getMessage());
 			e.printStackTrace();
 		}
 	}
+
+	/**
+	 * 取消订阅某个主题
+	 *
+	 * @param topic
+	 */
+	public void unsubscribe(String topic) {
+		log.info("========================【取消订阅主题:" + topic + "】========================");
+		try {
+			client.unsubscribe(topic);
+		} catch (MqttException e) {
+			log.error("MqttAcceptClient unsubscribe error,message:{}", e.getMessage());
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 重新连接
+	 */
+	public void reconnection() {
+		try {
+			client.connect();
+		} catch (MqttException e) {
+			log.error("MqttAcceptClient reconnection error,message:{}", e.getMessage());
+			e.printStackTrace();
+		}
+	}
+
 }
