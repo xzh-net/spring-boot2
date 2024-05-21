@@ -19,7 +19,7 @@ spring-boot-cxf         -- CXF
 spring-boot-elasticsearch   --商品搜索
 spring-boot-elk         -- 日志收集
 spring-boot-email       -- 发送邮件
-spring-boot-emqx        -- 消息中间件
+spring-boot-emqx        -- 消息中间件【ui2】
 spring-boot-etl         -- 数据转换
 spring-boot-generator   -- 代码生成工具
 spring-boot-hbase       -- hbase
@@ -42,13 +42,13 @@ spring-boot-redis       -- 缓存中间件
 spring-boot-rocketmq    -- 消息中间件
 spring-boot-security    -- 动态授权
 spring-boot-sharding-jdbc   -- 分库分表
-spring-boot-sockjs          -- sockjs + rabbitmq
-spring-boot-sockjs-redis    -- sockjs + redis
-spring-boot-sse	            -- Server Sent Event
+spring-boot-sockjs          -- sockjs + rabbitmq【ui1】
+spring-boot-sockjs-redis    -- sockjs + redis【ui3】
+spring-boot-sse	            -- Server Sent Event【ui2】
 spring-boot-stand       -- springboot2
 spring-boot-swagger     -- 脚手架整合swagger
 spring-boot-validation  -- 逻辑校验的三种方式
-spring-boot-webflux     -- 异步非阻塞式Web框架
+spring-boot-webflux     -- 异步非阻塞式Web框架【ui1】
 spring-boot-websocket   -- websocket原生html
 spring-boot-wechat      -- 微信网页授权
 ```
