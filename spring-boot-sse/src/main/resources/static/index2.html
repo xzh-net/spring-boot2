@@ -10,7 +10,7 @@
 <script>
     function output() {
         let source = new EventSource(
-            'http://localhost:8080/article');
+            '/article');
         let innerHTML = '';
         source.onmessage = function (e) {
             if (e.data == '[done]') {

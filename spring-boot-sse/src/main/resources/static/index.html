@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>server-sent events</title>
-    <script src="js/jquery.js"></script>
+    <title>SSE demo1</title>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
     <div>
@@ -16,7 +16,7 @@
     </div>
     <div>
         <h3>消息</h3>
-        <button id="push">发送</button><input id="pushtxt" type="text">
+        <button id="push" disabled="disabled">发送</button><input id="pushtxt" type="text">
         <label>收到消息：</label><input id="message" type="text" disabled="disabled">
     </div>
     
@@ -24,7 +24,7 @@
 <script>
 	let source;
     $("#connect").click(function () {
-    	source = new EventSource('http://localhost:8080/connect');
+    	source = new EventSource("/connect");
     	source.onopen = function() {
     		setConnect(true);
     		$("#subscribeMsg").val("success");
@@ -37,15 +37,21 @@
 	        }
 	    };
 	    source.onerror = function() {
-            console.error("sse error");
-            source.close();
-        }
+	    	console.log('发生错误：', event);
+        };
+     	// 自定义事件，服务端返回时设置event字段为自定义事件名称
+        source.addEventListener("connecttime",
+            function (event) {
+        		console.log('自定义事件', event);
+            },
+            false
+        );
+	    
     });
     
     $("#disconnect").click(function () {
     	if(source!=null){
     		source.close();
-    		source=null;
 	    }
         setConnect(false);
         $("#subscribeMsg").val("");
@@ -54,11 +60,11 @@
     function setConnect(connectStatus) {
         $("#connect").attr("disabled", connectStatus);
         $("#disconnect").attr("disabled", !connectStatus);
+        $("#push").attr("disabled", !connectStatus);
     }
     //发送消息
     $("#push").click(function () {
     	$.get('send/all',{'message':$("#pushtxt").val()},function(res){
-    		alert(res);
     	});
     });
 
