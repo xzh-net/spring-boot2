@@ -7,11 +7,10 @@ import org.springframework.stereotype.Component;
 
 /**
  * MQTT网关，通过接口将数据传递到集成流
- * Created by macro on 2020/9/15.
  */
 @Component
-@MessagingGateway(defaultRequestChannel = "iotMqttInputChannel")
-public interface IotMqttGateway {
+@MessagingGateway(defaultRequestChannel = "mqttInputChannel")
+public interface MqttGateway {
     /**
      * 发送消息到默认topic
      */

@@ -5,10 +5,10 @@ spring:
     name: mqtt-paho
     
 mqtt:
-  broker-url: tcp://192.168.2.201:1883
-  client-id: mqtt-paho
-  username: xuzhihao
-  password: 123456
+  broker-url: tcp://172.17.17.212:1883
+  client-id: emqx-paho
+  username: admin
+  password: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1dWlkIjoiODc4ZjVlOGIwYmE3NDQ3YmE1OTIyNzE4NDE2MmRlZDIiLCJ1c2VybmFtZSI6ImFkbWluIn0.gQkcmaAcUzmCHQvzTnOC4xyW4cNjftpsb6yuBA6_rJ8
   cleanSession: true
   reconnect: true
   timeout: 100

@@ -1,13 +1,19 @@
 server:
   port: 8080
-rabbitmq:
-  mqtt:
-    url: tcp://xuzhihao:1883
-    username: guest
-    password: guest
-    clientid: mqttid1123
-    defaultTopic: test
-    
+
+mqtt:
+  broker-url: tcp://172.17.17.161:1883
+  server-id: rabbitmq-mqtt
+  client-id: mqtt-paho
+  username: admin
+  password: 123456
+  cleanSession: true
+  reconnect: true
+  timeout: 100
+  keepAlive: 100
+  defaultTopic: test
+  qos: 2
+
 spring:
   thymeleaf:
     cache: false
