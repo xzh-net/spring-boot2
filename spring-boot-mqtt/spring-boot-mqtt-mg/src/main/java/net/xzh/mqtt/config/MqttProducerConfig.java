@@ -1,4 +1,4 @@
-package net.xzh.rabbit.config;
+package net.xzh.mqtt.config;
 
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,5 +48,5 @@ public class MqttProducerConfig {
 	@Bean
 	public MessageChannel mqttOutboundChannel() {
 		return new DirectChannel();
-	}
+	}	
 }

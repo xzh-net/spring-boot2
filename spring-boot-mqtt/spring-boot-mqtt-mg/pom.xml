@@ -2,9 +2,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>spring-boot-rabbitmq-mqtt</artifactId>
-    <name>spring-boot-rabbitmq-mqtt</name>
-    <description>spring-boot-rabbitmq-mqtt</description>
+    <artifactId>spring-boot-mqtt-mg</artifactId>
+    <name>spring-boot-mqtt-mg</name>
+    <description>spring-boot-mqtt-mg</description>
 	<packaging>jar</packaging>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

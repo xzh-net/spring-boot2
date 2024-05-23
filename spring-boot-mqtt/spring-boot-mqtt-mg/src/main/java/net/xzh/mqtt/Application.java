@@ -1,4 +1,4 @@
-package net.xzh.rabbit;
+package net.xzh.mqtt;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

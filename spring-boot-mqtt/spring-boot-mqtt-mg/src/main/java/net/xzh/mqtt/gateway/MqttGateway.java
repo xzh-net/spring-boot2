@@ -1,4 +1,4 @@
-package net.xzh.rabbit.gateway;
+package net.xzh.mqtt.gateway;
 
 import org.springframework.integration.annotation.MessagingGateway;
 import org.springframework.integration.mqtt.support.MqttHeaders;

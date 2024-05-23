@@ -1,15 +1,15 @@
 server:
-  port: 8080
+  port: 8083
 
 mqtt:
-  broker-url: tcp://172.17.17.161:1883
+  broker-url: tcp://xuzhihao:1883
   server-id: rabbitmq-mqtt
   client-id: mqtt-paho
   username: admin
-  password: 123456
+  password: admin
   cleanSession: true
   reconnect: true
-  timeout: 100
+  timeout: 1000
   keepAlive: 100
-  defaultTopic: test
+  defaultTopic: testtopic
   qos: 2
