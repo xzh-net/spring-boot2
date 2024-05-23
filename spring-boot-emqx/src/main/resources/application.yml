@@ -5,6 +5,6 @@ spring:
     name: emqx-auth
     
 mqtt:
-  api-url: http://192.168.2.201:8081
+  api-url: http://xuzhihao:8081
   username: admin
   password: public

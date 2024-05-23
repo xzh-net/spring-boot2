@@ -19,7 +19,7 @@ spring-boot-cxf         -- CXF
 spring-boot-elasticsearch   --商品搜索
 spring-boot-elk         -- 日志收集
 spring-boot-email       -- 发送邮件
-spring-boot-emqx        -- 消息中间件【ui2】
+spring-boot-emqx        -- 消息中间件
 spring-boot-etl         -- 数据转换
 spring-boot-generator   -- 代码生成工具
 spring-boot-hbase       -- hbase
@@ -32,6 +32,7 @@ spring-boot-kafka       -- 消息中间件
 spring-boot-knife4j     -- 整合knife4j
 spring-boot-log         -- 日志拦截器
 spring-boot-mongo       -- 浏览记录读写分离
+spring-boot-mqtt        -- 消息中间件【ui2】
 spring-boot-netty       -- 聊天室、心跳检测
 spring-boot-oss         -- 附件上传
 spring-boot-pg-jmeter   -- PG压测、Tomcat调优
@@ -48,7 +49,7 @@ spring-boot-sse	            -- Server Sent Event【ui2】
 spring-boot-stand       -- springboot2
 spring-boot-swagger     -- 脚手架整合swagger
 spring-boot-validation  -- 逻辑校验的三种方式
-spring-boot-webflux     -- 异步非阻塞式Web框架【ui1】
-spring-boot-websocket   -- websocket原生html
+spring-boot-webflux     -- 异步非阻塞式Web框架
+spring-boot-websocket   -- websocket原生html【ui1】
 spring-boot-wechat      -- 微信网页授权
 ```

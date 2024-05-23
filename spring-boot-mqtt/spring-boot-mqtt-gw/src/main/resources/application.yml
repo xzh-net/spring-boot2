@@ -13,7 +13,3 @@ mqtt:
   keepAlive: 100
   defaultTopic: test
   qos: 2
-
-spring:
-  thymeleaf:
-    cache: false
