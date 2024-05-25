@@ -6,12 +6,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.PostConstruct;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * HTTP 认证，授权，判断超级用户
@@ -36,11 +38,10 @@ public class AuthController {
 		users.put("admin", "admin");
 	}
 
-	@PostMapping("/auth")
-	public ResponseEntity auth(@RequestParam("clientid") String clientid, @RequestParam("username") String username,
+	@PostMapping("/v4/auth")
+	public ResponseEntity auth4(@RequestParam("clientid") String clientid, @RequestParam("username") String username,
 			@RequestParam("password") String password, @RequestParam("ipaddr") String ipaddr) {
-		log.info("emqx http认证组件开始调用任务服务完成认证,clientid={},username={},password={},ipaddr={}", clientid, username,
-				password, ipaddr);
+		log.info("emqx http认证请求,clientid={},username={},password={},ipaddr={}", clientid, username, password, ipaddr);
 		String value = users.get(username);
 		if (StringUtils.isEmpty(value)) {
 			return ResponseEntity.status(HttpStatus.OK).body("ignore");
@@ -52,10 +53,10 @@ public class AuthController {
 
 	}
 
-	@PostMapping("/superuser")
+	@PostMapping("/v4/superuser")
 	public ResponseEntity superuser(@RequestParam("clientid") String clientid,
 			@RequestParam("username") String username, @RequestParam("ipaddr") String ipaddr) {
-		log.info("emqx查询是否是超级用户,clientid={},username={},ipaddr={}", clientid, username, ipaddr);
+		log.info("emqx 超级用户请求,clientid={},username={},ipaddr={}", clientid, username, ipaddr);
 		if (clientid.contains("admin") || username.contains("admin")) {
 			log.info("用户{}是超级用户", username);
 			return new ResponseEntity(HttpStatus.OK);
@@ -65,12 +66,12 @@ public class AuthController {
 		}
 	}
 
-	@PostMapping("/acl")
+	@PostMapping("/v4/acl")
 	public ResponseEntity acl(@RequestParam("access") int access, @RequestParam("username") String username,
 			@RequestParam("clientid") String clientid, @RequestParam("ipaddr") String ipaddr,
 			@RequestParam("topic") String topic, @RequestParam("mountpoint") String mountpoint) {
-		log.info("EMQX发起客户端操作授权查询请求,access={},username={},clientid={},ipaddr={},topic={},mountpoint={}", access,
-				username, clientid, ipaddr, topic, mountpoint);
+		log.info("emqx acl请求,access={},username={},clientid={},ipaddr={},topic={},mountpoint={}", access, username,
+				clientid, ipaddr, topic, mountpoint);
 		if (username.equals("emq-client2") && topic.equals("testtopic/#") && access == 1) {
 			log.info("客户端{}有权限订阅{}", username, topic);
 			return new ResponseEntity(HttpStatus.OK);
@@ -83,4 +84,19 @@ public class AuthController {
 		return new ResponseEntity(HttpStatus.UNAUTHORIZED);
 	}
 
+	@PostMapping("/v5/auth")
+	public ResponseEntity auth5(@RequestBody Map<String, Object> params) {
+		String username = (String) params.get("username");
+		String value = users.get(username);
+		
+		if (true) {
+			return new ResponseEntity(HttpStatus.UNAUTHORIZED);
+		}
+		
+		HashMap<String, Object> rtn = new HashMap<>();
+		rtn.put("result", "allow");
+		rtn.put("is_superuser", true);
+		return new ResponseEntity<>(rtn, HttpStatus.OK);
+
+	}
 }

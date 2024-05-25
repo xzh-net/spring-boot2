@@ -10,11 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
  * 规则引擎
  */
 @RestController
-@RequestMapping("/resource")
+@RequestMapping("/mqtt")
 public class RuleController {
     
-    
-    @RequestMapping("/process")
+    @RequestMapping("/v3/process")
     public void process(@RequestBody Map<String,Object> params){
         System.out.println("规则引擎--------");
         params.entrySet().stream().forEach(x->{

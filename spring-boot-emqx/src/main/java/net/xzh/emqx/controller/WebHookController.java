@@ -35,7 +35,7 @@ public class WebHookController {
 	@Autowired
 	private MqttProperties properties;
 
-	@PostMapping("/webhook")
+	@PostMapping("/v3/webhook")
 	public void hook(@RequestBody Map<String, Object> params) {
 		log.info("emqx 触发 webhook,请求体数据={}", params);
 		String action = (String) params.get("action");
