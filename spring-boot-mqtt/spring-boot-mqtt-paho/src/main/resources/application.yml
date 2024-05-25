@@ -11,7 +11,7 @@ mqtt:
   password: admin
   cleanSession: true
   reconnect: true
-  timeout: 100
+  timeout: 1000
   keepAlive: 100
   defaultTopic: testtopic
   qos: 2
