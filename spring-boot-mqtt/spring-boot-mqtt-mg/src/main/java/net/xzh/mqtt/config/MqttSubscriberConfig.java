@@ -22,9 +22,9 @@ import org.springframework.messaging.MessagingException;
  */
 @Configuration
 public class MqttSubscriberConfig {
-	
+
 	private static final Logger log = LoggerFactory.getLogger(MqttClient.class);
-	
+
 	@Autowired
 	private MqttProperties mqttProperties;
 
@@ -34,16 +34,15 @@ public class MqttSubscriberConfig {
 	}
 
 	/**
-	 * 使用生产者工厂的配置，或者可以使用另外一套订阅者的配置参数
-	 * 注意：生产者和订阅者必须使用不同的客户端id
+	 * 使用生产者工厂的配置，或者可以使用另外一套订阅者的配置参数 注意：生产者和订阅者必须使用不同的客户端id
 	 */
 	@Autowired
 	MqttPahoClientFactory mqttClientFactory;
-	
+
 	@Bean
 	public MessageProducer inbound() {
-		MqttPahoMessageDrivenChannelAdapter adapter = new MqttPahoMessageDrivenChannelAdapter(mqttProperties.getClientId(),
-				mqttClientFactory, mqttProperties.getDefaultTopic());
+		MqttPahoMessageDrivenChannelAdapter adapter = new MqttPahoMessageDrivenChannelAdapter(
+				mqttProperties.getClientId(), mqttClientFactory, mqttProperties.getDefaultTopic());
 		adapter.setCompletionTimeout(mqttProperties.getTimeout());
 		adapter.setConverter(new DefaultPahoMessageConverter());
 		// 设置消息质量：0->至多一次；1->至少一次；2->只有一次
@@ -59,14 +58,9 @@ public class MqttSubscriberConfig {
 			@Override
 			public void handleMessage(Message<?> message) throws MessagingException {
 				// 处理订阅消息
-				String topic="";
-				if(message.getHeaders().containsKey("mqtt_receivedTopic")) {
-					topic = message.getHeaders().get("mqtt_receivedTopic").toString();
-				}
-				if(message.getHeaders().containsKey("mqtt_topic")) {
-					topic = message.getHeaders().get("mqtt_topic").toString();
-				} 
-				log.info("订阅者订阅到了消息,topic={},payload={}",topic, message.getPayload());
+				String topic = message.getHeaders().get("mqtt_receivedTopic").toString();
+				String qos = message.getHeaders().get("mqtt_receivedQos").toString();
+				log.info("订阅者订阅到了消息,topic={},qos={},payload={}", topic, qos, message.getPayload());
 			}
 		};
 	}

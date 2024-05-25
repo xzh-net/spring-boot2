@@ -13,7 +13,7 @@ import net.xzh.mqtt.gateway.MqttGateway;
 /**
  * 发布测试
  */
-@Api(tags = "MQTT接口")
+@Api(tags = "测试接口")
 @RestController
 @RequestMapping("/mqtt")
 public class MqttController {
@@ -22,16 +22,9 @@ public class MqttController {
     private MqttGateway  mqttGateway;
 
 	@PostMapping("/send")
-    @ApiOperation("向默认主题发送消息")
-    public CommonResult send(String payload) {
-    	mqttGateway.sendToMqtt(payload);
-        return CommonResult.success(null);
-    }
-
-	@PostMapping("/send2Topic")
     @ApiOperation("向指定主题发送消息")
-    public CommonResult send2Topic(String payload, String topic) {
-    	mqttGateway.sendToMqtt(payload, topic);
-        return CommonResult.success(null);
+    public CommonResult<?> send(String payload, String topic) {
+    	mqttGateway.sendToMqtt(topic, payload,2);
+        return CommonResult.success(System.currentTimeMillis());
     }
 }
