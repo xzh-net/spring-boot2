@@ -1,7 +1,6 @@
 package net.xzh.mqtt.config;
 
 import org.eclipse.paho.client.mqttv3.MqttClient;
-import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.integration.annotation.ServiceActivator;
 import org.springframework.integration.channel.DirectChannel;
 import org.springframework.integration.core.MessageProducer;
-import org.springframework.integration.mqtt.core.DefaultMqttPahoClientFactory;
 import org.springframework.integration.mqtt.core.MqttPahoClientFactory;
 import org.springframework.integration.mqtt.inbound.MqttPahoMessageDrivenChannelAdapter;
 import org.springframework.integration.mqtt.support.DefaultPahoMessageConverter;
@@ -61,7 +59,14 @@ public class MqttSubscriberConfig {
 			@Override
 			public void handleMessage(Message<?> message) throws MessagingException {
 				// 处理订阅消息
-				log.info("订阅者订阅到了消息,payload={}", message.getPayload());
+				String topic="";
+				if(message.getHeaders().containsKey("mqtt_receivedTopic")) {
+					topic = message.getHeaders().get("mqtt_receivedTopic").toString();
+				}
+				if(message.getHeaders().containsKey("mqtt_topic")) {
+					topic = message.getHeaders().get("mqtt_topic").toString();
+				} 
+				log.info("订阅者订阅到了消息,topic={},payload={}",topic, message.getPayload());
 			}
 		};
 	}
