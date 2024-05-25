@@ -30,12 +30,12 @@ $(function () {
         clean: true, // 不保留会话
         connectTimeout: 4000, // 超时时间
         // 认证信息
-        clientId: 'emqx_client_h5',
+        clientId: 'web_client_h5',
         username: 'admin',
         password: 'admin',
     }
-    //const connectUrl = 'ws://172.17.17.161:8083/mqtt';
-    const connectUrl = 'ws://172.17.17.161:15675/ws';
+    const connectUrl = 'ws://xuzhihao:8083/mqtt';
+    //const connectUrl = 'ws://xuzhihao:15675/ws';
     $("#connect").click(function () {
     	client = mqtt.connect(connectUrl,options);
         //注册监听connect事件
