@@ -32,10 +32,10 @@ public class AuthController {
 	@PostConstruct
 	public void init() {
 		users = new HashMap<>();
-		users.put("user", "123456");
-		users.put("emq-client2", "123456");// testtopic/#
-		users.put("emq-client3", "123456");// testtopic/123
-		users.put("admin", "admin");
+		users.put("xzh", "123456");
+		users.put("zhangsan", "123456"); // 只能订阅 testtopic/#
+		users.put("lisi", "123456"); // 只能发布 testtopic/123
+		users.put("admin", "admin"); // 超级管理员
 	}
 
 	@PostMapping("/v4/auth")
@@ -72,11 +72,11 @@ public class AuthController {
 			@RequestParam("topic") String topic, @RequestParam("mountpoint") String mountpoint) {
 		log.info("emqx acl请求,access={},username={},clientid={},ipaddr={},topic={},mountpoint={}", access, username,
 				clientid, ipaddr, topic, mountpoint);
-		if (username.equals("emq-client2") && topic.equals("testtopic/#") && access == 1) {
+		if (username.equals("zhangsan") && topic.equals("testtopic/#") && access == 1) {
 			log.info("客户端{}有权限订阅{}", username, topic);
 			return new ResponseEntity(HttpStatus.OK);
 		}
-		if (username.equals("emq-client3") && topic.equals("testtopic/123") && access == 2) {
+		if (username.equals("lisi") && topic.equals("testtopic/123") && access == 2) {
 			log.info("客户端{}有权限向{}发布消息", username, topic);
 			return new ResponseEntity(HttpStatus.OK);
 		}
@@ -85,14 +85,14 @@ public class AuthController {
 	}
 
 	@PostMapping("/v5/auth")
-	public ResponseEntity auth5(@RequestBody Map<String, Object> params) {
+	public ResponseEntity<?> auth5(@RequestBody Map<String, Object> params) {
+		log.info("emqx httpv5认证请求,params={}", params);
 		String username = (String) params.get("username");
-		String value = users.get(username);
-		
-		if (true) {
-			return new ResponseEntity(HttpStatus.UNAUTHORIZED);
+		String password = (String) params.get("password");
+		String pwd = users.get(username);
+		if (StringUtils.isEmpty(username) || !pwd.equals(password)) {
+			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 		}
-		
 		HashMap<String, Object> rtn = new HashMap<>();
 		rtn.put("result", "allow");
 		rtn.put("is_superuser", true);
