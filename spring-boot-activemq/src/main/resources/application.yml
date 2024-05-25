@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: xzh-activemq-jms
+    name: activemq
   activemq:
     # broker-url: failover:(tcp://192.168.66.133:61616,tcp://192.168.66.133:61617,tcp://192.168.66.133:616168) # 连接地址
     broker-url: tcp://xuzhihao:61616

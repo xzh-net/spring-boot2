@@ -23,7 +23,7 @@ import net.xzh.mq.domain.User;
 @Component
 public class JmsReceiver {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(JmsReceiver.class);
+	private static final Logger log = LoggerFactory.getLogger(JmsReceiver.class);
 	
     /**
      * 接收TextMessage的方法
@@ -33,7 +33,7 @@ public class JmsReceiver {
         if(message instanceof TextMessage){
             TextMessage textMessage = (TextMessage)message;
             try {
-                LOGGER.info("接收Text消息：{}",textMessage.getText());
+            	log.info("接收Text消息：{}",textMessage.getText());
             } catch (JMSException e) {
                 e.printStackTrace();
             }
@@ -46,7 +46,7 @@ public class JmsReceiver {
         if(message instanceof MapMessage){
             MapMessage mapMessage = (MapMessage)message;
             try {
-            	LOGGER.info("接收Map消息：{},{}",mapMessage.getString("name"),mapMessage.getString("age"));
+            	log.info("接收Map消息：{},{}",mapMessage.getString("name"),mapMessage.getString("age"));
             } catch (JMSException e) {
                 e.printStackTrace();
             }
@@ -59,7 +59,7 @@ public class JmsReceiver {
             ObjectMessage objectMessage = (ObjectMessage)message;
             try {
                 User user = (User)objectMessage.getObject();
-                LOGGER.info("接收Object消息：{}",user.toString());
+                log.info("接收Object消息：{}",user.toString());
             } catch (JMSException e) {
                 e.printStackTrace();
             }
@@ -73,7 +73,7 @@ public class JmsReceiver {
         if(message instanceof BytesMessage){
             BytesMessage bytesMessage = (BytesMessage)message;
             try {
-                LOGGER.info("接收Bytes消息：{}",bytesMessage.getBodyLength());
+            	log.info("接收Bytes消息：{}",bytesMessage.getBodyLength());
                 //1.设计缓存数组
                 byte[] buffer = new byte[(int)bytesMessage.getBodyLength()];
                 //2.把字节消息的内容写入到缓存数组
@@ -94,7 +94,7 @@ public class JmsReceiver {
             StreamMessage streamMessage = (StreamMessage)message;
             try {
                 //接收消息属性
-            	LOGGER.info("接收Stream消息：{},{},{}",streamMessage.getStringProperty("订单"),streamMessage.readString(),streamMessage.readInt());
+            	log.info("接收Stream消息：{},{},{}",streamMessage.getStringProperty("订单"),streamMessage.readString(),streamMessage.readInt());
             } catch (Exception e) {
                 e.printStackTrace();
             }

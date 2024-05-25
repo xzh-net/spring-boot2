@@ -29,11 +29,11 @@ import net.xzh.mq.common.model.CommonResult;
 import net.xzh.mq.domain.User;
 
 /**
- * 原生api
+ * jmsTemplate
  * @author CR7
  *
  */
-@Api(tags = "jms原生Api")
+@Api(tags = "jmsTemplate")
 @RestController
 public class JmsController {
 

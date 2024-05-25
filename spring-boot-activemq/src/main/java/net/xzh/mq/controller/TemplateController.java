@@ -15,32 +15,31 @@ import io.swagger.annotations.ApiOperation;
 import net.xzh.mq.common.model.CommonResult;
 
 /**
- * activemq模板
+ * jmsMessagingTemplate模板
  * @author CR7
  *
  */
-
-@Api(tags = "activemq模板")
+@Api(tags = "jmsMessagingTemplate")
 @RequestMapping("/active")
 @RestController
 public class TemplateController {
 	
 	@Autowired
-	private JmsMessagingTemplate jmsTemplate;
+	private JmsMessagingTemplate jmsMessagingTemplate;
 
 
 	@ApiOperation("发送queue消息")
 	@Transactional
 	@RequestMapping(value = "/sendQueueMsg", method = RequestMethod.GET)
 	public CommonResult<Object> sendQueueMsg(@RequestParam String msg) {
-		this.jmsTemplate.convertAndSend(new ActiveMQQueue("queue"), msg);
+		jmsMessagingTemplate.convertAndSend(new ActiveMQQueue("queue"), msg);
 		return CommonResult.success(System.currentTimeMillis());
 	}
 
 	@ApiOperation("发送topic消息")
 	@RequestMapping(value = "/sendTopicMsg", method = RequestMethod.GET)
 	public CommonResult<Object> sendTopicMsg(@RequestParam String msg) {
-		this.jmsTemplate.convertAndSend(new ActiveMQTopic("topic"), msg);
+		jmsMessagingTemplate.convertAndSend(new ActiveMQTopic("topic"), msg);
 		return CommonResult.success(System.currentTimeMillis());
 	}
 }
