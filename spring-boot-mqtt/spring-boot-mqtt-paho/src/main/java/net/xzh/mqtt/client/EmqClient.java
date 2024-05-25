@@ -119,17 +119,4 @@ public class EmqClient {
 			e.printStackTrace();
 		}
 	}
-
-	/**
-	 * 重新连接
-	 */
-	public void reconnection() {
-		try {
-			client.connect();
-		} catch (MqttException e) {
-			log.error("MqttAcceptClient reconnection error,message:{}", e.getMessage());
-			e.printStackTrace();
-		}
-	}
-
 }
