@@ -64,7 +64,7 @@ public class MessageCallback implements MqttCallbackExtended {
 	public void deliveryComplete(IMqttDeliveryToken token) {
 		int messageId = token.getMessageId();
 		String[] topics = token.getTopics();
-		log.info("消息发布完成,messageid={},topics={}", messageId, topics);
+		log.info("发布消息,messageid={},topics={}", messageId, topics);
 	}
 
 	/**
