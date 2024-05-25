@@ -6,7 +6,7 @@ spring:
     
 mqtt:
   broker-url: tcp://xuzhihao:1883
-  client-id: emqx-paho
+  client-id: java-server-paho
   username: admin
   password: admin
   cleanSession: true

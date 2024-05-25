@@ -3,8 +3,8 @@ server:
 
 mqtt:
   broker-url: tcp://xuzhihao:1883
-  server-id: server-java-mg
-  client-id: client-java-mg
+  server-id: java-server-mg
+  client-id: java-client-mg
   username: admin
   password: admin
   cleanSession: true
