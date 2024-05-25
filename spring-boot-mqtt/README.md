@@ -2,9 +2,9 @@
 
 ## 1. MQTT.js
 
-## 2. Spring Integration网关
+## 2. Spring Integration
 
-## 3. Paho客户端
+## 3. Paho
 
 > Rabbitmq不支持qos=2
 
