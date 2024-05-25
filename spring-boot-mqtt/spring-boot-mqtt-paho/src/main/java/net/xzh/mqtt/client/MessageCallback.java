@@ -2,7 +2,6 @@ package net.xzh.mqtt.client;
 
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallbackExtended;
-import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,20 +27,12 @@ public class MessageCallback implements MqttCallbackExtended {
 	@Autowired
 	private MqttProperties mqttProperties;
 
-	/**
-	 * 客户端断开后触发
-	 *
-	 * @param throwable
-	 */
 	@Override
-	public void connectionLost(Throwable throwable) {
-		log.info("连接断开，可以重连");
-		if (emqClient.getClient() == null || !emqClient.getClient().isConnected()) {
-			log.info("【emqx重新连接】....................................................");
-			emqClient.reconnection();
-		}
+	public void connectionLost(Throwable cause) {
+		// TODO Auto-generated method stub
+		
 	}
-
+	
 	/**
 	 * 客户端收到消息触发
 	 *
@@ -74,12 +65,7 @@ public class MessageCallback implements MqttCallbackExtended {
 	public void connectComplete(boolean reconnect, String serverURI) {
 		log.info("客户端{}连接成功！", emqClient.getClient().getClientId());
 		// 以/#结尾表示订阅所有以testtopic开头的主题
-		try {
-			emqClient.getClient().subscribe(mqttProperties.getDefaultTopic(), mqttProperties.getQos());
-		} catch (MqttException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
+		emqClient.subscribe(mqttProperties.getDefaultTopic(), mqttProperties.getQos());
 	}
+
 }
