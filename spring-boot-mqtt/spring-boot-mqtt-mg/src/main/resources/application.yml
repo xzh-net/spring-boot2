@@ -3,8 +3,8 @@ server:
 
 mqtt:
   broker-url: tcp://xuzhihao:1883
-  server-id: rabbitmq-mqtt
-  client-id: mqtt-paho
+  server-id: server-java-mg
+  client-id: client-java-mg
   username: admin
   password: admin
   cleanSession: true
