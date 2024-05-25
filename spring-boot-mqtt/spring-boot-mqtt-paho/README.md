@@ -1,4 +1,4 @@
-# 基于MqttClient整合org.eclipse.paho.client.mqttv3
+# 基于Paho整合MQTT
 
 1. 发布 /mqtt/pub?topic=testtopic&message=hello
 2. 订阅 /mqtt/sub?topic=test2
