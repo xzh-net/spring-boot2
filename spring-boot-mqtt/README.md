@@ -2,7 +2,7 @@
 
 ## 1. MQTT.js
 
-## 2. 消息网关
+## 2. Spring Integration网关
 
 ## 3. Paho客户端
 
