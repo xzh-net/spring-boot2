@@ -34,8 +34,8 @@ $(function () {
         username: 'admin',
         password: 'admin',
     }
-    const connectUrl = 'ws://172.17.17.161:8083/mqtt';
-    //const connectUrl = 'ws://172.17.17.161:15675/ws';
+    //const connectUrl = 'ws://172.17.17.161:8083/mqtt';
+    const connectUrl = 'ws://172.17.17.161:15675/ws';
     $("#connect").click(function () {
     	client = mqtt.connect(connectUrl,options);
         //注册监听connect事件
