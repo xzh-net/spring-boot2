@@ -1,4 +1,4 @@
-package net.xzh.rabbit.exchange.direct;
+package net.xzh.rabbitmq.exchange;
 
 import org.springframework.amqp.core.AnonymousQueue;
 import org.springframework.amqp.core.Binding;
@@ -8,15 +8,17 @@ import org.springframework.amqp.core.Queue;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import net.xzh.rabbitmq.config.CommonConstant;
+
 /**
- * Created by macro on 2020/5/19.
+ * 路由模式交换机
  */
 @Configuration
-public class DirectRabbitConfig {
+public class DirectExchangeConfig {
 
     @Bean
     public DirectExchange direct() {
-        return new DirectExchange("exchange.direct");
+        return new DirectExchange(CommonConstant.EXCHANGE_DIRECT);
     }
 
     @Bean
@@ -49,15 +51,6 @@ public class DirectRabbitConfig {
         return BindingBuilder.bind(directQueue2).to(direct).with("debug");
     }
 
-    @Bean
-    public DirectReceiver receiver() {
-        return new DirectReceiver();
-    }
 
-
-    @Bean
-    public DirectSender directSender() {
-        return new DirectSender();
-    }
 
 }

@@ -1,4 +1,4 @@
-package net.xzh.rabbit.common.model;
+package net.xzh.rabbitmq.common.model;
 
 /**
  * 枚举了一些常用API操作码

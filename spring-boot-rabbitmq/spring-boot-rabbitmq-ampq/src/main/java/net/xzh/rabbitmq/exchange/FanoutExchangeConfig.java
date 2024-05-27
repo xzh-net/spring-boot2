@@ -1,4 +1,4 @@
-package net.xzh.rabbit.exchange.fanout;
+package net.xzh.rabbitmq.exchange;
 
 import org.springframework.amqp.core.AnonymousQueue;
 import org.springframework.amqp.core.Binding;
@@ -8,15 +8,17 @@ import org.springframework.amqp.core.Queue;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import net.xzh.rabbitmq.config.CommonConstant;
+
 /**
- * Created by macro on 2020/5/19.
+ * 订阅模式-Fanout
  */
 @Configuration
-public class FanoutRabbitConfig {
+public class FanoutExchangeConfig {
 
     @Bean
     public FanoutExchange fanout() {
-        return new FanoutExchange("exchange.fanout");
+        return new FanoutExchange(CommonConstant.EXCHANGE_FANOUT);
     }
 
     @Bean
@@ -37,16 +39,6 @@ public class FanoutRabbitConfig {
     @Bean
     public Binding fanoutBinding2(FanoutExchange fanout, Queue fanoutQueue2) {
         return BindingBuilder.bind(fanoutQueue2).to(fanout);
-    }
-
-    @Bean
-    public FanoutReceiver fanoutReceiver() {
-        return new FanoutReceiver();
-    }
-
-    @Bean
-    public FanoutSender fanoutSender() {
-        return new FanoutSender();
     }
 
 }

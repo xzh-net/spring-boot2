@@ -1,4 +1,4 @@
-package net.xzh.rabbit.common.model;
+package net.xzh.rabbitmq.common.model;
 
 /**
  * 通用返回对象
