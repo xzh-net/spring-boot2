@@ -1,4 +1,4 @@
-package net.xzh.mq.receive;
+package net.xzh.activemq.listener;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,5 +18,5 @@ public class TopicConsumerListener {
 	 @JmsListener(destination = "topic", containerFactory = "jmsListenerContainerTopic")
      public void receive(String msg) {
 		 log.info("topic接受到，{}",msg);
-    }
+     }
 }

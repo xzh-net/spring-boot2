@@ -1,10 +1,10 @@
-package net.xzh.mq.config;
+package net.xzh.activemq.config;
 
 import javax.jms.ConnectionFactory;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.RedeliveryPolicy;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
@@ -15,7 +15,10 @@ import org.springframework.jms.config.JmsListenerContainerFactory;
  */
 
 @Configuration
-public class ActiveMqConfig {
+public class ActiveMQConfig   {
+
+	@Autowired
+	private ActiveMQProperties activeMQProperties;
 
 	@Bean
 	public RedeliveryPolicy redeliveryPolicy() {
@@ -36,43 +39,41 @@ public class ActiveMqConfig {
 	}
 
 	@Bean
-	public ActiveMQConnectionFactory activeMQConnectionFactory(@Value("${spring.activemq.broker-url}") String url,
-			RedeliveryPolicy redeliveryPolicy) {
-		ActiveMQConnectionFactory activeMQConnectionFactory = new ActiveMQConnectionFactory("admin", "admin", url);
+	public ActiveMQConnectionFactory connectionFactory(RedeliveryPolicy redeliveryPolicy) {
+		ActiveMQConnectionFactory activeMQConnectionFactory = new ActiveMQConnectionFactory(activeMQProperties.getUsername(),
+				activeMQProperties.getPassword(), activeMQProperties.getBrokerUrl());
 		activeMQConnectionFactory.setRedeliveryPolicy(redeliveryPolicy);
 		return activeMQConnectionFactory;
 	}
 
 	/**
-	 * 点对点客户端监听器
-	 * queue模式的ListenerContainer
+	 * 点对点客户端监听器 queue模式的ListenerContainer
 	 * 
-	 * @param activeMQConnectionFactory
+	 * @param connectionFactory
 	 * @return
 	 */
 	@Bean
-    public JmsListenerContainerFactory<?> jmsListenerContainerQueue(ConnectionFactory activeMQConnectionFactory){
-        DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
-        factory.setPubSubDomain(false);
-        factory.setConnectionFactory(activeMQConnectionFactory);
-        factory.setSessionTransacted(false);
-        factory.setSessionAcknowledgeMode(4);
-        return factory;
-    }
+	public JmsListenerContainerFactory<?> jmsListenerContainerQueue(ConnectionFactory connectionFactory) {
+		DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
+		factory.setPubSubDomain(false);
+		factory.setConnectionFactory(connectionFactory);
+		factory.setSessionTransacted(false);
+		factory.setSessionAcknowledgeMode(4);
+		return factory;
+	}
 
 	/**
-	 * 订阅客户端监听器
-	 * topic模式的ListenerContainer
+	 * 订阅客户端监听器 topic模式的ListenerContainer
 	 * 
-	 * @param activeMQConnectionFactory
+	 * @param connectionFactory
 	 * @return
 	 */
-	
+
 	@Bean
-    public JmsListenerContainerFactory<?> jmsListenerContainerTopic(ConnectionFactory activeMQConnectionFactory){
-        DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
-        factory.setPubSubDomain(true);
-        factory.setConnectionFactory(activeMQConnectionFactory);
-        return factory;
+	public JmsListenerContainerFactory<?> jmsListenerContainerTopic(ConnectionFactory connectionFactory) {
+		DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
+		factory.setPubSubDomain(true);
+		factory.setConnectionFactory(connectionFactory);
+		return factory;
 	}
 }

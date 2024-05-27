@@ -1,4 +1,4 @@
-package net.xzh.mq.controller;
+package net.xzh.activemq.controller;
 
 import org.apache.activemq.command.ActiveMQQueue;
 import org.apache.activemq.command.ActiveMQTopic;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import net.xzh.mq.common.model.CommonResult;
+import net.xzh.activemq.common.model.CommonResult;
 
 /**
  * jmsMessagingTemplate模板
@@ -42,4 +42,5 @@ public class TemplateController {
 		jmsMessagingTemplate.convertAndSend(new ActiveMQTopic("topic"), msg);
 		return CommonResult.success(System.currentTimeMillis());
 	}
+	
 }

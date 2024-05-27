@@ -1,4 +1,4 @@
-package net.xzh.mq.receive;
+package net.xzh.activemq.listener;
 
 import javax.jms.JMSException;
 import javax.jms.Message;

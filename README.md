@@ -12,7 +12,6 @@
 ## 1. 基础整合
 
 ```lua
-spring-boot-activemq    -- 消息中间件
 spring-boot-activiti    -- 工作流设计器，groups验证分组
 spring-boot-dubbo       -- RPC
 spring-boot-cxf         -- CXF
@@ -27,6 +26,7 @@ spring-boot-hdfs        -- hadoop
 spring-boot-hikaricp    -- 数据源
 spring-boot-jasypt      -- 密码加解密
 spring-boot-harbor      -- 持续集成
+spring-boot-jms         -- JMS消息服务
 spring-boot-jwt         -- 登录认证
 spring-boot-kafka       -- 消息中间件
 spring-boot-knife4j     -- 整合knife4j

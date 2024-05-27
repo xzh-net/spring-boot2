@@ -2,9 +2,9 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>spring-boot-activemq</artifactId>
-	<name>spring-boot-activemq</name>
-	<description>spring-boot-activemq</description>
+	<artifactId>spring-boot-jms</artifactId>
+	<name>spring-boot-jms</name>
+	<description>spring-boot-jms</description>
 	<packaging>jar</packaging>
 
 	<properties>
