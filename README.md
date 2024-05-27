@@ -32,7 +32,7 @@ spring-boot-kafka       -- 消息中间件
 spring-boot-knife4j     -- 整合knife4j
 spring-boot-log         -- 日志拦截器
 spring-boot-mongo       -- 浏览记录读写分离
-spring-boot-mqtt        -- 消息中间件【ui2】
+spring-boot-mqtt        -- 客户端集成【ui2】
 spring-boot-netty       -- 聊天室、心跳检测
 spring-boot-oss         -- 附件上传
 spring-boot-pg-jmeter   -- PG压测、Tomcat调优
