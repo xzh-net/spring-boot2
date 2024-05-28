@@ -16,12 +16,12 @@ public class DirectExchangeListener {
 
 	private static final Logger log = LoggerFactory.getLogger(DirectExchangeListener.class);
 
-	@RabbitListener(queues = "#{directQueue1.name}")
+	@RabbitListener(queues = "#{directQueue1}")
 	public void receive1(String message) {
 		log.info("{}[error,warn]订阅到了消息,topic={}", CommonConstant.EXCHANGE_DIRECT, message);
 	}
 
-	@RabbitListener(queues = "#{directQueue2.name}")
+	@RabbitListener(queues = "#{directQueue2}")
 	public void receive2(String message) {
 		log.info("{}[info,debug]订阅到了消息,topic={}", CommonConstant.EXCHANGE_DIRECT, message);
 	}

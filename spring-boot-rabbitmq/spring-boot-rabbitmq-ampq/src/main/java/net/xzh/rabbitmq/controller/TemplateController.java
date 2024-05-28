@@ -11,7 +11,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import net.xzh.rabbitmq.common.model.CommonResult;
 import net.xzh.rabbitmq.config.CommonConstant;
-import net.xzh.rabbitmq.exchange.topic.TopicSender;
 
 /**
  * RabbitTemplate
@@ -23,9 +22,6 @@ public class TemplateController {
 
 	@Autowired
 	private RabbitTemplate template;
-
-	@Autowired
-	private TopicSender topicSender;
 
 	@ApiOperation("简单模式")
 	@RequestMapping(value = "/simple", method = RequestMethod.GET)
@@ -55,11 +51,13 @@ public class TemplateController {
 		if (messgaes.startsWith("1")) {
 			key = "error";
 		} else if (messgaes.startsWith("2")) {
-			key = "debug";
+			key = "warn";
 		} else if (messgaes.startsWith("3")) {
 			key = "info";
+		} else if (messgaes.startsWith("4")) {
+			key = "debug";
 		} else {
-			key = "warn";
+			key = "other";
 		}
 		template.convertAndSend(CommonConstant.EXCHANGE_DIRECT, key, messgaes);
 		return CommonResult.success(System.currentTimeMillis());
@@ -68,7 +66,7 @@ public class TemplateController {
 	@ApiOperation("通配符模式")
 	@RequestMapping(value = "/topic", method = RequestMethod.GET)
 	public CommonResult<?> topic(@RequestParam String messgaes) {
-		template.convertAndSend(CommonConstant.EXCHANGE_DIRECT,"", messgaes);
+		template.convertAndSend(CommonConstant.EXCHANGE_TOPIC, messgaes, messgaes);
 		return CommonResult.success(System.currentTimeMillis());
 	}
 }

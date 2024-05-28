@@ -1,4 +1,4 @@
-package net.xzh.rabbitmq.exchange.topic;
+package net.xzh.rabbitmq.exchange;
 
 import org.springframework.amqp.core.AnonymousQueue;
 import org.springframework.amqp.core.Binding;
@@ -8,15 +8,17 @@ import org.springframework.amqp.core.TopicExchange;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import net.xzh.rabbitmq.config.CommonConstant;
+
 /**
- * Created by macro on 2020/5/19.
+ * 主题模式交换机
  */
 @Configuration
-public class TopicRabbitConfig {
+public class TopicExchangeConfig {
 
     @Bean
     public TopicExchange topic() {
-        return new TopicExchange("exchange.topic");
+        return new TopicExchange(CommonConstant.EXCHANGE_TOPIC);
     }
 
     @Bean
@@ -42,16 +44,6 @@ public class TopicRabbitConfig {
     @Bean
     public Binding topicBinding2a(TopicExchange topic, Queue topicQueue2) {
         return BindingBuilder.bind(topicQueue2).to(topic).with("lazy.#");
-    }
-
-    @Bean
-    public TopicReceiver topicReceiver() {
-        return new TopicReceiver();
-    }
-
-    @Bean
-    public TopicSender topicSender() {
-        return new TopicSender();
     }
 
 }
