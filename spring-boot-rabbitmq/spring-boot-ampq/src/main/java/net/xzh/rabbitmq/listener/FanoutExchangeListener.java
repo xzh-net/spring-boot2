@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import net.xzh.rabbitmq.config.CommonConstant;
 
 /**
- * 发布订阅模式
+ * 发布订阅模式监听器
  */
 @Service
 public class FanoutExchangeListener {
