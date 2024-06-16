@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/mqtt")
 public class RuleController {
     
-    @RequestMapping("/v3/process")
+    @RequestMapping("/process")
     public void process(@RequestBody Map<String,Object> params){
         System.out.println("规则引擎--------");
         params.entrySet().stream().forEach(x->{
