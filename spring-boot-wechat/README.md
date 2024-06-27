@@ -8,15 +8,15 @@ https://mp.weixin.qq.com/debug/cgi-bin/sandboxinfo?action=showinfo&t=sandbox/ind
 
 域名不能带端口号，备案通过同时上传验证文件txt
 
-![](doc/img/1.png)
+![](doc/assets/1.png)
 
 ## 2. 添加网页授权
 
-![](doc/img/2.png)
+![](doc/assets/2.png)
 
 ## 3. 开发者配置
 
-![](doc/img/3.png)
+![](doc/assets/3.png)
 
 ## 4. 网页授权流程
 [1 第一步：用户同意授权，获取code](https://developers.weixin.qq.com/doc/offiaccount/OA_Web_Apps/Wechat_webpage_authorization.html#0)
@@ -39,11 +39,11 @@ https://digpm.vjsp.cn/cms/index
 
 ## 1. 设置类目与模板
 
-![](doc/img/4.png)
+![](doc/assets/4.png)
 
-![](doc/img/5.png)
+![](doc/assets/5.png)
 
-![](doc/img/6.png)
+![](doc/assets/6.png)
 
 ## 2. 模板消息接口
 
@@ -61,7 +61,7 @@ https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Service_Cent
 
 http://res.wx.qq.com/open/js/jweixin-1.6.0.js
 
-![](doc/img/7.png)
+![](doc/assets/7.png)
 
 ## 3. 说明文档
 
