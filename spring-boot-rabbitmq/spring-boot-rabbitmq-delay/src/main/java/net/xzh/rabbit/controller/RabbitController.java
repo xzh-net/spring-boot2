@@ -57,7 +57,7 @@ public class RabbitController {
 		// 构建回调返回的数据
 		CorrelationData correlationData = new CorrelationData(orderId);
 		// 发送消息
-		rabbitTemplate.convertAndSend(AcknowledgeConfig.ITEM_TOPIC_EXCHANGE, "item.springboot-rabbitmq", message,
+		rabbitTemplate2.convertAndSend(AcknowledgeConfig.ITEM_TOPIC_EXCHANGE, "item.springboot-rabbitmq", message,
 				correlationData);
 		return CommonResult.success(orderId);
 	}
