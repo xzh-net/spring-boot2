@@ -1,4 +1,4 @@
-package net.xzh.rabbit.exchange.manual;
+package net.xzh.rabbit.exchange;
 
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
@@ -11,10 +11,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * RabbitMQ配置类(手动确认)
+ * 确认方式交换机配置
+ * 当前以主题模式测试，生产中可视情况修改交换机类型
  */
 @Configuration
-public class ManualRabbitConfig {
+public class AcknowledgeConfig {
 	// 交换机名称
 	public static final String ITEM_TOPIC_EXCHANGE = "item_topic_exchange";
 	// 队列名称

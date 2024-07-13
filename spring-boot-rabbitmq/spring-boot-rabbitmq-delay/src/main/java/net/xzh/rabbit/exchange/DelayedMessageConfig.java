@@ -1,4 +1,4 @@
-package net.xzh.rabbit.exchange.delay;
+package net.xzh.rabbit.exchange;
 
  
 import org.springframework.amqp.core.Binding;
@@ -16,7 +16,7 @@ import java.util.Map;
  * 基于rabbitmq-delayed-message-exchange 插件完成
 **/
 @Configuration
-public class DelayRabbitConfig {
+public class DelayedMessageConfig {
 	public static final String QUEUE_NAME = "delay_queue";
 
 	public static final String EXCHANGE_NAME = "delay_exchange";

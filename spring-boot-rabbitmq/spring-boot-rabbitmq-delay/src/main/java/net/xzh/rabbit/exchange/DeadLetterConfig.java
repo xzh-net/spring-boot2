@@ -1,4 +1,4 @@
-package net.xzh.rabbit.exchange.dxl;
+package net.xzh.rabbit.exchange;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Configuration;
  *
  */
 @Configuration
-public class DxlRabbitConfig {
+public class DeadLetterConfig {
 	
 	public static final String DXL_EXCHANGE_NAME = "user.order.dxl_exchange";	//死信交换机
 	public static final String DXL_QUEUE_NAME = "user.order.dxl_queue";	//死信队列

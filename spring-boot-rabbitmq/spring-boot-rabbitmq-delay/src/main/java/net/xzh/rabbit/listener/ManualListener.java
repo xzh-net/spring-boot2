@@ -1,4 +1,4 @@
-package net.xzh.rabbit.exchange.manual;
+package net.xzh.rabbit.listener;
 
 import java.io.IOException;
 import java.util.Map;
@@ -12,10 +12,16 @@ import org.springframework.stereotype.Component;
 
 import com.rabbitmq.client.Channel;
 
+/**
+ * 消费监听器
+ * 
+ * @author CR7
+ *
+ */
 @Component
-public class ManualReceiver {
-	private static final Logger LOGGER = LoggerFactory.getLogger(ManualReceiver.class);
-	
+public class ManualListener {
+	private static final Logger LOGGER = LoggerFactory.getLogger(ManualListener.class);
+
 	@RabbitListener(queues = "item_queue")
 	public void process(Message message, @Headers Map<String, Object> headers, Channel channel) {
 		String messageId = message.getMessageProperties().getMessageId();
@@ -23,25 +29,24 @@ public class ManualReceiver {
 		try {
 			if (messageId.endsWith("1")) {
 				channel.basicAck(tag, false);// 手动签收消息,通知mq服务器端删除该消息
-				LOGGER.info("Received msg,{}", message);
+				LOGGER.info("接收到消息：{},{}", tag, message);
 			} else if (messageId.endsWith("2")) {
-				Thread.sleep(2000L);
 				channel.basicNack(tag, false, true);// 重回队列，根据实际应用
-				LOGGER.info("Error Return Queue,{}", message);
+				LOGGER.info("消息重回队列：{},{}", tag, message);
 			} else {
 				int i = 1 / 0;
-				LOGGER.info("Mock Exception,{}", message);
+				LOGGER.info("模拟异常消息：{},{}", tag, message);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			try {
 				channel.basicNack(tag, false, false);// 拒绝接收，丢弃该消息 配合手动处理和数据库日志
-				LOGGER.info("Discard msg,{}", message);
+				LOGGER.info("丢弃消息：{},{}", tag, message);
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			
+
 		}
 	}
 }
