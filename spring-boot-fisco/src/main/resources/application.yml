@@ -1,0 +1,29 @@
+server:
+   port: 8080
+
+fisco:
+  cryptoMaterial:
+    certPath: "conf"
+
+  network:
+    peers:
+      - "172.17.17.161:20200"
+
+  amop:
+    #  - publicKeys: [ "conf/amop/consumer_public_key_1.pem" ]
+    #    topicName: "PrivateTopic1"
+    #  - password: "123456"
+    #    privateKey: "conf/amop/consumer_private_key.p12"
+    #    topicName: "PrivateTopic2"
+
+    account:
+      keyStoreDir: "account"
+      accountFilePath: ""
+      accountFileFormat: "pem"
+      password: ""
+      accountAddress: ""
+
+    threadPool:
+      channelProcessorThreadSize: "16"
+      receiptProcessorThreadSize: "16"
+      maxBlockingQueueSize: "102400"
