@@ -1,0 +1,5 @@
+server:
+   port: 8080
+k8s:
+  api-http: https://192.168.3.201:6443
+  token: 很长的一串
