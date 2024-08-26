@@ -92,7 +92,7 @@ public class DeploymentController {
 		return CommonResult.success(v1Status);
 	}
 	
-	@ApiOperation("按命名空间查询所有Deployment")
+	@ApiOperation("查询Deployment")
 	@RequestMapping(value = "/listDeployment", method = RequestMethod.GET)
 	public CommonResult<?> listDeployment(@RequestParam String namespace) {
 		AppsV1Api apiInstance = new AppsV1Api();
