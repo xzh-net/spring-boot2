@@ -55,8 +55,10 @@ public class PodController {
 	
 	@ApiOperation("对象实体创建Pod")
 	@RequestMapping(value = "/createPod", method = RequestMethod.POST)
-	public CommonResult<?> createPod(@RequestParam String namespace,@RequestParam String podname,@RequestParam String containername,@RequestParam String image) throws IOException {
+	public CommonResult<?> createPod(@RequestParam String namespace) throws IOException {
 		CoreV1Api apiInstance = new CoreV1Api();
+		String podName = "test1-pod-nginx";
+	    String imageName = "nginx:1.22.1";
 		
 		// 容器暴漏端口
 		List<V1ContainerPort> portList = Arrays.asList(new V1ContainerPort().containerPort(80).protocol("TCP"),
@@ -65,12 +67,12 @@ public class PodController {
 		V1Pod v1Pod =
 		        new V1PodBuilder()
 		            .withNewMetadata()
-		            .withName(podname)
+		            .withName(podName)
 		            .endMetadata()
 		            .withNewSpec()
 		            .addNewContainer()
-		            .withName(containername)
-		            .withImage(image)
+		            .withName(podName)
+		            .withImage(imageName)
 		            .withPorts(portList)
 		            .endContainer()
 		            .endSpec()
