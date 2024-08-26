@@ -33,13 +33,14 @@ import net.xzh.k8s.common.model.CommonResult;
  */
 @Api(tags = "CoreV1Api管理Pod")
 @RestController
+@RequestMapping("/pod")
 public class PodController {
 
 	private static final Logger logger = LoggerFactory.getLogger(PodController.class);
 
 	@ApiOperation("查询Pod")
-	@RequestMapping(value = "/listPods", method = RequestMethod.POST)
-	public CommonResult<?> listPods(@RequestParam String namespace) {
+	@RequestMapping(value = "/listPod", method = RequestMethod.POST)
+	public CommonResult<?> listPod(@RequestParam String namespace) {
 		CoreV1Api apiInstance = new CoreV1Api();
 		HashMap<String, Object> rtn = new HashMap<String, Object>();
 		try {
