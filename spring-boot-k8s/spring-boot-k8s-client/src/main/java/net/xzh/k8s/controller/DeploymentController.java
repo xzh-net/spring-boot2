@@ -35,6 +35,7 @@ import net.xzh.k8s.common.model.CommonResult;
  */
 @Api(tags = "AppsV1Api管理Deployment")
 @RestController
+@RequestMapping("/deploy")
 public class DeploymentController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(DeploymentController.class);
@@ -92,7 +93,7 @@ public class DeploymentController {
 		return CommonResult.success(v1Status);
 	}
 	
-	@ApiOperation("查询Deployment")
+	@ApiOperation("查询所有Deployment")
 	@RequestMapping(value = "/listDeployment", method = RequestMethod.GET)
 	public CommonResult<?> listDeployment(@RequestParam String namespace) {
 		AppsV1Api apiInstance = new AppsV1Api();

@@ -38,7 +38,7 @@ public class PodController {
 
 	private static final Logger logger = LoggerFactory.getLogger(PodController.class);
 
-	@ApiOperation("查询Pod")
+	@ApiOperation("查询所有Pod")
 	@RequestMapping(value = "/listPod", method = RequestMethod.POST)
 	public CommonResult<?> listPod(@RequestParam String namespace) {
 		CoreV1Api apiInstance = new CoreV1Api();

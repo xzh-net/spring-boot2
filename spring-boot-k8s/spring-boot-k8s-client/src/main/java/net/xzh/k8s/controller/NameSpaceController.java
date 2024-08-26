@@ -134,7 +134,7 @@ public class NameSpaceController {
 		return CommonResult.success(rtn);
 	}
 
-	@ApiOperation("查询所有Pods")
+	@ApiOperation("查询所有Pod")
 	@RequestMapping(value = "/listPod", method = RequestMethod.GET)
 	public CommonResult<?> listPod() {
 		CoreV1Api apiInstance = new CoreV1Api();
