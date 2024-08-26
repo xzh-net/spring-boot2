@@ -10,9 +10,9 @@ import io.swagger.annotations.Api;
  * @author CR7
  *
  */
-@Api(tags = "BatchV1Api管理")
+@Api(tags = "BatchV1Api管理Job")
 @RestController
-public class BatchV1ApiController {
+public class JobController {
 	
 	
 	

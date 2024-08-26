@@ -28,13 +28,13 @@ import net.xzh.k8s.common.model.CommonResult;
  * @author CR7
  *
  */
-@Api(tags = "CoreV1Api管理")
+@Api(tags = "CoreV1Api命名空间")
 @RestController
-public class CoreV1ApiController {
+public class NameSpaceController {
 
-	private static final Logger logger = LoggerFactory.getLogger(CoreV1ApiController.class);
+	private static final Logger logger = LoggerFactory.getLogger(NameSpaceController.class);
 
-	@ApiOperation("获取应用空间列表")
+	@ApiOperation("查询所有命名空间")
 	@RequestMapping(value = "/listNamespace", method = RequestMethod.GET)
 	public CommonResult<?> listNamespace() {
 		CoreV1Api apiInstance = new CoreV1Api();
@@ -51,67 +51,67 @@ public class CoreV1ApiController {
 	}
 
 	@ApiOperation("创建命名空间")
-	@RequestMapping(value = "/createNamespace", method = RequestMethod.GET)
-	public CommonResult<?> createNamespace(@RequestParam String ns) {
+	@RequestMapping(value = "/createNamespace", method = RequestMethod.POST)
+	public CommonResult<?> createNamespace(@RequestParam String namespace) {
 		CoreV1Api apiInstance = new CoreV1Api();
 		V1Namespace rtn = null;
 
-		V1Namespace namespace = new V1Namespace();
-		namespace.setApiVersion("v1");
-		namespace.setKind("Namespace");
-		namespace.setMetadata(new V1ObjectMeta().name(ns));
+		V1Namespace ns = new V1Namespace();
+		ns.setApiVersion("v1");
+		ns.setKind("Namespace");
+		ns.setMetadata(new V1ObjectMeta().name(namespace));
 		try {
-			rtn = apiInstance.createNamespace(namespace, null, null, null);
+			rtn = apiInstance.createNamespace(ns, null, null, null);
 		} catch (ApiException e) {
-			// TODO Auto-generated catch block
+			logger.error("Exception when calling CoreV1Api#createNamespace");
 			e.printStackTrace();
 		}
 		return CommonResult.success(rtn);
 	}
 
 	@ApiOperation("删除命名空间")
-	@RequestMapping(value = "/deleteNamespace", method = RequestMethod.GET)
-	public CommonResult<?> deleteNamespace(@RequestParam String ns) {
-		CoreV1Api apiInstance = new CoreV1Api();
+	@RequestMapping(value = "/deleteNamespace", method = RequestMethod.POST)
+	public CommonResult<?> deleteNamespace(@RequestParam String namespace) {
 		V1Status rtn = null;
+		CoreV1Api apiInstance = new CoreV1Api();
 		try {
-			rtn = apiInstance.deleteNamespace(ns, null, null, null, null, null, null);
+			rtn = apiInstance.deleteNamespace(namespace, null, null, null, null, null, null);
 		} catch (ApiException e) {
-			// TODO Auto-generated catch block
+			logger.error("Exception when calling CoreV1Api#deleteNamespace");
 			e.printStackTrace();
 		}
 		return CommonResult.success(rtn);
 	}
 
-	@ApiOperation("查询某个应用空间下的所有service")
+	@ApiOperation("查询某个命名空间下的所有service")
 	@RequestMapping(value = "/listNamespacedService", method = RequestMethod.GET)
-	public CommonResult<?> listNamespacedService(@RequestParam String ns) {
+	public CommonResult<?> listNamespacedService(@RequestParam String namespace) {
 		CoreV1Api apiInstance = new CoreV1Api();
 		HashMap<String, Object> rtn = new HashMap<String, Object>();
 		try {
-			V1ServiceList serviceList = apiInstance.listNamespacedService(ns, null, null, null, null, null, null, null,
+			V1ServiceList serviceList = apiInstance.listNamespacedService(namespace, null, null, null, null, null, null, null,
 					null, null, null);
 			serviceList.getItems()
-					.forEach(list -> rtn.put(list.getMetadata().getName(), list.getMetadata().getManagedFields()));
+					.forEach(list -> rtn.put(list.getMetadata().getName(), list.getMetadata().getName()));
 		} catch (ApiException e) {
-			// TODO Auto-generated catch block
+			logger.error("Exception when calling CoreV1Api#listNamespacedService");
 			e.printStackTrace();
 		}
 		return CommonResult.success(rtn);
 	}
 
-	@ApiOperation("查询某个应用空间下的所有Pod")
+	@ApiOperation("查询某个命名空间下的所有Pod")
 	@RequestMapping(value = "/listNamespacedPod", method = RequestMethod.GET)
-	public CommonResult<?> listNamespacedPod(@RequestParam String ns) {
+	public CommonResult<?> listNamespacedPod(@RequestParam String namespace) {
 		CoreV1Api apiInstance = new CoreV1Api();
 		HashMap<String, Object> rtn = new HashMap<String, Object>();
 		try {
-			V1PodList podList = apiInstance.listNamespacedPod(ns, null, null, null, null, null, null, null, null, null,
+			V1PodList podList = apiInstance.listNamespacedPod(namespace, null, null, null, null, null, null, null, null, null,
 					null);
 			podList.getItems()
-					.forEach(list -> rtn.put(list.getMetadata().getName(), list.getMetadata().getManagedFields()));
+					.forEach(list -> rtn.put(list.getMetadata().getName(), list.getMetadata().getName()));
 		} catch (ApiException e) {
-			// TODO Auto-generated catch block
+			logger.error("Exception when calling CoreV1Api#listNamespacedPod");
 			e.printStackTrace();
 		}
 		return CommonResult.success(rtn);
