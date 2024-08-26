@@ -30,6 +30,7 @@ import net.xzh.k8s.common.model.CommonResult;
  */
 @Api(tags = "CoreV1Api命名空间")
 @RestController
+@RequestMapping("/ns")
 public class NameSpaceController {
 
 	private static final Logger logger = LoggerFactory.getLogger(NameSpaceController.class);
@@ -84,8 +85,8 @@ public class NameSpaceController {
 	}
 
 	@ApiOperation("查询某个命名空间下的所有service")
-	@RequestMapping(value = "/listNamespacedService", method = RequestMethod.GET)
-	public CommonResult<?> listNamespacedService(@RequestParam String namespace) {
+	@RequestMapping(value = "/listServiceByNamespace", method = RequestMethod.GET)
+	public CommonResult<?> listServiceByNamespaced(@RequestParam String namespace) {
 		CoreV1Api apiInstance = new CoreV1Api();
 		HashMap<String, Object> rtn = new HashMap<String, Object>();
 		try {
@@ -101,8 +102,8 @@ public class NameSpaceController {
 	}
 
 	@ApiOperation("查询某个命名空间下的所有Pod")
-	@RequestMapping(value = "/listNamespacedPod", method = RequestMethod.GET)
-	public CommonResult<?> listNamespacedPod(@RequestParam String namespace) {
+	@RequestMapping(value = "/listPodByNamespace", method = RequestMethod.GET)
+	public CommonResult<?> listPodByNamespace(@RequestParam String namespace) {
 		CoreV1Api apiInstance = new CoreV1Api();
 		HashMap<String, Object> rtn = new HashMap<String, Object>();
 		try {
@@ -117,8 +118,8 @@ public class NameSpaceController {
 		return CommonResult.success(rtn);
 	}
 	
-	@ApiOperation("查询所有Services")
-	@RequestMapping(value = "/listServices", method = RequestMethod.GET)
+	@ApiOperation("查询所有Service")
+	@RequestMapping(value = "/listService", method = RequestMethod.GET)
 	public CommonResult<?> listService() {
 		CoreV1Api apiInstance = new CoreV1Api();
 		HashMap<String, Object> rtn = new HashMap<String, Object>();
@@ -134,7 +135,7 @@ public class NameSpaceController {
 	}
 
 	@ApiOperation("查询所有Pods")
-	@RequestMapping(value = "/listPods", method = RequestMethod.GET)
+	@RequestMapping(value = "/listPod", method = RequestMethod.GET)
 	public CommonResult<?> listPod() {
 		CoreV1Api apiInstance = new CoreV1Api();
 		HashMap<String, Object> rtn = new HashMap<String, Object>();
