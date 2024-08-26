@@ -3,6 +3,7 @@ package net.xzh.k8s.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -37,20 +38,21 @@ public class PodController {
 
 	private static final Logger logger = LoggerFactory.getLogger(PodController.class);
 
-	@ApiOperation("查询所有Pod")
-	@RequestMapping(value = "/listPods", method = RequestMethod.GET)
-	public CommonResult<?> listPods() {
+	@ApiOperation("查询Pod")
+	@RequestMapping(value = "/listPods", method = RequestMethod.POST)
+	public CommonResult<?> listPods(@RequestParam String namespace) {
 		CoreV1Api apiInstance = new CoreV1Api();
-		ArrayList<String> list = new ArrayList<String>();
+		HashMap<String, Object> rtn = new HashMap<String, Object>();
 		try {
-			V1PodList podList = apiInstance.listPodForAllNamespaces(null, null, null, null, null, null, null, null,
-					null, null);
-			podList.getItems().forEach(pod -> list.add(pod.getMetadata().getName()));
+			V1PodList podList = apiInstance.listNamespacedPod(namespace, null, null, null, null, null, null, null, null, null,
+					null);
+			podList.getItems()
+					.forEach(list -> rtn.put(list.getMetadata().getName(), list.getMetadata().getName()));
 		} catch (ApiException e) {
-			logger.error("Exception when calling CoreV1Api#listPodForAllNamespaces");
+			logger.error("Exception when calling CoreV1Api#listNamespacedPod");
 			e.printStackTrace();
 		}
-		return CommonResult.success(list);
+		return CommonResult.success(rtn);
 	}
 	
 	@ApiOperation("对象实体创建Pod")
