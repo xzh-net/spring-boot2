@@ -88,12 +88,12 @@ public class NameSpaceController {
 	@RequestMapping(value = "/listServiceByNamespace", method = RequestMethod.GET)
 	public CommonResult<?> listServiceByNamespaced(@RequestParam String namespace) {
 		CoreV1Api apiInstance = new CoreV1Api();
-		HashMap<String, Object> rtn = new HashMap<String, Object>();
+		ArrayList<String> rtn = new ArrayList<String>();
 		try {
 			V1ServiceList serviceList = apiInstance.listNamespacedService(namespace, null, null, null, null, null, null, null,
 					null, null, null);
 			serviceList.getItems()
-					.forEach(list -> rtn.put(list.getMetadata().getName(), list.getMetadata().getName()));
+					.forEach(list -> rtn.add(list.getMetadata().getName()));
 		} catch (ApiException e) {
 			logger.error("Exception when calling CoreV1Api#listNamespacedService");
 			e.printStackTrace();
@@ -105,12 +105,12 @@ public class NameSpaceController {
 	@RequestMapping(value = "/listPodByNamespace", method = RequestMethod.GET)
 	public CommonResult<?> listPodByNamespace(@RequestParam String namespace) {
 		CoreV1Api apiInstance = new CoreV1Api();
-		HashMap<String, Object> rtn = new HashMap<String, Object>();
+		ArrayList<String> rtn = new ArrayList<String>();
 		try {
 			V1PodList podList = apiInstance.listNamespacedPod(namespace, null, null, null, null, null, null, null, null, null,
 					null);
 			podList.getItems()
-					.forEach(list -> rtn.put(list.getMetadata().getName(), list.getMetadata().getName()));
+					.forEach(list -> rtn.add(list.getMetadata().getName()));
 		} catch (ApiException e) {
 			logger.error("Exception when calling CoreV1Api#listNamespacedPod");
 			e.printStackTrace();
@@ -122,11 +122,11 @@ public class NameSpaceController {
 	@RequestMapping(value = "/listService", method = RequestMethod.GET)
 	public CommonResult<?> listService() {
 		CoreV1Api apiInstance = new CoreV1Api();
-		HashMap<String, Object> rtn = new HashMap<String, Object>();
+		ArrayList<String> rtn = new ArrayList<String>();
 		try {
 			V1ServiceList serviceList = apiInstance.listServiceForAllNamespaces(null, null, null, null, null, null, null, null, null, null);
 			serviceList.getItems()
-					.forEach(list -> rtn.put(list.getMetadata().getName(), list.getMetadata().getName()));
+					.forEach(list -> rtn.add(list.getMetadata().getName()));
 		} catch (ApiException e) {
 			logger.error("Exception when calling CoreV1Api#listNamespacedService");
 			e.printStackTrace();
@@ -138,12 +138,12 @@ public class NameSpaceController {
 	@RequestMapping(value = "/listPod", method = RequestMethod.GET)
 	public CommonResult<?> listPod() {
 		CoreV1Api apiInstance = new CoreV1Api();
-		HashMap<String, Object> rtn = new HashMap<String, Object>();
+		ArrayList<String> rtn = new ArrayList<String>();
 		try {
 			V1PodList podList = apiInstance.listPodForAllNamespaces(null, null, null, null, null, null, null, null, null,
 					null);
 			podList.getItems()
-					.forEach(list -> rtn.put(list.getMetadata().getName(), list.getMetadata().getName()));
+					.forEach(list -> rtn.add(list.getMetadata().getName()));
 		} catch (ApiException e) {
 			logger.error("Exception when calling CoreV1Api#listNamespacedPod");
 			e.printStackTrace();
