@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -61,7 +62,9 @@ public class PodController {
 		CoreV1Api apiInstance = new CoreV1Api();
 		String podName = "test1-pod-nginx";
 	    String imageName = "nginx:1.22.1";
-		
+	    Map<String, String> selectLabels = new HashMap<>();
+        selectLabels.put("app.zidingyi.name", podName);
+        
 		// 容器暴漏端口
 		List<V1ContainerPort> portList = Arrays.asList(new V1ContainerPort().containerPort(80).protocol("TCP"),
 				new V1ContainerPort().containerPort(8080).protocol("TCP"));
@@ -70,6 +73,7 @@ public class PodController {
 		        new V1PodBuilder()
 		            .withNewMetadata()
 		            .withName(podName)
+		            .withLabels(selectLabels)
 		            .endMetadata()
 		            .withNewSpec()
 		            .addNewContainer()

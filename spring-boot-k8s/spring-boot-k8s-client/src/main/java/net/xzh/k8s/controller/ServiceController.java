@@ -47,8 +47,8 @@ public class ServiceController {
 		CoreV1Api apiInstance = new CoreV1Api();
 		ArrayList<String> list = new ArrayList<String>();
 		try {
-			V1ServiceList serviceList = apiInstance.listNamespacedService(namespace, null, null, null, null, null, null, null,
-					null, null, null);
+			V1ServiceList serviceList = apiInstance.listNamespacedService(namespace, null, null, null, null, null, null,
+					null, null, null, null);
 			serviceList.getItems().forEach(svc -> list.add(svc.getMetadata().getName()));
 		} catch (ApiException e) {
 			logger.error("Exception when calling CoreV1Api#listPodForAllNamespaces");
@@ -56,55 +56,47 @@ public class ServiceController {
 		}
 		return CommonResult.success(list);
 	}
-	
+
 	@ApiOperation("创建NodePort类型Service")
 	@RequestMapping(value = "/createService", method = RequestMethod.GET)
 	public CommonResult<?> createService(@RequestParam String namespace) {
 		CoreV1Api apiInstance = new CoreV1Api();
-		
+
 		Map<String, String> selectLabels = new HashMap<>();
-        String serviceName = "svc-"+System.currentTimeMillis();
-        selectLabels.put("deploy", "test-deploy-nginx"); //此处名称test-deploy-nginx和DeploymentController中对应一致
-        
-        // 创建 V1ServicePortBuilder 对象列表
-        List<V1ServicePortBuilder> portBuilders = new ArrayList<>();
+		String serviceName = "svc-" + System.currentTimeMillis();
+		selectLabels.put("app.zidingyi.name", "test1-pod-nginx"); // 此处需要对应pod中selectLabels中内容
 
-        // 添加端口构建器到列表中
-        portBuilders.add(new V1ServicePortBuilder()
-                .withProtocol("TCP")
-                .withPort(8000)//service本身
-                .withTargetPort(new IntOrString(80))  //目标容器
-                .withNodePort(30880));  // 对外网暴漏端口
-        
-        // 使用 Stream API 将 portBuilders 列表转换为 servicePorts 列表
-        List<V1ServicePort> servicePorts = portBuilders.stream()
-                .map(V1ServicePortBuilder::build)
-                .collect(Collectors.toList());
+		// 创建 V1ServicePortBuilder 对象列表
+		List<V1ServicePortBuilder> portBuilders = new ArrayList<>();
 
-        V1Service body = new V1ServiceBuilder()
-                .withMetadata(new V1ObjectMetaBuilder()
-                        .withName(serviceName) //DNS-1035
-                        .withNamespace(namespace)   //命名空间
-                        .build())
-                .withSpec(new V1ServiceSpecBuilder()
-                        .withType("NodePort") // 设置服务类型为NodePort
-                        .withSelector(selectLabels) // 设置选择器
-                        .withPorts(servicePorts)
-                        .build())
-                .build();
-        V1Service v1Service = null;
+		// 添加端口构建器到列表中
+		portBuilders.add(new V1ServicePortBuilder().withProtocol("TCP").withPort(8000)// service本身
+				.withTargetPort(new IntOrString(80)) // 目标容器
+				.withNodePort(30880)); // 对外网暴漏端口
+
+		// 使用 Stream API 将 portBuilders 列表转换为 servicePorts 列表
+		List<V1ServicePort> servicePorts = portBuilders.stream().map(V1ServicePortBuilder::build)
+				.collect(Collectors.toList());
+
+		V1Service body = new V1ServiceBuilder().withMetadata(new V1ObjectMetaBuilder().withName(serviceName) // DNS-1035
+				.withNamespace(namespace) // 命名空间
+				.build()).withSpec(new V1ServiceSpecBuilder().withType("NodePort") // 设置服务类型为NodePort
+						.withSelector(selectLabels) // 设置选择器
+						.withPorts(servicePorts).build())
+				.build();
+		V1Service v1Service = null;
 		try {
 			v1Service = apiInstance.createNamespacedService(namespace, body, null, null, null);
 		} catch (ApiException e) {
 			logger.error("Exception when calling CoreV1Api#createNamespacedService");
 			e.printStackTrace();
 		}
-		return CommonResult.success(v1Service);
+		return CommonResult.success(v1Service.getMetadata().getName());
 	}
-	
+
 	@ApiOperation("删除Service")
 	@RequestMapping(value = "/deleteService", method = RequestMethod.GET)
-	public CommonResult<?> deleteService(@RequestParam String namespace,@RequestParam String svcname) {
+	public CommonResult<?> deleteService(@RequestParam String namespace, @RequestParam String svcname) {
 		CoreV1Api apiInstance = new CoreV1Api();
 		V1Status v1Status = null;
 		try {
@@ -115,6 +107,5 @@ public class ServiceController {
 		}
 		return CommonResult.success(v1Status);
 	}
-	
-	
+
 }
