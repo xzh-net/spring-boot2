@@ -1,6 +1,6 @@
 # 使用 Java 操作 Kubernetes API
 
-Java操作k8s，开源版本共有两个：
+Java操作k8s，有官方版本和社区版本：
  - kubernetes-client/java
  - fabric8io/kubernetes-client
 
