@@ -3,7 +3,7 @@ kind: Pod
 metadata:
   name: test2-pod-nginx
   labels:
-    - app.zidingyi.name: test2-pod-nginx 
+    app.zidingyi.name: test2-pod-nginx 
 spec:
   containers:
   - name: nginx
