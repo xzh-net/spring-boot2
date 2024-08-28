@@ -28,7 +28,7 @@ import net.xzh.k8s.common.model.CommonResult;
  * @author CR7
  *
  */
-@Api(tags = "CoreV1Api命名空间")
+@Api(tags = "CoreV1Api管理命名空间")
 @RestController
 @RequestMapping("/ns")
 public class NameSpaceController {
