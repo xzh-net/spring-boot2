@@ -70,7 +70,7 @@ public class ServiceController {
 		List<V1ServicePortBuilder> portBuilders = new ArrayList<>();
 
 		// 添加端口构建器到列表中
-		portBuilders.add(new V1ServicePortBuilder().withProtocol("TCP").withPort(8000)// service本身
+		portBuilders.add(new V1ServicePortBuilder().withProtocol("TCP").withPort(8000)// 集群内部监听的端口,service本身端口
 				.withTargetPort(new IntOrString(80)) // 目标容器
 				.withNodePort(30880)); // 对外网暴漏端口
 
