@@ -44,7 +44,6 @@ public class NameSpaceController {
 	@RequestMapping(value = "/listNamespace", method = RequestMethod.GET)
 	public CommonResult<?> listNamespace() {
 		NamespaceList namespaceList = kubernetesClient.namespaces().list();
-		// List<Namespace> namespaces = kubernetesClient.namespaces().list().getItems();
 		ArrayList<String> list = new ArrayList<String>();
 		namespaceList.getItems().forEach(namespace -> list.add(namespace.getMetadata().getName()));
 		return CommonResult.success(list);
