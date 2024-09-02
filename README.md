@@ -15,7 +15,7 @@ spring-boot-pulsar          -- 消息中间件
 spring-boot-rabbitmq        -- 消息中间件
 spring-boot-redis           -- 缓存中间件
 spring-boot-rocketmq        -- 消息中间件
-spring-boot-fisco           -- 金盟链
+spring-boot-fisco           -- 金链盟
 spring-boot-k8s             -- 操作Kubernetes API
 ```
 
