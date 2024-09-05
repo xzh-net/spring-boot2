@@ -9,3 +9,7 @@ wechat:
    appid: xzh
    appsecret: xzh
    templateid: xzh
+wechat2:
+   agentid: 1000002
+   corpid: ww5d36e10908fed266
+   corpsecret: 2XA88NK_h801rAFIVYYNpYtNhkh801rAFIVYYNpYtNhk

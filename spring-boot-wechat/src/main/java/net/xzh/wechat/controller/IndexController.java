@@ -13,9 +13,9 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @RestController
 public class IndexController {
-
+	
 	/**
-	 * 跳转到首页
+	 * 微信公众号单点登录
 	 * 
 	 * @param session
 	 * @param modelAndView
@@ -24,6 +24,19 @@ public class IndexController {
 	@GetMapping(value = "/index")
 	public ModelAndView login(HttpSession session, ModelAndView modelAndView) {
 		modelAndView.setViewName("index");
+		return modelAndView;
+	}
+	
+	/**
+	 * 企业微信扫码登录
+	 * 
+	 * @param session
+	 * @param modelAndView
+	 * @return
+	 */
+	@GetMapping(value = "/index2")
+	public ModelAndView login2(HttpSession session, ModelAndView modelAndView) {
+		modelAndView.setViewName("index2");
 		return modelAndView;
 	}
 
