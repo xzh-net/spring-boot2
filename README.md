@@ -37,7 +37,8 @@ spring-boot-sharding-jdbc   -- 分库分表
 ## 3. 架构篇
 
 ```lua
-spring-boot-stand           -- springboot2
+spring-boot-stand           -- 基础项目
+spring-boot-api-version     -- Rest API 版本控制
 spring-boot-security        -- 动态授权
 spring-boot-jwt             -- 登录认证
 spring-boot-elk             -- 日志收集
