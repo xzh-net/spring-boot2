@@ -16,12 +16,12 @@ import net.xzh.harbor.common.model.CommonResult;
  */
 @Api(tags = "首页")
 @RestController
-public class IndexController {
+public class HomeController {
 	
 
-	@ApiOperation("系统登录")
+	@ApiOperation("登录")
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public CommonResult sendTextMail() {
+	public CommonResult<?> sendTextMail() {
 		return CommonResult.success(System.currentTimeMillis());
 	}
 }

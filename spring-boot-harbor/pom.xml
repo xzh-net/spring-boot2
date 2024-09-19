@@ -40,6 +40,12 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!--Hutool Java工具包 -->
+		<dependency>
+			<groupId>cn.hutool</groupId>
+			<artifactId>hutool-all</artifactId>
+			<version>4.5.7</version>
+		</dependency>
 		<!--整合Knife4j -->
 		<dependency>
 			<groupId>com.github.xiaoymin</groupId>
