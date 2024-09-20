@@ -43,9 +43,6 @@ public class AccountController {
 	@Autowired
 	RestTemplate restTemplate;
 
-	// 重置密码
-	// 查询项目仓库信息
-
 	@ApiOperation("创建账号")
 	@RequestMapping(value = "/createUser", method = RequestMethod.POST)
 	public CommonResult<?> createUser(@RequestBody HarborUser harborUser) {
