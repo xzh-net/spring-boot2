@@ -17,6 +17,7 @@ spring-boot-redis           -- 缓存中间件
 spring-boot-rocketmq        -- 消息中间件
 spring-boot-fisco           -- 金链盟
 spring-boot-k8s             -- 操作Kubernetes API
+spring-boot-openstack       -- 操作OpenStack
 ```
 
 ## 2. 工具篇
