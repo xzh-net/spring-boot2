@@ -9,21 +9,19 @@ import io.swagger.annotations.ApiOperation;
 import net.xzh.jclouds.common.model.CommonResult;
 
 /**
- * 首页
+ * 镜像管理
  * 
  * @author Administrator
  *
  */
-@Api(tags = "首页")
+@Api(tags = "镜像管理")
 @RestController
-public class HomeController {
+public class ImageController extends BaseController {
 	
-
-	@ApiOperation("登录")
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public CommonResult<?> sendTextMail() {
-		return CommonResult.success(System.currentTimeMillis());
+	@ApiOperation("查询镜像")
+	@RequestMapping(value = "/images", method = RequestMethod.GET)
+	public CommonResult<?> images() {
+		return CommonResult.success(computeService().listImages());
 	}
-	
-	
+
 }

@@ -29,7 +29,7 @@ public class Swagger2Config {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("net.xzh.harbor.controller"))
+                .apis(RequestHandlerSelectors.basePackage("net.xzh.jclouds.controller"))
                 .paths(PathSelectors.any())
                 .build()
                 //添加登录认证
