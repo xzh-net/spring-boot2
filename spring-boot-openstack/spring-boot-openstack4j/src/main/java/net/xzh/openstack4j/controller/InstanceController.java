@@ -33,11 +33,6 @@ public class InstanceController extends BaseController {
 		return CommonResult.success(OSClient().getToken().getId());
 	}
 
-	@ApiOperation("查询实例")
-	@RequestMapping(value = "/instances", method = RequestMethod.GET)
-	public CommonResult<?> instances() {
-		return CommonResult.success(OSClient().compute().servers().list());
-	}
 
 	@ApiOperation("新建实例")
 	@RequestMapping(value = "/instance", method = RequestMethod.POST)
@@ -50,6 +45,13 @@ public class InstanceController extends BaseController {
 		Server server = OSClient().compute().servers().bootAndWaitActive(request, 600);
 		return CommonResult.success(server.getId());
 	}
+	
+	@ApiOperation("查询实例")
+	@RequestMapping(value = "/instances", method = RequestMethod.GET)
+	public CommonResult<?> instances() {
+		return CommonResult.success(OSClient().compute().servers().list());
+	}
+	
 
 	@ApiOperation("实例详情")
 	@RequestMapping(value = "/instance/{id}", method = RequestMethod.GET)
