@@ -15,7 +15,6 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import net.xzh.swagger.common.api.CommonPage;
 import net.xzh.swagger.common.api.CommonResult;
 import net.xzh.swagger.modules.model.UmsResource;
@@ -26,8 +25,7 @@ import net.xzh.swagger.security.component.DynamicSecurityMetadataSource;
  * 后台资源管理Controller
  */
 @Controller
-@Api(tags = "UmsResourceController")
-@Tag(name = "UmsResourceController",description = "后台资源管理")
+@Api(tags = "资源管理")
 @RequestMapping("/resource")
 public class UmsResourceController {
 
@@ -39,7 +37,7 @@ public class UmsResourceController {
     @ApiOperation("添加后台资源")
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult create(@RequestBody UmsResource umsResource) {
+    public CommonResult<?> create(@RequestBody UmsResource umsResource) {
         boolean success = resourceService.create(umsResource);
         dynamicSecurityMetadataSource.clearDataSource();
         if (success) {
@@ -52,7 +50,7 @@ public class UmsResourceController {
     @ApiOperation("修改后台资源")
     @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult update(@PathVariable Long id,
+    public CommonResult<?> update(@PathVariable Long id,
                                @RequestBody UmsResource umsResource) {
         boolean success = resourceService.update(id, umsResource);
         dynamicSecurityMetadataSource.clearDataSource();
@@ -74,7 +72,7 @@ public class UmsResourceController {
     @ApiOperation("根据ID删除后台资源")
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult delete(@PathVariable Long id) {
+    public CommonResult<?> delete(@PathVariable Long id) {
         boolean success = resourceService.delete(id);
         dynamicSecurityMetadataSource.clearDataSource();
         if (success) {

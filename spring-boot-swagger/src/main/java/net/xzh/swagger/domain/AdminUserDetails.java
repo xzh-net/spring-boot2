@@ -15,7 +15,11 @@ import net.xzh.swagger.modules.model.UmsResource;
  * SpringSecurity需要的用户详情
  */
 public class AdminUserDetails implements UserDetails {
-    private UmsAdmin umsAdmin;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private UmsAdmin umsAdmin;
     private List<UmsResource> resourceList;
     public AdminUserDetails(UmsAdmin umsAdmin, List<UmsResource> resourceList) {
         this.umsAdmin = umsAdmin;

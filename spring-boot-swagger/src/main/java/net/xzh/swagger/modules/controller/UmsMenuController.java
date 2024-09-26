@@ -15,7 +15,6 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import net.xzh.swagger.common.api.CommonPage;
 import net.xzh.swagger.common.api.CommonResult;
 import net.xzh.swagger.modules.dto.UmsMenuNode;
@@ -26,8 +25,7 @@ import net.xzh.swagger.modules.service.UmsMenuService;
  * 后台菜单管理Controller
  */
 @Controller
-@Api(tags = "UmsMenuController")
-@Tag(name = "UmsMenuController",description = "后台菜单管理")
+@Api(tags = "菜单管理")
 @RequestMapping("/menu")
 public class UmsMenuController {
 
@@ -37,7 +35,7 @@ public class UmsMenuController {
     @ApiOperation("添加后台菜单")
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult create(@RequestBody UmsMenu umsMenu) {
+    public CommonResult<?> create(@RequestBody UmsMenu umsMenu) {
         boolean success = menuService.create(umsMenu);
         if (success) {
             return CommonResult.success(null);
@@ -49,7 +47,7 @@ public class UmsMenuController {
     @ApiOperation("修改后台菜单")
     @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult update(@PathVariable Long id,
+    public CommonResult<?> update(@PathVariable Long id,
                                @RequestBody UmsMenu umsMenu) {
         boolean success = menuService.update(id, umsMenu);
         if (success) {
@@ -70,7 +68,7 @@ public class UmsMenuController {
     @ApiOperation("根据ID删除后台菜单")
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult delete(@PathVariable Long id) {
+    public CommonResult<?> delete(@PathVariable Long id) {
         boolean success = menuService.removeById(id);
         if (success) {
             return CommonResult.success(null);
@@ -100,7 +98,7 @@ public class UmsMenuController {
     @ApiOperation("修改菜单显示状态")
     @RequestMapping(value = "/updateHidden/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult updateHidden(@PathVariable Long id, @RequestParam("hidden") Integer hidden) {
+    public CommonResult<?> updateHidden(@PathVariable Long id, @RequestParam("hidden") Integer hidden) {
         boolean success = menuService.updateHidden(id, hidden);
         if (success) {
             return CommonResult.success(null);
