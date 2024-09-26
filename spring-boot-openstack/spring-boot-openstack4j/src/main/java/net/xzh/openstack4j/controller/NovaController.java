@@ -31,19 +31,11 @@ public class NovaController extends BaseController {
 		return CommonResult.success(OSClient().compute().flavors().list());
 	}
 	
-	
-	@ApiOperation("镜像v2")
-	@RequestMapping(value = "/imagesV2", method = RequestMethod.GET)
-	public CommonResult<?> imagesV2() {
-		return CommonResult.success(OSClient().imagesV2().list());
-	
-	}
-	
 	@ApiOperation("镜像")
 	@RequestMapping(value = "/images", method = RequestMethod.GET)
 	public CommonResult<?> images() {
+//		OSClient().imagesV2().list()
 		return CommonResult.success(OSClient().compute().images().list());
-	
 	}
 
 }
