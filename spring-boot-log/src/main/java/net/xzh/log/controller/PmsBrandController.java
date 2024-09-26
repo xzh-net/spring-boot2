@@ -5,7 +5,6 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,8 +24,7 @@ import net.xzh.log.service.PmsBrandService;
 
 
 /**
- * 品牌管理Controller
- * Created by macro on 2019/4/19.
+ * 品牌管理
  */
 @Api(tags = "商品品牌管理")
 @RestController
@@ -61,7 +59,7 @@ public class PmsBrandController {
     @ApiOperation("更新指定id品牌信息")
     @AuditLog(operation = "'更新品牌:' + #pmsBrandDto")
     @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
-    public CommonResult updateBrand(@PathVariable("id") Long id, @RequestBody PmsBrand pmsBrandDto, BindingResult result) {
+    public CommonResult updateBrand(@PathVariable("id") Long id, @RequestBody PmsBrand pmsBrandDto) {
         CommonResult commonResult;
         int count = brandService.updateBrand(id, pmsBrandDto);
         if (count == 1) {

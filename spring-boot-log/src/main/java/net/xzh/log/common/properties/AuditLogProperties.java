@@ -9,7 +9,6 @@ import lombok.Setter;
 /**
  * 审计日志配置
  *
- * @author zlt
  * @date 2020/2/3
  * <p>
  */
