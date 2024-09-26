@@ -13,13 +13,16 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * Created by macro on 2020/10/15.
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Builder
 public class AdminUserDetails implements UserDetails {
-    private String username;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4927179906055151748L;
+	private String username;
     private String password;
     private List<String> authorityList;
     @Override

@@ -9,11 +9,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * <p>
  * 后台资源表
- * </p>
  *
- * @author macro
  * @since 2020-08-21
  */
 @Data

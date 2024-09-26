@@ -17,11 +17,10 @@ import net.xzh.security.common.model.CommonResult;
 import net.xzh.security.service.UmsAdminService;
 
 /**
- * 后台用户管理
- * Created by macro on 2018/4/26.
+ * 用户管理
  */
 @Controller
-@Api(tags = "UmsAdminController")
+@Api(tags = "用户管理")
 @RequestMapping("/admin")
 public class UmsAdminController {
     @Autowired
@@ -35,7 +34,7 @@ public class UmsAdminController {
     @ApiOperation(value = "登录以后返回token")
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult login(@RequestParam String username, @RequestParam String password) {
+    public CommonResult<?> login(@RequestParam String username, @RequestParam String password) {
         String token = adminService.login(username, password);
         if (token == null) {
             return CommonResult.validateFailed("用户名或密码错误");

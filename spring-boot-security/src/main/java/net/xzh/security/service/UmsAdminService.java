@@ -3,8 +3,6 @@ package net.xzh.security.service;
 
 import java.util.List;
 
-import org.springframework.security.core.userdetails.UserDetailsService;
-
 import net.xzh.security.domain.AdminUserDetails;
 import net.xzh.security.domain.UmsResource;
 
