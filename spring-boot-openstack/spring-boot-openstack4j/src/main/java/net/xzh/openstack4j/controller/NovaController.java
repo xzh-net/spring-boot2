@@ -9,26 +9,41 @@ import io.swagger.annotations.ApiOperation;
 import net.xzh.openstack4j.common.model.CommonResult;
 
 /**
- * 镜像管理
+ * 计算管理
  * 
  * @author Administrator
  *
  */
-@Api(tags = "镜像管理")
+@Api(tags = "计算")
 @RestController
-public class ImageController extends BaseController {
+public class NovaController extends BaseController {
 	
-	@ApiOperation("查询列表v2")
+
+	@ApiOperation("获取token")
+	@RequestMapping(value = "/token", method = RequestMethod.GET)
+	public CommonResult<?> token() {
+		return CommonResult.success(OSClient().getToken().getId());
+	}
+	
+	@ApiOperation("实例类型")
+	@RequestMapping(value = "/flavors", method = RequestMethod.GET)
+	public CommonResult<?> flavors() {
+		return CommonResult.success(OSClient().compute().flavors().list());
+	}
+	
+	
+	@ApiOperation("镜像v2")
 	@RequestMapping(value = "/imagesV2", method = RequestMethod.GET)
 	public CommonResult<?> imagesV2() {
 		return CommonResult.success(OSClient().imagesV2().list());
 	
 	}
 	
-	@ApiOperation("查询列表")
+	@ApiOperation("镜像")
 	@RequestMapping(value = "/images", method = RequestMethod.GET)
 	public CommonResult<?> images() {
 		return CommonResult.success(OSClient().compute().images().list());
 	
 	}
+
 }

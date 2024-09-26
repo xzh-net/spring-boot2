@@ -23,7 +23,7 @@ import net.xzh.jclouds.common.model.CommonResult;
  * @author Administrator
  *
  */
-@Api(tags = "实例管理")
+@Api(tags = "实例")
 @RestController
 public class InstanceController extends BaseController {
 

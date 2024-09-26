@@ -15,20 +15,13 @@ import net.xzh.jclouds.common.model.CommonResult;
  * @author Administrator
  *
  */
-@Api(tags = "网络管理")
+@Api(tags = "网络")
 @RestController
 public class NetWorkController extends BaseController {
 
-	@ApiOperation("查询网络")
+	@ApiOperation("查询")
 	@RequestMapping(value = "/network/{id}", method = RequestMethod.GET)
 	public CommonResult<?> network(@PathVariable String id) {
 		return CommonResult.success(neutronApi().getNetworkApi("RegionOne").get(id));
 	}
-
-	@ApiOperation("查询资源类型")
-	@RequestMapping(value = "/flavors", method = RequestMethod.GET)
-	public CommonResult<?> flavors() {
-		return CommonResult.success(computeService().listHardwareProfiles());
-	}
-
 }

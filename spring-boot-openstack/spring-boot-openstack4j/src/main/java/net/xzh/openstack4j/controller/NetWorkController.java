@@ -14,20 +14,14 @@ import net.xzh.openstack4j.common.model.CommonResult;
  * @author Administrator
  *
  */
-@Api(tags = "网络管理")
+@Api(tags = "网络")
 @RestController
 public class NetWorkController extends BaseController {
 
-	@ApiOperation("查询网络")
+	@ApiOperation("查询")
 	@RequestMapping(value = "/network", method = RequestMethod.GET)
 	public CommonResult<?> network() {
 		return CommonResult.success(OSClient().networking().network().list());
-	}
-
-	@ApiOperation("查询资源类型")
-	@RequestMapping(value = "/flavors", method = RequestMethod.GET)
-	public CommonResult<?> flavors() {
-		return CommonResult.success(OSClient().compute().flavors().list());
 	}
 
 }

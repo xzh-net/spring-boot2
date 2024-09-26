@@ -23,15 +23,9 @@ import net.xzh.openstack4j.common.model.CommonResult;
  * @author Administrator
  *
  */
-@Api(tags = "实例管理")
+@Api(tags = "实例")
 @RestController
 public class InstanceController extends BaseController {
-
-	@ApiOperation("获取token")
-	@RequestMapping(value = "/token", method = RequestMethod.GET)
-	public CommonResult<?> token() {
-		return CommonResult.success(OSClient().getToken().getId());
-	}
 
 
 	@ApiOperation("新建实例")
