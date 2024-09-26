@@ -22,7 +22,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  */
 @Configuration
 @EnableSwagger2
-public class SwaggerConfig extends BaseSwaggerConfig {
+public class Swagger2Config extends BaseSwaggerConfig {
 
     @Override
     public SwaggerProperties swaggerProperties() {
