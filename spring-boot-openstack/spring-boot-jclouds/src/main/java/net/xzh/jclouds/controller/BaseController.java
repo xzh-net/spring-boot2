@@ -51,20 +51,4 @@ public class BaseController {
 				.modules(ImmutableSet.of(new SLF4JLoggingModule())).buildApi(NeutronApi.class);
 		return neutronApi;
 	}
-	
-
-	public static void main(String[] args) {
-		final Properties overrides = new Properties();
-		overrides.put(KeystoneProperties.KEYSTONE_VERSION, "3");
-		overrides.put(KeystoneProperties.SCOPE, "project:xuchaoguo_project");// 项目名
-		NovaApi novaApi = ContextBuilder.newBuilder("openstack-nova").endpoint("http://172.17.19.30:5000/v3")
-				.credentials("Default:xuchaoguo", "000000").overrides(overrides)
-				.modules(ImmutableSet.of(new SLF4JLoggingModule())).buildApi(NovaApi.class);
-		System.out.println(novaApi);
-		
-		ComputeService compute = ContextBuilder.newBuilder("openstack-nova").endpoint("http://172.17.19.30:5000/v3")
-				.credentials("Default:xuchaoguo", "000000")// Domain Name:userName,password
-				.overrides(overrides).buildView(ComputeServiceContext.class).getComputeService();
-		System.out.println(compute);
-	}
 }
