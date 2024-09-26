@@ -1,5 +1,18 @@
 package net.xzh.knife4j.controller;
 
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 
 import io.swagger.annotations.Api;
@@ -9,15 +22,6 @@ import net.xzh.knife4j.common.model.CommonPage;
 import net.xzh.knife4j.common.model.CommonResult;
 import net.xzh.knife4j.model.PmsBrand;
 import net.xzh.knife4j.service.PmsBrandService;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 
 /**
@@ -60,7 +64,7 @@ public class PmsBrandController {
     @ApiOperation("更新指定id品牌信息")
     @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult updateBrand(@PathVariable("id") Long id, @RequestBody PmsBrand pmsBrandDto, BindingResult result) {
+    public CommonResult updateBrand(@PathVariable("id") Long id, @RequestBody PmsBrand pmsBrandDto) {
         CommonResult commonResult;
         int count = brandService.updateBrand(id, pmsBrandDto);
         if (count == 1) {
