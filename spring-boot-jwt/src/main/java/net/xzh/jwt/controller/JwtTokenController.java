@@ -21,10 +21,9 @@ import net.xzh.jwt.domain.PayloadDto;
 import net.xzh.jwt.service.JwtTokenService;
 
 /**
- * JWT令牌管理Controller
- * Created by macro on 2020/6/22.
+ * jwt令牌管理
  */
-@Api(tags = "JwtTokenController", description = "JWT令牌管理")
+@Api(tags = "jwt令牌管理")
 @Controller
 @RequestMapping("/token")
 public class JwtTokenController {
