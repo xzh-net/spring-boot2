@@ -1,8 +1,16 @@
-# Harbor 2.0.1
+# SpringBoot创建docker镜像，并推送到私有仓库
 
-## 1. 安装
 
-### 1.1 安装Docker
+## 1. 准备环境
+
+### 1.1 安装Harbor 2.0.1
+
+新建项目
+
+![](doc/assets/harbor.png)
+
+
+### 1.2 Docker配置
 
 ```bash
 vi /etc/docker/daemon.json
@@ -18,12 +26,6 @@ vi /etc/docker/daemon.json
 ```bash
 docker login -u admin -p Harbor12345 http://192.168.2.100:88
 ```
-
-
-### 1.2 新建项目
-
-   ![](doc/assets/harbor.png)
-
 
 ## 2. 使用插件构建并推送镜像
 
