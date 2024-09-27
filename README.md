@@ -1,65 +1,69 @@
-# Spring Boot 2.3.0
+# Spring Boot整合
 
-## 1. 组件篇
+## 1. 基础功能
 
-```lua
-spring-boot-elasticsearch   -- 商品搜索
-spring-boot-emqx            -- 消息中间件
-spring-boot-hbase           -- hbase
-spring-boot-hdfs            -- hadoop
-spring-boot-harbor          -- 持续集成
-spring-boot-jms             -- ActiveMQ
-spring-boot-kafka           -- 消息中间件
-spring-boot-mongo           -- 浏览记录读写分离
-spring-boot-pulsar          -- 消息中间件
-spring-boot-rabbitmq        -- 消息中间件
-spring-boot-redis           -- 缓存中间件
-spring-boot-rocketmq        -- 消息中间件
-spring-boot-fisco           -- 金链盟
-spring-boot-k8s             -- Kubernetes API
-spring-boot-openstack       -- OpenStack API
-```
+- [SpringBoot入门](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-stand)
+- [性能卓越的数据库连接池HikariCP](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-hikaricp)
 
-## 2. 工具篇
 
-```lua
-spring-boot-quartz          -- 定时任务和线程池
-spring-boot-pg-jmeter       -- PG压测、Tomcat调优
-spring-boot-hikaricp        -- 数据源
-spring-boot-jasypt          -- 密码加解密
-spring-boot-oss             -- 附件上传
-spring-boot-email           -- 发送邮件
-spring-boot-wechat          -- 微信网页授权
-spring-boot-etl             -- 数据转换
-spring-boot-generator       -- 代码生成工具
-spring-boot-sharding-jdbc   -- 分库分表
-```
+## 2. 官方Starter
 
-## 3. 架构篇
+- [权限安全框架实现动态认证授权](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-security)
+- [SpringBoot配置Email发送功能](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-email)
+- [整合Quartz作业调度框架](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-quartz)
+- [整合validation完成数据校验全局异常拦截处理](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-validation)
+- [整合ActiveMQ基于JSM规范进行消息发送和订阅](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-jms)
+- [整合RocketMQ进行消息发送和订阅](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-rocketmq)
+- [整合RabbitMq实战应用场景](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-rabbitmq)
+- [整合MongoDB读写分离的浏览记录和商品收藏](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-mongo)
+- [整合Redis流控和缓存穿透解决方案](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-redis)
+- [整合Elasticsearch实现商品搜索和索引管理](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-elasticsearch)
+- [高性能的异步非阻塞web框架](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-webflux)
 
-```lua
-spring-boot-stand           -- 基础项目
-spring-boot-api-version     -- Rest API 版本控制
-spring-boot-security        -- 动态授权
-spring-boot-jwt             -- 登录认证
-spring-boot-elk             -- 日志收集
-spring-boot-log             -- 日志拦截器
-spring-boot-knife4j         -- 整合knife4j
-spring-boot-swagger         -- 脚手架整合swagger
-spring-boot-validation      -- 逻辑校验的三种方式
-spring-boot-dubbo           -- RPC
-spring-boot-cxf             -- CXF
-spring-boot-webflux         -- 异步非阻塞式Web框架
-```
 
-## 4. 项目篇
+## 3. 三方Starter
 
-```lua
-spring-boot-activiti        -- 工作流设计器，groups验证分组
-spring-boot-websocket       -- websocket原生html【ui1】
-spring-boot-sockjs          -- sockjs + rabbitmq【ui1】
-spring-boot-sockjs-redis    -- sockjs + redis【ui3】
-spring-boot-sse             -- Server Sent Event【ui2】
-spring-boot-mqtt            -- 客户端集成【ui2】
-spring-boot-netty           -- 聊天室、心跳检测
-```
+- [整合cxf发布webservice以及调用的方法](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-cxf)
+- [整合Dubbo调用示例](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-dubbo)
+- [整合Knife4j API文档生成工具](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-knife4j)
+- [整合Apache Pulsar云原生消息平台的王者](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-pulsar)
+- [整合Shardingjdbc实现分库分表](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-sharding-jdbc)
+- [整合Druid数据库连接池监控Postgres压测和Sql调优](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-pg-jmeter)
+- [敏感数据的保护伞，使用Jasypt加密配置文件](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-jasypt)
+- [使用自定义Starter实现日志拦截器](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-log)
+
+
+## 4. 三方SDK
+
+- [搞懂JWT、JWS、JWE之间的关系](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-jwt)
+- [集成分布式文件存储实现文件上传下载](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-oss)
+- [集成Hbase操作实现表的增删改查](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-hbase)
+- [集成Hadoop实现文件上传](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-hdfs)
+- [集成Kafka实现消息通知和接收](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-kafka)
+- [集成FISCO BCOS合约编写和部署](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-fisco)
+- [集成Kubernetes API实现容器编排](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-k8s)
+- [集成OpenStack API管理主机和资源状态](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-openstack)
+- [集成Kettle处理数据](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-etl)
+- [基于Netty的聊天室项目及调用示例](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-netty)
+- [Mqtt多种继承方式汇总](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-mqtt)
+
+
+## 5. 工具插件
+
+> 应用配置文件不依赖中间件的连接
+
+- [基于Emqx为客户端实现自定义登录授权](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-emqx)
+- [基于Elasticsearch技术栈实现统一日志收集](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-elk)
+- [基API版本控制](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-api-version)
+- [使用Maven插件构建Docker镜像,并推送到Harbor仓库](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-harbor)
+- [基于html5的Websocket单机示例](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-websocket)
+- [Websocket增强利器SockJS](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-sockjs)
+- [Websocket增强利器SockJS（集群版）](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-sockjs-redis)
+- [ChatGPT流式传输SSE](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-sockjs-sse)
+- [公众号和企业微信开发实战](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-wechat)
+- [Mybatis代码生成器](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-generator)
+
+## 7. 项目实战
+
+- [基于SpringBoot+MyBatis-Plus的快速开发脚手架](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-swagger)
+- [整合Activiti工作流，包含设计器和数据验证分组校验](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-activiti)
