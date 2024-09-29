@@ -17,7 +17,7 @@ import net.xzh.security.component.RestfulAccessDeniedHandler;
 /**
  * SpringSecurity通用配置
  * 包括通用Bean、Security通用Bean及动态权限通用Bean
- * Created by macro on 2022/5/20.
+ * Created by xzh on 2022/5/20.
  */
 @Configuration
 public class CommonSecurityConfig {

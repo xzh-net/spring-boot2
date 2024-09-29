@@ -8,8 +8,8 @@
 
 ## 2. 官方Starter
 
-- [权限安全框架实现动态认证授权](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-security)
-- [SpringBoot配置Email发送功能](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-email)
+- [Spring Security安全访问权限框架如何与国密算法整合](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-security)
+- [Spring Boot配置Email发送功能](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-email)
 - [整合Quartz作业调度框架](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-quartz)
 - [整合validation完成数据校验全局异常拦截处理](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-validation)
 - [整合ActiveMQ基于JSM规范进行消息发送和订阅](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-jms)
@@ -56,9 +56,9 @@
 - [基于Elasticsearch技术栈实现统一日志收集](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-elk)
 - [API版本控制](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-api-version)
 - [使用Maven插件构建Docker镜像,并推送到Harbor仓库](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-harbor)
-- [基于html5的Websocket单机示例](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-websocket)
-- [Websocket增强利器SockJS](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-sockjs)
-- [Websocket增强利器SockJS（集群版）](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-sockjs-redis)
+- [基于html5的WebSocket单机示例](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-websocket)
+- [WebSocket增强利器SockJS](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-sockjs)
+- [WebSocket增强利器SockJS（集群版）](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-sockjs-redis)
 - [ChatGPT流式传输SSE](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-sockjs-sse)
 - [公众号和企业微信开发实战](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-wechat)
 - [Mybatis代码生成器](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-generator)
