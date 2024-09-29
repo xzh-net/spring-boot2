@@ -23,7 +23,7 @@
 
 ## 3. 三方Starter
 
-- [整合cxf发布webservice以及调用的方法](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-cxf)
+- [整合CXF发布WebService以及调用的方法](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-cxf)
 - [整合Dubbo调用示例](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-dubbo)
 - [整合Knife4j API文档生成工具](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-knife4j)
 - [整合Apache Pulsar云原生消息平台的王者](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-pulsar)
