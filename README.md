@@ -14,7 +14,7 @@
 - [整合validation完成数据校验全局异常拦截处理](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-validation)
 - [整合ActiveMQ基于JSM规范进行消息发送和订阅](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-jms)
 - [整合RocketMQ进行消息发送和订阅](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-rocketmq)
-- [整合RabbitMq实战应用场景](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-rabbitmq)
+- [整合RabbitMq应用场景实战](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-rabbitmq)
 - [整合MongoDB读写分离的浏览记录和商品收藏](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-mongo)
 - [整合Redis流控和缓存穿透解决方案](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-redis)
 - [整合Elasticsearch实现商品搜索和索引管理](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-elasticsearch)
@@ -28,7 +28,7 @@
 - [整合Knife4j API文档生成工具](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-knife4j)
 - [整合Apache Pulsar云原生消息平台的王者](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-pulsar)
 - [整合Shardingjdbc实现分库分表](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-sharding-jdbc)
-- [整合Druid数据库连接池监控Postgres压测和Sql调优](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-pg-jmeter)
+- [整合Druid数据库连接池监控Postgres压测和SQL调优](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-pg-jmeter)
 - [敏感数据的保护伞，使用Jasypt加密配置文件](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-jasypt)
 - [使用自定义Starter实现日志拦截器](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-log)
 
@@ -45,7 +45,7 @@
 - [集成OpenStack API管理主机和资源状态](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-openstack)
 - [集成Kettle处理数据](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-etl)
 - [基于Netty的聊天室项目及调用示例](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-netty)
-- [Mqtt多种继承方式汇总](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-mqtt)
+- [MQTT多种集成方式汇总](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-mqtt)
 
 
 ## 5. 工具插件
@@ -54,7 +54,7 @@
 
 - [基于Emqx为客户端实现自定义登录授权](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-emqx)
 - [基于Elasticsearch技术栈实现统一日志收集](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-elk)
-- [基API版本控制](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-api-version)
+- [API版本控制](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-api-version)
 - [使用Maven插件构建Docker镜像,并推送到Harbor仓库](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-harbor)
 - [基于html5的Websocket单机示例](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-websocket)
 - [Websocket增强利器SockJS](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-sockjs)
