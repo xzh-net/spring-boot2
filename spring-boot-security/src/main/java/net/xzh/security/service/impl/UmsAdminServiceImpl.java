@@ -21,6 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 import net.xzh.security.common.util.JwtTokenUtil;
 import net.xzh.security.domain.AdminUserDetails;
 import net.xzh.security.domain.UmsResource;
+import net.xzh.security.model.UmsAdmin;
 import net.xzh.security.service.UmsAdminService;
 
 /**
@@ -52,7 +53,7 @@ public class UmsAdminServiceImpl implements UmsAdminService {
         adminUserDetailsList.add(AdminUserDetails.builder()
                 .username("xzh")
                 .password(passwordEncoder.encode("123456"))
-                .authorityList(CollUtil.toList("5:brand:listAll"))
+                .authorityList(CollUtil.toList("4:brand:list"))
                 .build());
         
         resourceList.add(UmsResource.builder()
@@ -94,6 +95,16 @@ public class UmsAdminServiceImpl implements UmsAdminService {
     public List<UmsResource> getResourceList() {
         return resourceList;
     }
+    
+	public UmsAdmin register(UmsAdmin umsAdminParam) {
+		 adminUserDetailsList.add(AdminUserDetails.builder()
+	                .username(umsAdminParam.getUsername())
+	                .password(passwordEncoder.encode(umsAdminParam.getPassword()))
+	                .authorityList(CollUtil.toList("4:brand:list"))
+	                .build());
+		return umsAdminParam;
+	}
+    
 
     @Override
     public String login(String username, String password) {

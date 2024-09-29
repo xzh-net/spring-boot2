@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import net.xzh.security.common.model.CommonResult;
+import net.xzh.security.model.UmsAdmin;
 import net.xzh.security.service.UmsAdminService;
 
 /**
@@ -31,7 +33,7 @@ public class UmsAdminController {
     private String tokenHead;
 
 
-    @ApiOperation(value = "登录以后返回token")
+    @ApiOperation(value = "登录")
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult<?> login(@RequestParam String username, @RequestParam String password) {
@@ -43,5 +45,17 @@ public class UmsAdminController {
         tokenMap.put("token", token);
         tokenMap.put("tokenHead", tokenHead);
         return CommonResult.success(tokenMap);
+    }
+    
+    
+    @ApiOperation(value = "用户注册")
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult<UmsAdmin> register(@RequestBody UmsAdmin umsAdminParam) {
+        UmsAdmin umsAdmin = adminService.register(umsAdminParam);
+        if (umsAdmin == null) {
+            CommonResult.failed();
+        }
+        return CommonResult.success(umsAdmin);
     }
 }

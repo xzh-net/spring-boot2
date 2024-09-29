@@ -7,6 +7,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import net.xzh.security.common.util.JwtTokenUtil;
+import net.xzh.security.common.util.PwdEncoderUtil;
 import net.xzh.security.component.DynamicAccessDecisionManager;
 import net.xzh.security.component.DynamicSecurityFilter;
 import net.xzh.security.component.DynamicSecurityMetadataSource;
@@ -34,7 +35,8 @@ public class CommonSecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+//    	return new BCryptPasswordEncoder();
+    	return PwdEncoderUtil.getDelegatingPasswordEncoder("SM3");
     }
 
     @Bean

@@ -5,6 +5,7 @@ import java.util.List;
 
 import net.xzh.security.domain.AdminUserDetails;
 import net.xzh.security.domain.UmsResource;
+import net.xzh.security.model.UmsAdmin;
 
 /**
  * 后台用于管理Service
@@ -24,4 +25,9 @@ public interface UmsAdminService {
      * 用户名密码登录
      */
     String login(String username, String password);
+    
+    /**
+     * 注册功能
+     */
+    UmsAdmin register(UmsAdmin umsAdminParam);
 }
