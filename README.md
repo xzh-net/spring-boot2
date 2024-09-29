@@ -2,7 +2,7 @@
 
 ## 1. 基础功能
 
-- [SpringBoot入门](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-stand)
+- [Spring Boot入门](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-stand)
 - [性能卓越的数据库连接池HikariCP](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-hikaricp)
 
 
@@ -11,7 +11,7 @@
 - [Spring Security安全访问权限框架如何与国密算法整合](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-security)
 - [Spring Boot配置Email发送功能](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-email)
 - [整合Quartz作业调度框架](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-quartz)
-- [整合validation完成数据校验全局异常拦截处理](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-validation)
+- [整合Validation完成数据校验全局异常拦截处理](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-validation)
 - [整合ActiveMQ基于JSM规范进行消息发送和订阅](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-jms)
 - [整合RocketMQ进行消息发送和订阅](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-rocketmq)
 - [整合RabbitMQ应用场景实战](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-rabbitmq)
