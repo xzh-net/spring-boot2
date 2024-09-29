@@ -37,7 +37,7 @@ public class PipelinedController {
 
 	@ApiOperation("string管道添加")
 	@RequestMapping(value = "/stringSet", method = RequestMethod.GET)
-	public CommonResult stringSet(@RequestParam String id) {
+	public CommonResult<?> stringSet(@RequestParam String id) {
 		StopWatch stopWatch = new StopWatch();
 		stopWatch.start("");
 		HashMap<String, String> map = new HashMap<String, String>();
@@ -61,7 +61,7 @@ public class PipelinedController {
 
 	@ApiOperation("string管道获取")
 	@RequestMapping(value = "/stringGet", method = RequestMethod.GET)
-	public CommonResult stringGet(@RequestParam String id) {
+	public CommonResult<?> stringGet(@RequestParam String id) {
 		HashMap<String, String> map = new HashMap<String, String>();
 		for (int i = 0; i < 1000; i++) {
 			map.put("pipe:str:" + id + ":" + i, i + "");
@@ -82,7 +82,7 @@ public class PipelinedController {
 
 	@ApiOperation("json管道添加")
 	@RequestMapping(value = "/jsonSet", method = RequestMethod.GET)
-	public CommonResult jsonSet(String id) {
+	public CommonResult<?> jsonSet(String id) {
 		StopWatch stopWatch = new StopWatch();
 		stopWatch.start("");
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -106,7 +106,7 @@ public class PipelinedController {
 
 	@ApiOperation("json管道获取")
 	@RequestMapping(value = "/jsonGet", method = RequestMethod.GET)
-	public CommonResult jsonGet(String id) {
+	public CommonResult<?> jsonGet(String id) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		for (int i = 0; i < 1000; i++) {
 			map.put("pipe:json:" + id + ":" + i, newJson(i));

@@ -31,7 +31,7 @@ public class PubSubController {
 
 	@ApiOperation("按主题")
     @RequestMapping(value = "/push", method = RequestMethod.GET)
-    public CommonResult push(@RequestParam String id) {
+    public CommonResult<?> push(@RequestParam String id) {
 		redisTemplate.convertAndSend("redisChat", id + "room" );
 		redisTemplate.convertAndSend("redisChat2", id + "room2");
 		return CommonResult.success(1);
@@ -39,7 +39,7 @@ public class PubSubController {
     
     @ApiOperation("key失效过期")
     @RequestMapping(value = "/set", method = RequestMethod.GET)
-	public CommonResult set(String id) {
+	public CommonResult<?> set(String id) {
     	ArrayList<Object> msg = new ArrayList<Object>();
     	msg.add("xzh");
     	msg.add(20220120);

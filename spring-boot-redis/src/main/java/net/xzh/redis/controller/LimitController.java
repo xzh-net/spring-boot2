@@ -25,21 +25,21 @@ public class LimitController {
 	@Limit
 	@ApiOperation("默认限制")
 	@RequestMapping(value = "/default", method = RequestMethod.GET)
-	public CommonResult defaultlimit(@RequestParam String id) {
+	public CommonResult<?> defaultlimit(@RequestParam String id) {
 		return CommonResult.success(1);
 	}
 
 	@Limit(limitType = LimitType.IP)
 	@ApiOperation("ip限制")
 	@RequestMapping(value = "/ip", method = RequestMethod.GET)
-	public CommonResult ip(@RequestParam String id) {
+	public CommonResult<?> ip(@RequestParam String id) {
 		return CommonResult.success(1);
 	}
 
 	@Limit(key = "customer_limit_test", limitType = LimitType.CUSTOMER)
 	@ApiOperation("自定义限制")
 	@RequestMapping(value = "/customer", method = RequestMethod.GET)
-	public CommonResult customer(@RequestParam String id) {
+	public CommonResult<?> customer(@RequestParam String id) {
 		return CommonResult.success(1);
 	}
 

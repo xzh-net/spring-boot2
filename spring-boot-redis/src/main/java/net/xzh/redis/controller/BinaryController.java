@@ -34,7 +34,7 @@ public class BinaryController {
 	
 	@ApiOperation("插入")
     @RequestMapping(value = "/byteSet", method = RequestMethod.GET)
-	public CommonResult byteSet(@RequestParam String id) {
+	public CommonResult<?> byteSet(@RequestParam String id) {
 		ArrayList<HashMap<String, Object>> l = new ArrayList<HashMap<String, Object>>();
 		for (int i = 0; i < 10; i++) {
 			HashMap<String, Object> map = new HashMap<String, Object>();
@@ -48,9 +48,9 @@ public class BinaryController {
 
     @ApiOperation("读取")
     @RequestMapping(value = "/byteGet", method = RequestMethod.GET)
-	public CommonResult byteGet(@RequestParam String id) {
+	public CommonResult<?> byteGet(@RequestParam String id) {
 		byte[] bytes = (byte[]) serializeRedisTemplate.opsForValue().get(id);
-		List<HashMap<String, Object>> rtn = ObjectUtil.unserialize(bytes);
+		List<HashMap<String, Object>> rtn = ObjectUtil.deserialize(bytes);
 		return CommonResult.success(rtn);
 	}
 	

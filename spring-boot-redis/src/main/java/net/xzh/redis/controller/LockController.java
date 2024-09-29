@@ -45,7 +45,7 @@ public class LockController {
 	 */
 	@ApiOperation("库存超卖")
 	@RequestMapping(value = "/deductStock", method = RequestMethod.GET)
-	public CommonResult deductStock(@RequestParam String id) {
+	public CommonResult<?> deductStock(@RequestParam String id) {
 		String lockKey="stock"+id;
 		RLock reentrantLock = redissonClient.getLock(id);
 		try {

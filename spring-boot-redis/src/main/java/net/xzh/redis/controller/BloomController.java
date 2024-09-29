@@ -32,7 +32,7 @@ public class BloomController {
 	@ApiOperation("+1库存")
     @RequestMapping(value = "/bloomSet", method = RequestMethod.GET)
 	@RedisBloomAdd(key = "productBloom", value = "#id")
-	public CommonResult bloomSet(@RequestParam String id) {
+	public CommonResult<?> bloomSet(@RequestParam String id) {
 		int stock = Convert.toInt(stringRedisTemplate.opsForValue().get(id),0);
 		if(stock>0) {
 			stringRedisTemplate.opsForValue().set(id, StrUtil.toString(stock+1));
@@ -45,7 +45,7 @@ public class BloomController {
     @ApiOperation("模拟穿透")
     @RequestMapping(value = "/bloomGet", method = RequestMethod.GET)
     @RedisBloom(key = "productBloom", value = "#id")
-	public CommonResult bloomGet(@RequestParam String id) {
+	public CommonResult<?> bloomGet(@RequestParam String id) {
 		return CommonResult.success(stringRedisTemplate.opsForValue().get(id));
 	}
 }
