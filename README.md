@@ -14,7 +14,7 @@
 - [整合validation完成数据校验全局异常拦截处理](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-validation)
 - [整合ActiveMQ基于JSM规范进行消息发送和订阅](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-jms)
 - [整合RocketMQ进行消息发送和订阅](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-rocketmq)
-- [整合RabbitMq应用场景实战](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-rabbitmq)
+- [整合RabbitMQ应用场景实战](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-rabbitmq)
 - [整合MongoDB读写分离的浏览记录和商品收藏](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-mongo)
 - [整合Redis流控和缓存穿透解决方案](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-redis)
 - [整合Elasticsearch实现商品搜索和索引管理](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-elasticsearch)
