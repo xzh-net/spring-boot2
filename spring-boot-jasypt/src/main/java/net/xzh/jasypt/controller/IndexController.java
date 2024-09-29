@@ -35,7 +35,7 @@ public class IndexController {
 		return CommonResult.success(umsAdminMapper.selectByPrimaryKey(id));
 	}
 	
-	@ApiOperation("获取测试key解密值")
+	@ApiOperation("获取解密值")
 	@RequestMapping(value = "/key", method = RequestMethod.GET)
 	public CommonResult<String> password() {
 		return CommonResult.success(password);

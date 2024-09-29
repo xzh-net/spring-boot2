@@ -29,7 +29,7 @@
 - [整合Apache Pulsar云原生消息平台的王者](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-pulsar)
 - [整合Shardingjdbc实现分库分表](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-sharding-jdbc)
 - [整合Druid数据库连接池监控Postgres压测和SQL调优](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-pg-jmeter)
-- [敏感数据的保护伞，使用Jasypt加密配置文件](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-jasypt)
+- [敏感数据的保护伞，基于Jasypt使用SM4加密配置文件](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-jasypt)
 - [使用自定义Starter实现日志拦截器](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-log)
 
 
