@@ -62,6 +62,7 @@
 - [ChatGPT流式传输SSE](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-sockjs-sse)
 - [公众号和企业微信开发实战](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-wechat)
 - [Mybatis代码生成器](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-generator)
+- [Kawaks Rom下载](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-winkawaks)
 
 ## 7. 项目实战
 
