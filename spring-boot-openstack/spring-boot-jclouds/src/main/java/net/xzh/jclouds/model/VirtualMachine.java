@@ -19,13 +19,13 @@ public class VirtualMachine implements Serializable {
     @ApiModelProperty(value = "实例名称")
     private String serverName;
 
-    @ApiModelProperty(value = "镜像ID，6c573993-7271-499b-b443-5e298c6c09a7")
+    @ApiModelProperty(value = "镜像ID")
     private String imageId;
 
-    @ApiModelProperty(value = "实例规格，lif.flavor.id")
+    @ApiModelProperty(value = "实例规格ID")
     private String hardwareId;
     
-    @ApiModelProperty(value = "实例网络,多个以英文逗号分割，ad10a9c6-0cf9-4fcb-8c64-de20f0abcf55")
+    @ApiModelProperty(value = "网络ID(lan)")
     private String networks;
 
 	public String getRegionId() {
