@@ -8,7 +8,7 @@ import net.xzh.elasticsearch.domain.EsProduct;
 
 /**
  * 商品ES操作类
- * Created by macro on 2018/6/19.
+ * Created 2018/6/19.
  */
 public interface EsProductRepository extends ElasticsearchRepository<EsProduct, Long> {
     /**

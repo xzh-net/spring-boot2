@@ -8,7 +8,7 @@ import com.nimbusds.jose.jwk.RSAKey;
 import net.xzh.jwt.domain.PayloadDto;
 
 /**
- * Created by macro on 2020/6/22.
+ * Created 2020/6/22.
  */
 public interface JwtTokenService {
 

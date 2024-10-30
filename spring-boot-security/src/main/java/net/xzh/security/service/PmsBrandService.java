@@ -7,7 +7,7 @@ import net.xzh.security.model.PmsBrand;
 
 /**
  * PmsBrandService
- * Created by macro on 2019/4/19.
+ * Created 2019/4/19.
  */
 public interface PmsBrandService {
     List<PmsBrand> listAllBrand();

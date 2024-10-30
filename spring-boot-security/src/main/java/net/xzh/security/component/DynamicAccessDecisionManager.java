@@ -14,7 +14,7 @@ import cn.hutool.core.collection.CollUtil;
 
 /**
  * 动态权限决策管理器，用于判断用户是否有访问权限
- * Created by macro on 2020/2/7.
+ * Created 2020/2/7.
  */
 public class DynamicAccessDecisionManager implements AccessDecisionManager {
 

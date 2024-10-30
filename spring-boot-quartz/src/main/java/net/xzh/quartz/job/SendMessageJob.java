@@ -15,7 +15,7 @@ import net.xzh.quartz.service.ScheduleService;
 
 /**
  * 发送站内信定时任务执行器
- * Created by macro on 2020/9/27.
+ * Created 2020/9/27.
  */
 @Component
 public class SendMessageJob extends QuartzJobBean {

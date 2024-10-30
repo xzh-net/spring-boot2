@@ -25,7 +25,7 @@ import net.xzh.security.model.UmsAdmin;
 import net.xzh.security.service.UmsAdminService;
 
 /**
- * Created by macro on 2020/10/15.
+ * Created 2020/10/15.
  */
 @Slf4j
 @Service

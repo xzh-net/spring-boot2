@@ -20,7 +20,7 @@ import net.xzh.redis.service.RedisService;
 
 /**
  * redis测试Controller
- * Created by macro on 2020/3/3.
+ * Created 2020/3/3.
  */
 @Api(tags = "基础数据读写")
 @RestController

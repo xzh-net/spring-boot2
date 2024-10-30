@@ -7,7 +7,7 @@ import net.xzh.jwt.model.UmsPermission;
 
 /**
  * 后台管理员Service
- * Created by macro on 2018/4/26.
+ * Created 2018/4/26.
  */
 public interface UmsAdminService {
     /**

@@ -4,7 +4,7 @@ import net.xzh.gen.model.UmsResource;
 import net.xzh.gen.model.UmsResourceCategory;
 
 /**
- * Created by macro on 2020/12/9.
+ * Created 2020/12/9.
  */
 public class ResourceWithCateDto extends UmsResource {
     /**

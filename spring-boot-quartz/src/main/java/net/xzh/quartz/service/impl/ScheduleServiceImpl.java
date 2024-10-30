@@ -24,7 +24,7 @@ import net.xzh.quartz.service.ScheduleService;
 
 /**
  * Quartz定时任务操作实现类
- * Created by macro on 2020/9/27.
+ * Created 2020/9/27.
  */
 @Service
 public class ScheduleServiceImpl implements ScheduleService {

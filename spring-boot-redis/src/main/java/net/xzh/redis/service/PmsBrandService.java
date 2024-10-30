@@ -7,7 +7,7 @@ import net.xzh.redis.model.PmsBrand;
 
 /**
  * PmsBrandService
- * Created by macro on 2019/4/19.
+ * Created 2019/4/19.
  */
 public interface PmsBrandService {
 

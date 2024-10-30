@@ -6,7 +6,7 @@ import net.xzh.gen.model.UmsAdmin;
 import net.xzh.gen.model.UmsRole;
 
 /**
- * Created by macro on 2020/12/9.
+ * Created 2020/12/9.
  */
 public class AdminRoleDto extends UmsAdmin {
 

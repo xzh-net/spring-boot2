@@ -13,7 +13,7 @@ import net.xzh.redis.service.RedisService;
 
 /**
  * redis操作实现类
- * Created by macro on 2020/3/3.
+ * Created 2020/3/3.
  */
 @Service
 public class RedisServiceImpl implements RedisService {

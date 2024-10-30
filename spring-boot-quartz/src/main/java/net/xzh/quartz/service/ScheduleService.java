@@ -6,7 +6,7 @@ import java.util.Date;
 
 /**
  * Quartz定时任务操作类
- * Created by macro on 2020/9/27.
+ * Created 2020/9/27.
  */
 public interface ScheduleService {
     /**

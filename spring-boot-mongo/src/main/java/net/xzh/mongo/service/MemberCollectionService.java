@@ -6,7 +6,7 @@ import net.xzh.mongo.domain.MemberProductCollection;
 
 /**
  * 会员收藏Service
- * Created by macro on 2018/8/2.
+ * Created 2018/8/2.
  */
 public interface MemberCollectionService {
     int add(MemberProductCollection productCollection);

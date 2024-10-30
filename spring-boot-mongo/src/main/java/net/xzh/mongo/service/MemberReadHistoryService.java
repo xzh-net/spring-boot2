@@ -8,7 +8,7 @@ import net.xzh.mongo.domain.MemberReadHistory;
 
 /**
  * 会员浏览记录管理Service
- * Created by macro on 2018/8/3.
+ * Created 2018/8/3.
  */
 public interface MemberReadHistoryService {
     /**

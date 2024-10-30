@@ -10,7 +10,7 @@ import net.xzh.gen.dto.RoleStatDto;
 import net.xzh.gen.model.UmsAdmin;
 
 /**
- * Created by macro on 2020/12/9.
+ * Created 2020/12/9.
  */
 public interface UmsAdminDao {
 

@@ -34,7 +34,7 @@ import net.xzh.jwt.domain.PayloadDto;
 import net.xzh.jwt.service.JwtTokenService;
 
 /**
- * Created by macro on 2020/6/22.
+ * Created 2020/6/22.
  */
 @Service
 public class JwtTokenServiceImpl implements JwtTokenService {

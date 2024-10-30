@@ -24,7 +24,7 @@ import net.xzh.gen.service.UmsAdminService;
 
 /**
  * 后台用户管理Controller
- * Created by macro on 2020/12/8.
+ * Created 2020/12/8.
  */
 @Api(tags = "后台用户管理")
 @RestController

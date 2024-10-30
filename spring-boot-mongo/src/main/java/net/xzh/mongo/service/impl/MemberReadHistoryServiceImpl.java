@@ -20,7 +20,7 @@ import net.xzh.mongo.service.MemberReadHistoryService;
 
 /**
  * 会员浏览记录管理Service实现类
- * Created by macro on 2018/8/3.
+ * Created 2018/8/3.
  */
 @Service
 public class MemberReadHistoryServiceImpl implements MemberReadHistoryService {

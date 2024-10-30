@@ -9,7 +9,7 @@ import net.xzh.gen.model.UmsAdmin;
 
 /**
  * 后台用户管理Service
- * Created by macro on 2020/12/8.
+ * Created 2020/12/8.
  */
 public interface UmsAdminService {
     void create(UmsAdmin entity);

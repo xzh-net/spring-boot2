@@ -9,7 +9,7 @@ import net.xzh.elasticsearch.domain.EsProductRelatedInfo;
 
 /**
  * 商品搜索管理Service
- * Created by macro on 2018/6/19.
+ * Created 2018/6/19.
  */
 public interface EsProductService {
     /**

@@ -26,7 +26,7 @@ import net.xzh.jwt.model.UmsPermission;
 import net.xzh.jwt.service.UmsAdminService;
 
 /**
- * UmsAdminService实现类 Created by macro on 2018/4/26.
+ * UmsAdminService实现类 Created 2018/4/26.
  */
 @Service
 public class UmsAdminServiceImpl implements UmsAdminService {

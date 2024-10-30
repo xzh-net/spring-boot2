@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * 操作日志 Created by macro on 2018/4/26.
+ * 操作日志 Created 2018/4/26.
  */
 @Setter
 @Getter

@@ -21,7 +21,7 @@ import net.xzh.elk.model.UmsAdmin;
 
 /**
  * 品牌管理Controller
- * Created by macro on 2019/4/19.
+ * Created 2019/4/19.
  */
 @Api(tags = "日志测试")
 @Controller

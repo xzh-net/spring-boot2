@@ -16,7 +16,7 @@ import net.xzh.redis.service.PmsBrandService;
 
 /**
  * PmsBrandService实现类
- * Created by macro on 2019/4/19.
+ * Created 2019/4/19.
  */
 @Service
 public class PmsBrandServiceImpl implements PmsBrandService {

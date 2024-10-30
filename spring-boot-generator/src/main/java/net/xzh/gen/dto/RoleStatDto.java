@@ -1,7 +1,7 @@
 package net.xzh.gen.dto;
 
 /**
- * Created by macro on 2020/12/9.
+ * Created 2020/12/9.
  */
 public class RoleStatDto {
     private Long roleId;

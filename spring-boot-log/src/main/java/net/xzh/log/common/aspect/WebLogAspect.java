@@ -38,7 +38,7 @@ import net.xzh.log.common.utils.AddrUtil;
 
 /**
  * 操作日志切面
- * Created by macro on 2018/4/26.
+ * Created 2018/4/26.
  */
 @Aspect
 @Component

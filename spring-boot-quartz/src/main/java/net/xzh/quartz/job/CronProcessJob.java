@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * 使用CRON表达式的任务执行器
- * Created by macro on 2020/9/29.
+ * Created 2020/9/29.
  */
 @Component
 public class CronProcessJob extends QuartzJobBean {

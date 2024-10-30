@@ -30,7 +30,7 @@ import net.xzh.jwt.service.UmsAdminService;
 
 /**
  * SpringSecurity的配置
- * Created by macro on 2018/4/26.
+ * Created 2018/4/26.
  */
 @Configuration
 @EnableWebSecurity
