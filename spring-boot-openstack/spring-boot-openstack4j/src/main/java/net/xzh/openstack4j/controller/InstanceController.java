@@ -52,6 +52,12 @@ public class InstanceController extends BaseController {
 	public CommonResult<?> instanceDetail(@PathVariable String id) {
 		return CommonResult.success(OSClient().compute().servers().get(id));
 	}
+	
+	@ApiOperation("获取vnc地址")
+	@RequestMapping(value = "/vncConsole/{id}", method = RequestMethod.GET)
+	public CommonResult<?> vncConsole(@PathVariable String id) {
+		return CommonResult.success(OSClient().compute().servers().getVNCConsole(id, null));
+	}
 
 	@ApiOperation("删除实例")
 	@RequestMapping(value = "/instance/{id}", method = RequestMethod.DELETE)
