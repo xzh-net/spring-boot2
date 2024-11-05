@@ -20,10 +20,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class BaseController {
 
 	public static OSClientV3 OSClient() {
-		String endpoint = "http://172.17.19.30:5000/v3";
-		String userName = "xuchaoguo";
+		String endpoint = "http://172.17.19.40:5000/v3";
+		String userName = "admin";
 		String password = "000000";
-		String tenantId = "1a12c595513d4127ab5426381f14a2a1";//项目ID
+		String tenantId = "0f86252d01d246f4bc8330dfb0d81bc9";//项目ID
 		String domainId = "default";
 		OSClientV3 os = OSFactory.builderV3()
 				.endpoint(endpoint)
@@ -34,10 +34,10 @@ public class BaseController {
 	}
 	
 	public static void main(String[] args) {
-		String endpoint = "http://172.17.19.30:5000/v3";
+		String endpoint = "http://172.17.19.40:5000/v3";
 		String userName = "admin";
 		String password = "000000";
-		String tenantId = "7c07b1aa250949b1bd8e60c47bc6092c";//项目ID
+		String tenantId = "0f86252d01d246f4bc8330dfb0d81bc9";//项目ID
 		String domainId = "default";
 		OSClientV3 os = OSFactory.builderV3()
 		        .endpoint(endpoint)
