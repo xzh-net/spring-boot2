@@ -3,13 +3,6 @@
 访问地址：http://127.0.0.1:8080/doc.html
 
 ```bash
-<parent>
-	<groupId>org.springframework.boot</groupId>
-	<artifactId>spring-boot-starter-parent</artifactId>
-	<version>2.7.0</version>
-	<relativePath />
-</parent>
-	
 mvn clean compile
 mvn clean package
 ```
