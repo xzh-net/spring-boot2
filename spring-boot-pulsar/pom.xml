@@ -7,6 +7,14 @@
 	<description>spring-boot-pulsar</description>
 	<packaging>jar</packaging>
 
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<!-- <version>2.3.0.RELEASE</version> -->
+		<version>2.4.5</version>
+		<relativePath />
+	</parent>
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -14,12 +22,6 @@
 		<skipTests>true</skipTests>
 	</properties>
 
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.4.5</version>
-		<relativePath />
-	</parent>
 	<dependencies>
 		<!--SpringBoot通用依赖模块 -->
 		<dependency>
@@ -39,13 +41,13 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<!--SpringBoot整合Pulsar-->
-        <dependency>
-            <groupId>io.github.majusko</groupId>
-            <artifactId>pulsar-java-spring-boot-starter</artifactId>
-            <version>1.1.1</version>
-        </dependency>
-        <!--整合Knife4j -->
+		<!--SpringBoot整合Pulsar -->
+		<dependency>
+			<groupId>io.github.majusko</groupId>
+			<artifactId>pulsar-java-spring-boot-starter</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+		<!--整合Knife4j -->
 		<dependency>
 			<groupId>com.github.xiaoymin</groupId>
 			<artifactId>knife4j-spring-boot-starter</artifactId>
