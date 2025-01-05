@@ -9,7 +9,6 @@ import net.xzh.mall.tiny.modules.ums.mapper.UmsMenuMapper;
 import net.xzh.mall.tiny.modules.ums.mapper.UmsResourceMapper;
 import net.xzh.mall.tiny.modules.ums.mapper.UmsRoleMapper;
 import net.xzh.mall.tiny.modules.ums.model.*;
-import net.xzh.mall.tiny.modules.ums.model.*;
 import net.xzh.mall.tiny.modules.ums.service.UmsAdminCacheService;
 import net.xzh.mall.tiny.modules.ums.service.UmsRoleMenuRelationService;
 import net.xzh.mall.tiny.modules.ums.service.UmsRoleResourceRelationService;
@@ -23,7 +22,6 @@ import java.util.List;
 
 /**
  * 后台角色管理Service实现类
- * Created by macro on 2018/9/30.
  */
 @Service
 public class UmsRoleServiceImpl extends ServiceImpl<UmsRoleMapper, UmsRole>implements UmsRoleService {

@@ -2,7 +2,6 @@ package net.xzh.mall.tiny.security.config;
 
 import net.xzh.mall.tiny.security.component.*;
 import net.xzh.mall.tiny.security.util.JwtTokenUtil;
-import net.xzh.mall.tiny.security.component.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.context.annotation.Bean;
@@ -21,7 +20,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 /**
  * 对SpringSecurity的配置的扩展，支持自定义白名单资源路径和查询用户逻辑
- * Created by macro on 2019/11/5.
  */
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 

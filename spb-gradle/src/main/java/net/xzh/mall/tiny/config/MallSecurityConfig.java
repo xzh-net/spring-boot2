@@ -19,7 +19,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * mall-security模块相关配置
- * Created by macro on 2019/11/9.
  */
 @Configuration
 @EnableWebSecurity
