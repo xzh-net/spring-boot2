@@ -142,7 +142,6 @@ resources
 ```java
 /**
  * 后台菜单管理Service实现类
- * Created by macro on 2020/2/2.
  */
 @Service
 public class UmsMenuServiceImpl extends ServiceImpl<UmsMenuMapper,UmsMenu>implements UmsMenuService {
@@ -196,7 +195,7 @@ public class UmsMenuServiceImpl extends ServiceImpl<UmsMenuMapper,UmsMenu>implem
 ```java
 /**
  * 后台菜单管理Service实现类
- * Created by macro on 2020/2/2.
+
  */
 @Service
 public class UmsMenuServiceImpl extends ServiceImpl<UmsMenuMapper,UmsMenu>implements UmsMenuService {
@@ -223,8 +222,6 @@ public class UmsMenuServiceImpl extends ServiceImpl<UmsMenuMapper,UmsMenu>implem
  * 后台菜单表 Mapper 接口
  * </p>
  *
- * @author macro
- * @since 2020-08-21
  */
 public interface UmsMenuMapper extends BaseMapper<UmsMenu> {
 
@@ -298,7 +295,6 @@ mall-tiny已经集成了Docker插件，可以打包成Docker镜像来部署，�
 ```java
 /**
  * 用户登录参数
- * Created by macro on 2018/4/26.
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -317,7 +313,7 @@ public class UmsAdminLoginParam {
 ```java
 /**
  * 后台用户管理
- * Created by macro on 2018/4/26.
+
  */
 @Controller
 @Api(tags = "UmsAdminController", description = "后台用户管理")
