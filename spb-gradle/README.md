@@ -1,8 +1,20 @@
-# 基于SpringBoot+MyBatis-Plus的快速开发脚手架
+# mall-tiny
+
+<p>
+<a href="#公众号"><img src="http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/badge/%E5%85%AC%E4%BC%97%E5%8F%B7-macrozheng-blue.svg" alt="公众号"></a>
+<a href="https://github.com/macrozheng/mall"><img src="http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/badge/%E5%90%8E%E5%8F%B0%E9%A1%B9%E7%9B%AE-mall-blue.svg" alt="后台项目"></a>
+<a href="https://github.com/macrozheng/mall-admin-web"><img src="http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/badge/%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE-mall--admin--web-green.svg" alt="前端项目"></a>
+</p>
+
+## 简介
+
+mall-tiny是一款基于SpringBoot+MyBatis-Plus的快速开发脚手架，拥有完整的权限管理功能，可对接Vue前端，开箱即用。
 
 ## 项目演示
 
-![](doc/assets/mall_tiny_start_09.png)
+mall-tiny项目可无缝对接`mall-admin-web`前端项目，秒变权限管理系统。前端项目地址：https://github.com/macrozheng/mall-admin-web
+
+![](images/mall_tiny_start_09.png)
 
 ## 技术选型
 
@@ -22,17 +34,17 @@
 
 ## 数据库表结构
 
-![](doc/assets/mall_tiny_start_01.png)
+![](images/mall_tiny_start_01.png)
 
 - 化繁为简，仅保留了权限管理功能相关的9张表，方便自由定制；
 
-- 数据库源文件地址：/doc/sql/mall_tiny.sql
+- 数据库源文件地址：https://github.com/macrozheng/mall-tiny/blob/master/sql/mall_tiny.sql
 
 ## 使用流程
 
 ### 环境搭建
 
-简化依赖服务，只需安装最常用的MySql和Redis服务即可，数据库中需要导入`mall_tiny.sql`脚本。
+简化依赖服务，只需安装最常用的MySql和Redis服务即可，服务安装具体参考[mall在Windows环境下的部署](https://mp.weixin.qq.com/s/Q9ybpfq8IEdbZmvlaMXJdg)，数据库中需要导入`mall_tiny.sql`脚本。
 
 ### 开发规约
 
@@ -57,6 +69,8 @@ src
 |       ├── model -- 该模块相关实体类
 |       └── service -- 该模块相关业务处理类
 └── security -- SpringSecurity认证授权相关代码
+    ├── annotation -- 相关注解
+    ├── aspect -- 相关切面
     ├── component -- 认证授权相关组件
     ├── config -- 相关配置
     └── util -- 相关工具类
@@ -85,9 +99,9 @@ resources
 
 - 获取指定记录详情：GET /{控制器路由名称}/{id}
 
-- 具体参数及返回结果定义可以运行代码查看Swagger-UI的Api文档：http://localhost:8080/swagger-ui/
+- 具体参数及返回结果定义可以运行代码查看Swagger-UI的Api文档：http://localhost:8080/swagger-ui.html
 
-![](doc/assets/mall_tiny_start_02.png)
+![](images/mall_tiny_start_02.png)
 
 ### 项目运行
 
@@ -99,7 +113,7 @@ resources
 
 > 创建好`pms`模块的所有表，需要注意的是一定要写好表字段的`注释`，这样实体类和接口文档中就会自动生成字段说明了。
 
-![](doc/assets/mall_tiny_start_03.png)
+![](images/mall_tiny_start_03.png)
 
 #### 使用代码生成器
 
@@ -107,15 +121,15 @@ resources
 
 - 代码生成器支持两种模式，一种生成单表的代码，比如只生成`pms_brand`表代码可以先输入`pms`，后输入`pms_brand`；
 
-![](doc/assets/mall_tiny_start_04.png)
+![](images/mall_tiny_start_04.png)
 
 - 生成代码结构一览；
 
-![](doc/assets/mall_tiny_start_05.png)
+![](images/mall_tiny_start_05.png)
 
 - 另一种直接生成整个模块的代码，比如生成`pms`模块代码可以先输入`pms`，后输入`pms_*`。
 
-![](doc/assets/mall_tiny_start_06.png)
+![](images/mall_tiny_start_06.png)
 
 #### 编写业务代码
 
@@ -128,6 +142,7 @@ resources
 ```java
 /**
  * 后台菜单管理Service实现类
+ * Created by macro on 2020/2/2.
  */
 @Service
 public class UmsMenuServiceImpl extends ServiceImpl<UmsMenuMapper,UmsMenu>implements UmsMenuService {
@@ -181,6 +196,7 @@ public class UmsMenuServiceImpl extends ServiceImpl<UmsMenuMapper,UmsMenu>implem
 ```java
 /**
  * 后台菜单管理Service实现类
+ * Created by macro on 2020/2/2.
  */
 @Service
 public class UmsMenuServiceImpl extends ServiceImpl<UmsMenuMapper,UmsMenu>implements UmsMenuService {
@@ -207,7 +223,8 @@ public class UmsMenuServiceImpl extends ServiceImpl<UmsMenuMapper,UmsMenu>implem
  * 后台菜单表 Mapper 接口
  * </p>
  *
- * @author CR7
+ * @author macro
+ * @since 2020-08-21
  */
 public interface UmsMenuMapper extends BaseMapper<UmsMenu> {
 
@@ -254,7 +271,7 @@ public interface UmsMenuMapper extends BaseMapper<UmsMenu> {
 
 ### 项目部署
 
-使用gradle构建
+mall-tiny已经集成了Docker插件，可以打包成Docker镜像来部署，具体参考：[使用Maven插件为SpringBoot应用构建Docker镜像](https://mp.weixin.qq.com/s/q2KDzHbPkf3Q0EY8qYjYgw)
 
 ### 其他说明
 
@@ -262,15 +279,15 @@ public interface UmsMenuMapper extends BaseMapper<UmsMenu> {
 
 > 由于使用了SpringSecurity来实现认证和授权，部分接口需要token才可以访问，访问需要认证授权接口流程如下。
 
-- 访问Swagger-UI接口文档：http://localhost:8080/swagger-ui/
+- 访问Swagger-UI接口文档：http://localhost:8080/swagger-ui.html
 
 - 调用登录接口获取token；
 
-![](doc/assets/mall_tiny_start_07.png)
+![](images/mall_tiny_start_07.png)
 
 - 点击右上角Authorize按钮输入token，然后访问相关接口即可。
 
-![](doc/assets/mall_tiny_start_08.png)
+![](images/mall_tiny_start_08.png)
 
 #### 请求参数校验
 
@@ -281,7 +298,7 @@ public interface UmsMenuMapper extends BaseMapper<UmsMenu> {
 ```java
 /**
  * 用户登录参数
- * Created by CR7
+ * Created by macro on 2018/4/26.
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -300,7 +317,7 @@ public class UmsAdminLoginParam {
 ```java
 /**
  * 后台用户管理
- * Created by CR7
+ * Created by macro on 2018/4/26.
  */
 @Controller
 @Api(tags = "UmsAdminController", description = "后台用户管理")
@@ -322,3 +339,17 @@ public class UmsAdminController {
     }
 }
 ```
+
+## 公众号
+
+mall项目全套学习教程连载中，关注公众号「**macrozheng**」第一时间获取。
+
+加微信群交流，公众号后台回复「**加群**」即可。
+
+![公众号图片](http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/banner/qrcode_for_macrozheng_258.jpg)
+
+## 许可证
+
+[Apache License 2.0](https://github.com/macrozheng/mall-tiny/blob/master/LICENSE)
+
+Copyright (c) 2018-2020 macrozheng

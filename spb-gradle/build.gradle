@@ -6,17 +6,12 @@ plugins {
     id 'com.bmuschko.docker-spring-boot-application' version '6.7.0'
 }
 
-group = 'net.xzh.gradle'
+group = 'com.macro.mall.tiny'
 version = '1.0.0-SNAPSHOT'
 sourceCompatibility = '1.8'
 
-// build.gradle (模块级)
 repositories {
-    // 配置阿里云私服
-    maven {
-        url "http://maven.aliyun.com/nexus/content/groups/public/"
-    }
-    // 从中央仓库下载依赖
+    maven { url 'https://maven.aliyun.com/repository/public' }
     mavenCentral()
 }
 
@@ -34,13 +29,12 @@ dependencies {
     implementation 'com.alibaba:druid-spring-boot-starter'
     implementation 'mysql:mysql-connector-java'
     implementation 'io.springfox:springfox-swagger2'
-    implementation 'io.springfox:springfox-gradle-ui'
-    implementation 'io.gradle:gradle-models'
-    implementation 'io.gradle:gradle-annotations'
+    implementation 'io.springfox:springfox-swagger-ui'
+    implementation 'io.swagger:swagger-models'
+    implementation 'io.swagger:swagger-annotations'
     implementation 'cn.hutool:hutool-all'
     implementation 'io.jsonwebtoken:jjwt'
     implementation 'com.baomidou:mybatis-plus-boot-starter'
-    implementation 'com.baomidou:mybatis-plus-generator'
     implementation 'org.apache.velocity:velocity-engine-core'
 }
 
@@ -49,9 +43,9 @@ dependencyManagement {
         dependency 'com.alibaba:druid-spring-boot-starter:1.1.10'
         dependency 'mysql:mysql-connector-java:8.0.16'
         dependency 'io.springfox:springfox-swagger2:2.9.2'
-        dependency 'io.springfox:springfox-gradle-ui:2.9.2'
-        dependency 'io.gradle:gradle-models:1.6.0'
-        dependency 'io.gradle:gradle-annotations:1.6.0'
+        dependency 'io.springfox:springfox-swagger-ui:2.9.2'
+        dependency 'io.swagger:swagger-models:1.6.0'
+        dependency 'io.swagger:swagger-annotations:1.6.0'
         dependency 'cn.hutool:hutool-all:4.5.7'
         dependency 'io.jsonwebtoken:jjwt:0.9.0'
         dependency 'com.baomidou:mybatis-plus-boot-starter:3.3.2'
@@ -61,16 +55,16 @@ dependencyManagement {
 }
 
 ext{
-    registryUrl='192.168.2.100:5000'
+    registryUrl='192.168.5.78:5000'
 }
 
 docker {
-    url = 'tcp://192.168.2.100:2375'
+    url = 'tcp://192.168.5.78:2375'
     springBootApplication {
         baseImage = 'java:8'
         maintainer = 'macrozheng'
         ports = [8080]
-        images = ["${registryUrl}/spb-gradle/${rootProject.name}:${version}"]
+        images = ["${registryUrl}/mall-tiny/${rootProject.name}:${version}"]
         jvmArgs = ['-Dspring.profiles.active=prod']
     }
 }

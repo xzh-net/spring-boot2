@@ -33,15 +33,15 @@ redis:
 secure:
   ignored:
     urls: #安全路径白名单
-      - /gradle-ui.html
-      - /gradle-resources/**
-      - /gradle/**
+      - /swagger-ui.html
+      - /swagger-resources/**
+      - /swagger/**
       - /**/v2/api-docs
       - /**/*.js
       - /**/*.css
       - /**/*.png
       - /**/*.ico
-      - /webjars/springfox-gradle-ui/**
+      - /webjars/springfox-swagger-ui/**
       - /actuator/**
       - /druid/**
       - /admin/login
