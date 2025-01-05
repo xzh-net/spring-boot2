@@ -6,7 +6,7 @@ plugins {
     id 'com.bmuschko.docker-spring-boot-application' version '6.7.0'
 }
 
-group = 'com.macro.mall.tiny'
+group = 'net.xzh.mall.tiny'
 version = '1.0.0-SNAPSHOT'
 sourceCompatibility = '1.8'
 
