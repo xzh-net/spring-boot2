@@ -1,4 +1,3 @@
-
 pluginManagement {
     repositories {
         maven {
@@ -6,5 +5,4 @@ pluginManagement {
         }
     }
 }
-
 rootProject.name = 'mall-tiny'
