@@ -67,4 +67,5 @@
 ## 7. 项目实战
 
 - [基于SpringBoot+MyBatis-Plus的快速开发脚手架](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-swagger)
+- [基于SpringBoot+MyBatis-Plus的快速开发脚手架Gradle](https://github.com/xzh-net/spring-boot/tree/main/spb-gradle)
 - [整合Activiti工作流，包含设计器和数据验证分组校验](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-activiti)
