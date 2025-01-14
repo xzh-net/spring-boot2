@@ -18,8 +18,8 @@ Jenkins API总共有三种格式，分别为：JSON API、XML API、Python API�
 
 ![](doc/assets/1.png)
 
-Manage Jenkins -> Script Console，脚本命令行输入`hudson.security.csrf.GlobalCrumbIssuerConfiguration.DISABLE_CSRF_PROTECTION = true
-`
+Manage Jenkins -> Script Console，脚本命令行输入`hudson.security.csrf.GlobalCrumbIssuerConfiguration.DISABLE_CSRF_PROTECTION = true`
+
 ![](doc/assets/2.png)
 
 ![](doc/assets/3.png)
