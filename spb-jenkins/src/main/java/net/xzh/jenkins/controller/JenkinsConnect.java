@@ -13,9 +13,9 @@ public class JenkinsConnect {
 	}
 
 	// 连接 Jenkins 需要设置的信息
-	private static String jenkinsUrl = "http://172.17.17.231:8080";
+	private static String jenkinsUrl = "http://192.168.2.100:8080";
 	private static String jenkinsUsername = "admin";
-	private static String jenkinsPassword = "18918727799";
+	private static String jenkinsPassword = "123456";
 	
 	/**
 	 * Http 客户端工具
