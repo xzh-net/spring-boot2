@@ -43,6 +43,7 @@
 - [集成FISCO BCOS合约编写和部署](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-fisco)
 - [集成GitLab API管理代码仓库](https://github.com/xzh-net/spring-boot/tree/main/spb-gitlab)
 - [集成Jenkins API实现流水线开发](https://github.com/xzh-net/spring-boot/tree/main/spb-jenkins)
+- [基于SonarQube的Web API实现代码质量和安全管理](https://github.com/xzh-net/spring-boot/tree/main/spb-sonar)
 - [集成Kubernetes API实现容器编排](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-k8s)
 - [集成OpenStack API管理主机和资源状态](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-openstack)
 - [集成Kettle处理数据](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-etl)
