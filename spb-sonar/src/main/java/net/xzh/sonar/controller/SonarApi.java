@@ -24,7 +24,7 @@ public class SonarApi {
 		sonarApi.measuresComponent(projectKey);
 		//问题
 		sonarApi.issuesSearch(projectKey);
-		//阈值
+		//质量阈
 		sonarApi.qualityGates(projectKey);
 		//重复度
 		sonarApi.duplications(projectKey);
