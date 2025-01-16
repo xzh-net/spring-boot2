@@ -13,67 +13,60 @@ public class SonarApi {
 	static String sonarqubeUrl = "http://172.17.17.136:9000";
 	static String projectKey = "test";
 	static String token = "8392a26df9d7714e95068703d61aa6fd2bc95cf1";
-	
+
 	SonarApi() {
 
 	}
 
 	public static void main(String[] args) {
 		SonarApi sonarApi = new SonarApi();
-		//指标
+		// 指标
 		sonarApi.measuresComponent(projectKey);
-		//问题
-		sonarApi.issuesSearch(projectKey);
-		//质量阈
-		sonarApi.qualityGates(projectKey);
-		//重复度
-		sonarApi.duplications(projectKey);
+		// 问题
+//		sonarApi.issuesSearch(projectKey);
+//		// 质量阈
+//		sonarApi.qualityGates(projectKey);
+//		// 重复度
+//		sonarApi.duplications(projectKey);
 	}
 
-	
 	/**
 	 * 获取度量指标
-	 * bugs
-	 * vulnerabilities 漏洞
-	 * code_smells 异味 
-	 * coverage 覆盖率 
-	 * lines_to_cover 代码行数
-	 * duplicated_lines_density 重复密度
-	 * complexity 圈复杂度
-	 * ncloc 代码行数
+	 * 见README.md指标明细说明
 	 * @param projectKey
 	 */
 
 	public void measuresComponent(String projectKey) {
 		String apiEndpoint = sonarqubeUrl + "/api/measures/component";
 		String url = apiEndpoint + "?component=" + projectKey
-				+ "&metricKeys=bugs,vulnerabilities,code_smells,coverage&login=" + token;
+				+ "&metricKeys=bugs,vulnerabilities,code_smells,coverage,duplicated_lines_density&login=" + token;
 		RemoteApi(url);
 	}
-	
+
 	/**
 	 * 重复度
+	 * 
 	 * @param projectKey
 	 */
-	
+
 	public void duplications(String projectKey) {
 		String apiEndpoint = sonarqubeUrl + "/api/duplications/show";
 		String url = apiEndpoint + "?key=" + projectKey + "&login=" + token;
 		RemoteApi(url);
 	}
-	
-	
+
 	/**
 	 * 获取质量阈
+	 * 
 	 * @param projectKey
 	 */
-	
+
 	public void qualityGates(String projectKey) {
 		String apiEndpoint = sonarqubeUrl + "/api/qualitygates/project_status";
 		String url = apiEndpoint + "?projectKey=" + projectKey + "&login=" + token;
 		RemoteApi(url);
 	}
-	
+
 	/**
 	 * 检索问题列表
 	 */
@@ -82,7 +75,7 @@ public class SonarApi {
 		String url = apiEndpoint + "?componentKeys=" + projectKey + "&login=" + token;
 		RemoteApi(url);
 	}
-	
+
 	/**
 	 * 公用调用
 	 * 
