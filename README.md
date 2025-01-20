@@ -58,7 +58,7 @@
 - [基于Emqx为客户端实现自定义登录授权](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-emqx)
 - [基于Elasticsearch技术栈实现统一日志收集](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-elk)
 - [API版本控制](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-api-version)
-- [使用Maven插件构建Docker镜像,并推送到Harbor仓库](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-harbor)
+- [使用Maven插件构建Docker镜像,并推送到Harbor仓库](https://github.com/xzh-net/spring-boot/tree/main/spb-harbor)
 - [基于html5的WebSocket单机示例](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-websocket)
 - [WebSocket增强利器SockJS](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-sockjs)
 - [WebSocket增强利器SockJS（集群版）](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-sockjs-redis)
