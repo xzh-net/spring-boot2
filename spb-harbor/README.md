@@ -7,7 +7,7 @@
 
 新建项目
 
-![](doc/assets/harbor.png)
+![](doc/assets/1.png)
 
 
 ### 1.2 Docker配置
@@ -65,6 +65,10 @@ docker run -dit -p 8080:8080 --name spring-boot-harbor 192.168.2.100:88/ec_platf
 
 ## 3. Harbor Api
 
+完整API通过控制台左下角链接点击查看
+
+![](doc/assets/2.png)
+
 查询用户信息
 ```bash
 curl -u "admin:Harbor12345" -X 'GET' \
@@ -73,10 +77,23 @@ curl -u "admin:Harbor12345" -X 'GET' \
 ```
 
 
-查询项目仓库信息
+查询项目下所有仓库列表
 ```bash
 curl -u "admin:Harbor12345" -X 'GET' \
   'http://172.17.17.37/api/v2.0/projects/vjspcloud/repositories?page=1&page_size=10' \
   -H 'accept: application/json'
 ```
 
+查询项目下具体一个仓库的汇总信息：推送次数、产品数量、最后更新时间
+```bash
+curl -u "admin:Harbor12345" -X 'GET' \
+  'http://172.17.17.37/api/v2.0/projects/vjspcloud/repositories/code-server' \
+  -H 'accept: application/json'
+```
+
+查询项目下具体一个仓库的所有标签
+```bash
+curl -u "admin:Harbor12345" -X 'GET' \
+  'http://172.17.17.37/api/v2.0/projects/vjspcloud/repositories/code-server/artifacts' \
+  -H 'accept: application/json'
+```
