@@ -63,7 +63,7 @@ docker run -dit -p 8080:8080 --name spring-boot-harbor 192.168.2.100:88/ec_platf
 
 
 
-## 2. Harbor Api
+## 3. Harbor Api
 
 查询用户信息
 ```bash
