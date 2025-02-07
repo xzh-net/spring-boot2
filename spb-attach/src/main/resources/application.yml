@@ -5,7 +5,7 @@ spring:
   application:
     name: xzh-oss
   datasource:
-    url: jdbc:mysql://172.17.17.137:3306/file_center?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://127.0.0.1:3306/file_center?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
     username: root
     password: root
    
@@ -22,7 +22,7 @@ xzh:
     s3:
       access-key: minioadmin
       accessKeySecret: minioadmin
-      endpoint: http://172.17.17.194:9009
-      bucketName: ios
+      endpoint: http://xuzhihao:9000
+      bucketName: test
 fdfs: 
-   trackerList: 172.17.17.137:22122
+   trackerList: xuzhihao:22122
