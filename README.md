@@ -9,7 +9,7 @@
 ## 2. 官方Starter
 
 - [Spring Security安全访问权限框架如何与国密算法整合](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-security)
-- [Spring Boot配置Email发送功能](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-email)
+- [Spring Boot配置Email发送功能](https://github.com/xzh-net/spring-boot/tree/main/spb-email)
 - [整合Quartz作业调度框架](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-quartz)
 - [整合Validation完成数据校验全局异常拦截处理](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-validation)
 - [整合ActiveMQ基于JSM规范进行消息发送和订阅](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-jms)
