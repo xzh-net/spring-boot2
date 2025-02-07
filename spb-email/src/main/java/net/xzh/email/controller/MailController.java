@@ -42,19 +42,16 @@ public class MailController {
 
 	@Autowired
 	TemplateEngine templateEngine;
-
 	@Value("${spring.mail.fromAddr}")
 	private String from;
-
 	@Value("${spring.mail.nickName}")
 	private String nickName;
-
 	private String to = "xcg992224@163.com";
 
 	
 	@ApiOperation("文本邮件")
-	@RequestMapping(value = "/sendTextMail", method = RequestMethod.GET)
-	public CommonResult sendTextMail() {
+	@RequestMapping(value = "/sendTextMail", method = RequestMethod.POST)
+	public CommonResult<?> sendTextMail() {
 		SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
 		simpleMailMessage.setFrom(nickName + "<" + from + ">");
 		simpleMailMessage.setTo(to);
@@ -71,8 +68,8 @@ public class MailController {
 
 	
 	@ApiOperation("html邮件")
-	@RequestMapping(value = "/sendHtmlEmail", method = RequestMethod.GET)
-	public CommonResult sendHtmlEmail() {
+	@RequestMapping(value = "/sendHtmlEmail", method = RequestMethod.POST)
+	public CommonResult<?> sendHtmlEmail() {
 		MimeMessage message = javaMailSender.createMimeMessage();
 		try {
 			MimeMessageHelper messageHelper = new MimeMessageHelper(message, true);
@@ -91,8 +88,8 @@ public class MailController {
 	}
 
 	@ApiOperation("html模板邮件")
-	@RequestMapping(value = "/sendHtmlemplateMail", method = RequestMethod.GET)
-	public CommonResult sendHtmlemplateMail() {
+	@RequestMapping(value = "/sendHtmlemplateMail", method = RequestMethod.POST)
+	public CommonResult<?> sendHtmlemplateMail() {
 		Context context = new Context();
 		context.setVariable("code", "123456");
 		String emailHTMLContent = templateEngine.process("email", context);
@@ -114,8 +111,8 @@ public class MailController {
 	}
 
 	@ApiOperation("附件邮件")
-	@RequestMapping(value = "/sendAttachmentsMail", method = RequestMethod.GET)
-	public CommonResult sendAttachmentsMail() {
+	@RequestMapping(value = "/sendAttachmentsMail", method = RequestMethod.POST)
+	public CommonResult<?> sendAttachmentsMail() {
 		String fileName = "图片.jpg";
 		String filePath = "D:\\aa.jpg";
 		MimeMessage message = javaMailSender.createMimeMessage();

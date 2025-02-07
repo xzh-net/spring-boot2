@@ -11,9 +11,9 @@ spring:
       templateEncoding: UTF-8
       templateLoaderPath: classpath:/templates/
    mail:
-      host: smtp.qq.com
-      username: 307587787
-      password: abspkbdvydjgbjdc
+      host: smtp.163.com
+      username: xcg992224
+      password: 我是授权码
       default-encoding: UTF-8
-      fromAddr: 307587787@qq.com
+      fromAddr: xcg992224@163.com
       nickName: young
