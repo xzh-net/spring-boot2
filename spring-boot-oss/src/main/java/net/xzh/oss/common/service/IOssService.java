@@ -8,7 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 import net.xzh.oss.common.model.ObjectInfo;
 
 /**
- * @author zlt
+ * @author xzh
  * @date 2021/2/9
  * <p>
  */
