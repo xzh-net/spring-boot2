@@ -1,2 +1,0 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-net.xzh.oss.common.config.OssAutoConfigure

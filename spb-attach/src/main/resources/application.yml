@@ -1,0 +1,28 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: xzh-oss
+  datasource:
+    url: jdbc:mysql://172.17.17.137:3306/file_center?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+   
+logging:
+  level:
+    root: info
+    net.xzh: debug
+    
+xzh:
+  file-server:
+    type: fdfs
+    fdfs:
+      web-url: http://xuzhihao
+    s3:
+      access-key: minioadmin
+      accessKeySecret: minioadmin
+      endpoint: http://172.17.17.194:9009
+      bucketName: ios
+fdfs: 
+   trackerList: 172.17.17.137:22122
