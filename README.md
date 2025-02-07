@@ -36,7 +36,7 @@
 ## 4. 三方SDK
 
 - [搞懂JWT、JWS、JWE之间的关系](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-jwt)
-- [集成分布式文件存储实现文件上传下载](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-oss)
+- [集成分布式文件存储实现文件上传下载](https://github.com/xzh-net/spring-boot/tree/main/spb-attach)
 - [集成Hbase操作实现表的增删改查](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-hbase)
 - [集成Hadoop实现文件上传](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-hdfs)
 - [集成Kafka实现消息通知和接收](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-kafka)
