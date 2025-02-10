@@ -66,6 +66,7 @@
 - [公众号和企业微信开发实战](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-wechat)
 - [Mybatis代码生成器](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-generator)
 - [Jsoup解析HTML实现游戏Rom下载](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-winkawaks)
+- [集成Collabora Online实现在线文档编辑](https://github.com/xzh-net/spring-boot/tree/main/spb-wopi)
 
 ## 7. 项目实战
 
