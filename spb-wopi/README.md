@@ -20,39 +20,14 @@ docker pull collabora/code:latest
 ### 1.2 启动镜像
 
 ```bash
-docker run -dit --name "collabora" \
--p 0.0.0.0:9980:9980 \
--e "username=admin" \
--e "password=123456" \
---cap-add MKNOD \
---privileged \
-collabora/code:latest
+docker run -dit --name collabora -p 9980:9980 -e "extra_params=--o:ssl.enable=false" -e "username=admin" -e "password=123456" --cap-add MKNOD collabora/code
 ```
 
-> --privileged 是让当前容器的用户即使不是 root，也可以执行任何需要root权限的操作。
+### 1.3 访问地址
 
-### 1.3 设置http访问
-
-coolwsd.xml 是Collabora Online的配置文件，它控制着Collabora Online服务中是否启用TSL/SSL 加密、字体资源位置、对特定IP或域名的访问控制等各种参数的设置。
-
-```bash
-docker exec -it -u root collabora /bin/bash
-apt-get update
-apt-get install vim -y
-
-vim /etc/coolwsd/coolwsd.xml
-<ssl desc="SSL settings">
-<enable type="bool" desc="xxx." default="true">false</enable>
-
-# 重启
-docker restart collabora
-```
-
-### 1.4 访问地址
-
-- 管理地址：https://172.17.17.160:9980/browser/dist/admin/admin.html
-- 配置参数：https://172.17.17.160:9980/hosting/discovery
-- 编辑地址：https://172.17.17.160:9980/browser/30822a710f/cool.html?WOPISrc=http://192.168.1.195:8080/wopi/files/92&lang=zh-CN&access_token=123
+- 管理地址：http://172.17.17.160:9980/browser/dist/admin/admin.html
+- 配置参数：http://172.17.17.160:9980/hosting/discovery
+- 编辑地址：http://172.17.17.160:9980/browser/30822a710f/cool.html?WOPISrc=http://172.17.17.160:8080/wopi/files/test.doc&lang=zh-CN&access_token=123
 
 在线编辑地址后面的 `WOPISrc` 要拼接 WOPI 服务地址的。通过cool.html访问时，后面传输的任何参数，例如 `access_token` 都会被转发到对应的 WOPI 服务的请求上，用于鉴权等操作。
 
