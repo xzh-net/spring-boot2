@@ -24,6 +24,11 @@
 
 按照项目编号或者项目路径，查询仓库成员代码修改量
 
+```bash
+# git客户端进入项目文件夹，统计特定时间段内，由指定作者所做的代码更改的统计数据
+git log --since='2024-11-14 09:00:00' --until='2024-11-14 23:59:59'  --author="xzh"  --pretty=tformat: --numstat | awk '{ add += $1; subs += $2; loc += $1 - $2 } END { printf "增加数: %s, 删除的行数: %s, 净增加行数: %s\n", add, subs, loc }'
+```
+
 
 ## 更多API查看源码
 
