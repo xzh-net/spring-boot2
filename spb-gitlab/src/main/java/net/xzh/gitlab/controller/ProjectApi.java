@@ -40,15 +40,15 @@ public class ProjectApi {
 	/**
 	 * GitLab登录地址
 	 */
-	public static final String GITLAB_REMOTE_URL = "http://git.vjspnet.cn/";
+	public static final String GITLAB_REMOTE_URL = "http://127.0.0.1:8080/";
 	/**
 	 * gitLab登录账号
 	 */
-	public static final String GITLAB_REMOTE_USERNAME = "xxxx";
+	public static final String GITLAB_REMOTE_USERNAME = "root";
 	/**
 	 * GitLab登录密码
 	 */
-	public static final String GITLAB_REMOTE_PWD = "xxxx";
+	public static final String GITLAB_REMOTE_PWD = "123456";
 
 	private GitLabApi gitLabApi;
 
