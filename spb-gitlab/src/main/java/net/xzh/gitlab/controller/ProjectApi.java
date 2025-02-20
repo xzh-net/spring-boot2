@@ -44,11 +44,11 @@ public class ProjectApi {
 	/**
 	 * gitLab登录账号
 	 */
-	public static final String GITLAB_REMOTE_USERNAME = "13998417419";
+	public static final String GITLAB_REMOTE_USERNAME = "xxxx";
 	/**
 	 * GitLab登录密码
 	 */
-	public static final String GITLAB_REMOTE_PWD = "13998417419";
+	public static final String GITLAB_REMOTE_PWD = "xxxx";
 
 	private GitLabApi gitLabApi;
 
