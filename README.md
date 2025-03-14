@@ -1,4 +1,4 @@
-# Spring Boot 2.x 整合
+# Spring Boot 2.x
 
 ## 1. 基础功能
 
