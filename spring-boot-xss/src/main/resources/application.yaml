@@ -1,0 +1,9 @@
+server:
+   port: 8080
+
+xss:
+  enabled: true
+  #  Exclude links (separate multiple links with commas)
+  excludes: /ui/*
+  #  match links (separate multiple links with commas)
+  urlPatterns: /api/*,/admin/*
