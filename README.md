@@ -67,8 +67,9 @@
 - [Mybatis代码生成器](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-generator)
 - [Jsoup解析HTML实现游戏Rom下载](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-winkawaks)
 - [集成Collabora Online实现在线文档编辑](https://github.com/xzh-net/spring-boot/tree/main/spb-wopi)
+- [Filter实现XSS防御](https://github.com/xzh-net/spring-boot/tree/main/spb-wopi)
 
-## 7. 项目实战
+## 6. 项目实战
 
 - [基于SpringBoot+MyBatis-Plus的快速开发脚手架](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-swagger)
 - [整合Activiti工作流，包含设计器和数据验证分组校验](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-activiti)
