@@ -1,6 +1,6 @@
 # GitLab Community Edition 13.7.4
 
-## 代码示例
+## API代码示例
 
 查询所有仓库
 
@@ -29,6 +29,15 @@
 git log --since='2024-11-14 09:00:00' --until='2024-11-14 23:59:59'  --author="xzh"  --pretty=tformat: --numstat | awk '{ add += $1; subs += $2; loc += $1 - $2 } END { printf "增加数: %s, 删除的行数: %s, 净增加行数: %s\n", add, subs, loc }'
 ```
 
+## 开启Webhook
+
+gitlab 10.6 版本以后为了安全，默认不允许向本地网络发送webhook请求，以管理员身份登录开启限制
+
+![](doc/assets/1.png)
+
+项目配置webhook请求地址
+
+![](doc/assets/2.png)
 
 ## 更多API查看源码
 
