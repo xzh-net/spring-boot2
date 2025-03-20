@@ -1,0 +1,10 @@
+server:
+   port: 8080
+
+sftp:
+  host: 172.17.17.160
+  port: 2222
+  username: xzh
+  password: 123456
+  remoteDir: /upload
+  localDir: D:\\tmp

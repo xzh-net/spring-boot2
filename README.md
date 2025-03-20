@@ -49,6 +49,7 @@
 - [集成Kettle处理数据](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-etl)
 - [基于Netty的聊天室项目及调用示例](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-netty)
 - [MQTT多种集成方式汇总](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-mqtt)
+- [SFTP文件同步](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-sftp)
 
 
 ## 5. 工具插件
