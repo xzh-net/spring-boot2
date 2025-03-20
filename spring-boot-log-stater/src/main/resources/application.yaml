@@ -5,7 +5,7 @@ spring:
   application:
     name: xzh-log
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/mall?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://172.17.17.137:3306/mall?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
     username: root
     password: root
    
@@ -20,6 +20,6 @@ xzh:
     log-type: db
     datasource: 
       driver-class-name: com.mysql.cj.jdbc.Driver
-      jdbc-url: jdbc:mysql://127.0.0.1:3306/logger-center?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false&zeroDateTimeBehavior=convertToNull&serverTimezone=Asia/Shanghai
+      jdbc-url: jdbc:mysql://172.17.17.137:3306/logger-center?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false&zeroDateTimeBehavior=convertToNull&serverTimezone=Asia/Shanghai
       username: root
       password: root
