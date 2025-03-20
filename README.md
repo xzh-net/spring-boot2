@@ -56,6 +56,7 @@
 
 > 不使用中间件技术，调试工具代码合辑
 
+- [PostgreSQL百万数据调优](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-pg-jmeter)
 - [基于Emqx为客户端实现自定义登录授权](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-emqx)
 - [基于Elasticsearch技术栈实现统一日志收集](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-elk)
 - [API版本控制](https://github.com/xzh-net/spring-boot/tree/main/spring-boot-api-version)
