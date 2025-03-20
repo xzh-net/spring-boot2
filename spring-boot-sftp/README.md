@@ -8,6 +8,10 @@ SFTP协议要求安全通道，如SSH，并在整个SFTP会话期间可见客户
 
 Spring Integration通过提供三个客户端端点：入站通道适配器、出站通道适配器和出站网关，来支持通过SFTP发送和接收文件。它还提供了方便的命名空间配置来定义这些客户端组件。
 
-
+```bash
+# 安装sftp
+docker run -p 2222:22 -d atmoz/sftp xzh:123456:::upload
+```
 
 参考文档：http://www.springdocs.cn/spring-integration/6.2.4/zh/sftp.html
+
