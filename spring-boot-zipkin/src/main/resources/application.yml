@@ -1,0 +1,10 @@
+server:
+    port:8080
+spring:
+    zipkin:
+        base-url: http://172.17.17.160:9411/
+        enabled: true
+    sleuth:
+        sampler:
+            probability: 1
+
