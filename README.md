@@ -32,7 +32,7 @@
 - [敏感数据的保护伞，基于Jasypt使用SM4加密配置文件](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-jasypt)
 - [Captcha行为验证码，包含滑动拼图、文字点选](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-captcha)
 - [【starter】日志拦截器](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-log-starter)
-- [【starter】分布式文件存储](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-oss-starter)
+- [【starter】分布式文件存储Minio和FastDFS](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-oss-starter)
 
 ## 4. 三方SDK
 
