@@ -3,7 +3,9 @@
 访问地址：http://127.0.0.1:8080/cms
 
 1. thymeleaf
-2. 国际化
+2. i18n
+3. 拦截器、请求白名单
+4. banner设置
 
 ```bash
 mvn clean compile
