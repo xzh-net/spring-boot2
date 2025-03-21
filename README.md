@@ -23,27 +23,16 @@
 ## 3. 三方Starter
 
 - [整合CXF发布WebService以及调用的方法](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-cxf)
-
 - [整合Dubbo调用示例](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-dubbo)
-
 - [整合Knife4j API文档生成工具](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-knife4j)
-
 - [整合Apache Pulsar云原生消息平台的王者](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-pulsar)
-
 - [整合RocketMQ进行消息发送和订阅](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-rocketmq)
-
 - [整合Shardingjdbc实现分库分表](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-sharding-jdbc)
-
 - [整合Druid数据库连接池监控Postgres压测和SQL调优](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-pg-jmeter)
-
 - [敏感数据的保护伞，基于Jasypt使用SM4加密配置文件](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-jasypt)
-
 - [Captcha行为验证码，包含滑动拼图、文字点选](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-captcha)
-
 - [Zipkin实现分布式全链路监控](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-zipkin)
-
 - [【自定义】日志拦截器](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-log-starter)
-
 - [【自定义】分布式文件存储Minio和FastDFS](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-oss-starter)
 
 ## 4. 三方SDK
