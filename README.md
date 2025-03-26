@@ -45,7 +45,6 @@
 - [集成FISCO BCOS合约编写和部署](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-fisco)
 - [集成GitLab API管理代码仓库](https://github.com/xzh-net/spring-boot2/tree/main/spb-gitlab)
 - [集成Jenkins API实现流水线开发](https://github.com/xzh-net/spring-boot2/tree/main/spb-jenkins)
-- [基于SonarQube的Web API实现代码质量和安全管理](https://github.com/xzh-net/spring-boot2/tree/main/spb-sonar)
 - [集成Kubernetes API实现容器编排](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-k8s)
 - [集成OpenStack API管理主机和资源状态](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-openstack)
 - [集成Kettle处理数据](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-etl)
@@ -58,18 +57,19 @@
 
 > 不使用中间件技术，调试工具代码合辑
 
-- [PostgreSQL百万数据调优](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-pg-jmeter)
+- [使用Maven插件构建Docker镜像,并推送到Harbor仓库](https://github.com/xzh-net/spring-boot2/tree/main/spb-harbor)
+- [基于SonarQube的Web API实现代码质量和安全管理](https://github.com/xzh-net/spring-boot2/tree/main/spb-sonar)
 - [基于Emqx为客户端实现自定义登录授权](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-emqx)
+- [集成Collabora Online实现在线文档编辑](https://github.com/xzh-net/spring-boot2/tree/main/spb-wopi)
+- [Mybatis代码生成器](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-generator)
+- [PostgreSQL百万数据调优](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-pg-jmeter)
 - [基于Elasticsearch技术栈实现统一日志收集](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-elk)
 - [API版本控制](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-api-version)
-- [使用Maven插件构建Docker镜像,并推送到Harbor仓库](https://github.com/xzh-net/spring-boot2/tree/main/spb-harbor)
 - [基于html5的WebSocket单机示例](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-websocket)
 - [WebSocket增强利器SockJS](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-sockjs)
 - [WebSocket增强利器SockJS（集群版）](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-sockjs-redis)
 - [ChatGPT流式传输SSE](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-sockjs-sse)
 - [公众号和企业微信开发实战](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-wechat)
-- [Mybatis代码生成器](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-generator)
-- [集成Collabora Online实现在线文档编辑](https://github.com/xzh-net/spring-boot2/tree/main/spb-wopi)
 - [Filter实现XSS防御](https://github.com/xzh-net/spring-boot2/tree/main/spb-wopi)
 
 ## 6. 项目实战
