@@ -12,7 +12,7 @@ import com.offbytwo.jenkins.model.ConsoleLog;
 import com.offbytwo.jenkins.model.JobWithDetails;
 
 /**
- * Job Build(任务构建) 相关操作
+ * Build(任务构建) 相关操作
  *
  * 例如对任务 Build 相关的信息进行获取操作、例如获取构建日志
  */
