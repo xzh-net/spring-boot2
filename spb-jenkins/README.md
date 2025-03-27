@@ -4,11 +4,13 @@ Jenkins API总共有三种格式，分别为：JSON API、XML API、Python API�
 
 > 以下使用的xml配置模版来自`http://172.17.17.231:8080/job/jobname/config.xml`，而不是`http://172.17.17.231:8080/job/jobname/api/xml`
 
-
 1. 视图操作
 2. 任务操作
-3. 编译操作
-4. 管理
+3. 构建编译操作
+4. 密钥管理
+5. 状态，插件，节点管理
+
+在SDK中 JenkinsServer是对JenkinsHttpClient某些功能的更高层次的封装，JenkinsServer依赖于JenkinsHttpClient。
 
 ## 常见问题
 
@@ -23,10 +25,3 @@ Manage Jenkins -> Script Console，脚本命令行输入`hudson.security.csrf.Gl
 ![](doc/assets/2.png)
 
 ![](doc/assets/3.png)
-
-## 编译构建
-
-```bash
-mvn clean compile
-mvn clean package
-```
