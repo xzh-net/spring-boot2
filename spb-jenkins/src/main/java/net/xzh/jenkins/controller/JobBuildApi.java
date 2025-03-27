@@ -21,7 +21,7 @@ public class JobBuildApi {
     private JenkinsServer jenkinsServer;
     
     JobBuildApi() {
-    	jenkinsServer = JenkinsConnect.connection();
+    	jenkinsServer = JenkinsConnect.getServer();
     }
 
     /**

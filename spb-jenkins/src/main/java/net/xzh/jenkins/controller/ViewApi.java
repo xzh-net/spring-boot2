@@ -17,8 +17,8 @@ public class ViewApi{
     private JenkinsHttpClient jenkinsHttpClient;
     
     ViewApi() {
-    	jenkinsServer = JenkinsConnect.connection();
-        jenkinsHttpClient = JenkinsConnect.getClient();
+    	jenkinsServer = JenkinsConnect.getServer();
+        jenkinsHttpClient = JenkinsConnect.getHttpClient();
     }
     
     public static void main(String[] args) {
