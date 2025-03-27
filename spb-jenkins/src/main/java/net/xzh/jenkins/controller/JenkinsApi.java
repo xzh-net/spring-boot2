@@ -22,7 +22,7 @@ public class JenkinsApi {
 	private JenkinsServer jenkinsServer;
     
 	JenkinsApi() {
-    	jenkinsServer = JenkinsConnect.connection();
+    	jenkinsServer = JenkinsConnect.getServer();
     }
 
     /**
@@ -44,7 +44,6 @@ public class JenkinsApi {
                 LoadStatistics loadStatistics = computer.details().getLoadStatistics();
                 // 获取节点的-监控数据
                 Map<String, Map> monitorData = computer.details().getMonitorData();
-                //......
             }
         } catch (IOException e) {
             e.printStackTrace();
