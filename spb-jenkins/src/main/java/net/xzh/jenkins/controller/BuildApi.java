@@ -16,11 +16,11 @@ import com.offbytwo.jenkins.model.JobWithDetails;
  *
  * 例如对任务 Build 相关的信息进行获取操作、例如获取构建日志
  */
-public class JobBuildApi {
+public class BuildApi {
 
     private JenkinsServer jenkinsServer;
     
-    JobBuildApi() {
+    BuildApi() {
     	jenkinsServer = JenkinsConnect.getServer();
     }
 
@@ -231,24 +231,24 @@ public class JobBuildApi {
     }
 
     public static void main(String[] args) {
-        JobBuildApi jobBuildApi = new JobBuildApi();
+        BuildApi buildApi = new BuildApi();
         // 获取 Job 最后的 Build
-        jobBuildApi.getJobLastBuild();
+        buildApi.getJobLastBuild();
         // 获取 Job 首次 Build
-        jobBuildApi.getJobFirstBuild();
+        buildApi.getJobFirstBuild();
         // 根据 Job Build 编号获取编译信息
-        jobBuildApi.getJobByNumber();
+        buildApi.getJobByNumber();
         // 获取 Build 全部列表
-        jobBuildApi.getJobBuildListAll();
+        buildApi.getJobBuildListAll();
         // 获取一定范围的 Build 列表
-        jobBuildApi.getJobBuildListRange();
+        buildApi.getJobBuildListRange();
         // 获取 Build 基本信息
-        jobBuildApi.getJobBuildInfo();
+        buildApi.getJobBuildInfo();
         // 获取 Build 详细信息
-        jobBuildApi.getJobBuildDetailInfo();
+        buildApi.getJobBuildDetailInfo();
         // 获取 Build Log 日志信息
-        jobBuildApi.getJobBuildLog();
+        buildApi.getJobBuildLog();
         // 获得正在执行的编译 Log 日志信息
-        jobBuildApi.getBuildActiveLog();
+        buildApi.getBuildActiveLog();
     }
 }
