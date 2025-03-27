@@ -13,7 +13,7 @@ import com.offbytwo.jenkins.model.Plugin;
 import com.offbytwo.jenkins.model.PluginManager;
 
 /**
- * 获取 Jenkins 相关信息
+ * 状态，插件，节点管理
  *
  * 例如获取插件信息、获取Label信息、关闭Jenkins等
  */
