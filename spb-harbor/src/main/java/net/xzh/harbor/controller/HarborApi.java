@@ -24,15 +24,20 @@ import net.xzh.harbor.common.model.CommonResult;
 import net.xzh.harbor.model.HarborUser;
 
 /**
- * 账号管理
+ * Harbor管理
  * 
  * @author Administrator
  *
  */
-@Api(tags = "账号管理")
-@RestController
-public class AccountController {
+public class HarborApi {
 
+	
+//	harbor:
+//		   username: admin
+//		   password: LNyD2h9HSr7oZaqI
+//		   url: http://172.17.17.37:8088/api/v2.0
+			   
+			   
 	@Value("${harbor.username}")
 	private String harborAdminUsername;
 	@Value("${harbor.password}")
