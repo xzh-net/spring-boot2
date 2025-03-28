@@ -24,7 +24,7 @@ public class JenkinsConnect {
 	 * 
 	 * @return
 	 */
-	public static JenkinsHttpClient getClient() {
+	public static JenkinsHttpClient getHttpClient() {
 		JenkinsHttpClient jenkinsHttpClient = null;
 		try {
 			jenkinsHttpClient = new JenkinsHttpClient(new URI(jenkinsUrl), jenkinsUsername, jenkinsPassword);
@@ -37,7 +37,7 @@ public class JenkinsConnect {
 	/**
 	 * 连接 Jenkins
 	 */
-	public static JenkinsServer connection() {
+	public static JenkinsServer getServer() {
 		JenkinsServer jenkinsServer = null;
 		try {
 			jenkinsServer = new JenkinsServer(new URI(jenkinsUrl), jenkinsUsername, jenkinsPassword);
