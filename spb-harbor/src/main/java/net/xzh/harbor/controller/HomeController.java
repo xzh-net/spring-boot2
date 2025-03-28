@@ -20,8 +20,8 @@ public class HomeController {
 	
 
 	@ApiOperation("登录")
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public CommonResult<?> sendTextMail() {
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public CommonResult<?> index() {
 		return CommonResult.success(System.currentTimeMillis());
 	}
 }
