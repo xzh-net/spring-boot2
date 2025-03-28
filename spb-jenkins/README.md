@@ -9,6 +9,7 @@ Jenkins API总共有三种格式，分别为：JSON API、XML API、Python API�
 3. 构建编译操作
 4. 密钥管理
 5. 状态，插件，节点管理
+6. 用户，凭证，域管理（凭证操作必须安装`Credentials Binding`插件）
 
 在SDK中 JenkinsServer是对JenkinsHttpClient某些功能的更高层次的封装，JenkinsServer依赖于JenkinsHttpClient。
 
