@@ -1,7 +1,2 @@
 server:
    port: 8080
-
-harbor:
-   username: admin
-   password: LNyD2h9HSr7oZaqI
-   url: http://172.17.17.37/api/v2.0
