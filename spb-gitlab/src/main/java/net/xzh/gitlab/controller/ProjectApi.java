@@ -29,31 +29,22 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Project(项目) 相关操作
- * 例如对任务的增、删、改、查等操作
+ * Project(项目) 相关操作 例如对任务的增、删、改、查等操作
  */
 public class ProjectApi {
 
-	private static final Logger log = LoggerFactory.getLogger(ProjectApi.class);
+	// 连接 gitlab 需要设置的信息
+	private static String gitlabUrl = "http://127.0.0.1:8080/";
+	private static String gitlabUsername = "root";
+	private static String gitlabPassword = "123456";
 
-	/**
-	 * GitLab登录地址
-	 */
-	public static final String GITLAB_REMOTE_URL = "http://127.0.0.1:8080/";
-	/**
-	 * gitLab登录账号
-	 */
-	public static final String GITLAB_REMOTE_USERNAME = "root";
-	/**
-	 * GitLab登录密码
-	 */
-	public static final String GITLAB_REMOTE_PWD = "123456";
+	private static final Logger log = LoggerFactory.getLogger(ProjectApi.class);
 
 	private GitLabApi gitLabApi;
 
 	ProjectApi() {
 		try {
-			gitLabApi = GitLabApi.oauth2Login(GITLAB_REMOTE_URL, GITLAB_REMOTE_USERNAME, GITLAB_REMOTE_PWD);
+			gitLabApi = GitLabApi.oauth2Login(gitlabUrl, gitlabUsername, gitlabPassword);
 		} catch (GitLabApiException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

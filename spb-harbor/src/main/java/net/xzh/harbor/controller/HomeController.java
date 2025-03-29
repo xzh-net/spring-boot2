@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 测试推送镜像
+ * 镜像推送后首页测试
  * 
  * @author Administrator
  *
