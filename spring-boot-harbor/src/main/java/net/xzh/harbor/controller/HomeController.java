@@ -17,4 +17,5 @@ public class HomeController {
 	public String index() {
 		return System.currentTimeMillis() + "";
 	}
+	
 }
