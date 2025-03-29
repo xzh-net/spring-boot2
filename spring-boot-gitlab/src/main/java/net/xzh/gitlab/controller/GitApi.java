@@ -23,6 +23,7 @@ import org.gitlab4j.api.models.Branch;
 import org.gitlab4j.api.models.Commit;
 import org.gitlab4j.api.models.Member;
 import org.gitlab4j.api.models.Project;
+import org.gitlab4j.api.models.ProjectHook;
 import org.gitlab4j.api.models.ProjectUser;
 import org.gitlab4j.api.models.Visibility;
 import org.slf4j.Logger;
@@ -31,18 +32,18 @@ import org.slf4j.LoggerFactory;
 /**
  * Project(项目) 相关操作 例如对任务的增、删、改、查等操作
  */
-public class ProjectApi {
+public class GitApi {
 
 	// 连接 gitlab 需要设置的信息
-	private static String gitlabUrl = "http://127.0.0.1:8080/";
+	private static String gitlabUrl = "http://172.17.17.136:18080/";
 	private static String gitlabUsername = "root";
 	private static String gitlabPassword = "123456";
 
-	private static final Logger log = LoggerFactory.getLogger(ProjectApi.class);
+	private static final Logger log = LoggerFactory.getLogger(GitApi.class);
 
 	private GitLabApi gitLabApi;
 
-	ProjectApi() {
+	GitApi() {
 		try {
 			gitLabApi = GitLabApi.oauth2Login(gitlabUrl, gitlabUsername, gitlabPassword);
 		} catch (GitLabApiException e1) {
@@ -144,6 +145,24 @@ public class ProjectApi {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * 创建hook
+	 */
+	public void addHook(Object projectIdOrPath) {
+		ProjectHook enabledHooks = new ProjectHook()
+                .withPushEvents(true)
+                .withTagPushEvents(true)
+                .withMergeRequestsEvents(true);
+		try {
+			ProjectHook projectHook = gitLabApi.getProjectApi().addHook(projectIdOrPath,"http://192.168.2.100:8080/gitlab/webhook/"+System.currentTimeMillis(), enabledHooks, false, "your-secret-token");
+			System.out.println(projectHook);
+		} catch (GitLabApiException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 
 	/**
 	 * 修改仓库
@@ -362,30 +381,31 @@ public class ProjectApi {
 	}
 
 	public static void main(String[] args) throws Exception {
-		ProjectApi projectApi = new ProjectApi();
+		GitApi api = new GitApi();
 		// 查询所有
-//		projectApi.listProject();
+//		api.listProject();
 		// 查询归属自己的仓库
-//		projectApi.ownedProjects();
+//		api.ownedProjects();
 		// 获取星标项目
-//		projectApi.starredProjects();
+//		api.starredProjects();
 		// 查询项目成员
-//		projectApi.memberProjects(420L);
+//		api.memberProjects(420L);
 		// 查询项目用户
-//		projectApi.projectUsers(420L);
+//		api.projectUsers(420L);
 		// 创建仓库
-//		projectApi.createProject();
+//		api.createProject();
 		// 修改仓库
-//		projectApi.updateProject(1365L);
+//		api.updateProject(1365L);
 		// 删除仓库
-//		projectApi.deleteRepo(1365L);
+//		api.deleteRepo(1365L);
 		// 仓库归档
-//		projectApi.archiveProject(1365L);
+//		api.archiveProject(1365L);
 		// 解除归档
 //		projectApi.unArchiveProject(1365L);
-		// 统计代码行数
-		// 指定仓库 ，遍历人员，查询所有人的代码修改量， 新增 ，删除，变更
-//		projectApi.rowsStatistics("xuzhihao/spring");
-		projectApi.rowsStatistics(417L);
+		// 统计代码按仓库遍历人员，查询所有人的代码修改量：新增，删除，变更
+//		api.rowsStatistics("xuzhihao/spring");
+//		api.rowsStatistics(417L);
+		//创建webhook
+		api.addHook("3lvya1tn/250121/11");
 	}
 }
