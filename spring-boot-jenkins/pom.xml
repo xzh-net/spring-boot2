@@ -2,9 +2,9 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>spb-jenkins</artifactId>
-	<name>spb-jenkins</name>
-	<description>spb-jenkins</description>
+	<artifactId>spring-boot-jenkins</artifactId>
+	<name>spring-boot-jenkins</name>
+	<description>spring-boot-jenkins</description>
 	<packaging>jar</packaging>
 
 	<properties>
