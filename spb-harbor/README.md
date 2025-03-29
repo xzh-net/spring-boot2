@@ -58,8 +58,7 @@ docker run -dit -p 8080:8080 --name spring-boot-harbor 192.168.2.100:88/ec_platf
 
 ### 2.5 访问地址
 
-   - http://192.168.2.200:8080/doc.html 
-   - http://192.168.2.200:8080/login
+http://192.168.2.200:8080
 
 
 
@@ -77,23 +76,23 @@ curl -u "admin:Harbor12345" -X 'GET' \
 ```
 
 
-查询项目下所有仓库列表
+查询指定项目下所有仓库列表
 ```bash
 curl -u "admin:Harbor12345" -X 'GET' \
-  'http://172.17.17.37/api/v2.0/projects/vjspcloud/repositories?page=1&page_size=10' \
+  'http://172.17.17.37/api/v2.0/projects/k13iwh8l/repositories?page=1&page_size=10' \
   -H 'accept: application/json'
 ```
 
-查询项目下具体一个仓库的汇总信息：推送次数、产品数量、最后更新时间
+查询指定项目下具体一个仓库的汇总信息：推送次数、产品数量、最后更新时间
 ```bash
 curl -u "admin:Harbor12345" -X 'GET' \
-  'http://172.17.17.37/api/v2.0/projects/vjspcloud/repositories/code-server' \
+  'http://172.17.17.37/api/v2.0/projects/k13iwh8l/repositories/code-server' \
   -H 'accept: application/json'
 ```
 
-查询项目下具体一个仓库的所有标签
+查询指定项目下具体一个仓库的所有标签
 ```bash
 curl -u "admin:Harbor12345" -X 'GET' \
-  'http://172.17.17.37/api/v2.0/projects/vjspcloud/repositories/code-server/artifacts' \
+  'http://172.17.17.37/api/v2.0/projects/k13iwh8l/repositories/code-server/artifacts' \
   -H 'accept: application/json'
 ```

@@ -49,8 +49,13 @@ public class HarborApi {
 	 * 创建用户,密码必须满足复杂度
 	 */
 	public void createUser() {
-		String user = String.format("{\"comment\": \"\"," + "\"email\": \"xuzhihao@163.com\","
-				+ "\"password\": \"123qWE!@#\"," + "\"realname\": \"徐智豪\"," + "\"username\": \"xuzhihao\"}");
+		String user="{"
+				+ "  \"comment\": \"说明\","
+				+ "  \"username\": \"xuzhihao\","
+				+ "  \"password\": \"123qWE!@#\","
+				+ "  \"email\": \"xuzhihao@163.com\","
+				+ "  \"realname\": \"徐智豪\""
+				+ "}";
 		HttpEntity<String> entity = new HttpEntity<>(user, createHeaders(harborUsername, harborPassword));
 		ResponseEntity<String> resp = new RestTemplate().exchange(harborUrl + "/users", HttpMethod.POST, entity,
 				String.class);
@@ -88,7 +93,50 @@ public class HarborApi {
 		HttpEntity<String> resp=new RestTemplate().exchange(harborUrl + "/users", HttpMethod.GET, entity, String.class);
 		System.out.println(resp.getBody());
 	}
-
+	
+	/**
+	 * 为指定项目创建一个无时效，可推拉机器人账号
+	 * 
+	 * name: 机器人名称，系统会自动添加robot$+${project} 前缀。
+	 * duration: 过期时间（Unix时间戳，非必填），-1 永不过期
+	 * level: project 固定值
+	 * permissions: 权限列表，每个对象需指定：
+	 *   namespace: 项目id
+	 *   kind: project 固定值
+	 *   access: 权限组
+	 *     resource: 资源类型
+	 *     action: 操作类型
+	 */
+	public void createRebot(String project) {
+		String rebot = "{"
+				+ "    \"name\": \"test2025\", "
+				+ "    \"duration\": -1, "
+				+ "    \"description\": \"这是一个机器人账号\", "
+				+ "    \"disable\": false, "
+				+ "    \"level\": \"project\", "
+				+ "    \"permissions\": ["
+				+ "        {"
+				+ "            \"namespace\": \"k13iwh8l\", "
+				+ "            \"kind\": \"project\", "
+				+ "            \"access\": ["
+				+ "                {"
+				+ "                    \"resource\": \"repository\", "
+				+ "                    \"action\": \"pull\""
+				+ "                }, "
+				+ "                {"
+				+ "                    \"resource\": \"repository\", "
+				+ "                    \"action\": \"push\""
+				+ "                }"
+				+ "            ]"
+				+ "        }"
+				+ "    ]"
+				+ "}";
+		HttpEntity<String> entity = new HttpEntity<>(rebot, createHeaders(harborUsername, harborPassword));
+		ResponseEntity<String> resp = new RestTemplate().exchange(harborUrl + "/robots", HttpMethod.POST, entity,
+				String.class);
+		System.out.println(resp.getBody());
+	}
+	
 	public static void main(String[] args) {
 		HarborApi api = new HarborApi();
 		// 创建用户
@@ -98,7 +146,9 @@ public class HarborApi {
 		// 删除用户
 //		api.removeUser("37");
 		//查询所有用户
-		api.listUser();
+//		api.listUser();
+		//创建机器人
+		api.createRebot("k13iwh8l");
 
 	}
 
