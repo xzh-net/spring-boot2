@@ -68,7 +68,7 @@
 - [基于html5的WebSocket单机示例](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-websocket)
 - [WebSocket增强利器SockJS](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-sockjs)
 - [WebSocket增强利器SockJS（集群版）](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-sockjs-redis)
-- [ChatGPT流式传输SSE](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-sockjs-sse)
+- [ChatGPT流式传输SSE](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-sse)
 - [公众号和企业微信开发实战](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-wechat)
 - [Filter实现XSS防御](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-xss)
 
