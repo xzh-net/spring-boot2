@@ -198,13 +198,13 @@ public class HarborApi {
 	 * 为指定项目创建一个webhook
 	 * @param project
 	 */
-	public void createWebhook(String project) {
+	public void createWebhook(String project_name_or_id) {
 		String rebot = "{"
 				+ "	\"enabled\": true,"
 				+ "	\"event_types\": [\"DELETE_ARTIFACT\", \"PULL_ARTIFACT\", \"PUSH_ARTIFACT\", \"TAG_RETENTION\"],"
 				+ "	\"targets\": [{"
 				+ "		\"type\": \"http\","
-				+ "		\"address\": \"http://172.17.17.165:8080/harbor/webhook\","
+				+ "		\"address\": \"http://172.17.17.165:8080/harbor/webhook/"+project_name_or_id+"\","
 				+ "		\"skip_cert_verify\": true,"
 				+ "		\"payload_format\": \"Default\","
 				+ "		\"auth_header\": \"123456\""
@@ -213,7 +213,7 @@ public class HarborApi {
 				+ "	\"description\": \"这是一个测试webhook\""
 				+ "}";
 		HttpEntity<String> entity = new HttpEntity<>(rebot, createHeaders(harborUsername, harborPassword));
-		ResponseEntity<String> resp = new RestTemplate().exchange(harborUrl + "/projects/16/webhook/policies", HttpMethod.POST, entity,
+		ResponseEntity<String> resp = new RestTemplate().exchange(harborUrl + "/projects/"+project_name_or_id+"/webhook/policies", HttpMethod.POST, entity,
 				String.class);
 		System.out.println(resp.getBody());
 	}
@@ -231,13 +231,13 @@ public class HarborApi {
 		// 创建机器人
 //		api.createRebot("k13iwh8l");
 		// 创建webhook
-//		api.createWebhook("");
+		api.createWebhook("21");
 		// 创建项目
 //		api.createProject();
 		// 更新项目为私有
 //		api.updateProject("16");
 		// 复制镜像
-		api.copyArtifact("", "", "");
+//		api.copyArtifact("", "", "");
 	}
 
 }

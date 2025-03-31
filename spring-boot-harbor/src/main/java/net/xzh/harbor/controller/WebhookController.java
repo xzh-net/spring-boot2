@@ -22,10 +22,10 @@ public class WebhookController {
 
 	@SuppressWarnings("unchecked")
 	@PostMapping("/harbor/webhook/{id}")
-	public ResponseEntity<String> receiveWebhook(@RequestHeader("X-Gitlab-Token") String token, @PathVariable String id,
+	public ResponseEntity<String> receiveWebhook(@RequestHeader("authorization") String token, @PathVariable String id,
 			@RequestBody String payload) {
-		//根据仓库id找到对应仓库的密钥，再去查询当前仓库对应的触发规则
-		if (!"your-secret-token".equals(token)) {
+		// 根据id找到对应的密钥
+		if (!"123456".equals(token)) {
 			return ResponseEntity.status(403).body("Invalid token");
 		}
 		try {
