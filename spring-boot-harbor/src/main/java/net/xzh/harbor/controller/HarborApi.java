@@ -24,7 +24,7 @@ public class HarborApi {
 	// 连接 Harbor 需要设置的信息
 	private static String harborUrl = "http://172.17.17.37:8088/api/v2.0";
 	private static String harborUsername = "admin";
-	private static String harborPassword = "LNyD2h9HSr7oZaqI";
+	private static String harborPassword = "123456";
 
 	/**
 	 * Authorization Basic认证
@@ -137,6 +137,63 @@ public class HarborApi {
 		System.out.println(resp.getBody());
 	}
 	
+	
+	/**
+	 * 创建项目
+	 * @param project
+	 */
+	public void createProject() {
+		String project = "{"
+				+ "	\"project_name\": \"test_project_2025\","
+				+ "	\"metadata\": {"
+				+ "		\"public\": \"false\""
+				+ "	},"
+				+ "	\"storage_limit\": -1,"
+				+ "	\"registry_id\": null"
+				+ "}";
+		HttpEntity<String> entity = new HttpEntity<>(project, createHeaders(harborUsername, harborPassword));
+		ResponseEntity<String> resp = new RestTemplate().exchange(harborUrl + "/projects", HttpMethod.POST, entity,
+				String.class);
+		System.out.println(resp.getBody());
+	}
+	
+	/**
+	 * 更新项目为私有
+	 * @param project
+	 */
+	public void updateProject(String project_name_or_id) {
+		String updateproject = "{"
+				+ "  \"metadata\": {"
+				+ "    \"public\": \"false\""
+				+ "  }"
+				+ "}";
+		HttpEntity<String> entity = new HttpEntity<>(updateproject, createHeaders(harborUsername, harborPassword));
+		ResponseEntity<String> resp = new RestTemplate().exchange(harborUrl + "/projects/"+project_name_or_id, HttpMethod.PUT, entity,
+				String.class);
+		System.out.println(resp.getBody());
+	}
+	
+	
+	/**
+	 * 把{from}复制到项目：{project_name}，名字叫：{repository_name}
+	 * @param project_name 项目名称
+	 * @param repository_name 镜像库名称注意转码,来自官方的示例：e.g. a/b -> a%252Fb
+	 * @param from 注意格式 "project/repository:tag" or "project/repository@digest" 
+	 * 数据示例：
+	 * 		test_project_2025
+	 * 		spb-harbor
+	 * 		k13iwh8l/spb-harbor@sha256:badec119ac8cfdaff6f007e1c5ae7879df0317e357fc8572d1e6979040971631
+	 */
+	public void copyArtifact(String project_name,String repository_name ,String from) {
+		project_name="test_project_2025";
+		repository_name="harbor";
+		from="k13iwh8l/spb-harbor@sha256:badec119ac8cfdaff6f007e1c5ae7879df0317e357fc8572d1e6979040971631";
+		HttpEntity<String> entity = new HttpEntity<>(createHeaders(harborUsername, harborPassword));
+		ResponseEntity<String> resp = new RestTemplate().exchange(harborUrl + "/projects/"+project_name+"/repositories/"+repository_name+"/artifacts?from="+ from, HttpMethod.POST, entity,
+				String.class);
+		System.out.println(resp.getBody());
+	}
+	
 	/**
 	 * 为指定项目创建一个webhook
 	 * @param project
@@ -174,7 +231,13 @@ public class HarborApi {
 		// 创建机器人
 //		api.createRebot("k13iwh8l");
 		// 创建webhook
-		api.createWebhook("");
+//		api.createWebhook("");
+		// 创建项目
+//		api.createProject();
+		// 更新项目为私有
+//		api.updateProject("16");
+		// 复制镜像
+		api.copyArtifact("", "", "");
 	}
 
 }
