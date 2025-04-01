@@ -1,0 +1,15 @@
+server:
+   port: 8080
+
+spring:
+  rabbitmq:
+    addresses: 172.17.17.160:5672
+    virtual-host: /
+    username: admin
+    password: 123456
+
+minio:
+  endpoint: http://172.17.17.160:9000/ #Minio服务所在地址
+  bucketName: test #存储桶名称
+  accessKey: zVGaKvQObNbdKY18cVLR #访问的key
+  secretKey: PKW0DOxYTaW9thVZvT5ndJzhPvI9YmxEAlXHGgoz #访问的秘钥

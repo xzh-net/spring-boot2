@@ -26,10 +26,6 @@ public class DirectExchangeConfig {
         return new AnonymousQueue();
     }
 
-    @Bean
-    public Queue directQueue2() {
-        return new AnonymousQueue();
-    }
 
     @Bean
     public Binding directBinding1a(DirectExchange direct, Queue directQueue1) {
