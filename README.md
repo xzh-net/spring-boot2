@@ -34,10 +34,11 @@
 - [Zipkin实现分布式全链路监控](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-zipkin)
 - [动态数据源切换](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-datasource)
 - [【自定义】日志拦截器](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-log-starter)
-- [【自定义】分布式文件存储Minio和FastDFS](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-oss-starter)
+- [【自定义】分布式文件存储S3和FastDFS](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-oss-starter)
 
 ## 4. 三方SDK
 
+- [MinIO使用Webhook和AMPQ实现上传回调](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-minio)
 - [搞懂JWT、JWS、JWE之间的关系](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-jwt)
 - [集成Hbase操作实现表的增删改查](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-hbase)
 - [集成Hadoop实现文件上传](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-hdfs)
