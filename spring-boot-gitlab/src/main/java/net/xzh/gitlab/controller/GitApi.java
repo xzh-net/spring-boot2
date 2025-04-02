@@ -99,10 +99,12 @@ public class GitApi {
 
 	/**
 	 * 查询项目成员
+	 * 
+	 * @param projectId
 	 */
-	public void memberProjects(Long projectId) {
+	public void memberProjects(Object projectIdOrPath) {
 		try {
-			List<Member> members = gitLabApi.getProjectApi().getMembers(projectId);
+			List<Member> members = gitLabApi.getProjectApi().getMembers(projectIdOrPath);
 			for (Member member : members) {
 				log.info("名称：{},  Username：{} 访问级别：{}", member.getName(), member.getUsername(),
 						member.getAccessLevel());
@@ -115,13 +117,13 @@ public class GitApi {
 
 	/**
 	 * 查询项目用户 项目用户包括：项目成员+群组用户，两部分组成
-	 *
+	 * 
 	 * @param projectId
 	 */
 
-	public void projectUsers(Long projectId) {
+	public void projectUsers(Object projectIdOrPath) {
 		try {
-			List<ProjectUser> projectUsers = gitLabApi.getProjectApi().getProjectUsers(projectId);
+			List<ProjectUser> projectUsers = gitLabApi.getProjectApi().getProjectUsers(projectIdOrPath);
 			for (ProjectUser projectUser : projectUsers) {
 				log.info("名称：{}, Username：{}", projectUser.getName(), projectUser.getUsername());
 			}
@@ -139,30 +141,31 @@ public class GitApi {
 		project.setVisibility(Visibility.PUBLIC);// 公开
 		try {
 			Project createProject = gitLabApi.getProjectApi().createProject(project);
-			System.out.println(createProject);
+			log.info("创建仓库：{}", createProject);
 		} catch (GitLabApiException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
-	/**
+
+	/***
 	 * 创建hook
+	 * 
+	 * @param projectIdOrPath
 	 */
 	public void addHook(Object projectIdOrPath) {
-		ProjectHook enabledHooks = new ProjectHook()
-                .withPushEvents(true)
-                .withTagPushEvents(true)
-                .withMergeRequestsEvents(true);
+		ProjectHook enabledHooks = new ProjectHook().withPushEvents(true).withTagPushEvents(true)
+				.withMergeRequestsEvents(true);
 		try {
-			ProjectHook projectHook = gitLabApi.getProjectApi().addHook(projectIdOrPath,"http://192.168.2.100:8080/gitlab/webhook/"+System.currentTimeMillis(), enabledHooks, false, "your-secret-token");
-			System.out.println(projectHook);
+			ProjectHook projectHook = gitLabApi.getProjectApi().addHook(projectIdOrPath,
+					"http://192.168.2.100:8080/gitlab/webhook/" + System.currentTimeMillis(), enabledHooks, false,
+					"your-secret-token");
+			log.info("创建hook：{}", projectHook);
 		} catch (GitLabApiException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
 
 	/**
 	 * 修改仓库
@@ -173,8 +176,8 @@ public class GitApi {
 		project.withDescription("仓库描述123_update");
 		project.setVisibility(Visibility.PRIVATE);// 私有
 		try {
-			Project createProject = gitLabApi.getProjectApi().updateProject(project);
-			System.out.println(createProject);
+			Project rtn = gitLabApi.getProjectApi().updateProject(project);
+			log.info("修改仓库：{}", rtn);
 		} catch (GitLabApiException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -184,11 +187,11 @@ public class GitApi {
 	/**
 	 * 删除仓库
 	 *
-	 * @param projectId
+	 * @param projectIdOrPath
 	 */
-	public void deleteProject(Long projectId) {
+	public void deleteProject(Object projectIdOrPath) {
 		try {
-			gitLabApi.getProjectApi().deleteProject(projectId);
+			gitLabApi.getProjectApi().deleteProject(projectIdOrPath);
 		} catch (GitLabApiException e) {
 			e.printStackTrace();
 		}
@@ -197,11 +200,11 @@ public class GitApi {
 	/**
 	 * 仓库归档
 	 *
-	 * @param projectId
+	 * @param projectIdOrPath
 	 */
-	public void archiveProject(Long projectId) {
+	public void archiveProject(Object projectIdOrPath) {
 		try {
-			gitLabApi.getProjectApi().archiveProject(projectId);
+			gitLabApi.getProjectApi().archiveProject(projectIdOrPath);
 		} catch (GitLabApiException e) {
 			e.printStackTrace();
 		}
@@ -210,12 +213,43 @@ public class GitApi {
 	/**
 	 * 解除归档
 	 *
-	 * @param projectId
+	 * @param projectIdOrPath
 	 */
-	public void unArchiveProject(Long projectId) {
+	public void unArchiveProject(Object projectIdOrPath) {
 		try {
-			gitLabApi.getProjectApi().unarchiveProject(projectId);
+			gitLabApi.getProjectApi().unarchiveProject(projectIdOrPath);
 		} catch (GitLabApiException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * 查询分支
+	 * 
+	 * @param projectIdOrPath
+	 */
+	public void listBranch(Object projectIdOrPath) {
+		try {
+			List<Branch> branches = gitLabApi.getRepositoryApi().getBranches(projectIdOrPath);
+			log.info("{}", branches);
+		} catch (GitLabApiException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	
+	/**
+	 * 查询提交记录
+	 * 
+	 * @param projectIdOrPath
+	 */
+	public void listCommits(Object projectIdOrPath) {
+		try {
+			List<Commit> commits = gitLabApi.getCommitsApi().getCommits(projectIdOrPath);
+			log.info("{}", commits);
+		} catch (GitLabApiException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -402,10 +436,16 @@ public class GitApi {
 //		api.archiveProject(1365L);
 		// 解除归档
 //		projectApi.unArchiveProject(1365L);
+		// 查询分支
+		api.listBranch("42");
+		// 获取提交记录
+//		api.listCommits("42");
 		// 统计代码按仓库遍历人员，查询所有人的代码修改量：新增，删除，变更
 //		api.rowsStatistics("xuzhihao/spring");
 //		api.rowsStatistics(417L);
-		//创建webhook
-		api.addHook("3lvya1tn/250121/11");
+		// 创建webhook
+//		api.addHook("3lvya1tn/250121/11");
 	}
+
+
 }
