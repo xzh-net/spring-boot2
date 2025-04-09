@@ -52,9 +52,8 @@
 - [基于Netty的聊天室项目及调用示例](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-netty)
 - [MQTT多种集成方式汇总](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-mqtt)
 - [SFTP文件同步](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-sftp)
-- [Jsoup解析html下载游戏rom](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-winkawaks)
 
-## 5. 工具插件
+## 5. 工具
 
 > 不使用中间件技术，调试工具代码合辑
 
@@ -68,6 +67,7 @@
 - [基于html5的WebSocket单机示例](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-websocket)
 - [WebSocket增强利器SockJS](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-sockjs)
 - [WebSocket增强利器SockJS（集群版）](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-sockjs-redis)
+- [Jsoup解析html下载游戏Rom和图片处理](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-winkawaks)
 - [ChatGPT流式传输SSE](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-sse)
 - [公众号和企业微信开发实战](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-wechat)
 - [Filter实现XSS防御](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-xss)
