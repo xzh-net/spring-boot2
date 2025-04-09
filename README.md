@@ -38,7 +38,7 @@
 - [替代Hystrix和Sentinel的轻量级熔断器Resilience4j](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-resilience4j)
 
 
-## 4. 三方SDK
+## 4. 三方类库
 
 - [MinIO使用Webhook和AMPQ实现上传回调](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-minio)
 - [搞懂JWT、JWS、JWE之间的关系](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-jwt)
@@ -54,22 +54,23 @@
 - [基于Netty的聊天室项目及调用示例](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-netty)
 - [MQTT多种集成方式汇总](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-mqtt)
 - [SFTP文件同步](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-sftp)
+- [Jexl表达式引擎](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-jexl)
+- [Jsoup解析html下载游戏Rom和图片处理](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-winkawaks)
 
 ## 5. 工具
 
 > 不使用中间件技术，调试工具代码合辑
 
+- [API版本控制](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-api-version)
+- [Mybatis代码生成器](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-generator)
 - [使用Maven插件构建Docker镜像,并推送到Harbor仓库](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-harbor)
 - [基于SonarQube的Web API实现代码质量和安全管理](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-sonar)
 - [基于Emqx为客户端实现自定义登录授权](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-emqx)
 - [集成Collabora Online实现在线文档编辑](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-wopi)
-- [Mybatis代码生成器](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-generator)
 - [基于Elasticsearch技术栈实现统一日志收集](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-elk)
-- [API版本控制](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-api-version)
 - [基于html5的WebSocket单机示例](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-websocket)
 - [WebSocket增强利器SockJS](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-sockjs)
 - [WebSocket增强利器SockJS（集群版）](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-sockjs-redis)
-- [Jsoup解析html下载游戏Rom和图片处理](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-winkawaks)
 - [ChatGPT流式传输SSE](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-sse)
 - [公众号和企业微信开发实战](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-wechat)
 - [Filter实现XSS防御](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-xss)
