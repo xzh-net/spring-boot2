@@ -55,6 +55,7 @@
 - [MQTT多种集成方式汇总](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-mqtt)
 - [SFTP文件同步](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-sftp)
 - [Jexl表达式引擎](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-jexl)
+- [Groovy脚本实现动态编程](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-groovy)
 - [Jsoup解析html下载游戏Rom和图片处理](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-winkawaks)
 
 ## 5. 工具
