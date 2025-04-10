@@ -1,10 +1,10 @@
 package net.xzh.xss.filter;
 
-import org.jsoup.Jsoup;
-import org.jsoup.safety.Whitelist;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
+
+import org.jsoup.Jsoup;
+import org.jsoup.safety.Safelist;
 
 /**
  * XSS filter process
@@ -28,7 +28,7 @@ public class XssHttpServletRequestWrapper extends HttpServletRequestWrapper {
             String[] escapseValues = new String[length];
             for (int i = 0; i < length; i++) {
                 // Prevent xss attacks and filter leading and trailing spaces
-                escapseValues[i] = Jsoup.clean(values[i], Whitelist.relaxed()).trim();
+                escapseValues[i] = Jsoup.clean(values[i], Safelist.relaxed()).trim();
             }
             return escapseValues;
         }
