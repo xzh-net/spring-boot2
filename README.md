@@ -1,6 +1,6 @@
 # Spring Boot 2.x
 
-## 1. 基础功能
+## 1. 基础
 
 - [Spring Boot入门Thymeleaf、i18n、自定义Banner、拦截器](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-stand)
 - [性能卓越的数据库连接池HikariCP](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-hikaricp)
@@ -18,6 +18,7 @@
 - [整合Redis流控和缓存穿透解决方案](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-redis)
 - [整合Elasticsearch实现商品搜索和索引管理](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-elasticsearch)
 - [高性能的异步非阻塞web框架](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-webflux)
+- [原生WebSocket示例](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-websocket)
 
 
 ## 3. 三方Starter
@@ -69,14 +70,13 @@
 - [基于Emqx为客户端实现自定义登录授权](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-emqx)
 - [集成Collabora Online实现在线文档编辑](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-wopi)
 - [基于Elasticsearch技术栈实现统一日志收集](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-elk)
-- [基于html5的WebSocket单机示例](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-websocket)
-- [WebSocket增强利器SockJS](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-sockjs)
-- [WebSocket增强利器SockJS（集群版）](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-sockjs-redis)
-- [ChatGPT流式传输SSE](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-sse)
-- [公众号和企业微信开发实战](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-wechat)
+- [SockJS + STOMP + RabbitMQ实时聊天](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-sockjs)
+- [SockJS + STOMP + Redis聊天集群](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-sockjs-redis)
+- [SSE流式传输协议](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-sse)
+- [微信公众号和企业微信开发](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-wechat)
 - [Filter实现XSS防御](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-xss)
 
-## 6. 项目实战
+## 6. 项目
 
 - [基于SpringBoot+MyBatis-Plus的快速开发脚手架](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-swagger)
 - [整合Activiti工作流，包含设计器和数据验证分组校验](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-activiti)
