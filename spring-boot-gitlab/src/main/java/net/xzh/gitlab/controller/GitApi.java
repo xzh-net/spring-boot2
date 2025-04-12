@@ -2,6 +2,8 @@ package net.xzh.gitlab.controller;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -29,6 +31,8 @@ import org.gitlab4j.api.models.Visibility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import cn.hutool.core.util.StrUtil;
+
 /**
  * Project(项目) 相关操作 例如对任务的增、删、改、查等操作
  */
@@ -36,8 +40,8 @@ public class GitApi {
 
 	// 连接 gitlab 需要设置的信息
 	private static String gitlabUrl = "http://172.17.17.136:18080/";
-	private static String gitlabUsername = "root";
-	private static String gitlabPassword = "123456";
+	private static String gitlabUsername = "test";
+	private static String gitlabPassword = "12345678";
 
 	private static final Logger log = LoggerFactory.getLogger(GitApi.class);
 
@@ -147,6 +151,43 @@ public class GitApi {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * 导入外部仓库
+	 */
+	public void importProject(String remoteUrl,String romoteToken) {
+		Project project = new Project().withName("xzh-test-" + System.currentTimeMillis());
+		project.withDescription("仓库描述123");
+		project.setVisibility(Visibility.PUBLIC);// 公开
+		String toekn = "://oauth2:"+ romoteToken +"@";
+		try {
+			//校验仓库地址是否正确
+			URL url = new URL(remoteUrl);
+            String path = url.getPath();
+            GitLabApi checkApi = new GitLabApi(GitLabApi.ApiVersion.V4, remoteUrl.replace(path, ""), romoteToken);
+            String repName=path.substring(1).replace(".git", "");
+			Project from = checkApi.getProjectApi().getProject(repName);
+			//form源仓库不存在或者报错，程序终止，以上代码仅调试，不要用于生成环境。
+			if(StrUtil.isNotEmpty(romoteToken)) {
+				//导入需要凭证的库
+				Project imp = gitLabApi.getProjectApi().createProject(project, remoteUrl.replace("://",toekn));
+				log.info("导入需要凭证的库：{}", imp);
+			}else {
+				//导入公开仓库
+				Project imp = gitLabApi.getProjectApi().createProject(project, remoteUrl);
+				log.info("导入公开仓库：{}", imp);
+			}
+		} catch (GitLabApiException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	  
+      
 
 	/***
 	 * 创建hook
@@ -428,6 +469,9 @@ public class GitApi {
 //		api.projectUsers(420L);
 		// 创建仓库
 //		api.createProject();
+		// 导入仓库
+		api.importProject("http://devgit.vjspnet.cn/13998417419/spring.git","");//无凭证公开仓库
+		api.importProject("http://devgit.vjspnet.cn/13998417419/srping.git","sMqds4BFz9DbQUtQom4v");//私有仓库+个人凭证
 		// 修改仓库
 //		api.updateProject(1365L);
 		// 删除仓库
@@ -437,7 +481,7 @@ public class GitApi {
 		// 解除归档
 //		projectApi.unArchiveProject(1365L);
 		// 查询分支
-		api.listBranch("42");
+//		api.listBranch("42");
 		// 获取提交记录
 //		api.listCommits("42");
 		// 统计代码按仓库遍历人员，查询所有人的代码修改量：新增，删除，变更
@@ -446,6 +490,4 @@ public class GitApi {
 		// 创建webhook
 //		api.addHook("3lvya1tn/250121/11");
 	}
-
-
 }
