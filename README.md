@@ -58,6 +58,7 @@
 - [Jexl表达式引擎](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-jexl)
 - [Groovy脚本实现动态编程](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-groovy)
 - [Jsoup解析html下载游戏Rom和图片处理](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-winkawaks)
+- [Java调用Python的几种方式](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-python)
 
 ## 5. 工具
 
