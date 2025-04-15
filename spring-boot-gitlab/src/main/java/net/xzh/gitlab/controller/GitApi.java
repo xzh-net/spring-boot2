@@ -4,9 +4,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -27,6 +29,8 @@ import org.gitlab4j.api.models.Member;
 import org.gitlab4j.api.models.Project;
 import org.gitlab4j.api.models.ProjectHook;
 import org.gitlab4j.api.models.ProjectUser;
+import org.gitlab4j.api.models.RepositoryFile;
+import org.gitlab4j.api.models.TreeItem;
 import org.gitlab4j.api.models.Visibility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,8 +44,8 @@ public class GitApi {
 
 	// 连接 gitlab 需要设置的信息
 	private static String gitlabUrl = "http://172.17.17.136:18080/";
-	private static String gitlabUsername = "test";
-	private static String gitlabPassword = "12345678";
+	private static String gitlabUsername = "root";
+	private static String gitlabPassword = "Vjsp2024";
 
 	private static final Logger log = LoggerFactory.getLogger(GitApi.class);
 
@@ -151,29 +155,29 @@ public class GitApi {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * 导入外部仓库
 	 */
-	public void importProject(String remoteUrl,String romoteToken) {
+	public void importProject(String remoteUrl, String romoteToken) {
 		Project project = new Project().withName("xzh-test-" + System.currentTimeMillis());
 		project.withDescription("仓库描述123");
 		project.setVisibility(Visibility.PUBLIC);// 公开
-		String toekn = "://oauth2:"+ romoteToken +"@";
+		String toekn = "://oauth2:" + romoteToken + "@";
 		try {
-			//校验仓库地址是否正确
+			// 校验仓库地址是否正确
 			URL url = new URL(remoteUrl);
-            String path = url.getPath();
-            GitLabApi checkApi = new GitLabApi(GitLabApi.ApiVersion.V4, remoteUrl.replace(path, ""), romoteToken);
-            String repName=path.substring(1).replace(".git", "");
+			String path = url.getPath();
+			GitLabApi checkApi = new GitLabApi(GitLabApi.ApiVersion.V4, remoteUrl.replace(path, ""), romoteToken);
+			String repName = path.substring(1).replace(".git", "");
 			Project from = checkApi.getProjectApi().getProject(repName);
-			//form源仓库不存在或者报错，程序终止，以上代码仅调试，不要用于生成环境。
-			if(StrUtil.isNotEmpty(romoteToken)) {
-				//导入需要凭证的库
-				Project imp = gitLabApi.getProjectApi().createProject(project, remoteUrl.replace("://",toekn));
+			// form源仓库不存在或者报错，程序终止，以上代码仅调试，不要用于生成环境。
+			if (StrUtil.isNotEmpty(romoteToken)) {
+				// 导入需要凭证的库
+				Project imp = gitLabApi.getProjectApi().createProject(project, remoteUrl.replace("://", toekn));
 				log.info("导入需要凭证的库：{}", imp);
-			}else {
-				//导入公开仓库
+			} else {
+				// 导入公开仓库
 				Project imp = gitLabApi.getProjectApi().createProject(project, remoteUrl);
 				log.info("导入公开仓库：{}", imp);
 			}
@@ -185,9 +189,35 @@ public class GitApi {
 			e.printStackTrace();
 		}
 	}
-	
-	  
-      
+
+	/**
+	 * 按项目查询文件
+	 * 
+	 * @param projectIdOrPath
+	 * @param fileName
+	 */
+
+	private void queryFileProject(Object projectIdOrPath, String refName, String path) {
+		try {
+			List<TreeItem> treeItems = gitLabApi.getRepositoryApi().getTree(projectIdOrPath, "/", refName, true);
+			for (TreeItem item : treeItems) {
+				if (item.getType() == TreeItem.Type.BLOB && item.getName().contains(path)) {
+					// 获取文件对象
+					RepositoryFile file = gitLabApi.getRepositoryFileApi().getFile(projectIdOrPath, item.getPath(),
+							refName);
+					System.out.println(
+							"File: " + item.getPath() + ", Content: " + item.getType() + ", Size: " + file.getSize());
+					// Base64 解码内容
+					byte[] contentBytes = Base64.getDecoder().decode(file.getContent());
+					String content = new String(contentBytes, StandardCharsets.UTF_8);
+					System.out.println(content);
+				}
+			}
+		} catch (GitLabApiException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	}
 
 	/***
 	 * 创建hook
@@ -263,7 +293,7 @@ public class GitApi {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * 查询分支
 	 * 
@@ -279,7 +309,6 @@ public class GitApi {
 		}
 	}
 
-	
 	/**
 	 * 查询提交记录
 	 * 
@@ -470,8 +499,10 @@ public class GitApi {
 		// 创建仓库
 //		api.createProject();
 		// 导入仓库
-		api.importProject("http://devgit.vjspnet.cn/13998417419/spring.git","");//无凭证公开仓库
-		api.importProject("http://devgit.vjspnet.cn/13998417419/srping.git","sMqds4BFz9DbQUtQom4v");//私有仓库+个人凭证
+//		api.importProject("http://devgit.vjspnet.cn/13998417419/spring.git","");//无凭证公开仓库
+//		api.importProject("http://devgit.vjspnet.cn/13998417419/srping.git","sMqds4BFz9DbQUtQom4v");//私有仓库+个人凭证
+		// 文件查询
+		api.queryFileProject(42, "master", "DemoApplication");
 		// 修改仓库
 //		api.updateProject(1365L);
 		// 删除仓库
@@ -490,4 +521,5 @@ public class GitApi {
 		// 创建webhook
 //		api.addHook("3lvya1tn/250121/11");
 	}
+
 }
