@@ -19,7 +19,7 @@
 - [整合Elasticsearch实现商品搜索和索引管理](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-elasticsearch)
 - [高性能的异步非阻塞web框架](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-webflux)
 - [原生WebSocket示例](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-websocket)
-
+- [JPA操作SQLite数据库](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-sqlite)
 
 ## 3. 三方Starter
 
