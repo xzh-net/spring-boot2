@@ -1,11 +1,12 @@
 # SpringBoot 集成 Collabora Online 实现在线文档编辑
 
-- Collabora Online 官网地址： https://www.collaboraoffice.com/
-- SDK官网地址： https://sdk.collaboraonline.com/
-- 官方文档： https://sdk.collaboraonline.com/
-- GitHub： https://github.com/CollaboraOnline/online
-- WOPI 官方文档： https://api.onlyoffice.com/zh/editors/wopi/discovery
-- 官方 nodejs demo： https://github.com/CollaboraOnline/collabora-online-sdk-examples//tree/master/webapp/nodejs
+- 官网地址: https://www.collaboraoffice.com/
+- SDK地址: https://sdk.collaboraonline.com/
+- GitHub: https://github.com/CollaboraOnline/online
+- WOPI 官方文档: https://api.onlyoffice.com/zh/editors/wopi/discovery
+- 官方demo: https://github.com/CollaboraOnline/collabora-online-sdk-examples/tree/master/webapp/nodejs
+- Nginx 代理配置: https://sdk.collaboraonline.com/docs/installation/Proxy_settings.html
+- 镜像地址: https://sdk.collaboraonline.com/docs/installation/CODE_Docker_image.html
 
 ## 1. 什么是 Collabora Online？
 
