@@ -86,7 +86,7 @@ public class WopiController {
     public ResponseEntity<String> uploadFile(HttpServletRequest request,@PathVariable String fileId) {
 		System.out.println(fileId+",写入文件");
         try {
-        	Path filePath = Paths.get("/home", "test.docx");
+        	Path filePath = Paths.get("d:\\", "test.docx");
         	Files.copy(request.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
             return ResponseEntity.status(200).body(null);
         } catch (IOException e) {
@@ -97,6 +97,6 @@ public class WopiController {
 
 	private byte[] getFileContent(String fileId) throws IOException {
 		// 实现获取文件内容的逻辑，返回文件的二进制数据
-		return FileUtil.readBytes(new File("/home/test.docx"));
+		return FileUtil.readBytes(new File("d:\\test.docx"));
 	}
 }
