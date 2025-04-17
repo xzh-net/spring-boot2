@@ -14,7 +14,8 @@ public class PmsBrand implements Serializable {
     private Long id;
 
     @Order(1)
-    @NotEmpty(message="品牌名称不能为空")
+//    @NotEmpty(message="品牌名称不能为空")
+    @NotEmpty(message="PmsBrand.name")
     @ApiModelProperty(value = "品牌名称",required = true)
     private String name;
 
@@ -42,7 +43,8 @@ public class PmsBrand implements Serializable {
     private Integer productCommentCount;
 
     @Order(3)
-    @NotEmpty(message="品牌logo不能为空")
+//    @NotEmpty(message="品牌logo不能为空")
+    @NotEmpty(message="PmsBrand.logo")
     @ApiModelProperty(value = "品牌logo",required = true)
     private String logo;
 

@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 
 import net.xzh.mall.common.model.CommonResult;
+import net.xzh.mall.i18n.I18nMessages;
 
 /**
  * HibernateValidator错误结果处理切面 
@@ -31,7 +32,7 @@ public class BindingResultAspect {
 				if (result.hasErrors()) {
 					FieldError fieldError = result.getFieldError();
 					if (fieldError != null) {
-						return CommonResult.validateFailed(fieldError.getDefaultMessage());
+						return CommonResult.validateFailed(I18nMessages.getMessage(fieldError.getDefaultMessage()));
 					} else {
 						return CommonResult.validateFailed();
 					}
