@@ -1,11 +1,6 @@
-# spring-boot-security
+# 使用国密算法整合Security登录过程
 
 访问地址：http://127.0.0.1:8080/doc.html
-
-```bash
-mvn clean compile
-mvn clean package
-```
 
 ## 动态权限
 
@@ -34,3 +29,11 @@ mvn clean package
         }
         ```
 
+## 算法
+
+Hutool针对Bouncy Castle做了简化包装，用于实现国密算法中的SM2、SM3、SM4。
+
+国密算法工具封装包括：
+ - 非对称加密和签名：SM2（RSA）
+ - 摘要签名算法：SM3（MD5）
+ - 对称加密：SM4（AES）
