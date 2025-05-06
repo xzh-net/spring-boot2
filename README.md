@@ -60,6 +60,7 @@
 - [让程序自己编写程序，源码分析生成](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-parser)
 - [Jsoup解析html下载游戏Rom和图片处理](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-winkawaks)
 - [Java调用Python的几种方式](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-python)
+- [使用Apache Geode解决千万级QPS并发查询](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-geode)
 
 ## 5. 工具
 
