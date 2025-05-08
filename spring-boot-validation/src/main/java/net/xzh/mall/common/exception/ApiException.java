@@ -7,7 +7,11 @@ import net.xzh.mall.common.model.IErrorCode;
  * 自定义API异常
  */
 public class ApiException extends RuntimeException {
-    private IErrorCode errorCode;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private IErrorCode errorCode;
 
     public ApiException(IErrorCode errorCode) {
         super(errorCode.getMessage());
