@@ -27,7 +27,8 @@ public class PmsBrand implements Serializable {
     private Integer sort;
 
     @Order(2)
-    @FlagValidator(value = {"0","1"}, message = "厂家状态不正确")
+//    @FlagValidator(value = {"0","1"}, message = "厂家状态不正确")
+    @FlagValidator(value = {"0","1"}, message = "PmsBrand.factoryStatus")
     @ApiModelProperty(value = "是否为品牌制造商：0->不是；1->是")
     private Integer factoryStatus;
 

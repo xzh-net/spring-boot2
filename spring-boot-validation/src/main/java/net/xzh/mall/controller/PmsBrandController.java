@@ -47,10 +47,28 @@ public class PmsBrandController {
     }
 
     @ApiOperation("添加品牌")
-    @ApiOperationSupport(ignoreParameters = {"id","productCount","productCommentCount"})
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult createBrand(@Validated @RequestBody PmsBrand pmsBrand,BindingResult result) {
+    public CommonResult<?> createBrand(@Validated @RequestBody PmsBrand pmsBrand,BindingResult result) {
+		if (pmsBrand.getName().equals("test")) {
+			Asserts.fail("不允许test");
+		}
+        CommonResult commonResult;
+        int count = brandService.createBrand(pmsBrand);
+        if (count == 1) {
+            commonResult = CommonResult.success(pmsBrand);
+            LOGGER.debug("createBrand success:{}", pmsBrand);
+        } else {
+            commonResult = CommonResult.failed("操作失败");
+            LOGGER.debug("createBrand failed:{}", pmsBrand);
+        }
+        return commonResult;
+    }
+    
+    @ApiOperation("添加品牌2")
+    @RequestMapping(value = "/create2", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult<?> createBrand2(@Validated @RequestBody PmsBrand pmsBrand) {
 		if (pmsBrand.getName().equals("test")) {
 			Asserts.fail("不允许test");
 		}
@@ -69,7 +87,7 @@ public class PmsBrandController {
     @ApiOperation("更新指定id品牌信息")
     @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult updateBrand(@PathVariable("id") Long id, @RequestBody PmsBrand pmsBrandDto, BindingResult result) {
+    public CommonResult<?> updateBrand(@PathVariable("id") Long id, @RequestBody PmsBrand pmsBrandDto, BindingResult result) {
         CommonResult commonResult;
         int count = brandService.updateBrand(id, pmsBrandDto);
         if (count == 1) {
@@ -85,7 +103,7 @@ public class PmsBrandController {
     @ApiOperation("删除指定id的品牌")
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public CommonResult deleteBrand(@PathVariable("id") Long id) {
+    public CommonResult<?> deleteBrand(@PathVariable("id") Long id) {
         int count = brandService.deleteBrand(id);
         if (count == 1) {
             LOGGER.debug("deleteBrand success :id={}", id);
