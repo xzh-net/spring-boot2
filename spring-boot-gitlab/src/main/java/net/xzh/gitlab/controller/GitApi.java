@@ -12,8 +12,10 @@ import java.util.Base64;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.apache.poi.ss.usermodel.Cell;
@@ -330,42 +332,39 @@ public class GitApi {
 	 * @throws Exception
 	 */
 	public void rowsStatistics(Object projectIdOrPath) throws Exception {
-		// 记录开始时间
-		long startTime = System.currentTimeMillis();
 		// 获取指定名称的项目列表
 		Project project = gitLabApi.getProjectApi().getProject(projectIdOrPath);
-		String namespace = project.getNamespace().getFullPath();
-		String proName = project.getPath();
-		String proUrl = project.getWebUrl();
-		log.info("项目命名空间：{}, 项目名称：{}, 项目地址：{}", namespace, proName, proUrl);
-
 		// 定义统计时间范围
-		LocalDate startDate = LocalDate.of(2025, 2, 6);
-		LocalDate endDate = LocalDate.of(2025, 2, 20);
+		LocalDate startDate = LocalDate.of(2025, 5, 15);
+		LocalDate endDate = LocalDate.of(2025, 5, 15);
 		// 获取所有提交记录
 		List<Commit> allCommits = new ArrayList<>();
 		// 提前获取所有分支
 		List<Branch> branches = gitLabApi.getRepositoryApi().getBranches(project.getId());
-//        for (Branch branch : branches) {
-		// 获取该分支在时间范围内的所有提交
-		java.util.Date start = Date.from(startDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-		java.util.Date end = Date.from(endDate.plusDays(1).atStartOfDay(ZoneId.systemDefault()).toInstant());
-		List<Commit> branchCommits = gitLabApi.getCommitsApi().getCommits(project.getId(), "feature-fb", start, end);
-		allCommits.addAll(branchCommits);
-//        }
 
-		// 按日期和作者分组（并行处理）
-		Map<LocalDate, Map<String, List<Commit>>> commitsByDateAndAuthor = allCommits.parallelStream()
+		for (Branch branch : branches) {
+			// 获取该分支在时间范围内的所有提交
+			java.util.Date start = Date.from(startDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+			java.util.Date end = Date.from(endDate.plusDays(1).atStartOfDay(ZoneId.systemDefault()).toInstant());
+			List<Commit> branchCommits = gitLabApi.getCommitsApi().getCommits(project.getId(), branch.getName(), start,
+					end);
+			allCommits.addAll(branchCommits);
+		}
+
+		// 按日期和作者分组
+		Map<LocalDate, Map<String, List<Commit>>> commitsByDateAndAuthor = allCommits.stream()
 				.collect(Collectors.groupingBy(
 						commit -> commit.getCommittedDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
 						Collectors.groupingBy(Commit::getAuthorName)));
+
 		// 获取项目的成员列表
 		List<Member> members = gitLabApi.getProjectApi().getMembers(project.getId());
 		// 用于存储每个成员每天的统计信息
 		Map<String, List<CodeContributionRecord>> memberStats = new HashMap<>();
 		// 遍历成员列表
 		for (Member member : members) {
-			String name = member.getName();
+			String name = member.getName();//名字
+            String userName = member.getUsername();//手机号
 			String state = member.getState();
 			// 跳过不符合要求的用户
 			if ("blocked".equals(state) || name.contains("root")) {
@@ -378,8 +377,15 @@ public class GitApi {
 				int addCode = 0;
 				int delCode = 0;
 				int totalCode = 0;
+				// 用于去重的提交SHA集合
+                Set<String> processedCommits = new HashSet<>();
 				// 统计成员的代码贡献
 				for (Commit commit : commits) {
+					// 跳过已处理的提交（解决重复提交问题）
+                    if (processedCommits.contains(commit.getId())) {
+                        continue;
+                    }
+                    processedCommits.add(commit.getId());
 					// 过滤合并提交
 					if (isMergeCommit(commit)) {
 						continue;
@@ -400,11 +406,6 @@ public class GitApi {
 
 		// 生成 Excel 文件
 		generateExcel(memberStats, "D:\\" + projectIdOrPath + ".xlsx");
-		// 记录结束时间
-		long endTime = System.currentTimeMillis();
-		// 计算执行时间
-		long executionTime = endTime - startTime;
-		System.out.println("逻辑执行时间: " + executionTime + " 毫秒");
 	}
 
 	// 判断是否为合并提交
@@ -502,7 +503,7 @@ public class GitApi {
 //		api.importProject("http://devgit.vjspnet.cn/13998417419/spring.git","");//无凭证公开仓库
 //		api.importProject("http://devgit.vjspnet.cn/13998417419/srping.git","sMqds4BFz9DbQUtQom4v");//私有仓库+个人凭证
 		// 文件查询
-		api.queryFileProject(42, "master", "DemoApplication");
+//		api.queryFileProject(42, "master", "DemoApplication");
 		// 修改仓库
 //		api.updateProject(1365L);
 		// 删除仓库
@@ -517,7 +518,7 @@ public class GitApi {
 //		api.listCommits("42");
 		// 统计代码按仓库遍历人员，查询所有人的代码修改量：新增，删除，变更
 //		api.rowsStatistics("xuzhihao/spring");
-//		api.rowsStatistics(417L);
+		api.rowsStatistics(379L);
 		// 创建webhook
 //		api.addHook("3lvya1tn/250121/11");
 	}
