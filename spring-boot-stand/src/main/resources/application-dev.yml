@@ -12,3 +12,6 @@ xzh:
    noAuthUrls:
    - /
    - /login
+   - /user/*
+   - /user/**
+   - /api/?/test
