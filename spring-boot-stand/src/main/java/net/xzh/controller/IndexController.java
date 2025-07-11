@@ -3,7 +3,8 @@ package net.xzh.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -13,32 +14,28 @@ import net.xzh.i18n.I18nMessages;
 public class IndexController {
 
 	/**
-	 * 
-	 * @param session
-	 * @param modelAndView
-	 * @return
+	 * 我的桌面
 	 */
-	@RequestMapping(value = "/dashboard")
-	@ResponseBody
+	@GetMapping("/dashboard")
 	public ModelAndView login(HttpSession session, ModelAndView modelAndView) {
 		modelAndView.addObject("welcome", I18nMessages.getMessage("welcome"));
 		modelAndView.setViewName("dashboard");
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "/login")
+	@PostMapping("/login")
 	@ResponseBody()
 	public String login(String loginName, HttpSession session) {
 		session.setAttribute("user", loginName);
-		return "";
+		return "success‌";
 	}
 
-	@RequestMapping(value = "/logout")
+	@PostMapping("/logout")
 	@ResponseBody()
 	public String logout(HttpSession session) {
 		if (session != null) {
 			session.invalidate();
 		}
-		return "";
+		return "success‌";
 	}
 }
