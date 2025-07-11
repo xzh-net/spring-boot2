@@ -6,8 +6,4 @@
 2. i18n
 3. 拦截器、请求白名单
 4. banner设置
-
-```bash
-mvn clean compile
-mvn clean package
-```
+5. 获取数据常用6种方式
