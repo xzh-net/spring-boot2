@@ -35,7 +35,7 @@ public class LoginHandlerInterceptor implements HandlerInterceptor {
 	    AntPathMatcher pathMatcher = new AntPathMatcher();
 	    boolean isNoAuth = authProperties.getNoAuthUrls().stream()
 	            .anyMatch(pattern -> pathMatcher.match(pattern, url));
-		if (isNoAuth) {// 需要拦截认证的页面
+		if (!isNoAuth) {// 需要拦截认证的页面
 			String loginName = (String) request.getSession().getAttribute("user");
 			if (StrUtil.isBlank(loginName)) {
 				response.sendRedirect(request.getContextPath() + "/"); // 未登录自动跳转界面
