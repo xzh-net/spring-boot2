@@ -4,7 +4,9 @@ server:
 spring:
   datasource:
     driver-class-name: org.sqlite.JDBC
-    url: jdbc:sqlite:test.db
+    url: jdbc:sqlite:d:/test.db
+    username: 
+    password:
   jpa:
     show-sql: true
     hibernate: 
