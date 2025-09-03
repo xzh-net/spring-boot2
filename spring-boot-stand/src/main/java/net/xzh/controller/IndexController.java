@@ -1,7 +1,9 @@
 package net.xzh.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +15,8 @@ import net.xzh.i18n.I18nMessages;
 @Controller
 public class IndexController {
 
+	@Autowired
+	private HttpServletRequest request;
 	/**
 	 * 我的桌面
 	 */
