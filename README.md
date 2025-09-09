@@ -3,7 +3,10 @@
 ## 1. 基础
 
 - [Spring Boot入门Thymeleaf、i18n、自定义Banner、拦截器](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-stand)
+
 - [性能卓越的数据库连接池HikariCP](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-hikaricp)
+
+---
 
 
 ## 2. 官方Starter
@@ -20,6 +23,8 @@
 - [高性能的异步非阻塞web框架](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-webflux)
 - [原生WebSocket示例](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-websocket)
 - [JPA操作SQLite数据库](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-sqlite)
+
+---
 
 ## 3. 三方Starter
 
@@ -38,6 +43,7 @@
 - [【自定义】分布式文件存储S3和FastDFS](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-oss-starter)
 - [替代Hystrix和Sentinel的轻量级熔断器Resilience4j](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-resilience4j)
 
+---
 
 ## 4. 三方类库
 
@@ -62,6 +68,8 @@
 - [Java调用Python的几种方式](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-python)
 - [使用Apache Geode解决千万级QPS并发查询](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-geode)
 
+---
+
 ## 5. 工具
 
 > 不使用中间件技术，调试工具代码合辑
@@ -78,6 +86,8 @@
 - [SSE流式传输协议](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-sse)
 - [微信公众号和企业微信开发](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-wechat)
 - [Filter实现XSS防御](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-xss)
+
+---
 
 ## 6. 项目
 
