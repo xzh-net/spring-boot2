@@ -12,7 +12,7 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.data.redis.core.script.DefaultRedisScript;
+import org.springframework.data.redis.core.script.RedisScript;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -34,10 +34,11 @@ import net.xzh.redis.common.utils.AddrUtil;
 @Component
 @Slf4j
 public class LimitAspect {
-	@Autowired
+	@Autowired	
 	private StringRedisTemplate stringRedisTemplate;
+	
 	@Autowired
-	private DefaultRedisScript<Long> redisScript;
+	private RedisScript<Long> limitScript;
 
 	@Around("@annotation(limit)")
 	public Object around(ProceedingJoinPoint joinPoint, Limit limit) throws Throwable {
@@ -64,7 +65,7 @@ public class LimitAspect {
 			key = SecureUtil.md5(jwtToken + "-" + request.getRequestURI() + "-" + Arrays.asList(args));
 			break;
 		}
-		Long executeTimes = stringRedisTemplate.execute(redisScript, Collections.singletonList(limit.prefix() + key),
+		Long executeTimes = stringRedisTemplate.execute(limitScript, Collections.singletonList(limit.prefix() + key),
 				now + "", ttl + "", expired + "", max + "");
 		if (executeTimes != null) {
 			if (executeTimes == 0) {

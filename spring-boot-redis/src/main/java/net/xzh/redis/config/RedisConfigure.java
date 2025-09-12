@@ -13,6 +13,7 @@ import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.data.redis.serializer.RedisSerializationContext;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
@@ -98,5 +99,36 @@ public class RedisConfigure {
                 .computePrefixWith(cacheName -> "annotation".concat(":").concat(cacheName).concat(":"))
                 .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(redisKeySerializer))
                 .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(redisValueSerializer));
+    }
+    
+    @Bean
+    public DefaultRedisScript<Long> limitScript()
+    {
+        DefaultRedisScript<Long> redisScript = new DefaultRedisScript<>();
+        redisScript.setScriptText(limitScriptText());
+        redisScript.setResultType(Long.class);
+        return redisScript;
+    }
+
+    /**
+     * 滑动时间窗口算法限流脚本
+     */
+    private String limitScriptText()
+    {
+        return "local key = KEYS[1]\n"
+        		+ "local now = tonumber(ARGV[1])\n"
+        		+ "local ttl = tonumber(ARGV[2])\n"
+        		+ "local expired = tonumber(ARGV[3])\n"
+        		+ "local max = tonumber(ARGV[4])\n"
+        		+ "redis.call('zremrangebyscore', key, 0, expired)\n"
+        		+ "local current = tonumber(redis.call('zcard', key))\n"
+        		+ "local next = current + 1\n"
+        		+ "if next > max then\n"
+        		+ "  return 0;\n"
+        		+ "else\n"
+        		+ "  redis.call(\"zadd\", key, now, now)\n"
+        		+ "  redis.call(\"pexpire\", key, ttl)\n"
+        		+ "  return next\n"
+        		+ "end";
     }
 }
