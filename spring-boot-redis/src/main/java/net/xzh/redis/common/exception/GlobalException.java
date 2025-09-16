@@ -1,8 +1,7 @@
 package net.xzh.redis.common.exception;
 
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import net.xzh.redis.common.model.CommonResult;
 
@@ -12,11 +11,10 @@ import net.xzh.redis.common.model.CommonResult;
  * @author Administrator
  *
  */
-@ControllerAdvice
-public class GlobalExceptionHandler {
+@RestControllerAdvice
+public class GlobalException {
 
 	@SuppressWarnings("rawtypes")
-	@ResponseBody
 	@ExceptionHandler(value = ApiException.class)
 	public CommonResult handle(ApiException e) {
 		if (e.getErrorCode() != null) {

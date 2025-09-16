@@ -1,4 +1,4 @@
-package net.xzh.redis.common.annotation;
+package net.xzh.redis.common.aspect.annotation;
 
 import org.springframework.core.annotation.Order;
 

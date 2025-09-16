@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.github.pagehelper.PageHelper;
 
+import net.xzh.redis.common.constant.Constants;
 import net.xzh.redis.mapper.PmsBrandMapper;
 import net.xzh.redis.model.PmsBrand;
 import net.xzh.redis.model.PmsBrandExample;
@@ -16,52 +17,53 @@ import net.xzh.redis.service.PmsBrandService;
 
 /**
  * PmsBrandService实现类
- * Created 2019/4/19.
  */
 @Service
 public class PmsBrandServiceImpl implements PmsBrandService {
 	
-	 /**
-     * redis数据库自定义key
-     */
-    public  static final String REDIS_KEY_DATABASE="mall:brand";
     
     @Autowired
     private PmsBrandMapper brandMapper;
     
     @Override
-    public int create(PmsBrand brand) {
+    public int createBrand(PmsBrand brand) {
         return brandMapper.insertSelective(brand);
     }
 
-    @CacheEvict(value = REDIS_KEY_DATABASE, key = "#id")
+    @CacheEvict(value = Constants.CACHE_MALL_BRAND, key = "#id")
     @Override
-    public int update(Long id, PmsBrand brand) {
+    public int updateBrand(Long id, PmsBrand brand) {
         brand.setId(id);
         return brandMapper.updateByPrimaryKeySelective(brand);
     }
 
-    @CacheEvict(value = REDIS_KEY_DATABASE, key = "#id")
+    @CacheEvict(value = Constants.CACHE_MALL_BRAND, key = "#id")
     @Override
-    public int delete(Long id) {
+    public int deleteBrand(Long id) {
         return brandMapper.deleteByPrimaryKey(id);
     }
 
-    @Cacheable(value = REDIS_KEY_DATABASE, key = "#id", unless = "#result==null")
+    @Cacheable(value = Constants.CACHE_MALL_BRAND, key = "#id", unless = "#result==null")
     @Override
-    public PmsBrand getItem(Long id) {
+    public PmsBrand getBrand(Long id) {
         return brandMapper.selectByPrimaryKey(id);
     }
 
-    @Override
-    public List<PmsBrand> list(Integer pageNum, Integer pageSize) {
+    public List<PmsBrand> listBrand(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
         return brandMapper.selectByExample(new PmsBrandExample());
     }
 
+    @Cacheable(value = Constants.CACHE_MALL_BRAND, key = "'data'", unless = "#result==null")
     @Override
-    public List<PmsBrand> ListAll() {
+    public List<PmsBrand> listAllBrand() {
         return brandMapper.selectByExample(new PmsBrandExample());
+    }
+
+    @Override
+    @CacheEvict(value = Constants.CACHE_MALL_BRAND, key = "'data'")
+    public void refreshCache() {
+
     }
 
 }

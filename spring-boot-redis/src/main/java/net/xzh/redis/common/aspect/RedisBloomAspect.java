@@ -16,9 +16,9 @@ import org.springframework.stereotype.Component;
 
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
-import net.xzh.redis.common.annotation.RedisBloom;
+import net.xzh.redis.common.aspect.annotation.RedisBloom;
+import net.xzh.redis.common.enums.ResultCode;
 import net.xzh.redis.common.exception.Asserts;
-import net.xzh.redis.common.model.ResultCode;
 
 /**
  * RedisBloom注解拦截器
@@ -64,7 +64,6 @@ public class RedisBloomAspect {
      * @param s
      * @Description: 验证是否存在与布隆过滤器中
      * @return: void
-     * @Author: liusibo
      * @Date: 2021/7/8 13:51
      */
     private void check(RBloomFilter<String> bloomFilter, String check) {

@@ -7,37 +7,35 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import net.xzh.redis.common.annotation.Limit;
+import net.xzh.redis.common.aspect.annotation.RateLimiter;
+import net.xzh.redis.common.enums.LimitType;
 import net.xzh.redis.common.model.CommonResult;
-import net.xzh.redis.common.model.LimitType;
 
 /**
- * 限流测试
+ * 三种限流类型测试
  * 
- * @author Administrator
- *
  */
-@Api(tags = "自定义限流")
+@Api(tags = "限流")
 @RestController
 @RequestMapping("/limit")
-public class LimitController {
+public class RateLimitController {
 
-	@Limit
-	@ApiOperation("默认限制")
+	@RateLimiter(max = 10, timeout = 60)
+	@ApiOperation("默认")
 	@RequestMapping(value = "/default", method = RequestMethod.GET)
 	public CommonResult<?> defaultlimit(@RequestParam String id) {
 		return CommonResult.success(1);
 	}
 
-	@Limit(limitType = LimitType.IP)
-	@ApiOperation("ip限制")
+	@RateLimiter(limitType = LimitType.IP, max = 10, timeout = 60)
+	@ApiOperation("按ip")
 	@RequestMapping(value = "/ip", method = RequestMethod.GET)
 	public CommonResult<?> ip(@RequestParam String id) {
 		return CommonResult.success(1);
 	}
 
-	@Limit(key = "customer_limit_test", limitType = LimitType.CUSTOMER)
-	@ApiOperation("自定义限制")
+	@RateLimiter(key = "customer_limit_test", limitType = LimitType.USER, max = 10, timeout = 60)
+	@ApiOperation("按用户自定义")
 	@RequestMapping(value = "/customer", method = RequestMethod.GET)
 	public CommonResult<?> customer(@RequestParam String id) {
 		return CommonResult.success(1);

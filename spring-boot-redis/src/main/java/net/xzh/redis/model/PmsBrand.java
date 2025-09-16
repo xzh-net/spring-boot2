@@ -1,8 +1,7 @@
 package net.xzh.redis.model;
 
-import java.io.Serializable;
-
 import io.swagger.annotations.ApiModelProperty;
+import java.io.Serializable;
 
 public class PmsBrand implements Serializable {
     private Long id;

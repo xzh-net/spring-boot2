@@ -1,4 +1,4 @@
-package net.xzh.redis.config;
+package net.xzh.redis.config.properties;
 
 import java.util.List;
 
@@ -8,11 +8,15 @@ import org.springframework.stereotype.Component;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * redis缓存注解属性
+ *
+ */
 @Setter
 @Getter
-@ConfigurationProperties(prefix = "xzh.cache-manager")
+@ConfigurationProperties(prefix = "redis.cache")
 @Component
-public class CacheManagerProperties {
+public class RedisCacheProperties {
     private List<CacheConfig> configs;
 
     @Setter
@@ -23,7 +27,7 @@ public class CacheManagerProperties {
          */
         private String key;
         /**
-         * 过期时间，sec
+         * 过期时间，单位：默认3600秒
          */
         private long second = 3600;
     }

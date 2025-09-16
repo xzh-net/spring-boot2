@@ -23,7 +23,7 @@ import java.util.List;
 @Configuration
 @EnableSwagger2
 @EnableKnife4j
-public class Swagger2Config {
+public class SwaggerConfig {
     @Bean
     public Docket createRestApi() {
         return new Docket(DocumentationType.SWAGGER_2)

@@ -1,25 +1,27 @@
 package net.xzh.redis.service;
 
-
 import java.util.List;
 
 import net.xzh.redis.model.PmsBrand;
 
 /**
- * PmsBrandService
- * Created 2019/4/19.
+ * 品牌
  */
+
 public interface PmsBrandService {
 
-    int create(PmsBrand brand);
+	List<PmsBrand> listAllBrand();
 
-    int update(Long id, PmsBrand brand);
+	int createBrand(PmsBrand brand);
 
-    int delete(Long id);
+	int updateBrand(Long id, PmsBrand brand);
 
-    PmsBrand getItem(Long id);
+	int deleteBrand(Long id);
 
-    List<PmsBrand> list(Integer pageNum, Integer pageSize);
+	List<PmsBrand> listBrand(int pageNum, int pageSize);
 
-    List<PmsBrand> ListAll();
+	PmsBrand getBrand(Long id);
+
+	void refreshCache();
+
 }

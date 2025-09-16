@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
-import net.xzh.redis.common.annotation.RedisBloomAdd;
+import net.xzh.redis.common.aspect.annotation.RedisBloomAdd;
 
 /**
  * RedisBloomAdd拦截器

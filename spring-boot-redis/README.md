@@ -2,30 +2,17 @@
 
 访问地址：http://127.0.0.1:8080/doc.html
 
-1. 基本类型数据测试
-2. 发布订阅，自定义key失效事件、全局key失效事件
-3. 二进制保存
-4. 管道批量操作
-5. 缓存注解，自定义不同组别设置不同失效时间
-6. redisson分布式锁
-7. redisson布隆过滤器
-8. 使用lua脚本实现访问次数限制
-9. 读写分离
-
-```java
-@Bean
-public LettuceClientConfigurationBuilderCustomizer clientConfigurationBuilderCustomizer() {
-	return new LettuceClientConfigurationBuilderCustomizer() {
-		@Override
-		public void customize(LettuceClientConfigurationBuilder clientConfigurationBuilder) {
-			clientConfigurationBuilder.readFrom(ReadFrom.REPLICA_PREFERRED);
-		}
-	};
-}
-```
+1. 自定义redisTemplate模板，设置序列化函数
+2. 开启@EnableCaching注解，设置不同key使用不同的失效时间
+3. 基于时间窗滑块算法实现三种方式限流
+4. 设置读写分离规则
+5. 封装工具类调用生成短信验证码并验证
+6. 基本数据类型操作
+7. redisson分布式锁
+8. redisson布隆过滤器
 
 
-限流脚本
+基于时间窗限流脚本
 
 ```lua
 local key = KEYS[1] -- 限流的资源KEY

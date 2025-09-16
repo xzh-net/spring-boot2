@@ -19,13 +19,12 @@ import net.xzh.redis.service.PmsBrandService;
 import net.xzh.redis.service.RedisService;
 
 /**
- * redis测试Controller
- * Created 2020/3/3.
+ * 测试
  */
-@Api(tags = "基础数据读写")
+@Api(tags = "测试")
 @RestController
 @RequestMapping("/redis")
-public class RedisController {
+public class TestController {
 	
     @Autowired
     private RedisService redisService;
@@ -35,7 +34,7 @@ public class RedisController {
     @ApiOperation("对象读写")
     @RequestMapping(value = "/simpleTest", method = RequestMethod.GET)
     public CommonResult<PmsBrand> simpleTest() {
-        List<PmsBrand> brandList = brandService.list(1, 5);
+        List<PmsBrand> brandList = brandService.listAllBrand();
         PmsBrand brand = brandList.get(0);
         String key = "redis:simple:" + brand.getId();
         redisService.set(key, brand);
@@ -46,7 +45,7 @@ public class RedisController {
     @ApiOperation("Hash缓存")
     @RequestMapping(value = "/hashTest", method = RequestMethod.GET)
     public CommonResult<PmsBrand> hashTest() {
-        List<PmsBrand> brandList = brandService.list(1, 5);
+        List<PmsBrand> brandList = brandService.listAllBrand();
         PmsBrand brand = brandList.get(0);
         String key = "redis:hash:" + brand.getId();
         Map<String, Object> value = BeanUtil.beanToMap(brand);
@@ -59,7 +58,7 @@ public class RedisController {
     @ApiOperation("Set缓存")
     @RequestMapping(value = "/setTest", method = RequestMethod.GET)
     public CommonResult<Set<Object>> setTest() {
-        List<PmsBrand> brandList = brandService.list(1, 5);
+        List<PmsBrand> brandList = brandService.listAllBrand();
         String key = "redis:set:all";
         redisService.sAdd(key, (Object[]) ArrayUtil.toArray(brandList, PmsBrand.class));
         redisService.sRemove(key, brandList.get(0));
@@ -70,7 +69,7 @@ public class RedisController {
     @ApiOperation("List缓存")
     @RequestMapping(value = "/listTest", method = RequestMethod.GET)
     public CommonResult<List<Object>> listTest() {
-        List<PmsBrand> brandList = brandService.list(1, 5);
+        List<PmsBrand> brandList = brandService.listAllBrand();
         String key = "redis:list:all";
         redisService.lPushAll(key, (Object[]) ArrayUtil.toArray(brandList, PmsBrand.class));
         redisService.lRemove(key, 1, brandList.get(0));

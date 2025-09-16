@@ -4,8 +4,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * MyBatis配置类
- * Created 2019/4/8.
+ * 持久层配置
  */
 @Configuration
 @MapperScan("net.xzh.redis.mapper")

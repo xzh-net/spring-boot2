@@ -3,10 +3,8 @@ package net.xzh.redis.common.exception;
 import net.xzh.redis.common.model.IErrorCode;
 
 /**
- * 断言处理类，用于抛出各种API异常
+ * 异常断言处理类
  * 
- * @author Administrator
- *
  */
 
 public class Asserts {
