@@ -30,11 +30,18 @@ public class Constants {
 	/**
 	 * 短信登录
 	 */
-	public static final String CACHE_AUTH_PHONE = "auth:phone:";
+	public static final String CACHE_PHONE_CODE = "auth:phone:";
+	
+	/**
+	 * 短信验证码长度
+	 */
+	
+	public static final int CACHE_PHONE_CODE_LENGTH = 8;
 	
 	/**
 	 * 秒杀分布式锁
 	 */
 	public static final String LOCK_PREFIX = "secKill:lock:";
+	
 	
 }
