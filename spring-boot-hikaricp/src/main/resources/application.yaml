@@ -10,11 +10,16 @@ spring:
       username: root
       password: root
       hikari:
-         connection-timeout: 30000  # 等待连接池分配连接的最大时长（毫秒），超过这个时长还没可用的连接则发生SQ
-         minimum-idle: 5            # 最小连接数
-         maximum-pool-size: 20      # 最大连接数
-         auto-commit: true          # 自动提交
-         idle-timeout: 600000       # 连接超时的最大时长（毫秒），超时则被释放（retired），默认:10分钟
-         pool-name: hikari-sso      # 连接池名字
-         max-lifetime: 1800000      # 连接的生命时长（毫秒），超时而且没被使用则被释放（retired），默认:30分钟
-         connection-test-query: SELECT 1      # 连接的测试语句
+         # 连接池核心参数
+         maximum-pool-size: 20              # 最大连接数
+         minimum-idle: 5                    # 最小连接数
+         # 连接有效性检查
+         connection-timeout: 30000          # 连接超时时间（默认30秒）
+         idle-timeout: 600000               # 空闲连接最大存活时间（默认:10分钟）
+         max-lifetime: 1800000              # 连接最大生命周期（30分钟），小于pg的tcp_keepalive时间
+         connection-test-query: SELECT 1    # 连接检测查询
+         # 优化参数
+         leak-detection-threshold: 5000     # 连接泄漏检测阈值（毫秒）
+         pool-name: hikari                  # 连接池名
+         auto-commit: true                  # 自动提交
+         validation-timeout: 5000           # 连接验证超时
