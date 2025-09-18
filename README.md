@@ -93,3 +93,11 @@
 
 - [基于Spring Boot+MyBatis-Plus的快速开发脚手架](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-swagger)
 - [整合Activiti工作流设计器和数据验证分组校验](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-activiti)
+
+
+
+## 更新记录
+
+- 2025-09-18 优化任务调度和自定义线程池参数
+- 2025-09-17 日志拦截器逻辑优化，增加记录字段
+- 2025-09-16 完善Redis限流功能和优化template注入逻辑
