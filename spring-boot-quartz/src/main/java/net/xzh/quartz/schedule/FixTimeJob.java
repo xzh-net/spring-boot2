@@ -18,9 +18,9 @@ import net.xzh.quartz.service.ScheduleService;
  * Created 2020/9/27.
  */
 @Component
-public class fixTimeJob extends QuartzJobBean {
+public class FixTimeJob extends QuartzJobBean {
 	
-	private static final Logger log = LoggerFactory.getLogger(fixTimeJob.class);
+	private static final Logger log = LoggerFactory.getLogger(FixTimeJob.class);
 	
     @Autowired
     private ScheduleService scheduleService;
