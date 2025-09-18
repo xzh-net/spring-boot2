@@ -1,4 +1,4 @@
-package net.xzh.quartz.task;
+package net.xzh.quartz.schedule;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -7,10 +7,15 @@ import org.springframework.stereotype.Component;
 
 import cn.hutool.core.date.DateTime;
 
+/**
+ * 固定频率执行器，无法动态修改，可以结合业务做为系统执行器
+ * @author CR7
+ *
+ */
 @Component
-public class TestTask {
+public class SystemSchedule {
 
-	private static final Logger log = LoggerFactory.getLogger(TestTask.class);
+	private static final Logger log = LoggerFactory.getLogger(SystemSchedule.class);
 	
 	/**
 	 * cron表达式

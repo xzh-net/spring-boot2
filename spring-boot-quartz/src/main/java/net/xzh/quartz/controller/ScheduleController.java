@@ -13,48 +13,51 @@ import cn.hutool.core.date.DateUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import net.xzh.quartz.common.model.CommonResult;
-import net.xzh.quartz.job.CronProcessJob;
-import net.xzh.quartz.job.SendEmailJob;
-import net.xzh.quartz.job.SendMessageJob;
+import net.xzh.quartz.schedule.cronExpJob;
+import net.xzh.quartz.schedule.fixSecondJob;
+import net.xzh.quartz.schedule.fixTimeJob;
 import net.xzh.quartz.service.ScheduleService;
 
 /**
- * 定时任务调度相关接口
- * Created 2020/9/29.
+ * 定时任务调度相关接口 update 20250918
  */
-@Api(tags = "定时任务调度")
+@Api(tags = "定时任务")
 @RestController
 @RequestMapping("/schedule")
 public class ScheduleController {
-    @Autowired
-    private ScheduleService scheduleService;
-    
-    @ApiOperation("指定时间发送邮件")
-    @PostMapping("/sendEmail")
-    public CommonResult sendEmail(@RequestParam String startTime,@RequestParam String data) {
-        Date date = DateUtil.parse(startTime, DatePattern.NORM_DATETIME_FORMAT);
-        String jobName = scheduleService.scheduleFixTimeJob(SendEmailJob.class, date, data);
-        return CommonResult.success(jobName);
-    }
 
-    @ApiOperation("过?秒发送站内信")
-    @PostMapping("/sendMessage")
-    public CommonResult sendMessage(@RequestParam Integer second,@RequestParam String data) {
-        String jobName = scheduleService.scheduleFixSecondJob(SendMessageJob.class, second, data);
-        return CommonResult.success(jobName);
-    }
+	@Autowired
+	private ScheduleService scheduleService;
 
-    @ApiOperation("通过CRON表达式调度任务")
-    @PostMapping("/scheduleJob")
-    public CommonResult scheduleJob(@RequestParam String cron, @RequestParam String data) {
-        String jobName = scheduleService.scheduleJob(CronProcessJob.class, cron, data);
-        return CommonResult.success(jobName);
-    }
+	@ApiOperation("指定时间执行")
+	@PostMapping("/scheduleFixTimeJob")
+	public CommonResult<?> scheduleFixTimeJob(
+			@RequestParam(required = true, defaultValue = "2025-09-18 16:00:00") String startTime,
+			@RequestParam String message) {
+		Date date = DateUtil.parse(startTime, DatePattern.NORM_DATETIME_FORMAT);
+		String jobName = scheduleService.scheduleFixTimeJob(fixTimeJob.class, date, message);
+		return CommonResult.success(jobName);
+	}
 
-    @ApiOperation("取消定时任务")
-    @PostMapping("/cancelScheduleJob")
-    public CommonResult cancelScheduleJob(@RequestParam String jobName) {
-        Boolean success = scheduleService.cancelScheduleJob(jobName);
-        return CommonResult.success(success);
-    }
+	@ApiOperation("过?秒执行")
+	@PostMapping("/scheduleFixSecondJob")
+	public CommonResult<?> scheduleFixSecondJob(@RequestParam Integer second, @RequestParam String message) {
+		String jobName = scheduleService.scheduleFixSecondJob(fixSecondJob.class, second, message);
+		return CommonResult.success(jobName);
+	}
+
+	@ApiOperation("按照表达式执行")
+	@PostMapping("/scheduleCronExpJob")
+	public CommonResult<?> cronExpJob(@RequestParam(required = true, defaultValue = "*/10 * * * * ?") String cron,
+			@RequestParam String message) {
+		String jobName = scheduleService.scheduleCronExpJob(cronExpJob.class, cron, message);
+		return CommonResult.success(jobName);
+	}
+
+	@ApiOperation("取消任务")
+	@PostMapping("/cancelJob")
+	public CommonResult<?> cancelJob(@RequestParam String jobName) {
+		Boolean success = scheduleService.cancelJob(jobName);
+		return CommonResult.success(success);
+	}
 }

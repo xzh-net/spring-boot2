@@ -1,4 +1,4 @@
-package net.xzh.quartz.job;
+package net.xzh.quartz.schedule;
 
 import org.quartz.JobDataMap;
 import org.quartz.JobDetail;
@@ -14,13 +14,13 @@ import org.springframework.stereotype.Component;
 import net.xzh.quartz.service.ScheduleService;
 
 /**
- * 发送邮件定时任务执行器
+ * 多少s以后执行的执行器
  * Created 2020/9/27.
  */
 @Component
-public class SendEmailJob extends QuartzJobBean {
+public class fixSecondJob extends QuartzJobBean {
 	
-	private static final Logger log = LoggerFactory.getLogger(SendEmailJob.class);
+	private static final Logger log = LoggerFactory.getLogger(fixSecondJob.class);
 	
     @Autowired
     private ScheduleService scheduleService;
@@ -30,9 +30,9 @@ public class SendEmailJob extends QuartzJobBean {
         Trigger trigger = jobExecutionContext.getTrigger();
         JobDetail jobDetail = jobExecutionContext.getJobDetail();
         JobDataMap jobDataMap = jobDetail.getJobDataMap();
-        String data = jobDataMap.getString("data");
-        log.info("定时发送邮件操作：{}",data);
+        String message = jobDataMap.getString("message");
+        log.info("多少s以后执行的执行器：{}",message);
         //完成后删除触发器和任务
-        scheduleService.cancelScheduleJob(trigger.getKey().getName());
+        scheduleService.cancelJob(trigger.getKey().getName());
     }
 }

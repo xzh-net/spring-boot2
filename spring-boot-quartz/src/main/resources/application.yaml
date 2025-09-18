@@ -3,9 +3,9 @@ server:
 
 spring:
   application:
-    name: quartz
+    name: thiread-quartz
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/mall?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://172.17.17.137:3306/mall?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
     username: root
     password: root
   quartz:

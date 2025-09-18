@@ -13,7 +13,7 @@
 
 - [Spring Security安全访问权限框架如何与国密算法整合](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-security)
 - [Spring Boot配置Email发送功能](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-email)
-- [整合Quartz作业调度框架](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-quartz)
+- [Quartz作业调度和自定义线程池](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-quartz)
 - [整合Validation处理非空校验拦截（支持国际化）](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-validation)
 - [整合ActiveMQ基于JSM规范进行消息发送和订阅](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-jms)
 - [整合RabbitMQ应用场景实战](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-rabbitmq)

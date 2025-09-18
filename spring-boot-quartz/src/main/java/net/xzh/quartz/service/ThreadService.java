@@ -10,17 +10,17 @@ public class ThreadService {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ThreadService.class);
 	
-	public void test() {
+	public void sync() {
 		LOGGER.info("同步,{}",Thread.currentThread().getName());
 	}
 
 	@Async
-	public void asyncTest() {
+	public void asyncDefault() {
 		LOGGER.info("异步默认,{}",Thread.currentThread().getName());
 	}
 
 	@Async("define")
-	public void asyncExampleTest() {
+	public void asyncCustom() {
 		LOGGER.info("异步define,{}",Thread.currentThread().getName());
 	}
 

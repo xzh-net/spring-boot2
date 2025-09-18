@@ -1,4 +1,4 @@
-package net.xzh.quartz.job;
+package net.xzh.quartz.schedule;
 
 import org.quartz.JobDataMap;
 import org.quartz.JobDetail;
@@ -10,19 +10,19 @@ import org.springframework.scheduling.quartz.QuartzJobBean;
 import org.springframework.stereotype.Component;
 
 /**
- * 使用CRON表达式的任务执行器
- * Created 2020/9/29.
+ * cron表达式执行器
+ * update 20250918
  */
 @Component
-public class CronProcessJob extends QuartzJobBean {
+public class cronExpJob extends QuartzJobBean {
 	
-	private static final Logger log = LoggerFactory.getLogger(CronProcessJob.class);
+	private static final Logger log = LoggerFactory.getLogger(cronExpJob.class);
 	
     @Override
     protected void executeInternal(JobExecutionContext jobExecutionContext) throws JobExecutionException {
         JobDetail jobDetail = jobExecutionContext.getJobDetail();
         JobDataMap jobDataMap = jobDetail.getJobDataMap();
-        String data = jobDataMap.getString("data");
-        log.info("CRON表达式任务执行：{}",data);
+        String message = jobDataMap.getString("message");
+        log.info("cron表达式执行器：{}",message);
     }
 }

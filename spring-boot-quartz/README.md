@@ -1,12 +1,12 @@
-# Quartz
+# Quartz作业调度和自定义线程池
 
 访问地址：http://127.0.0.1:8080/doc.html (无认证)
 
-1. @EnableScheduling
-2. quartz
-3. 自定义线程池
-
-```bash
-mvn clean compile
-mvn clean package
-```
+1. 线程池
+	- 系统默认
+	- 自定义
+2. 定时任务，可以执行频率，修改，取消
+	- 指定时间执行
+	- 多少s以后执行 
+	- 按表达式执行
+3. 系统任务，无法更改

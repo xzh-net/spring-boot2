@@ -12,12 +12,12 @@ import net.xzh.quartz.common.model.CommonResult;
 import net.xzh.quartz.service.ThreadService;
 
 /**
- * 自定义线程池 aop环绕实现日志插入
+ * 自定义线程池
  * 
  * @author Administrator
  *
  */
-@Api(tags = "自定义线程池")
+@Api(tags = "线程池")
 @RestController
 public class ThreadController {
 	
@@ -25,13 +25,27 @@ public class ThreadController {
 	private ThreadService threadService;
 	
 
-	@ApiOperation("线程异步调试")
-	@RequestMapping(value = "/async/{id}", method = RequestMethod.GET)
-	public CommonResult<Long> users(@PathVariable(name = "id") String id) {
-		threadService.test();
-		threadService.asyncTest();
-		threadService.asyncExampleTest();
+	@ApiOperation("同步")
+	@RequestMapping(value = "/sync/{id}", method = RequestMethod.GET)
+	public CommonResult<Long> sync(@PathVariable(name = "id") String id) {
+		threadService.sync();
 		return CommonResult.success(System.currentTimeMillis());
 	}
+	
+	@ApiOperation("异步默认")
+	@RequestMapping(value = "/asyncDefault/{id}", method = RequestMethod.GET)
+	public CommonResult<Long> asyncDefault(@PathVariable(name = "id") String id) {
+		threadService.asyncDefault();
+		return CommonResult.success(System.currentTimeMillis());
+	}
+
+	
+	@ApiOperation("异步自定义")
+	@RequestMapping(value = "/asyncCustom/{id}", method = RequestMethod.GET)
+	public CommonResult<Long> asyncCustom(@PathVariable(name = "id") String id) {
+		threadService.asyncCustom();
+		return CommonResult.success(System.currentTimeMillis());
+	}
+
 
 }

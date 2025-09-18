@@ -36,12 +36,12 @@ public class ScheduleServiceImpl implements ScheduleService {
     private String defaultGroup = "default_group";
 
     @Override
-    public String scheduleJob(Class<? extends Job> jobBeanClass, String cron, String data) {
+    public String scheduleCronExpJob(Class<? extends Job> jobBeanClass, String cron, String message) {
         // 创建需要执行的任务
         String jobName = UUID.fastUUID().toString();
         JobDetail jobDetail = JobBuilder.newJob(jobBeanClass)
                 .withIdentity(jobName, defaultGroup)
-                .usingJobData("data", data)
+                .usingJobData("message", message)
                 .build();
         //创建触发器，指定任务执行时间
         CronTrigger cronTrigger = TriggerBuilder.newTrigger()
@@ -68,7 +68,7 @@ public class ScheduleServiceImpl implements ScheduleService {
                 DateUtil.dayOfMonth(startTime),
                 DateUtil.month(startTime) + 1,
                 DateUtil.year(startTime));
-        return scheduleJob(jobBeanClass, startCron, data);
+        return scheduleCronExpJob(jobBeanClass, startCron, data);
     }
     
     @Override
@@ -80,7 +80,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 
     
     @Override
-    public Boolean cancelScheduleJob(String jobName) {
+    public Boolean cancelJob(String jobName) {
         boolean success = false;
         try {
             // 暂停触发器
