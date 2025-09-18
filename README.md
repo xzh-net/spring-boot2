@@ -39,7 +39,7 @@
 - [Captcha行为验证码，包含滑动拼图、文字点选](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-captcha)
 - [Zipkin实现分布式全链路监控](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-zipkin)
 - [动态数据源切换](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-datasource)
-- [【自定义】日志拦截器](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-log-starter)
+- [【自定义】审计日志拦截器](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-log)
 - [【自定义】分布式文件存储S3和FastDFS](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-oss-starter)
 - [替代Hystrix和Sentinel的轻量级熔断器Resilience4j](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-resilience4j)
 
@@ -92,4 +92,4 @@
 ## 6. 项目
 
 - [基于Spring Boot+MyBatis-Plus的快速开发脚手架](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-swagger)
-- [整合Activiti工作流，包含设计器和数据验证分组校验](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-activiti)
+- [整合Activiti工作流设计器和数据验证分组校验](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-activiti)
