@@ -12,6 +12,7 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.core.DefaultParameterNameDiscoverer;
 import org.springframework.core.NamedThreadLocal;
 import org.springframework.expression.EvaluationContext;
@@ -40,6 +41,7 @@ import net.xzh.log.common.utils.IpUtil;
 @Slf4j
 @Aspect
 @Component
+@EnableConfigurationProperties({AuditLogProperties.class})
 @ConditionalOnClass({ HttpServletRequest.class, RequestContextHolder.class })
 public class AuditLogAspect {
 

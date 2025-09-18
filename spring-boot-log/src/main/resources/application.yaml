@@ -15,7 +15,7 @@ logging:
     net.xzh: debug
     
 audit-log:
-  enabled: true
+  enabled: false
   log-type: db
   datasource: 
     driver-class-name: com.mysql.cj.jdbc.Driver
