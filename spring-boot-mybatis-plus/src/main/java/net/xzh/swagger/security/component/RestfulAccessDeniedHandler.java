@@ -13,8 +13,9 @@ import cn.hutool.json.JSONUtil;
 import net.xzh.swagger.common.api.CommonResult;
 
 /**
- * 自定义返回结果：没有权限访问时
+ * 处理授权失败
  */
+
 public class RestfulAccessDeniedHandler implements AccessDeniedHandler{
     @Override
     public void handle(HttpServletRequest request,

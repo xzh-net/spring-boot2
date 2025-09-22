@@ -17,61 +17,71 @@ import net.xzh.swagger.security.component.JwtAuthenticationTokenFilter;
 import net.xzh.swagger.security.component.RestAuthenticationEntryPoint;
 import net.xzh.swagger.security.component.RestfulAccessDeniedHandler;
 
-
 /**
- * SpringSecurity 5.4.x以上新用法配置
- * 为避免循环依赖，仅用于配置HttpSecurity
+ * SpringSecurity的配置
  */
 @Configuration
 public class SecurityConfig {
 
-    @Autowired
-    private IgnoreUrlsConfig ignoreUrlsConfig;
-    @Autowired
-    private RestfulAccessDeniedHandler restfulAccessDeniedHandler;
-    @Autowired
-    private RestAuthenticationEntryPoint restAuthenticationEntryPoint;
-    @Autowired
-    private JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter;
-    @Autowired
-    private DynamicSecurityService dynamicSecurityService;
-    @Autowired
-    private DynamicSecurityFilter dynamicSecurityFilter;
+	/**
+	 * 忽略认证地址
+	 */
+	@Autowired
+	private IgnoreUrlsConfig ignoreUrlsConfig;
 
-    @Bean
-    SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
-        ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry = httpSecurity
-                .authorizeRequests();
-        //不需要保护的资源路径允许访问
-        for (String url : ignoreUrlsConfig.getUrls()) {
-            registry.antMatchers(url).permitAll();
-        }
-        //允许跨域请求的OPTIONS请求
-        registry.antMatchers(HttpMethod.OPTIONS)
-                .permitAll();
-        // 任何请求需要身份认证
-        registry.and()
-                .authorizeRequests()
-                .anyRequest()
-                .authenticated()
-                // 关闭跨站请求防护及不使用session
-                .and()
-                .csrf()
-                .disable()
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                // 自定义权限拒绝处理类
-                .and()
-                .exceptionHandling()
-                .accessDeniedHandler(restfulAccessDeniedHandler)
-                .authenticationEntryPoint(restAuthenticationEntryPoint)
-                // 自定义权限拦截器JWT过滤器
-                .and()
-                .addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
-        //有动态权限配置时添加动态权限校验过滤器
-        if(dynamicSecurityService!=null){
-            registry.and().addFilterBefore(dynamicSecurityFilter, FilterSecurityInterceptor.class);
-        }
-        return httpSecurity.build();
-    }
+	/**
+	 * 处理授权失败
+	 */
+	@Autowired
+	private RestfulAccessDeniedHandler restfulAccessDeniedHandler;
+
+	/**
+	 * 处理认证失败
+	 */
+	@Autowired
+	private RestAuthenticationEntryPoint restAuthenticationEntryPoint;
+	@Autowired
+
+	/**
+	 * token认证过滤器
+	 */
+	private JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter;
+
+	/**
+	 * 动态权限扩展接口
+	 */
+	@Autowired
+	private DynamicSecurityService dynamicSecurityService;
+
+	/**
+	 * 动态权限过滤器
+	 */
+	@Autowired
+	private DynamicSecurityFilter dynamicSecurityFilter;
+
+	@Bean
+	SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
+		ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry = httpSecurity
+				.authorizeRequests();
+		// 不需要保护的资源路径允许访问
+		for (String url : ignoreUrlsConfig.getUrls()) {
+			registry.antMatchers(url).permitAll();
+		}
+		// 允许跨域请求的OPTIONS请求
+		registry.antMatchers(HttpMethod.OPTIONS).permitAll();
+		// 任何请求需要身份认证
+		registry.and().authorizeRequests().anyRequest().authenticated()
+				// 关闭跨站请求防护及不使用session
+				.and().csrf().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+				// 自定义权限拒绝处理类
+				.and().exceptionHandling().accessDeniedHandler(restfulAccessDeniedHandler)
+				.authenticationEntryPoint(restAuthenticationEntryPoint)
+				// 自定义权限拦截器JWT过滤器
+				.and().addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
+		// 有动态权限配置时添加动态权限校验过滤器
+		if (dynamicSecurityService != null) {
+			registry.and().addFilterBefore(dynamicSecurityFilter, FilterSecurityInterceptor.class);
+		}
+		return httpSecurity.build();
+	}
 }

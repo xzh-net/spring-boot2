@@ -5,7 +5,7 @@ import org.springframework.security.access.ConfigAttribute;
 import java.util.Map;
 
 /**
- * 动态权限相关业务类
+ * 动态权限相业
  */
 public interface DynamicSecurityService {
     /**
