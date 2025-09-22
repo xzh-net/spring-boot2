@@ -20,7 +20,7 @@ import net.xzh.security.security.util.PwdEncoderUtil;
  * Created by xzh on 2022/5/20.
  */
 @Configuration
-public class MallSecurityConfig {
+public class CommonSecurityConfig {
 
     @Bean
     public IgnoreUrlsConfig ignoreUrlsConfig() {

@@ -1,4 +1,4 @@
-package net.xzh.security.security.config;
+package net.xzh.security.config;
 
 import java.util.List;
 import java.util.Map;
@@ -21,7 +21,7 @@ import net.xzh.security.service.UmsAdminService;
  * 自定义配置，用于配置如何获取用户信息及动态权限
  */
 @Configuration
-public class UserDetailsSecurityConfig {
+public class MallSecurityConfig {
 	@Autowired
 	private UmsAdminService adminService;
 
