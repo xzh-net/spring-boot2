@@ -15,7 +15,7 @@ token:
   # 令牌前缀
   prefix: Bearer 
   # 令牌密钥
-  secret: abcdefghijklmnopqrstuvwxyz #JWT加解密使用的密钥
+  secret: abcdefghijklmnopqrstuvwxyz
   # 令牌有效期（默认30分钟）
   expiration: 1800
 
