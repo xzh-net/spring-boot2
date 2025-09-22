@@ -28,12 +28,15 @@ public class JwtTokenUtil {
     private static final Logger LOGGER = LoggerFactory.getLogger(JwtTokenUtil.class);
     private static final String CLAIM_KEY_USERNAME = "sub";
     private static final String CLAIM_KEY_CREATED = "created";
-    @Value("${jwt.secret}")
+    
+    @Value("${token.secret}")
     private String secret;
-    @Value("${jwt.expiration}")
+    
+    @Value("${token.expiration}")
     private Long expiration;
-    @Value("${jwt.tokenHead}")
-    private String tokenHead;
+    
+    @Value("${token.prefix}")
+    private String prefix;
 
     /**
      * 根据负责生成JWT的token
@@ -123,13 +126,13 @@ public class JwtTokenUtil {
     /**
      * 当原来的token没过期时是可以刷新的
      *
-     * @param oldToken 带tokenHead的token
+     * @param oldToken 带Bearer的token
      */
     public String refreshHeadToken(String oldToken) {
         if(StrUtil.isEmpty(oldToken)){
             return null;
         }
-        String token = oldToken.substring(tokenHead.length());
+        String token = oldToken.substring(prefix.length());
         if(StrUtil.isEmpty(token)){
             return null;
         }
