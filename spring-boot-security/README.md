@@ -10,3 +10,10 @@
 2. 实现FilterInvocationSecurityMetadataSource来动态获取权限配置
 3. 实现AccessDecisionManager来进行访问决策
 
+## 认证机制
+
+使用 Spring Security 的 AuthenticationManager 进行认证，委托给 UserDetailsService 执行实际的认证逻辑，标准化流程。
+
+> 其他方式：手动获取 UserDetails 并检查密码，直接操作 SecurityContextHolder，绕过 Spring Security 的认证管理器。
+> 参考项目：spring-boot-mybatis-plus
+
