@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import cn.hutool.core.util.IdUtil;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -28,9 +29,13 @@ public class JwtTokenUtil {
     private static final Logger LOGGER = LoggerFactory.getLogger(JwtTokenUtil.class);
     private static final String CLAIM_KEY_USERNAME = "sub";
     private static final String CLAIM_KEY_CREATED = "created";
-    @Value("${jwt.secret}")
+
+    // 令牌秘钥
+    @Value("${token.secret}")
     private String secret;
-    @Value("${jwt.expiration}")
+    
+    // 令牌有效期（默认30分钟）
+    @Value("${token.expiration}")
     private Long expiration;
 
     /**
@@ -112,9 +117,10 @@ public class JwtTokenUtil {
      * 根据用户信息生成token
      */
     public String generateToken(UserDetails userDetails) {
+    	String token = IdUtil.simpleUUID();
         Map<String, Object> claims = new HashMap<>();
         claims.put(CLAIM_KEY_USERNAME, userDetails.getUsername());
-        claims.put(CLAIM_KEY_CREATED, new Date());
+        claims.put(CLAIM_KEY_CREATED, token);
         return generateToken(claims);
     }
 

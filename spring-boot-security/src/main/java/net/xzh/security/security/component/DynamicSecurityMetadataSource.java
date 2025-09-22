@@ -16,6 +16,7 @@ import org.springframework.util.AntPathMatcher;
 import org.springframework.util.PathMatcher;
 
 import cn.hutool.core.util.URLUtil;
+import net.xzh.security.security.service.DynamicSecurityService;
 
 /**
  * 动态权限数据源，用于获取动态权限规则

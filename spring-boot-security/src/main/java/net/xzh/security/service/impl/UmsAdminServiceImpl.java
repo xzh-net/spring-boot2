@@ -6,18 +6,19 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import cn.hutool.core.collection.CollUtil;
-import lombok.extern.slf4j.Slf4j;
 import net.xzh.security.domain.AdminUserDetails;
 import net.xzh.security.domain.UmsResource;
 import net.xzh.security.model.UmsAdmin;
@@ -25,9 +26,8 @@ import net.xzh.security.security.util.JwtTokenUtil;
 import net.xzh.security.service.UmsAdminService;
 
 /**
- * Created 2020/10/15.
+ * 用户管理
  */
-@Slf4j
 @Service
 public class UmsAdminServiceImpl implements UmsAdminService {
     /**
@@ -38,8 +38,14 @@ public class UmsAdminServiceImpl implements UmsAdminService {
      * 存放默认资源信息
      */
     private List<UmsResource> resourceList = new ArrayList<>();
+    
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
+    
+    @Resource
+    @Lazy
+	private AuthenticationManager authenticationManager;
+    
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -108,21 +114,13 @@ public class UmsAdminServiceImpl implements UmsAdminService {
 
     @Override
     public String login(String username, String password) {
-        String token = null;
-        try {
-            UserDetails userDetails = getAdminByUsername(username);
-            if(userDetails==null){
-                return token;
-            }
-            if (!passwordEncoder.matches(password, userDetails.getPassword())) {
-                throw new BadCredentialsException("密码不正确");
-            }
-            UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-            token = jwtTokenUtil.generateToken(userDetails);
-        } catch (AuthenticationException e) {
-            log.warn("登录异常:{}", e.getMessage());
-        }
-        return token;
+    	Authentication authentication = null;
+		UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username,
+				password);
+		SecurityContextHolder.getContext().setAuthentication(authentication);
+		// 该方法会去调用UserDetailsServiceImpl.loadUserByUsername
+		authentication = authenticationManager.authenticate(authenticationToken);
+		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+		return jwtTokenUtil.generateToken(userDetails);
     }
 }

@@ -25,13 +25,13 @@ import net.xzh.security.service.UmsAdminService;
 @Api(tags = "用户管理")
 @RequestMapping("/admin")
 public class UmsAdminController {
+	
     @Autowired
     private UmsAdminService adminService;
-    @Value("${jwt.tokenHeader}")
-    private String tokenHeader;
-    @Value("${jwt.tokenHead}")
-    private String tokenHead;
-
+    
+    // 令牌前缀
+    @Value("${token.prefix}")
+    private String prefix;
 
     @ApiOperation(value = "登录")
     @RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -43,7 +43,7 @@ public class UmsAdminController {
         }
         Map<String, String> tokenMap = new HashMap<>();
         tokenMap.put("token", token);
-        tokenMap.put("tokenHead", tokenHead);
+        tokenMap.put("prefix", prefix);
         return CommonResult.success(tokenMap);
     }
     
