@@ -33,21 +33,23 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 
 	@Autowired
 	private JwtTokenUtil jwtTokenUtil;
-	@Value("${jwt.tokenHeader}")
-	private String tokenHeader;
-	@Value("${jwt.tokenHead}")
-	private String tokenHead;
+	
+	@Value("${token.header}")
+	private String header;
+	
+	@Value("${token.prefix}")
+	private String prefix;
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
 			throws ServletException, IOException {
-		String authHeader = request.getHeader(this.tokenHeader);
-		if (authHeader != null && authHeader.startsWith(this.tokenHead)) {
-			String authToken = authHeader.substring(this.tokenHead.length());// The part after "Bearer "
+		String authHeader = request.getHeader(header);
+		if (authHeader != null && authHeader.startsWith(prefix)) {
+			String authToken = authHeader.substring(prefix.length());// The part after "Bearer "
 			String username = jwtTokenUtil.getUserNameFromToken(authToken);
 			LOGGER.info("checking username:{}", username);
 			if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-				UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
+				UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 				if (jwtTokenUtil.validateToken(authToken, userDetails)) {
 					UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
 							userDetails, null, userDetails.getAuthorities());
