@@ -14,8 +14,7 @@ import cn.hutool.json.JSONUtil;
 import net.xzh.security.common.model.CommonResult;
 
 /**
- * 当未登录或者token失效访问接口时，自定义的返回结果
- * Created 2018/5/14.
+ * 处理认证失败
  */
 public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
     @Override

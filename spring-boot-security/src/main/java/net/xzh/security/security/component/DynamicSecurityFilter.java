@@ -23,7 +23,6 @@ import net.xzh.security.security.config.IgnoreUrlsConfig;
 
 /**
  * 动态权限过滤器，用于实现基于路径的动态权限过滤
- * Created 2020/2/7.
  */
 public class DynamicSecurityFilter extends AbstractSecurityInterceptor implements Filter {
 

@@ -21,13 +21,14 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import net.xzh.security.security.util.JwtTokenUtil;
 
 /**
- * JWT登录授权过滤器
- * Created 2018/4/26.
+ * token过滤器 验证token有效性
  */
 public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
     private static final Logger LOGGER = LoggerFactory.getLogger(JwtAuthenticationTokenFilter.class);
+    
     @Autowired
     private UserDetailsService userDetailsService;
+    
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
     @Value("${jwt.tokenHeader}")

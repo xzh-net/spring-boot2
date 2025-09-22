@@ -1,39 +1,12 @@
-# 使用国密算法整合Security登录过程
+# 依赖动态权限扩展接口实现的Security整合
 
 访问地址：http://127.0.0.1:8080/doc.html
 
-## 动态权限
+## 整合思路
 
-认证步骤：登录授权过滤器->动态权限过滤器，处理白名单->动态权限决策管理器
+动态权限扩展接口（DynamicSecurityService），本身不是Security的标准组件，而是一个常用于自定义、动态权限管理方案中的核心接口，通过调用 loadDataSource 等方法在运行时刷新规则，从而实现无需重启应用即可生效的权限管理
 
-1. 实现FilterInvocationSecurityMetadataSource类，获取动态权限数据源
-    - ```
-      @PostConstruct
-      public void loadDataSource() {
-      	configAttributeMap = dynamicSecurityService.loadDataSource();
-      }
-      ```
-      
-    - 重写的support方法都返回true
-    
-2. 实现AccessDecisionManager类，权限决策器
+1. 配置DynamicSecurityService，实现loadDataSource方法动态加载规则
+2. 实现FilterInvocationSecurityMetadataSource来动态获取权限配置
+3. 实现AccessDecisionManager来进行访问决策
 
-      - 重写的support方法都返回true
-
-3. SecurityConfig配置类中完成相应配置
-
-      - ```
-        //有动态权限配置时添加动态权限校验过滤器，权限过滤器会调用决策器AccessDecisionManager中的decide方法
-        if(dynamicSecurityService!=null){
-        	registry.and().addFilterBefore(dynamicSecurityFilter, FilterSecurityInterceptor.class);
-        }
-        ```
-
-## 算法
-
-Hutool针对Bouncy Castle做了简化包装，用于实现国密算法中的SM2、SM3、SM4。
-
-国密算法工具封装包括：
- - 非对称加密和签名：SM2（RSA）
- - 摘要签名算法：SM3（MD5）
- - 对称加密：SM4（AES）

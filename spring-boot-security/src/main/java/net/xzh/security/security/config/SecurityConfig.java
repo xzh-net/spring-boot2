@@ -23,16 +23,39 @@ import net.xzh.security.security.component.RestfulAccessDeniedHandler;
 @Configuration
 public class SecurityConfig {
 	
+	/**
+     * 忽略认证地址
+     */
     @Autowired
     private IgnoreUrlsConfig ignoreUrlsConfig;
+    
+    /**
+     * 处理授权失败
+     */
     @Autowired
     private RestfulAccessDeniedHandler restfulAccessDeniedHandler;
+    
+    /**
+     * 处理认证失败
+     */
     @Autowired
     private RestAuthenticationEntryPoint restAuthenticationEntryPoint;
+    
+    /**
+     * token认证过滤器
+     */
     @Autowired
     private JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter;
+    
+    /**
+     * 动态权限扩展接口
+     */
     @Autowired
     private DynamicSecurityService dynamicSecurityService;
+    
+    /**
+     * 动态权限过滤器
+     */
     @Autowired
     private DynamicSecurityFilter dynamicSecurityFilter;
 
