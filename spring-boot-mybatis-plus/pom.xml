@@ -3,9 +3,9 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>spring-boot-swagger</artifactId>
-	<name>spring-boot-swagger</name>
-	<description>spring-boot-swagger</description>
+	<artifactId>spring-boot-mybatis-plus</artifactId>
+	<name>spring-boot-mybatis-plus</name>
+	<description>spring-boot-mybatis-plus</description>
 	<packaging>jar</packaging>
 
 	<properties>
