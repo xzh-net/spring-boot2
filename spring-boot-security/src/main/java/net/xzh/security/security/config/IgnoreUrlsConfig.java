@@ -1,4 +1,4 @@
-package net.xzh.security.config;
+package net.xzh.security.security.config;
 
 
 import java.util.ArrayList;

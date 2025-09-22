@@ -1,4 +1,4 @@
-package net.xzh.security.common.util;
+package net.xzh.security.security.util;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,7 +8,7 @@ import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.util.Assert;
 
-import net.xzh.security.common.passwordEncoder.SM3PasswordEncoder;
+import net.xzh.security.security.passwordEncoder.SM3PasswordEncoder;
 
 /**
  * PasswordEncoder实现工具类

@@ -1,4 +1,4 @@
-package net.xzh.security.service;
+package net.xzh.security.security.component;
 
 
 import org.springframework.security.access.ConfigAttribute;

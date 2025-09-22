@@ -1,4 +1,4 @@
-package net.xzh.security.config;
+package net.xzh.security.security.config;
 
 import java.util.List;
 import java.util.Map;
@@ -13,7 +13,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import net.xzh.security.domain.AdminUserDetails;
 import net.xzh.security.domain.UmsResource;
-import net.xzh.security.service.DynamicSecurityService;
+import net.xzh.security.security.component.DynamicSecurityService;
 import net.xzh.security.service.UmsAdminService;
 
 /**

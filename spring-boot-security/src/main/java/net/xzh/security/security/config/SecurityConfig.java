@@ -1,4 +1,4 @@
-package net.xzh.security.config;
+package net.xzh.security.security.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -11,11 +11,11 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import net.xzh.security.component.DynamicSecurityFilter;
-import net.xzh.security.component.JwtAuthenticationTokenFilter;
-import net.xzh.security.component.RestAuthenticationEntryPoint;
-import net.xzh.security.component.RestfulAccessDeniedHandler;
-import net.xzh.security.service.DynamicSecurityService;
+import net.xzh.security.security.component.DynamicSecurityFilter;
+import net.xzh.security.security.component.DynamicSecurityService;
+import net.xzh.security.security.component.JwtAuthenticationTokenFilter;
+import net.xzh.security.security.component.RestAuthenticationEntryPoint;
+import net.xzh.security.security.component.RestfulAccessDeniedHandler;
 
 /**
  * SpringSecurity的配置

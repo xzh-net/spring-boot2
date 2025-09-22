@@ -1,4 +1,4 @@
-package net.xzh.security.component;
+package net.xzh.security.security.component;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -16,7 +16,6 @@ import org.springframework.util.AntPathMatcher;
 import org.springframework.util.PathMatcher;
 
 import cn.hutool.core.util.URLUtil;
-import net.xzh.security.service.DynamicSecurityService;
 
 /**
  * 动态权限数据源，用于获取动态权限规则

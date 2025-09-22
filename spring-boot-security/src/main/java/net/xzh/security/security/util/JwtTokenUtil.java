@@ -1,4 +1,4 @@
-package net.xzh.security.common.util;
+package net.xzh.security.security.util;
 
 import java.util.Date;
 import java.util.HashMap;

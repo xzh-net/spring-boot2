@@ -18,10 +18,10 @@ import org.springframework.stereotype.Service;
 
 import cn.hutool.core.collection.CollUtil;
 import lombok.extern.slf4j.Slf4j;
-import net.xzh.security.common.util.JwtTokenUtil;
 import net.xzh.security.domain.AdminUserDetails;
 import net.xzh.security.domain.UmsResource;
 import net.xzh.security.model.UmsAdmin;
+import net.xzh.security.security.util.JwtTokenUtil;
 import net.xzh.security.service.UmsAdminService;
 
 /**

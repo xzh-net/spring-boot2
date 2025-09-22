@@ -1,18 +1,18 @@
-package net.xzh.security.config;
+package net.xzh.security.security.config;
 
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import net.xzh.security.common.util.JwtTokenUtil;
-import net.xzh.security.common.util.PwdEncoderUtil;
-import net.xzh.security.component.DynamicAccessDecisionManager;
-import net.xzh.security.component.DynamicSecurityFilter;
-import net.xzh.security.component.DynamicSecurityMetadataSource;
-import net.xzh.security.component.JwtAuthenticationTokenFilter;
-import net.xzh.security.component.RestAuthenticationEntryPoint;
-import net.xzh.security.component.RestfulAccessDeniedHandler;
+import net.xzh.security.security.component.DynamicAccessDecisionManager;
+import net.xzh.security.security.component.DynamicSecurityFilter;
+import net.xzh.security.security.component.DynamicSecurityMetadataSource;
+import net.xzh.security.security.component.JwtAuthenticationTokenFilter;
+import net.xzh.security.security.component.RestAuthenticationEntryPoint;
+import net.xzh.security.security.component.RestfulAccessDeniedHandler;
+import net.xzh.security.security.util.JwtTokenUtil;
+import net.xzh.security.security.util.PwdEncoderUtil;
 
 /**
  * SpringSecurity通用配置
@@ -20,7 +20,7 @@ import net.xzh.security.component.RestfulAccessDeniedHandler;
  * Created by xzh on 2022/5/20.
  */
 @Configuration
-public class CommonSecurityConfig {
+public class MallSecurityConfig {
 
     @Bean
     public IgnoreUrlsConfig ignoreUrlsConfig() {

@@ -1,4 +1,4 @@
-package net.xzh.security.component;
+package net.xzh.security.security.component;
 
 import java.io.IOException;
 
@@ -19,7 +19,7 @@ import org.springframework.security.web.FilterInvocation;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.util.PathMatcher;
 
-import net.xzh.security.config.IgnoreUrlsConfig;
+import net.xzh.security.security.config.IgnoreUrlsConfig;
 
 /**
  * 动态权限过滤器，用于实现基于路径的动态权限过滤

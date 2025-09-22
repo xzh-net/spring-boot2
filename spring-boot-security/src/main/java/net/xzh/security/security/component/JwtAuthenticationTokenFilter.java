@@ -1,4 +1,4 @@
-package net.xzh.security.component;
+package net.xzh.security.security.component;
 
 import java.io.IOException;
 
@@ -18,7 +18,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import net.xzh.security.common.util.JwtTokenUtil;
+import net.xzh.security.security.util.JwtTokenUtil;
 
 /**
  * JWT登录授权过滤器

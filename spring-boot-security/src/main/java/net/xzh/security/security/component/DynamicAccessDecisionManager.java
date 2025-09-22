@@ -1,4 +1,4 @@
-package net.xzh.security.component;
+package net.xzh.security.security.component;
 
 import java.util.Collection;
 import java.util.Iterator;
