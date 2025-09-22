@@ -41,10 +41,13 @@ import net.xzh.swagger.modules.service.UmsRoleService;
 @Api(tags = "用户管理")
 @RequestMapping("/admin")
 public class UmsAdminController {
-    @Value("${jwt.tokenHeader}")
-    private String tokenHeader;
-    @Value("${jwt.tokenHead}")
-    private String tokenHead;
+	
+    @Value("${token.header}")
+    private String header;
+    
+    @Value("${token.prefix}")
+    private String prefix;
+    
     @Autowired
     private UmsAdminService adminService;
     @Autowired
@@ -71,7 +74,7 @@ public class UmsAdminController {
         }
         Map<String, String> tokenMap = new HashMap<>();
         tokenMap.put("token", token);
-        tokenMap.put("tokenHead", tokenHead);
+        tokenMap.put("prefix", prefix);
         return CommonResult.success(tokenMap);
     }
 
@@ -79,14 +82,14 @@ public class UmsAdminController {
     @RequestMapping(value = "/refreshToken", method = RequestMethod.GET)
     @ResponseBody
     public CommonResult<?> refreshToken(HttpServletRequest request) {
-        String token = request.getHeader(tokenHeader);
+        String token = request.getHeader(header);
         String refreshToken = adminService.refreshToken(token);
         if (refreshToken == null) {
             return CommonResult.failed("token已经过期！");
         }
         Map<String, String> tokenMap = new HashMap<>();
         tokenMap.put("token", refreshToken);
-        tokenMap.put("tokenHead", tokenHead);
+        tokenMap.put("prefix", prefix);
         return CommonResult.success(tokenMap);
     }
 
