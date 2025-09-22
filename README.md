@@ -11,7 +11,7 @@
 
 ## 2. 官方Starter
 
-- [Spring Security安全访问权限框架如何与国密算法整合](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-security)
+- [Spring Security安全访问权限框架整合国密算法实现登录认证](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-security)
 - [Spring Boot配置Email发送功能](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-email)
 - [Quartz作业调度和自定义线程池](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-quartz)
 - [整合Validation处理非空校验拦截（支持国际化）](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-validation)
