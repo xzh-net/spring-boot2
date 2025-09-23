@@ -1,4 +1,4 @@
-package net.xzh.security.security.passwordEncoder;
+package net.xzh.security.security.util;
 
 
 import cn.hutool.crypto.SmUtil;

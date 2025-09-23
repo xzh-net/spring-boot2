@@ -8,8 +8,6 @@ import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.util.Assert;
 
-import net.xzh.security.security.passwordEncoder.SM3PasswordEncoder;
-
 /**
  * PasswordEncoder实现工具类
  *

@@ -3,9 +3,9 @@ package net.xzh.security.service;
 
 import java.util.List;
 
-import net.xzh.security.domain.AdminUserDetails;
 import net.xzh.security.domain.UmsResource;
 import net.xzh.security.model.UmsAdmin;
+import net.xzh.security.security.domain.LoginUser;
 
 /**
  * 后台用于管理Service
@@ -14,7 +14,7 @@ public interface UmsAdminService {
 	/**
      * 根据用户名获取用户信息
      */
-    AdminUserDetails getAdminByUsername(String username);
+	LoginUser getLoginByUsername(String username);
 
     /**
      * 获取所以权限列表

@@ -19,12 +19,12 @@ import net.xzh.security.service.UmsAdminService;
 public class DynamicSecurityServiceImpl implements DynamicSecurityService {
 
 	@Autowired
-	private UmsAdminService adminService;
+	private UmsAdminService umsAdminService;
 	
 	@Override
 	public Map<String, ConfigAttribute> loadDataSource() {
 		Map<String, ConfigAttribute> map = new ConcurrentHashMap<>();
-		List<UmsResource> resourceList = adminService.getResourceList();
+		List<UmsResource> resourceList = umsAdminService.getResourceList();
 		for (UmsResource resource : resourceList) {
 			map.put(resource.getUrl(), new org.springframework.security.access.SecurityConfig(
 					resource.getId() + ":" + resource.getName()));

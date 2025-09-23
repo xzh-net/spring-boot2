@@ -2,16 +2,14 @@ package net.xzh.security.controller;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -24,18 +22,16 @@ import net.xzh.security.service.PmsBrandService;
 /**
  * 品牌管理Controller
  */
-@Controller
 @Api(tags = "品牌管理")
 @RequestMapping("/brand")
+@RestController
 public class PmsBrandController {
 	@Autowired
 	private PmsBrandService brandService;
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(PmsBrandController.class);
 
 	@ApiOperation("获取所有品牌列表")
 	@RequestMapping(value = "listAll", method = RequestMethod.GET)
-	@ResponseBody
 	public CommonResult<List<PmsBrand>> getBrandList() {
 		return CommonResult.success(brandService.listAllBrand());
 	}
@@ -44,47 +40,24 @@ public class PmsBrandController {
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	@ResponseBody
 	public CommonResult<?> createBrand(@RequestBody PmsBrand pmsBrand) {
-		int count = brandService.createBrand(pmsBrand);
-		if (count == 1) {
-			LOGGER.debug("createBrand success:{}", pmsBrand);
-			return CommonResult.success(pmsBrand);
-		} else {
-			LOGGER.debug("createBrand failed:{}", pmsBrand);
-			return CommonResult.failed("操作失败");
-		}
+		return CommonResult.success(brandService.createBrand(pmsBrand));
 	}
 
 	@ApiOperation("更新指定id品牌信息")
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
 	@ResponseBody
 	public CommonResult<?> updateBrand(@PathVariable("id") Long id, @RequestBody PmsBrand pmsBrandDto) {
-		int count = brandService.updateBrand(id, pmsBrandDto);
-		if (count == 1) {
-			LOGGER.debug("updateBrand success:{}", pmsBrandDto);
-			return CommonResult.success(pmsBrandDto);
-		} else {
-			LOGGER.debug("updateBrand failed:{}", pmsBrandDto);
-			return CommonResult.failed("操作失败");
-		}
+		return CommonResult.success(brandService.updateBrand(id, pmsBrandDto));
 	}
 
 	@ApiOperation("删除指定id的品牌")
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-	@ResponseBody
 	public CommonResult<?> deleteBrand(@PathVariable("id") Long id) {
-		int count = brandService.deleteBrand(id);
-		if (count == 1) {
-			LOGGER.debug("deleteBrand success :id={}", id);
-			return CommonResult.success(null);
-		} else {
-			LOGGER.debug("deleteBrand failed :id={}", id);
-			return CommonResult.failed("操作失败");
-		}
+		return CommonResult.success(brandService.deleteBrand(id));
 	}
 
 	@ApiOperation("分页查询品牌列表")
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	@ResponseBody
 	public CommonResult<CommonPage<PmsBrand>> listBrand(
 			@RequestParam(value = "pageNum", defaultValue = "1") @ApiParam("页码") Integer pageNum,
 			@RequestParam(value = "pageSize", defaultValue = "3") @ApiParam("每页数量") Integer pageSize) {
@@ -94,7 +67,6 @@ public class PmsBrandController {
 
 	@ApiOperation("获取指定id的品牌详情")
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	@ResponseBody
 	public CommonResult<PmsBrand> brand(@PathVariable("id") Long id) {
 		return CommonResult.success(brandService.getBrand(id));
 	}

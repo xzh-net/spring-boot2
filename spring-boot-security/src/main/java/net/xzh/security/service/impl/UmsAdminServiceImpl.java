@@ -19,9 +19,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import cn.hutool.core.collection.CollUtil;
-import net.xzh.security.domain.AdminUserDetails;
 import net.xzh.security.domain.UmsResource;
 import net.xzh.security.model.UmsAdmin;
+import net.xzh.security.security.domain.LoginUser;
 import net.xzh.security.security.util.JwtTokenUtil;
 import net.xzh.security.service.UmsAdminService;
 
@@ -33,7 +33,7 @@ public class UmsAdminServiceImpl implements UmsAdminService {
     /**
      * 存放默认用户信息
      */
-    private List<AdminUserDetails> adminUserDetailsList = new ArrayList<>();
+    private List<LoginUser> accountList = new ArrayList<>();
     /**
      * 存放默认资源信息
      */
@@ -51,15 +51,16 @@ public class UmsAdminServiceImpl implements UmsAdminService {
 
     @PostConstruct
     private void init(){
-        adminUserDetailsList.add(AdminUserDetails.builder()
+    	accountList.add(LoginUser.builder()
                 .username("admin")
                 .password(passwordEncoder.encode("123456"))
-                .authorityList(CollUtil.toList("1:brand:create","2:brand:update","3:brand:delete","4:brand:list","5:brand:listAll"))
+                .permissions(CollUtil.newHashSet("1:brand:create","2:brand:update","3:brand:delete","4:brand:list","5:brand:listAll","6:admin:resetPwd"))
                 .build());
-        adminUserDetailsList.add(AdminUserDetails.builder()
+    	
+    	accountList.add(LoginUser.builder()
                 .username("xzh")
                 .password(passwordEncoder.encode("123456"))
-                .authorityList(CollUtil.toList("4:brand:list"))
+                .permissions(CollUtil.newHashSet("4:brand:list"))
                 .build());
         
         resourceList.add(UmsResource.builder()
@@ -87,10 +88,15 @@ public class UmsAdminServiceImpl implements UmsAdminService {
                 .name("brand:listAll")
                 .url("/brand/listAll")
                 .build());
+        resourceList.add(UmsResource.builder()
+                .id(6L)
+                .name("admin:resetPwd")
+                .url("/admin/resetPwd/**")
+                .build());
     }
     @Override
-    public AdminUserDetails getAdminByUsername(String username) {
-        List<AdminUserDetails> findList = adminUserDetailsList.stream().filter(item -> item.getUsername().equals(username)).collect(Collectors.toList());
+    public LoginUser getLoginByUsername(String username) {
+        List<LoginUser> findList = accountList.stream().filter(item -> item.getUsername().equals(username)).collect(Collectors.toList());
         if(CollUtil.isNotEmpty(findList)){
             return findList.get(0);
         }
@@ -103,10 +109,10 @@ public class UmsAdminServiceImpl implements UmsAdminService {
     }
     
 	public UmsAdmin register(UmsAdmin umsAdminParam) {
-		 adminUserDetailsList.add(AdminUserDetails.builder()
+		accountList.add(LoginUser.builder()
 	                .username(umsAdminParam.getUsername())
 	                .password(passwordEncoder.encode(umsAdminParam.getPassword()))
-	                .authorityList(CollUtil.toList("4:brand:list"))
+	                .permissions(CollUtil.newHashSet("4:brand:list"))
 	                .build());
 		return umsAdminParam;
 	}

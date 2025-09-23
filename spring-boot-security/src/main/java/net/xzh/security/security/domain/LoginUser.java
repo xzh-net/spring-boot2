@@ -1,7 +1,7 @@
-package net.xzh.security.domain;
+package net.xzh.security.security.domain;
 
 import java.util.Collection;
-import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -13,21 +13,22 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
+ *  登录用户身份权限
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Builder
-public class AdminUserDetails implements UserDetails {
+public class LoginUser implements UserDetails {
     /**
 	 * 
 	 */
 	private static final long serialVersionUID = 4927179906055151748L;
 	private String username;
     private String password;
-    private List<String> authorityList;
+    private Set<String> permissions;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return this.authorityList.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
+        return this.permissions.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
     }
 
     @Override
