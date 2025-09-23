@@ -2,8 +2,9 @@ server:
    port: 8080
 
 xss:
+  # 过滤开关
   enabled: true
-  #  Exclude links (separate multiple links with commas)
+  # 排除链接（多个用逗号分隔）
   excludes: /ui/*
-  #  match links (separate multiple links with commas)
-  urlPatterns: /api/*,/admin/*
+  # 匹配链接
+  urlPatterns: /api/*

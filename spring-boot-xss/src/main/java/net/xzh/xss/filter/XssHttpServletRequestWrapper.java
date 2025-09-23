@@ -7,18 +7,17 @@ import org.jsoup.Jsoup;
 import org.jsoup.safety.Safelist;
 
 /**
- * XSS filter process
- * 
- * @author Frank
- *
+ * XSS过滤处理包装类
+ * 对HTTP请求参数进行XSS安全过滤，防止跨站脚本攻击
  */
+
 public class XssHttpServletRequestWrapper extends HttpServletRequestWrapper {
     public XssHttpServletRequestWrapper(HttpServletRequest request) {
         super(request);
     }
     @Override
     public String[] getParameterValues(String name) {
-        // Customize rules based on actual needs. Here, the content field is rich text and does not need to be filtered.
+        // 自定义排除字段
         if ("content".equals(name)) {
             return super.getParameterValues(name);
         }
@@ -27,7 +26,6 @@ public class XssHttpServletRequestWrapper extends HttpServletRequestWrapper {
             int length = values.length;
             String[] escapseValues = new String[length];
             for (int i = 0; i < length; i++) {
-                // Prevent xss attacks and filter leading and trailing spaces
                 escapseValues[i] = Jsoup.clean(values[i], Safelist.relaxed()).trim();
             }
             return escapseValues;
