@@ -85,7 +85,7 @@
 - [SockJS + STOMP + Redis聊天集群](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-sockjs-redis)
 - [SSE流式传输协议](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-sse)
 - [微信公众号和企业微信开发](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-wechat)
-- [Filter实现XSS防御](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-xss)
+- [使用Filter防范XSS攻击和伪造Referrer拦截](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-xss)
 
 ---
 
