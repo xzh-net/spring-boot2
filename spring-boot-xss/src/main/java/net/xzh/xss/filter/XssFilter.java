@@ -15,35 +15,27 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang3.StringUtils;
+import cn.hutool.core.util.StrUtil;
+import net.xzh.xss.filter.wrapper.XssHttpServletRequestWrapper;
 
 /**
+ * XSS过滤器
  * 
- * @author Frank
- *
  */
 public class XssFilter implements Filter {
 	/**
 	 * excludes link
 	 */
 	List<String> excludes = new ArrayList<String>();
-	/**
-	 * xss filter switch
-	 */
-	public boolean enabled = false;
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
 		String tempExcludes = filterConfig.getInitParameter("excludes");
-		String tempEnabled = filterConfig.getInitParameter("enabled");
-		if (StringUtils.isNotEmpty(tempExcludes)) {
+		if (StrUtil.isNotEmpty(tempExcludes)) {
 			String[] url = tempExcludes.split(",");
 			for (int i = 0; url != null && i < url.length; i++) {
 				excludes.add(url[i]);
 			}
-		}
-		if (StringUtils.isNotEmpty(tempEnabled)) {
-			enabled = Boolean.valueOf(tempEnabled);
 		}
 	}
 
@@ -61,9 +53,6 @@ public class XssFilter implements Filter {
 	}
 
 	private boolean handleExcludeURL(HttpServletRequest request, HttpServletResponse response) {
-		if (!enabled) {
-			return true;
-		}
 		if (excludes == null || excludes.isEmpty()) {
 			return false;
 		}

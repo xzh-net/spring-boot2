@@ -2,9 +2,16 @@ server:
    port: 8080
 
 xss:
-  # 过滤开关
-  enabled: true
-  # 排除链接（多个用逗号分隔）
-  excludes: /ui/*
-  # 匹配链接
-  urlPatterns: /api/*
+   # 过滤开关
+   enabled: true
+   # 排除链接（多个用逗号分隔）
+   excludes: /ignore/*
+   # 匹配链接
+   urlPatterns: /api/*,/login/*
+
+# 防盗链配置
+referer:
+   # 防盗链开关
+   enabled: true
+   # 允许的域名列表
+   allowed-domains: localhost,127.0.0.1
