@@ -19,12 +19,12 @@ import cn.hutool.core.util.StrUtil;
 import net.xzh.xss.filter.wrapper.XssHttpServletRequestWrapper;
 
 /**
- * XSS过滤器
+ * 防止XSS攻击的过滤器
  * 
  */
 public class XssFilter implements Filter {
 	/**
-	 * excludes link
+	 * 排除链接
 	 */
 	List<String> excludes = new ArrayList<String>();
 
