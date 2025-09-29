@@ -11,6 +11,7 @@ import org.springframework.security.web.access.AccessDeniedHandler;
 
 import cn.hutool.json.JSONUtil;
 import net.xzh.security.common.model.CommonResult;
+import net.xzh.security.common.model.ResultCode;
 
 /**
  * 处理授权失败
@@ -21,7 +22,7 @@ public class RestfulAccessDeniedHandler implements AccessDeniedHandler {
 			throws IOException, ServletException {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json");
-		response.getWriter().println(JSONUtil.parse(CommonResult.forbidden(e.getMessage())));
+		response.getWriter().println(JSONUtil.parse(CommonResult.failed(ResultCode.A0004)));
 		response.getWriter().flush();
 	}
 }

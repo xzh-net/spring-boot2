@@ -5,7 +5,8 @@ package net.xzh.security.common.model;
  * Created 2019/4/19.
  */
 public interface IErrorCode {
-    long getCode();
+	
+	String getCode();
 
     String getMessage();
 }

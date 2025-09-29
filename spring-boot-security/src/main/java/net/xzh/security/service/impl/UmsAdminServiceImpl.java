@@ -120,13 +120,16 @@ public class UmsAdminServiceImpl implements UmsAdminService {
 
     @Override
     public String login(String username, String password) {
-    	Authentication authentication = null;
+    	// 1. 创建认证令牌
 		UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username,
 				password);
-		SecurityContextHolder.getContext().setAuthentication(authentication);
-		// 该方法会去调用UserDetailsServiceImpl.loadUserByUsername
-		authentication = authenticationManager.authenticate(authenticationToken);
-		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+		// 2. 验证用户名密码
+		Authentication authentication = authenticationManager.authenticate(authenticationToken);
+		// 3. 认证成功后设置安全上下文
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        // 4. 获取用户详情并生成token
+        // 该方法会去调用UserDetailsServiceImpl.loadUserByUsername
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 		return jwtTokenUtil.generateToken(userDetails);
     }
 }

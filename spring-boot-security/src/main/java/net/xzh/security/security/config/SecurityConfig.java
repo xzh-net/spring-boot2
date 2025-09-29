@@ -24,7 +24,7 @@ import net.xzh.security.security.component.RestfulAccessDeniedHandler;
 import net.xzh.security.security.service.DynamicSecurityService;
 
 /**
- * SpringSecurity的配置
+ * SecurityConfig - 安全流程配置
  */
 
 @EnableMethodSecurity(prePostEnabled = true, securedEnabled = true)
