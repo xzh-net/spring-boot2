@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
 
 import cn.hutool.core.util.IdUtil;
 import io.jsonwebtoken.Claims;
@@ -25,16 +26,15 @@ import io.jsonwebtoken.SignatureAlgorithm;
  * HMACSHA512(base64UrlEncode(header) + "." +base64UrlEncode(payload),secret)
  * Created 2018/4/26.
  */
+@Component
 public class JwtTokenUtil {
     private static final Logger LOGGER = LoggerFactory.getLogger(JwtTokenUtil.class);
     private static final String CLAIM_KEY_USERNAME = "sub";
     private static final String CLAIM_KEY_CREATED = "created";
-
-    // 令牌秘钥
+    
     @Value("${token.secret}")
     private String secret;
     
-    // 令牌有效期（默认30分钟）
     @Value("${token.expiration}")
     private Long expiration;
 
@@ -60,7 +60,7 @@ public class JwtTokenUtil {
                     .parseClaimsJws(token)
                     .getBody();
         } catch (Exception e) {
-            LOGGER.info("JWT格式验证失败:{}",token);
+        	LOGGER.warn("JWT格式验证失败:{}", token);
         }
         return claims;
     }
@@ -135,6 +135,9 @@ public class JwtTokenUtil {
      * 刷新token
      */
     public String refreshToken(String token) {
+    	if (!canRefresh(token)) {
+            return null;
+        }
         Claims claims = getClaimsFromToken(token);
         claims.put(CLAIM_KEY_CREATED, new Date());
         return generateToken(claims);
