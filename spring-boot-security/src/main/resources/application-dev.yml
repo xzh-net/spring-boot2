@@ -54,5 +54,6 @@ secure:
       - /swagger-ui/**
       - /api-docs/**
       - /favicon.ico
+      - /jwt/**
       - /register
       - /login

@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import net.xzh.security.common.model.CommonResult;
+import net.xzh.security.common.model.ResultCode;
 
 
 /**
@@ -21,18 +22,15 @@ public class GlobalException {
      */
     public GlobalException() {
     }
-
-    /**
-     * 处理业务异常
-     * @param e 业务异常对象
-     * @return 统一的返回结果对象
-     */
+    
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler({BusinessException.class})
     public CommonResult<Object> handle(BusinessException e) {
     	if (e.getErrorCode() != null) {
 			return CommonResult.failed(e.getErrorCode());
 		}
-        return CommonResult.failed(e.getMessage());
+        return CommonResult.failed(ResultCode.A0001);
     }
+
+    
 }

@@ -39,34 +39,19 @@ public class CommonResult<T> {
 
     /**
      * 失败返回结果
+     */
+    public static <T> CommonResult<T> failed() {
+        return failed(ResultCode.A0001);
+    }
+    
+    /**
+     * 失败返回结果
      * @param errorCode 错误码
      */
     public static <T> CommonResult<T> failed(IErrorCode errorCode) {
         return new CommonResult<T>(errorCode.getCode(), errorCode.getMessage(), null);
     }
-
-    /**
-     * 失败返回结果
-     * @param message 提示信息
-     */
-    public static <T> CommonResult<T> failed(String message) {
-        return new CommonResult<T>(ResultCode.A0001.getCode(), message, null);
-    }
-
-    /**
-     * 失败返回结果
-     */
-    public static <T> CommonResult<T> failed() {
-        return failed(ResultCode.A0001);
-    }
-
-    /**
-     * 参数验证失败返回结果
-     * @param message 提示信息
-     */
-    public static <T> CommonResult<T> validateFailed(String message) {
-        return new CommonResult<T>(ResultCode.A0002.getCode(), message, null);
-    }
+    
 
     public String getCode() {
         return code;

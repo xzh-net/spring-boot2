@@ -4,6 +4,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import net.xzh.security.common.exception.BusinessException;
+import net.xzh.security.common.model.ResultCode;
 import net.xzh.security.security.domain.LoginUser;
 
 /**
@@ -17,7 +18,7 @@ public class SecurityUtils {
 		try {
 			return (LoginUser) getAuthentication().getPrincipal();
 		} catch (Exception e) {
-			throw new BusinessException("获取用户信息异常", e);
+			throw new BusinessException(ResultCode.A0003.getCode());
 		}
 	}
 	

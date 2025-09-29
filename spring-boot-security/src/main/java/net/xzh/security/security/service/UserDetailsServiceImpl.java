@@ -25,7 +25,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		if (loginUser != null) {
 			return loginUser;
 		}
-		throw new UsernameNotFoundException("用户名或密码错误");
+		throw new UsernameNotFoundException("账号密码错误");
 	}
 	
 
