@@ -11,7 +11,7 @@
 
 ## 2. 官方Starter
 
-- [Spring Boot整合Spring Security进行权限校验的两种方式](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-security)
+- [整合JWT和Spring Security进行权限校验](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-security)
 - [Spring Boot配置Email发送功能](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-email)
 - [Quartz作业调度和自定义线程池](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-quartz)
 - [整合Validation处理非空校验拦截（支持国际化）](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-validation)
@@ -48,7 +48,6 @@
 ## 4. 三方类库
 
 - [MinIO使用Webhook和AMPQ实现上传回调](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-minio)
-- [搞懂JWT、JWS、JWE之间的关系](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-jwt)
 - [集成Hbase操作实现表的增删改查](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-hbase)
 - [集成Hadoop实现文件上传](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-hdfs)
 - [集成Kafka实现消息通知和接收](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-kafka)
