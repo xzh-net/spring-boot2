@@ -9,7 +9,7 @@ import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import net.xzh.security.security.context.PermissionContextHolder;
 import net.xzh.security.security.domain.LoginUser;
-import net.xzh.security.security.util.SecurityUtils;
+import net.xzh.security.security.util.SecurityUtil;
 
 /**
  * 自定义权限实现
@@ -35,7 +35,7 @@ public class SpringSecurityService {
         {
             return false;
         }
-        LoginUser loginUser = SecurityUtils.getLoginUser();
+        LoginUser loginUser = SecurityUtil.getLoginUser();
         if (ObjectUtil.isNull(loginUser) || CollectionUtils.isEmpty(loginUser.getPermissions()))
         {
             return false;

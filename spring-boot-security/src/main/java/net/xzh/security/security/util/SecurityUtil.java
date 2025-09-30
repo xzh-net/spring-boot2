@@ -11,14 +11,14 @@ import net.xzh.security.security.domain.LoginUser;
  * 安全服务工具类
  * 
  */
-public class SecurityUtils {
+public class SecurityUtil {
 	
 	
 	public static LoginUser getLoginUser() {
 		try {
 			return (LoginUser) getAuthentication().getPrincipal();
 		} catch (Exception e) {
-			throw new BusinessException(ResultCode.A0003.getCode());
+			throw new BusinessException(ResultCode.A0003);
 		}
 	}
 	
