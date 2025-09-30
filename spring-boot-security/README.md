@@ -97,9 +97,9 @@ jwt对称非对称使用方式：
 
 
 
-## 测试地址
+## 整合SpringDoc 1.7.0
 
-http://127.0.0.1:8080/doc.html
+http://127.0.0.1:8080/swagger-ui/index.html
 
 
 
