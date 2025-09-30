@@ -32,6 +32,7 @@ springdoc:
     operations-sorter: alpha
     # 保持认证状态
     persistAuthorization: true
+    # 隐藏models
     default-models-expand-depth: -1
   packages-to-scan: net.xzh.security
   paths-to-match: /**
