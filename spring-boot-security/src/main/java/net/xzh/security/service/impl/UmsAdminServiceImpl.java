@@ -25,6 +25,7 @@ import net.xzh.security.domain.UmsResource;
 import net.xzh.security.model.UmsAdmin;
 import net.xzh.security.security.domain.LoginUser;
 import net.xzh.security.security.util.JwtTokenUtil;
+import net.xzh.security.security.util.SecurityUtil;
 import net.xzh.security.service.UmsAdminService;
 
 /**
@@ -98,16 +99,33 @@ public class UmsAdminServiceImpl implements UmsAdminService {
 			UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username,
 					password);
 			// 2. 验证用户名密码
+			// 该方法会去调用UserDetailsServiceImpl.loadUserByUsername
 			Authentication authentication = authenticationManager.authenticate(authenticationToken);
 			// 3. 认证成功后设置安全上下文
 			SecurityContextHolder.getContext().setAuthentication(authentication);
 			// 4. 获取用户详情并生成token
-			// 该方法会去调用UserDetailsServiceImpl.loadUserByUsername
 			UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 			return jwtTokenUtil.generateToken(userDetails);
 		} catch (BadCredentialsException e) {
 			// 账号密码错误
 			throw new BusinessException(ResultCode.A0005);
 		}
+	}
+
+	@Override
+	public String login2(String username, String password) {
+		UserDetails userDetails = getLoginByUsername(username);
+		if (!SecurityUtil.matchesPassword(password, userDetails.getPassword())) {
+			throw new BusinessException(ResultCode.A0005);
+		}
+		if (!userDetails.isEnabled()) {
+			throw new BusinessException(ResultCode.A0005);
+		}
+		// 1. 创建认证令牌
+		UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null,
+				userDetails.getAuthorities());
+		// 2. 认证成功后设置安全上下文
+		SecurityContextHolder.getContext().setAuthentication(authentication);
+		return jwtTokenUtil.generateToken(userDetails);
 	}
 }

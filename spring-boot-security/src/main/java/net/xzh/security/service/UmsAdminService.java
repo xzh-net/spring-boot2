@@ -22,9 +22,14 @@ public interface UmsAdminService {
     List<UmsResource> getResourceList();
 
     /**
-     * 用户名密码登录
+     * 用户名密码登录（传递未认证令牌）
      */
     String login(String username, String password);
+    
+    /**
+     * 用户名密码登录（传递已经认证令牌）
+     */
+    String login2(String username, String password);
     
     /**
      * 注册功能

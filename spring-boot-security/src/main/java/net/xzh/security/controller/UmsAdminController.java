@@ -34,7 +34,7 @@ public class UmsAdminController {
     @Operation(summary = "用户登录", description = "账号密码登录")
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public CommonResult<?> login(@RequestParam String username, @RequestParam String password) {
-        String token = umsAdminService.login(username, password);
+        String token = umsAdminService.login2(username, password);
         return CommonResult.success(prefix+token);
     }
     
