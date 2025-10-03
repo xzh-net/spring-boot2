@@ -30,7 +30,7 @@
 
 - [整合CXF发布WebService以及调用的方法](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-cxf)
 - [整合Dubbo调用示例](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-dubbo)
-- [整合Knife4j API文档生成工具](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-knife4j)
+- [整合SpringDoc文档生成工具](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-springdoc)
 - [整合Apache Pulsar云原生消息平台的王者](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-pulsar)
 - [整合RocketMQ进行消息发送和订阅](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-rocketmq)
 - [整合Shardingjdbc实现分库分表](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-sharding-jdbc)
