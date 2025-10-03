@@ -10,9 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.date.DateUtil;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import net.xzh.quartz.common.model.CommonResult;
 import net.xzh.quartz.schedule.CronExpJob;
 import net.xzh.quartz.schedule.FixSecondJob;
 import net.xzh.quartz.schedule.FixTimeJob;
@@ -21,7 +18,6 @@ import net.xzh.quartz.service.ScheduleService;
 /**
  * 定时任务调度相关接口 update 20250918
  */
-@Api(tags = "定时任务")
 @RestController
 @RequestMapping("/schedule")
 public class ScheduleController {
@@ -29,35 +25,50 @@ public class ScheduleController {
 	@Autowired
 	private ScheduleService scheduleService;
 
-	@ApiOperation("指定时间执行")
+	/**
+	 * 指定时间执行
+	 * @param startTime
+	 * @param message
+	 * @return
+	 */
 	@PostMapping("/scheduleFixTimeJob")
-	public CommonResult<?> scheduleFixTimeJob(
+	public Object scheduleFixTimeJob(
 			@RequestParam(required = true, defaultValue = "2025-09-18 16:00:00") String startTime,
 			@RequestParam String message) {
 		Date date = DateUtil.parse(startTime, DatePattern.NORM_DATETIME_FORMAT);
-		String jobName = scheduleService.scheduleFixTimeJob(FixTimeJob.class, date, message);
-		return CommonResult.success(jobName);
+		return scheduleService.scheduleFixTimeJob(FixTimeJob.class, date, message);
 	}
 
-	@ApiOperation("过?秒执行")
+	/**
+	 * 过?秒执行
+	 * @param second
+	 * @param message
+	 * @return
+	 */
 	@PostMapping("/scheduleFixSecondJob")
-	public CommonResult<?> scheduleFixSecondJob(@RequestParam Integer second, @RequestParam String message) {
-		String jobName = scheduleService.scheduleFixSecondJob(FixSecondJob.class, second, message);
-		return CommonResult.success(jobName);
+	public Object scheduleFixSecondJob(@RequestParam Integer second, @RequestParam String message) {
+		return scheduleService.scheduleFixSecondJob(FixSecondJob.class, second, message);
 	}
 
-	@ApiOperation("按照表达式执行")
+	/**
+	 * 按照表达式执行
+	 * @param cron
+	 * @param message
+	 * @return
+	 */
 	@PostMapping("/scheduleCronExpJob")
-	public CommonResult<?> cronExpJob(@RequestParam(required = true, defaultValue = "*/10 * * * * ?") String cron,
+	public Object cronExpJob(@RequestParam(required = true, defaultValue = "*/10 * * * * ?") String cron,
 			@RequestParam String message) {
-		String jobName = scheduleService.scheduleCronExpJob(CronExpJob.class, cron, message);
-		return CommonResult.success(jobName);
+		return scheduleService.scheduleCronExpJob(CronExpJob.class, cron, message);
 	}
 
-	@ApiOperation("取消任务")
+	/**
+	 * 取消任务
+	 * @param jobName
+	 * @return
+	 */
 	@PostMapping("/cancelJob")
-	public CommonResult<?> cancelJob(@RequestParam String jobName) {
-		Boolean success = scheduleService.cancelJob(jobName);
-		return CommonResult.success(success);
+	public Object cancelJob(@RequestParam String jobName) {
+		return scheduleService.cancelJob(jobName);
 	}
 }

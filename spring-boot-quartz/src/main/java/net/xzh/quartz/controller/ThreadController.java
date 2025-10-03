@@ -6,9 +6,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import net.xzh.quartz.common.model.CommonResult;
 import net.xzh.quartz.service.ThreadService;
 
 /**
@@ -17,7 +14,6 @@ import net.xzh.quartz.service.ThreadService;
  * @author Administrator
  *
  */
-@Api(tags = "线程池")
 @RestController
 public class ThreadController {
 	
@@ -25,26 +21,40 @@ public class ThreadController {
 	private ThreadService threadService;
 	
 
-	@ApiOperation("同步")
+	
+	/**
+	 * 同步调用
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping(value = "/sync/{id}", method = RequestMethod.GET)
-	public CommonResult<Long> sync(@PathVariable(name = "id") String id) {
+	public String sync(@PathVariable(name = "id") String id) {
 		threadService.sync();
-		return CommonResult.success(System.currentTimeMillis());
+		return "操作成功";
 	}
 	
-	@ApiOperation("异步默认")
+	
+	/**
+	 * 异步默认
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping(value = "/asyncDefault/{id}", method = RequestMethod.GET)
-	public CommonResult<Long> asyncDefault(@PathVariable(name = "id") String id) {
+	public String asyncDefault(@PathVariable(name = "id") String id) {
 		threadService.asyncDefault();
-		return CommonResult.success(System.currentTimeMillis());
+		return "操作成功";
 	}
 
 	
-	@ApiOperation("异步自定义")
+	/**
+	 * 异步自定义
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping(value = "/asyncCustom/{id}", method = RequestMethod.GET)
-	public CommonResult<Long> asyncCustom(@PathVariable(name = "id") String id) {
+	public String asyncCustom(@PathVariable(name = "id") String id) {
 		threadService.asyncCustom();
-		return CommonResult.success(System.currentTimeMillis());
+		return "操作成功";
 	}
 
 

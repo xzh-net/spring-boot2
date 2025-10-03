@@ -1,0 +1,29 @@
+# 定时任务调度
+
+### 指定时间执行
+POST http://127.0.0.1:8080/schedule/scheduleFixTimeJob?startTime=2025-10-03 18:02:35&message=指定时间执行
+
+
+### 过?秒执行
+POST http://127.0.0.1:8080/schedule/scheduleFixSecondJob?second=5&message=过5秒后执行
+
+
+### 按照表达式执行
+POST http://127.0.0.1:8080/schedule/scheduleCronExpJob?cron=*/2 * * * * ?&message=表达式每2秒执行 
+
+
+### 取消任务
+POST http://127.0.0.1:8080/schedule/cancelJob?jobName=4d2ec9ed-4202-4a55-a921-a8f77030063e
+
+
+# 自定义线程池
+
+### 同步调用
+GET http://127.0.0.1:8080/sync/123
+
+### 异步默认
+GET http://127.0.0.1:8080/asyncDefault/456
+
+
+### 异步自定义
+GET http://127.0.0.1:8080/asyncCustom/789

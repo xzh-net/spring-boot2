@@ -6,8 +6,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 @EnableScheduling
-public class ThreadApplication {
+public class QuartzApplication {
 	public static void main(String[] args) {
-		SpringApplication.run(ThreadApplication.class, args);
+		SpringApplication.run(QuartzApplication.class, args);
 	}
 }

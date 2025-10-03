@@ -21,7 +21,8 @@ spring:
             instanceName: scheduler # 调度器实例名称
             instanceId: AUTO # 调度器实例ID自动生成
           jobStore:
-            class: org.quartz.impl.jdbcjobstore.JobStoreTX # 调度信息存储处理类
+            # 升级spring boot > 2.5.6的版本后将不再支持JobStoreTX方式进行配置默认数据源
+            class: org.springframework.scheduling.quartz.LocalDataSourceJobStore
             driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate # 使用完全兼容JDBC的驱动
             tablePrefix: QRTZ_ # quartz相关表前缀
             useProperties: false # 是否将JobDataMap中的属性转为字符串存储
