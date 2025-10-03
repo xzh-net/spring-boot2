@@ -43,10 +43,10 @@ public class SpringDocConfig {
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
             .info(apiInfo())
-            //哪些要求bearerAuth认证
+            //全局安全方案
             .addSecurityItem(new SecurityRequirement().addList("bearerAuth"))
             .components(new Components()
-            		//定义一个bearerAuth的安全方案
+            		//定义bearerAuth的安全方案
                 .addSecuritySchemes("bearerAuth",
                     new SecurityScheme()
                         .name(header)
