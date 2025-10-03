@@ -97,8 +97,9 @@
 
 ## 更新记录
 
-- 2025-09-24 springboot升级到2.7.0，优化了防范XSS攻击和伪造Referrer
-- 2025-09-22 springboot升级到2.7.0，swagger升级为springdoc 1.7.0，增加Security权限控制两种方式的对比，
+- 2025-10-03 Jasypt整合SM4，springboot升级到2.7.0，swagger升级为springdoc 1.7.0【无认证】
+- 2025-09-24 优化了防范XSS攻击和伪造Referrer，springboot升级到2.7.0
+- 2025-09-22 增加Security权限控制两种方式的对比，springboot升级到2.7.0，swagger升级为springdoc 1.7.0【有认证】
 - 2025-09-18 优化任务调度和自定义线程池参数
 - 2025-09-17 HikariCP参数优化
 - 2025-09-17 日志拦截器逻辑优化，增加记录字段
