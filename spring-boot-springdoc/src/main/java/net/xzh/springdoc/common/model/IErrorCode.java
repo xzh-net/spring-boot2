@@ -1,4 +1,4 @@
-package net.xzh.knife4j.common.model;
+package net.xzh.springdoc.common.model;
 
 /**
  * 封装API的错误码

@@ -1,0 +1,37 @@
+server:
+  port: 8080
+
+spring:
+  profiles:
+    active: dev
+  datasource:
+    url: jdbc:mysql://172.17.17.137:3306/mall?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+
+
+## SpringDoc 配置
+springdoc:
+  api-docs:
+    path: /api-docs
+    enabled: true
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
+    # 标签排序方式
+    tags-sorter: alpha
+    # 操作排序方式
+    operations-sorter: alpha
+  packages-to-scan: net.xzh.springdoc
+  paths-to-match: /**
+
+# SpringDoc自定义配置
+app:
+  info:
+    title: SpringDoc Demo API
+    description: SpringBoot 2.7.0 整合 SpringDoc 示例
+    version: 1.0.0
+    contact:
+      name: API Support
+      email: support@example.com
+      url: https://example.com

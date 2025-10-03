@@ -1,9 +1,9 @@
-package net.xzh.knife4j.service;
+package net.xzh.springdoc.service;
 
 
 import java.util.List;
 
-import net.xzh.knife4j.model.PmsBrand;
+import net.xzh.springdoc.model.PmsBrand;
 
 /**
  * PmsBrandService

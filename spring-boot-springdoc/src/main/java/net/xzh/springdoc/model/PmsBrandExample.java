@@ -1,4 +1,4 @@
-package net.xzh.knife4j.model;
+package net.xzh.springdoc.model;
 
 import java.util.ArrayList;
 import java.util.List;

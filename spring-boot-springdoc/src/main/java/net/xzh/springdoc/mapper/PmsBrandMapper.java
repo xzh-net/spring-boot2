@@ -1,10 +1,10 @@
-package net.xzh.knife4j.mapper;
+package net.xzh.springdoc.mapper;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-import net.xzh.knife4j.model.PmsBrand;
-import net.xzh.knife4j.model.PmsBrandExample;
+import net.xzh.springdoc.model.PmsBrand;
+import net.xzh.springdoc.model.PmsBrandExample;
 
 public interface PmsBrandMapper {
     int countByExample(PmsBrandExample example);

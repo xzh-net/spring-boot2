@@ -1,11 +1,11 @@
-package net.xzh.knife4j.service.impl;
+package net.xzh.springdoc.service.impl;
 
 import com.github.pagehelper.PageHelper;
 
-import net.xzh.knife4j.mapper.PmsBrandMapper;
-import net.xzh.knife4j.model.PmsBrand;
-import net.xzh.knife4j.model.PmsBrandExample;
-import net.xzh.knife4j.service.PmsBrandService;
+import net.xzh.springdoc.mapper.PmsBrandMapper;
+import net.xzh.springdoc.model.PmsBrand;
+import net.xzh.springdoc.model.PmsBrandExample;
+import net.xzh.springdoc.service.PmsBrandService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
