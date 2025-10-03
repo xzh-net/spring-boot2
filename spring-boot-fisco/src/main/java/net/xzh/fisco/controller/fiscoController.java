@@ -8,24 +8,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import net.xzh.fisco.common.model.CommonResult;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import net.xzh.fisco.config.FiscoBcos;
 
-@Api(tags = "Fisco测试")
+
+/**
+ * 配置管理
+ */
+@Tag(name = "令牌管理", description = "配置管理相关的API")
 @RestController
 public class fiscoController {
 
 	@Autowired
 	private FiscoBcos fiscoBcos;
 
-	@ApiOperation("查询区块高度")
+	@Operation(summary = "查询区块高度", description = "查询区块高度")
 	@RequestMapping(value = "/block", method = RequestMethod.GET)
-	public CommonResult<?> Number() {
+	public Object Number() {
 		BcosSDK bcosSDK = fiscoBcos.getBcosSDK();
 		Client client = bcosSDK.getClient(Integer.valueOf(1));
 		BlockNumber blockNumber = client.getBlockNumber();
-		return CommonResult.success(blockNumber.getBlockNumber());
+		return blockNumber.getBlockNumber();
 	}
 }
