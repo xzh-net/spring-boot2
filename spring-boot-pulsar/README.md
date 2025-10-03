@@ -1,11 +1,15 @@
-# Pulsar
+# Pulsar 2.8.4
 
-1. Ack设置未完
-2. 自定义function，编写FormatDateFunction.java后，打包将jar包上传至pusar服务器
+Spring Boot for Apache Pulsar 是 Spring Boot 3.0 以上版本才正式引入的，本次使用 pulsar-java-spring-boot-starter 集成。
+
 
 ```bash
-mvn clean compile
-mvn clean package
+docker run -dit \
+    -p 6650:6650 \
+    -p 8080:8080 \
+    -v pulsardata:/data/pulsar/data \
+    -v pulsarconf:/data/pulsar/conf \
+    --name pulsar-standalone \
+    apachepulsar/pulsar:2.8.4 \
+    bin/pulsar standalone
 ```
-
-访问地址：http://127.0.0.1:8080/doc.html 

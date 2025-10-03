@@ -9,46 +9,49 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.github.majusko.pulsar.producer.PulsarTemplate;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import net.xzh.pulsar.common.model.CommonResult;
 import net.xzh.pulsar.dto.MessageDto;
 
 /**
- * 功能测试
+ * 消息生产者
  */
-@Api(tags = "PulsarController", description = "Pulsar功能测试")
-@RestController
 @RequestMapping("/pulsar")
-public class PulsarController {
+@RestController
+public class ProducerController {
 
     @Autowired
     private PulsarTemplate<MessageDto> template;
     
     @Autowired
-    private PulsarTemplate<String> simpleTemplate;
+    private PulsarTemplate<String> stringTemplate;
 
-    @ApiOperation("发送bootTopic消息")
-    @RequestMapping(value = "/bootTopic", method = RequestMethod.POST)
-    public CommonResult<?> bootTopic(@RequestBody MessageDto message) {
+    /**
+     * 发送系统消息
+     * @param msg
+     * @return
+     */
+    @RequestMapping(value = "/system", method = RequestMethod.POST)
+    public String bootTopic(@RequestBody MessageDto message) {
     	try {
-			template.send("bootTopic",message);
+			template.send("systemTopic",message);
 		} catch (PulsarClientException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        return CommonResult.success(null);
+        return "ok";
     }
-    
-    @ApiOperation("发送stringTopic消息")
-    @RequestMapping(value = "/stringTopic", method = RequestMethod.POST)
-    public CommonResult<?> stringTopic(@RequestParam String msg) {
+    /**
+     * 发送用户消息
+     * @param msg
+     * @return
+     */
+    @RequestMapping(value = "/user", method = RequestMethod.POST)
+    public String stringTopic(@RequestParam String msg) {
     	try {
-    		simpleTemplate.send("stringTopic",msg);
+    		stringTemplate.send("userTopic",msg);
 		} catch (PulsarClientException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        return CommonResult.success(null);
+    	return "ok";
     }
 }

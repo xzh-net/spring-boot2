@@ -1,0 +1,14 @@
+# 消息测试
+
+### 发送系统消息
+POST http://127.0.0.1:8080/pulsar/system
+Content-Type: application/json
+
+{
+  "content": "我是个大盗贼什么也不怕!!!",
+  "id": "12345678"
+}
+
+
+### 发送用户消息
+POST http://127.0.0.1:8080/pulsar/user?msg=我们都是好孩子

@@ -7,14 +7,14 @@ import io.github.majusko.pulsar.producer.ProducerFactory;
 import net.xzh.pulsar.dto.MessageDto;
 
 /**
- * Pulsar配置类
+ * Pulsar生产者配置
  */
 @Configuration
-public class PulsarConfig {
+public class PulsarProducerConfig {
     @Bean
     public ProducerFactory producerFactory() {
         return new ProducerFactory()
-                .addProducer("bootTopic", MessageDto.class)
-                .addProducer("stringTopic", String.class);
+                .addProducer("systemTopic", MessageDto.class)
+                .addProducer("userTopic", String.class);
     }
 }
