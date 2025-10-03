@@ -40,7 +40,7 @@ public class SpringDocConfig {
 	private String prefix;
     
     @Bean
-    public OpenAPI customOpenAPI() {
+    public OpenAPI openAPI() {
         return new OpenAPI()
             .info(apiInfo())
             //全局安全方案
