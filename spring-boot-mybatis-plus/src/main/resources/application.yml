@@ -1,55 +1,16 @@
 server:
-  port: 8080
-
+   port: 8080
+   servlet:
+      context-path: /
+   tomcat:
+     uri-encoding: UTF-8
+     # 连接数满后的排队数，默认为100
+     accept-count: 1000
+     threads:
+       # tomcat最大线程数，默认为200
+       max: 400
+       # Tomcat启动初始化的线程数，默认值10
+       min-spare: 100
 spring:
-  application:
-    name: swagger
-  profiles:
-    active: dev
-  mvc:
-    pathmatch:
-      matching-strategy: ant_path_matcher
-
-mybatis-plus:
-  mapper-locations: classpath:/mapper/**/*.xml
-  global-config:
-    db-config:
-      id-type: auto
-  configuration:
-    auto-mapping-behavior: partial
-    map-underscore-to-camel-case: true
-
-token:
-  # 令牌自定义标识
-  header: Authorization 
-  # 令牌前缀
-  prefix: Bearer 
-  # 令牌密钥
-  secret: abcdefghijklmnopqrstuvwxyz
-  # 令牌有效期（默认30分钟）
-  expiration: 1800
-
-redis:
-  database: mall
-  key:
-    admin: 'ums:admin'
-    resourceList: 'ums:resourceList'
-  expire:
-    common: 86400 # 24小时
-
-secure:
-  ignored:
-    urls: #安全路径白名单
-      - /swagger-ui/
-      - /swagger-resources/**
-      - /**/v2/api-docs
-      - /**/*.html
-      - /**/*.js
-      - /**/*.css
-      - /**/*.png
-      - /favicon.ico
-      - /actuator/**
-      - /admin/login
-      - /admin/register
-      - /admin/info
-      - /admin/logout
+   profiles:
+      active: dev

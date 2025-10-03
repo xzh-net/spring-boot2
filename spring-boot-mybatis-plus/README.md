@@ -8,12 +8,12 @@
 
 | 技术                   | 版本    | 说明             |
 | ---------------------- | ------- | ---------------- |
-| SpringBoot             | 2.3.0   | 容器+MVC框架     |
+| SpringBoot             | 2.7.0   | 容器+MVC框架     |
 | SpringSecurity         | 5.3.2   | 认证和授权框架   |
 | MyBatis                | 3.5.4   | ORM框架          |
 | MyBatis-Plus           | 3.3.2   | MyBatis增强工具  |
 | MyBatis-Plus Generator | 3.3.2   | 数据层代码生成器 |
-| Swagger-UI             | 2.9.2   | 文档生产工具     |
+| SpringDoc              | 1.7.0   | 文档生产工具     |
 | Redis                  | 5.0     | 分布式缓存       |
 | Docker                 | 18.09.0 | 应用容器引擎     |
 | Druid                  | 1.1.10  | 数据库连接池     |
@@ -85,7 +85,7 @@ resources
 
 - 获取指定记录详情：GET /{控制器路由名称}/{id}
 
-- 具体参数及返回结果定义可以运行代码查看Swagger-UI的Api文档：http://localhost:8080/swagger-ui/
+- 具体参数及返回结果定义可以运行代码查看Swagger-UI的Api文档：http://127.0.0.1:8080/swagger-ui/index.html
 
 ![](doc/assets/mall_tiny_start_02.png)
 

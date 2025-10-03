@@ -16,7 +16,7 @@
 		<hutool.version>5.7.22</hutool.version>
 		<jjwt.version>0.9.1</jjwt.version>
 		<mybatis-plus.version>3.5.1</mybatis-plus.version>
-		<springfox-swagger.version>3.0.0</springfox-swagger.version>
+		<springdoc.version>1.7.0</springdoc.version>
 	</properties>
 
 	<parent>
@@ -88,13 +88,18 @@
 			<artifactId>jjwt</artifactId>
 			<version>${jjwt.version}</version>
 		</dependency>
-		<!--Swagger-UI API文档生产工具 -->
+		<!-- SpringDoc 核心依赖 -->
 		<dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-boot-starter</artifactId>
-			<version>${springfox-swagger.version}</version>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>${springdoc.version}</version>
 		</dependency>
-
+		<!-- SpringDoc 安全支持 -->
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-security</artifactId>
+			<version>${springdoc.version}</version>
+		</dependency>
 	</dependencies>
 
 	<build>

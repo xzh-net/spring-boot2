@@ -10,7 +10,81 @@ spring:
     password: 'redis16380' # Redis服务器连接密码（默认为空）
     timeout: 3000ms # 连接超时时间（毫秒）
 
-logging:
-  level:
-    root: info
-    net.xzh.swagger: debug
+mybatis-plus:
+  mapper-locations: classpath:/mapper/**/*.xml
+  global-config:
+    banner: true
+    db-config:
+      id-type: auto
+  configuration:
+    # 字段自动映射
+    auto-mapping-behavior: partial
+    # 是否开启自动驼峰命名规则映射
+    map-underscore-to-camel-case: true
+    # 配置 MyBatis 日志实现，用于打印SQL语句到控制台，常用于开发环境调试（仅开发环境需要开启）
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+## token配置
+token:
+  # 令牌自定义标识
+  header: Authorization 
+  # 令牌前缀
+  prefix: "Bearer "
+  # 令牌密钥
+  secret: abcdefghijklmnopqrstuvwxyz
+  # 令牌有效期（默认30分钟）
+  expiration: 1800
+
+
+## redis缓存规则
+redis:
+  database: mall
+  key:
+    admin: 'ums:admin'
+    resourceList: 'ums:resourceList'
+  expire:
+    common: 86400 # 24小时
+
+## SpringDoc 配置
+springdoc:
+  api-docs:
+    path: /api-docs
+    enabled: true
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
+    # 标签排序方式
+    tags-sorter: alpha
+    # 操作排序方式
+    operations-sorter: alpha
+    # 保持认证状态
+    persistAuthorization: true
+    # 隐藏models
+    default-models-expand-depth: -1
+  packages-to-scan: net.xzh.project
+  paths-to-match: /**
+
+# SpringDoc自定义配置
+app:
+  info:
+    title: SpringDoc Demo API
+    description: SpringBoot 2.7.0 整合 SpringDoc 示例
+    version: 1.0.0
+    contact:
+      name: API Support
+      email: support@example.com
+      url: https://example.com
+
+# 安全路径白名单
+secure:
+  ignored:
+    urls:
+      - /swagger-ui/**
+      - /api-docs/**
+      - /favicon.ico
+      - /admin/login
+      - /admin/register
+      - /admin/info
+      - /admin/logout
+
+
