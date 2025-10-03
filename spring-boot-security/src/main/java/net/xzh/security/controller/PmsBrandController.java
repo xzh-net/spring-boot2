@@ -60,7 +60,7 @@ public class PmsBrandController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public CommonResult<CommonPage<PmsBrand>> listBrand(
 			@RequestParam(value = "pageNum", defaultValue = "1") @Param("页码") Integer pageNum,
-			@RequestParam(value = "pageSize", defaultValue = "3") @Param("每页数量") Integer pageSize) {
+			@RequestParam(value = "pageSize", defaultValue = "10") @Param("每页数量") Integer pageSize) {
 		List<PmsBrand> brandList = brandService.listBrand(pageNum, pageSize);
 		return CommonResult.success(CommonPage.restPage(brandList));
 	}
