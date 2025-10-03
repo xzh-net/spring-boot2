@@ -33,12 +33,6 @@
 			<artifactId>fisco-bcos-java-sdk</artifactId>
 			<version>${fisco-bcos.version}</version>
 		</dependency>
-        <!-- SpringDoc 核心依赖 -->
-		<dependency>
-			<groupId>org.springdoc</groupId>
-			<artifactId>springdoc-openapi-ui</artifactId>
-			<version>${springdoc.version}</version>
-		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
