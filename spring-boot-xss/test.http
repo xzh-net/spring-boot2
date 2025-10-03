@@ -1,0 +1,39 @@
+@ -1,38 +0,0 @@
+# XSS测试
+
+### 拦截表单参数
+GET http://127.0.0.1:8080/api?msg=<script>alert(1)</script>
+Referer: 127.0.0.1
+
+### 拦截JSON参数
+POST http://127.0.0.1:8080/login
+Content-Type: application/json
+Authorization: Bearer 12345678
+Referer: 127.0.0.1
+
+{
+  "loginName": "<script>zhangsan</script>",
+  "pwd": "123456"
+}
+
+
+### 忽略拦截表单参数
+GET http://127.0.0.1:8080/ignore/api?msg=<script>alert(1)</script>
+Referer: 127.0.0.1
+
+### 忽略拦截JSON参数
+POST http://127.0.0.1:8080/ignore/login
+Content-Type: application/json
+Authorization: Bearer 12345678
+Referer: 127.0.0.1
+
+{
+  "loginName": "<script>lisi</script>",
+  "pwd": "123456"
+}
+
+
+# Referer测试
+
+### 拦截表单参数
+GET http://127.0.0.1:8080/api?msg=<script>alert(1)</script>
