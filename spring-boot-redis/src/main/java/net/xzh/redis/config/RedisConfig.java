@@ -80,6 +80,24 @@ public class RedisConfig {
 		return redisTemplate;
 	}
 	
+	/**
+	 * springboot 2.3.0升级到2.7.0以后
+	 * 用于执行Lua脚本的RedisTemplate，使用字符串序列化
+	 */
+	@Bean(name = "scriptRedisTemplate")
+	public RedisTemplate<String, String> scriptRedisTemplate(RedisConnectionFactory factory,RedisSerializer<String> stringKeySerializer) {
+	    RedisTemplate<String, String> template = new RedisTemplate<>();
+	    template.setConnectionFactory(factory);
+	    // 使用字符串序列化器
+	    template.setKeySerializer(stringKeySerializer);
+	    template.setValueSerializer(stringKeySerializer);
+	    template.setHashKeySerializer(stringKeySerializer);
+	    template.setHashValueSerializer(stringKeySerializer);
+	    
+	    template.afterPropertiesSet();
+	    return template;
+	}
+
 	@Bean(name = "cacheManager")
 	@Primary
 	public CacheManager cacheManager(RedisConnectionFactory redisConnectionFactory,
@@ -129,4 +147,5 @@ public class RedisConfig {
 				+ "if next > max then\n" + "  return 0;\n" + "else\n" + "  redis.call(\"zadd\", key, now, now)\n"
 				+ "  redis.call(\"pexpire\", key, ttl)\n" + "  return next\n" + "end";
 	}
+	
 }

@@ -12,6 +12,7 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.script.RedisScript;
 import org.springframework.stereotype.Component;
@@ -33,8 +34,10 @@ import net.xzh.redis.common.utils.IpUtil;
 @Aspect
 @Component
 public class RateLimiterAspect {
+	
 	@Autowired
-	private RedisTemplate<Object, Object> redisTemplate;
+    @Qualifier("scriptRedisTemplate")  // 使用专用的 RedisTemplate
+    private RedisTemplate<String, String> redisTemplate;
 
 	@Autowired
 	private RedisScript<Long> limitScript;
@@ -69,13 +72,17 @@ public class RateLimiterAspect {
 			break;
 		}
 		// 限流的资源key
-		List<Object> keys = Collections.singletonList(rateLimiter.prefix() + key);
-		Long number = redisTemplate.execute(limitScript, keys, now, ttl, expired, max);
-		if (number != null) {
-			if (number == 0) {
-				throw new ApiException("访问频繁，请稍候再试");
-			}
-		}
+		List<String> keys = Collections.singletonList(rateLimiter.prefix() + key);
+	    Long number = redisTemplate.execute(limitScript, 
+	        keys, 
+	        String.valueOf(now), 
+	        String.valueOf(ttl), 
+	        String.valueOf(expired), 
+	        String.valueOf(max));
+	        
+	    if (number == null || number == 0) {
+	        throw new ApiException("访问频繁，请稍候再试");
+	    }
 	}
 
 }
