@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import cn.hutool.core.convert.Convert;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import net.xzh.redis.common.aspect.annotation.RedisBloom;
 import net.xzh.redis.common.aspect.annotation.RedisBloomAdd;
 import net.xzh.redis.common.model.CommonResult;
@@ -20,7 +20,7 @@ import net.xzh.redis.common.model.CommonResult;
  * @author Administrator
  *
  */
-@Api(tags = "布隆")
+@Tag(name = "布隆过滤器", description = "布隆过滤器测试")
 @RestController
 @RequestMapping("/bloom")
 public class BloomController {
@@ -28,7 +28,7 @@ public class BloomController {
 	@Autowired
 	private RedisTemplate<Object,Object> redisTemplate;// 来模拟数据库存
 	
-	@ApiOperation("设置产品")
+	@Operation(summary = "设置产品库存", description = "有库存+1，没有则初始化")
     @RequestMapping(value = "/bloomSet", method = RequestMethod.GET)
 	@RedisBloomAdd(key = "productBloom", value = "#id")
 	public CommonResult<?> bloomSet(@RequestParam String id) {
@@ -41,7 +41,7 @@ public class BloomController {
 		return CommonResult.success(1);
 	}
 
-    @ApiOperation("穿透测试")
+    @Operation(summary = "查询产品库存", description = "按id访问产品，未命中返回500")
     @RequestMapping(value = "/bloomGet", method = RequestMethod.GET)
     @RedisBloom(key = "productBloom", value = "#id")
 	public CommonResult<?> bloomGet(@RequestParam String id) {

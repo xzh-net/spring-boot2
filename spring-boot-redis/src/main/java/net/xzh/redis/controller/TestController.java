@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.ArrayUtil;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import net.xzh.redis.common.model.CommonResult;
 import net.xzh.redis.model.PmsBrand;
 import net.xzh.redis.service.PmsBrandService;
@@ -21,7 +21,8 @@ import net.xzh.redis.service.RedisService;
 /**
  * 测试
  */
-@Api(tags = "测试")
+
+@Tag(name = "基本数据类型测试", description = "基本数据类型测试")
 @RestController
 @RequestMapping("/redis")
 public class TestController {
@@ -31,7 +32,7 @@ public class TestController {
     @Autowired
     private PmsBrandService brandService;
 
-    @ApiOperation("对象读写")
+    @Operation(summary = "对象类型", description = "对象类型")
     @RequestMapping(value = "/simpleTest", method = RequestMethod.GET)
     public CommonResult<PmsBrand> simpleTest() {
         List<PmsBrand> brandList = brandService.listAllBrand();
@@ -42,7 +43,7 @@ public class TestController {
         return CommonResult.success(cacheBrand);
     }
 
-    @ApiOperation("Hash缓存")
+    @Operation(summary = "Hash结构", description = "Hash结构")
     @RequestMapping(value = "/hashTest", method = RequestMethod.GET)
     public CommonResult<PmsBrand> hashTest() {
         List<PmsBrand> brandList = brandService.listAllBrand();
@@ -51,11 +52,12 @@ public class TestController {
         Map<String, Object> value = BeanUtil.beanToMap(brand);
         redisService.hSetAll(key, value);
         Map<Object, Object> cacheValue = redisService.hGetAll(key);
-        PmsBrand cacheBrand = BeanUtil.mapToBean(cacheValue, PmsBrand.class, true);
+        PmsBrand cacheBrand=new PmsBrand();
+        BeanUtil.fillBeanWithMap(cacheValue, cacheBrand, false);
         return CommonResult.success(cacheBrand);
     }
 
-    @ApiOperation("Set缓存")
+    @Operation(summary = "Set结构", description = "Set结构")
     @RequestMapping(value = "/setTest", method = RequestMethod.GET)
     public CommonResult<Set<Object>> setTest() {
         List<PmsBrand> brandList = brandService.listAllBrand();
@@ -66,7 +68,7 @@ public class TestController {
         return CommonResult.success(cachedBrandList);
     }
 
-    @ApiOperation("List缓存")
+    @Operation(summary = "List结构", description = "List结构")
     @RequestMapping(value = "/listTest", method = RequestMethod.GET)
     public CommonResult<List<Object>> listTest() {
         List<PmsBrand> brandList = brandService.listAllBrand();

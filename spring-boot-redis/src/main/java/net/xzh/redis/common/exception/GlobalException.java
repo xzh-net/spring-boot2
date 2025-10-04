@@ -14,9 +14,8 @@ import net.xzh.redis.common.model.CommonResult;
 @RestControllerAdvice
 public class GlobalException {
 
-	@SuppressWarnings("rawtypes")
 	@ExceptionHandler(value = ApiException.class)
-	public CommonResult handle(ApiException e) {
+	public CommonResult<?> handle(ApiException e) {
 		if (e.getErrorCode() != null) {
 			return CommonResult.failed(e.getErrorCode());
 		}

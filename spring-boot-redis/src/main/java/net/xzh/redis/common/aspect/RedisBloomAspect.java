@@ -18,7 +18,7 @@ import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import net.xzh.redis.common.aspect.annotation.RedisBloom;
 import net.xzh.redis.common.enums.ResultCode;
-import net.xzh.redis.common.exception.Asserts;
+import net.xzh.redis.common.exception.ApiException;
 
 /**
  * RedisBloom注解拦截器
@@ -61,14 +61,13 @@ public class RedisBloomAspect {
 
     /***
      * @param bloomFilter
-     * @param s
      * @Description: 验证是否存在与布隆过滤器中
      * @return: void
      * @Date: 2021/7/8 13:51
      */
     private void check(RBloomFilter<String> bloomFilter, String check) {
         if (StrUtil.isNotBlank(check) && !bloomFilter.contains(check)) {
-            Asserts.fail(ResultCode.FAILED);
+        	throw new ApiException(ResultCode.FAILED);
         }
     }
 

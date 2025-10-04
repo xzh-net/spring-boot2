@@ -65,6 +65,9 @@ public class RedisConfig {
 		RedisTemplate<Object, Object> redisTemplate = new RedisTemplate<>();
 		redisTemplate.setConnectionFactory(factory);
 
+		// 设置默认序列化器
+	    redisTemplate.setDefaultSerializer(stringKeySerializer);
+	    
 		// 缓存整体对象、计数器、分布式锁。实现简单，整体操作快（黑盒）
 		redisTemplate.setKeySerializer(stringKeySerializer);
 		redisTemplate.setValueSerializer(jsonValueSerializer);
@@ -72,7 +75,7 @@ public class RedisConfig {
 		// 缓存可分解的对象、需要部分字段操作的场景。节省网络和CPU开销
 		redisTemplate.setHashKeySerializer(stringKeySerializer);
 		redisTemplate.setHashValueSerializer(jsonValueSerializer);
-
+		
 		redisTemplate.afterPropertiesSet();
 		return redisTemplate;
 	}

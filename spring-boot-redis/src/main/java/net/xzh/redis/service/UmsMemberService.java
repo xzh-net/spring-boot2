@@ -8,11 +8,12 @@ public interface UmsMemberService {
     /**
      * 生成验证码
      */
-    String generatePhoneCode(String telephone);
+    String captcha(String telephone);
 
     /**
-     * 获取验证码
+     * 验证码登录
+     * @param code 
      */
-    String extractPhoneCode(String telephone);
+    void loginByCaptcha(String telephone, String code);
 
 }

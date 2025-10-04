@@ -5,30 +5,31 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
- * 全局跨域配置
+ * 全局跨域配置类 实现WebMvcConfigurer接口，用于配置Spring MVC的各种组件
  */
-
 @Configuration
-public class GlobalCorsConfig {
-
-    /**
-     * 允许跨域调用的过滤器
-     */
-    @Bean
-    public CorsFilter corsFilter() {
-        CorsConfiguration config = new CorsConfiguration();
-        //允许所有域名进行跨域调用
-        config.addAllowedOrigin("*");
-        //允许跨越发送cookie
-        config.setAllowCredentials(true);
-        //放行全部原始头信息
-        config.addAllowedHeader("*");
-        //允许所有请求方法跨域调用
-        config.addAllowedMethod("*");
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", config);
-        return new CorsFilter(source);
-    }
+public class GlobalCorsConfig implements WebMvcConfigurer {
+	/**
+	 * 跨域配置
+	 */
+	@Bean
+	public CorsFilter corsFilter() {
+		CorsConfiguration config = new CorsConfiguration();
+		// 设置访问源地址
+		config.addAllowedOriginPattern("*");
+		// 设置访问源请求头
+		config.addAllowedHeader("*");
+		// 设置访问源请求方法
+		config.addAllowedMethod("*");
+		// 有效期 1800秒
+		config.setMaxAge(1800L);
+		// 添加映射路径，拦截一切请求
+		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		source.registerCorsConfiguration("/**", config);
+		// 返回新的CorsFilter
+		return new CorsFilter(source);
+	}
 }

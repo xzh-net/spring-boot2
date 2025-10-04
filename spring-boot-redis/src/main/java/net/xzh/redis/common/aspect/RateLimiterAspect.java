@@ -73,7 +73,7 @@ public class RateLimiterAspect {
 		Long number = redisTemplate.execute(limitScript, keys, now, ttl, expired, max);
 		if (number != null) {
 			if (number == 0) {
-				throw new ApiException("访问过于频繁，请稍候再试");
+				throw new ApiException("访问频繁，请稍候再试");
 			}
 		}
 	}

@@ -36,7 +36,7 @@ public class Constants {
 	 * 短信验证码长度
 	 */
 	
-	public static final int CACHE_PHONE_CODE_LENGTH = 8;
+	public static final int CACHE_PHONE_CODE_LENGTH = 6;
 	
 	/**
 	 * 秒杀分布式锁

@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cn.hutool.core.convert.Convert;
+import cn.hutool.core.util.StrUtil;
 import net.xzh.redis.common.constant.Constants;
+import net.xzh.redis.common.exception.ApiException;
 import net.xzh.redis.service.RedisService;
 import net.xzh.redis.service.UmsMemberService;
 
@@ -20,7 +22,7 @@ public class UmsMemberServiceImpl implements UmsMemberService {
 	private RedisService redisService;
 
 	@Override
-	public String generatePhoneCode(String telephone) {
+	public String captcha(String telephone) {
 		SecureRandom random = new SecureRandom();
 		StringBuilder sb = new StringBuilder(Constants.CACHE_PHONE_CODE_LENGTH);
 
@@ -37,9 +39,16 @@ public class UmsMemberServiceImpl implements UmsMemberService {
 
 	// 对输入的验证码进行校验
 	@Override
-	public String extractPhoneCode(String telephone) {
+	public void loginByCaptcha(String telephone, String code) {
+		if (StrUtil.isEmpty(code)) {
+			throw new ApiException("请输入验证码");
+		}
 		String cacheKey = Constants.CACHE_PHONE_CODE + telephone;
-		return Convert.toStr(redisService.get(cacheKey));
+		String identitycode = Convert.toStr(redisService.get(cacheKey));
+		if (!code.equals(identitycode)) {
+			throw new ApiException("验证码错误");
+		}
+		redisService.del(cacheKey);
 	}
 
 }

@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import cn.hutool.core.convert.Convert;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import net.xzh.redis.common.constant.Constants;
 import net.xzh.redis.common.model.CommonResult;
 
@@ -23,7 +23,7 @@ import net.xzh.redis.common.model.CommonResult;
  * @author Administrator
  *
  */
-@Api(tags = "秒杀")
+@Tag(name = "秒杀测试", description = "分布式锁")
 @RestController
 @RequestMapping("/product")
 public class SecKillController {
@@ -34,7 +34,7 @@ public class SecKillController {
 	@Autowired
 	private RedissonClient redissonClient;
 
-	@ApiOperation("有锁下单")
+	@Operation(summary = "锁定下单", description = "以订单id做为锁key")
 	@RequestMapping(value = "/payment", method = RequestMethod.GET)
 	public CommonResult<?> payment(@RequestParam String id) {
 		String rtn="库存不足";
@@ -61,7 +61,7 @@ public class SecKillController {
 	    return CommonResult.success(rtn);
 	}
 	
-	@ApiOperation("无锁下单")
+	@Operation(summary = "无锁下单", description = "测试超卖问题")
 	@RequestMapping(value = "/nolock", method = RequestMethod.GET)
 	public CommonResult<?> nolock(@RequestParam String id) {
 		String rtn="库存不足";
@@ -75,7 +75,7 @@ public class SecKillController {
 	    return CommonResult.success(rtn);
 	}
 	
-	@ApiOperation("增加库存")
+	@Operation(summary = "设置产品库存", description = "初始化：30")
 	@RequestMapping(value = "/stock", method = RequestMethod.GET)
 	public CommonResult<?> stock(@RequestParam String id) {
 		String productKey=Constants.CACHE_MALL_PRUDUCT+id;
@@ -83,7 +83,7 @@ public class SecKillController {
 	    return CommonResult.success(true);
 	}
 	
-	@ApiOperation("查询库存")
+	@Operation(summary = "查询产品库存", description = "查询产品库存")
 	@RequestMapping(value = "/query", method = RequestMethod.GET)
 	public CommonResult<?> query(@RequestParam String id) {
 		String productKey=Constants.CACHE_MALL_PRUDUCT+id;
