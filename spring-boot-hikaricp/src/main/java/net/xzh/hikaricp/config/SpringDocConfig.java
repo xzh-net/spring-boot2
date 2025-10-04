@@ -9,7 +9,7 @@ import io.swagger.v3.oas.models.OpenAPI;
 public class SpringDocConfig {
     
     @Bean
-    public OpenAPI customOpenAPI() {
+    public OpenAPI openAPI() {
         return new OpenAPI();
     }
 }
