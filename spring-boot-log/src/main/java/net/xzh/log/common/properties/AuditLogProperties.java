@@ -19,7 +19,7 @@ public class AuditLogProperties {
      */
     private Boolean enabled = false;
     /**
-     * 日志记录类型(log，db)
+     * 日志记录类型(logger，db)
      */
     private String logType;
 }
