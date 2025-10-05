@@ -29,7 +29,7 @@ import net.xzh.redis.common.model.CommonResult;
 public class SecKillController {
 
 	@Autowired
-	private RedisTemplate<Object,Object> redisTemplate;// 来模拟数据库存
+	private RedisTemplate<String,Object> redisTemplate;// 来模拟数据库存
 	
 	@Autowired
 	private RedissonClient redissonClient;

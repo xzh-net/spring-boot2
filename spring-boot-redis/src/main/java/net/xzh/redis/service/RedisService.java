@@ -33,7 +33,7 @@ public interface RedisService {
     /**
      * 批量删除属性
      */
-    Long del(List<Object> keys);
+    Long del(List<String> keys);
 
     /**
      * 设置过期时间

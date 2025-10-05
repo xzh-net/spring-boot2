@@ -55,49 +55,28 @@ public class RedisConfig {
 
 
 	/**
-	 * RedisTemplate配置
+	 * 推荐注入RedisTemplate<String, Object>，代码可读性好
 	 * 
 	 * @param factory
 	 */
 	@Bean
-	public RedisTemplate<Object, Object> redisTemplate(RedisConnectionFactory factory,
+	public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory factory,
 			RedisSerializer<String> stringKeySerializer, RedisSerializer<Object> jsonValueSerializer) {
-		RedisTemplate<Object, Object> redisTemplate = new RedisTemplate<>();
+		RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
 		redisTemplate.setConnectionFactory(factory);
 
-		// 设置默认序列化器
-	    redisTemplate.setDefaultSerializer(stringKeySerializer);
-	    
-		// 缓存整体对象、计数器、分布式锁。实现简单，整体操作快（黑盒）
+	    // 使用String序列化key
 		redisTemplate.setKeySerializer(stringKeySerializer);
-		redisTemplate.setValueSerializer(jsonValueSerializer);
-
-		// 缓存可分解的对象、需要部分字段操作的场景。节省网络和CPU开销
 		redisTemplate.setHashKeySerializer(stringKeySerializer);
+		
+		// 使用JSON序列化value
+		redisTemplate.setValueSerializer(jsonValueSerializer);
 		redisTemplate.setHashValueSerializer(jsonValueSerializer);
 		
 		redisTemplate.afterPropertiesSet();
 		return redisTemplate;
 	}
 	
-	/**
-	 * springboot 2.3.0升级到2.7.0以后
-	 * 用于执行Lua脚本的RedisTemplate，使用字符串序列化
-	 */
-	@Bean(name = "scriptRedisTemplate")
-	public RedisTemplate<String, String> scriptRedisTemplate(RedisConnectionFactory factory,RedisSerializer<String> stringKeySerializer) {
-	    RedisTemplate<String, String> template = new RedisTemplate<>();
-	    template.setConnectionFactory(factory);
-	    // 使用字符串序列化器
-	    template.setKeySerializer(stringKeySerializer);
-	    template.setValueSerializer(stringKeySerializer);
-	    template.setHashKeySerializer(stringKeySerializer);
-	    template.setHashValueSerializer(stringKeySerializer);
-	    
-	    template.afterPropertiesSet();
-	    return template;
-	}
-
 	@Bean(name = "cacheManager")
 	@Primary
 	public CacheManager cacheManager(RedisConnectionFactory redisConnectionFactory,

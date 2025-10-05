@@ -24,26 +24,26 @@ import net.xzh.redis.common.model.CommonResult;
 @RestController
 @RequestMapping("/bloom")
 public class BloomController {
-	
+
 	@Autowired
-	private RedisTemplate<Object,Object> redisTemplate;// 来模拟数据库存
-	
+	private RedisTemplate<String, Object> redisTemplate;// 来模拟数据库存
+
 	@Operation(summary = "设置产品库存", description = "有库存+1，没有则初始化")
-    @RequestMapping(value = "/bloomSet", method = RequestMethod.GET)
+	@RequestMapping(value = "/bloomSet", method = RequestMethod.GET)
 	@RedisBloomAdd(key = "productBloom", value = "#id")
 	public CommonResult<?> bloomSet(@RequestParam String id) {
-		int stock = Convert.toInt(redisTemplate.opsForValue().get(id),0);
-		if(stock>0) {
-			redisTemplate.opsForValue().set(id, stock+1);
-		}else {
+		int stock = Convert.toInt(redisTemplate.opsForValue().get(id), 0);
+		if (stock > 0) {
+			redisTemplate.opsForValue().set(id, stock + 1);
+		} else {
 			redisTemplate.opsForValue().set(id, 1);
 		}
 		return CommonResult.success(1);
 	}
 
-    @Operation(summary = "查询产品库存", description = "按id访问产品，未命中返回500")
-    @RequestMapping(value = "/bloomGet", method = RequestMethod.GET)
-    @RedisBloom(key = "productBloom", value = "#id")
+	@Operation(summary = "查询产品库存", description = "按id访问产品，未命中返回500")
+	@RequestMapping(value = "/bloomGet", method = RequestMethod.GET)
+	@RedisBloom(key = "productBloom", value = "#id")
 	public CommonResult<?> bloomGet(@RequestParam String id) {
 		return CommonResult.success(redisTemplate.opsForValue().get(id));
 	}

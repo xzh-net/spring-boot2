@@ -12,8 +12,7 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.script.RedisScript;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -36,8 +35,7 @@ import net.xzh.redis.common.utils.IpUtil;
 public class RateLimiterAspect {
 	
 	@Autowired
-    @Qualifier("scriptRedisTemplate")  // 使用专用的 RedisTemplate
-    private RedisTemplate<String, String> redisTemplate;
+	private StringRedisTemplate stringRedisTemplate;
 
 	@Autowired
 	private RedisScript<Long> limitScript;
@@ -73,7 +71,7 @@ public class RateLimiterAspect {
 		}
 		// 限流的资源key
 		List<String> keys = Collections.singletonList(rateLimiter.prefix() + key);
-	    Long number = redisTemplate.execute(limitScript, 
+	    Long number = stringRedisTemplate.execute(limitScript, 
 	        keys, 
 	        String.valueOf(now), 
 	        String.valueOf(ttl), 
