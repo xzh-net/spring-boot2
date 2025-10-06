@@ -97,6 +97,7 @@
 
 ## 更新记录
 
+- 2025-10-06 多数据源和动态数据源，springboot升级到2.7.0
 - 2025-10-04 自定义审计日志，springboot升级到2.7.0，swagger升级为springdoc 1.7.0
 - 2025-10-04 knife4j升级到springdoc 1.7.0【无认证，有结构】
 - 2025-10-03 mybatis-plus脚手架升级到springdoc 1.7.0【有认证】
