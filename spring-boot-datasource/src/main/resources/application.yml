@@ -1,0 +1,9 @@
+server:
+   port: 8080
+spring:
+   profiles:
+      # dynamic:动态数据源
+      # multi:多数据源
+      active: multi
+   main:
+      allow-circular-references: true

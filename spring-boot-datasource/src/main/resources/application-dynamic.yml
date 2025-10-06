@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    # 动态数据源主库
+    primary:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: jdbc:mysql://172.17.17.137:3306/mall?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
+      username: root
+      password: root
+      type: com.zaxxer.hikari.HikariDataSource

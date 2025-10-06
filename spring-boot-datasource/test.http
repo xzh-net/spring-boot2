@@ -1,0 +1,55 @@
+# 角色管理（多数据源）application-multi.yml
+
+### 主数据源
+GET http://127.0.0.1:8080/role/list
+
+
+### 从数据源
+GET http://127.0.0.1:8080/role/list_slave
+
+##############################################################################
+
+# 用户管理（动态数据源）application-dynamic.yml
+
+### 默认数据源查询用户列表
+GET http://127.0.0.1:8080/user/list?username=zhangsan
+
+
+### 查询用户列表(切换到test数据源)
+GET http://127.0.0.1:8080/user/list/test
+
+
+# 数据源管理
+
+### 查询所有
+GET http://127.0.0.1:8080/api/datasource/list
+
+### 添加数据源
+POST http://127.0.0.1:8080/api/datasource/add
+Content-Type: application/json
+
+{
+  "dataSourceKey": "test",
+  "dataSourceName": "自定义数据源",
+  "host": "172.17.17.137",
+  "port": "3306",
+  "dataBaseName": "mall_tiny",
+  "username": "root",
+  "password": "root"
+}
+
+### 删除数据源
+DELETE  http://127.0.0.1:8080/api/datasource/remove/primary
+
+
+### 测试数据源
+POST http://127.0.0.1:8080/api/datasource/test
+Content-Type: application/json
+
+{
+  "host": "172.17.17.137",
+  "port": "3306",
+  "dataBaseName": "mall_tiny",
+  "username": "root",
+  "password": "root"
+}
