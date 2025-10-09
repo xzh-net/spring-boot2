@@ -6,9 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.servlet.LocaleResolver;
-
-import cn.hutool.core.util.StrUtil;
 
 /**
  * 国际化解析
@@ -26,7 +25,7 @@ public class MyLocaleResolver implements LocaleResolver {
 		String lang = request.getParameter(LANG);
 		// 默认语言 简体中文
 		Locale locale = Locale.CHINA;
-		if (StrUtil.isNotBlank(lang) && lang.contains(DELIMITER)) {
+		if (StringUtils.isNotBlank(lang) && lang.contains(DELIMITER)) {
 			String[] langueagea = lang.split(DELIMITER);
 			locale = new Locale(langueagea[0], langueagea[1]);
 			HttpSession session = request.getSession();

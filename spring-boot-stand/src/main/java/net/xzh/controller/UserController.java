@@ -2,19 +2,28 @@ package net.xzh.controller;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.file.FileAlreadyExistsException;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.io.FilenameUtils;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import cn.hutool.core.io.FileUtil;
 import net.xzh.model.User;
 
 /**
@@ -25,6 +34,7 @@ import net.xzh.model.User;
  */
 
 @RestController
+@RequestMapping("/user")
 public class UserController {
 
 	/**
@@ -34,7 +44,7 @@ public class UserController {
 	 * @param name 可选参数（带默认值）
 	 * @return
 	 */
-	@GetMapping("/user/")
+	@GetMapping("")
 	public String getUser(@RequestParam("id") Long id,
 			@RequestParam(value = "name", defaultValue = "Guest") String name) {
 		return "ID: " + id + ", Name: " + name;
@@ -46,7 +56,7 @@ public class UserController {
 	 * @param id
 	 * @return
 	 */
-	@GetMapping("/user/{id}")
+	@GetMapping("/{id}")
 	public String getUser2(@PathVariable Long id) {
 		return "ID: " + id;
 	}
@@ -59,8 +69,8 @@ public class UserController {
 	 * @return
 	 */
 
-	@PostMapping("/user/raw")
-	public User addUser(@RequestBody User user) {
+	@PostMapping("/json")
+	public User json(@RequestBody User user) {
 		return user;
 	}
 
@@ -71,46 +81,65 @@ public class UserController {
 	 * @param user
 	 * @return
 	 */
-	@PostMapping("/user/form-data")
-	public User addUser2(@ModelAttribute User user) {
+	@PostMapping("/form-urlencoded")
+	public User formUrlencoded(@ModelAttribute User user) {
 		return user;
 	}
 
 	/**
-	 * 上传文件form-data
+	 * 使用MultipartFile接收文件（可多个）
 	 * 
 	 * @param file
 	 * @return
 	 */
 	@PostMapping("/upload")
-	public String upload(@RequestParam("file") MultipartFile file) {
+	public ResponseEntity<String> upload(@RequestParam("file") MultipartFile file) {
 		// file name
 		String fileName = file.getOriginalFilename();
-		String newFileName = System.currentTimeMillis() + "." + FileUtil.extName(fileName);
+		String newFileName = System.currentTimeMillis() + "." + FilenameUtils.getExtension(fileName);
 		// type
 		String contentType = file.getContentType();
-		return "upload success:" + newFileName;
+		return ResponseEntity.ok("上传成功。文件: "+newFileName +" 类型: "+ contentType);
 	}
 
 	/**
-	 * data-binary 不是 multipart/form-data 格式，无法使用@RequestBody和MultipartFile方式接收
+	 * binary 不是 multipart/form-data 格式，无法使用@RequestBody和MultipartFile方式接收
 	 * 不依赖spring注解，使用 HttpServletRequest 读取原始数据
+	 * 
 	 * @param request
 	 * @return
 	 */
 	@PostMapping("/binary")
-    public String binary(HttpServletRequest request) {
-        try (InputStream inputStream = request.getInputStream()) {
-            byte[] buffer = new byte[1024];
-            int bytesRead;
-            while ((bytesRead = inputStream.read(buffer)) != -1) {
-                // 处理数据（例如保存到文件或数据库）
-            }
-            return "上传成功！";
-        } catch (IOException e) {
-            e.printStackTrace();
-            return "上传失败！";
-        }
-    }
-	
+	public ResponseEntity<String> binary(HttpServletRequest request) {
+		// 定义文件保存路径（根据实际需求调整）
+		Path uploadPath = FileSystems.getDefault().getPath("d:/");
+		try {
+			// 确保上传目录存在
+			Files.createDirectories(uploadPath);
+			// 生成唯一文件名
+			String filename = "upload_" + System.currentTimeMillis() + ".bin";
+			Path filePath = uploadPath.resolve(filename);
+
+			try (InputStream inputStream = request.getInputStream();
+					OutputStream outputStream = Files.newOutputStream(filePath, StandardOpenOption.CREATE_NEW)) {
+
+				// 使用更高效的缓冲区大小（根据实际情况调整）
+				byte[] buffer = new byte[8192]; // 8KB缓冲区
+				int bytesRead;
+				long totalBytes = 0;
+
+				while ((bytesRead = inputStream.read(buffer)) != -1) {
+					outputStream.write(buffer, 0, bytesRead);
+					totalBytes += bytesRead;
+				}
+				return ResponseEntity.ok("上传成功。文件大小: " + totalBytes + " bytes");
+
+			} catch (FileAlreadyExistsException e) {
+				return ResponseEntity.status(HttpStatus.CONFLICT).body("文件已存在");
+			}
+
+		} catch (IOException e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("上传失败: " + e.getMessage());
+		}
+	}
 }

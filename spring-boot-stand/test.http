@@ -1,0 +1,45 @@
+# 获取提交数据的几种方式
+
+### 使用 @RequestParam 注解
+GET http://127.0.0.1:8080/cms/user?id=100&name=zhangsan
+
+
+### 使用 @PathVariable 注解
+GET http://127.0.0.1:8080/cms/user/100
+
+
+### 使用 @RequestBody 注解
+POST http://127.0.0.1:8080/cms/user/json
+Content-Type: application/json
+
+{
+  "id": 200,
+  "name": "lisi",
+  "email": "lisi@163.com"
+}
+
+
+### 使用 @ModelAttribute 注解
+POST http://127.0.0.1:8080/cms/user/form-urlencoded
+Content-Type: application/x-www-form-urlencoded
+
+id=100&name=zhangsan&email=zhangsan@163.com
+
+
+### 使用 MultipartFile 接收文件
+POST http://127.0.0.1:8080/cms/user/upload
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="test.jpg"
+Content-Type: image/jpeg
+
+< d:/1791.jpg
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+
+### 使用 HttpServletRequest 读取binary
+POST http://127.0.0.1:8080/cms/user/binary
+Content-Type: application/octet-stream
+
+< d:/1791.jpg
