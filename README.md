@@ -12,7 +12,7 @@
 ## 2. 官方Starter
 
 - [整合JWT和Spring Security进行权限校验](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-security)
-- [Spring Boot配置Email发送功能](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-email)
+- [SMTP发送邮件](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-email)
 - [Quartz作业调度和自定义线程池](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-quartz)
 - [整合Validation处理非空校验拦截（支持国际化）](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-validation)
 - [整合ActiveMQ基于JSM规范进行消息发送和订阅](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-jms)
@@ -97,6 +97,7 @@
 
 ## 更新记录
 
+- 2025-10-09 发送email，去掉hutool依赖，springboot升级到2.7.0
 - 2025-10-09 stand入门项目，去掉hutool依赖，springboot升级到2.7.0
 - 2025-10-06 多数据源和动态数据源，springboot升级到2.7.0
 - 2025-10-04 自定义审计日志，springboot升级到2.7.0，swagger升级为springdoc 1.7.0
