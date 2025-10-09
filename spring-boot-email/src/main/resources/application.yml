@@ -1,19 +1,10 @@
 server:
    port: 8080
 spring:
-   freemarker:
-      charset: UTF-8
-      request-context-attribute: request
-      settings:
-         classic_compatible: true
-         number_format: 0.##
-      suffix: .ftl
-      templateEncoding: UTF-8
-      templateLoaderPath: classpath:/templates/
    mail:
       host: smtp.163.com
       username: xcg992224
-      password: 我是授权码
+      password: FWjnmu7CF2TdEc8T
       default-encoding: UTF-8
       fromAddr: xcg992224@163.com
       nickName: young

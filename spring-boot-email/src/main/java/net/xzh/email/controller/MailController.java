@@ -21,37 +21,37 @@ import org.springframework.web.bind.annotation.RestController;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import net.xzh.email.common.model.CommonResult;
-
 /**
  * 发送邮件
  * 
  * @author Administrator
  *
  */
-@Api(tags = "发送邮件")
 @RestController
 public class MailController {
-	
-	 private static final Logger LOGGER = LoggerFactory.getLogger(MailController.class);
-	 
+
+	private static final Logger log = LoggerFactory.getLogger(MailController.class);
+
 	@Autowired
 	private JavaMailSender javaMailSender;
 
 	@Autowired
 	TemplateEngine templateEngine;
+
 	@Value("${spring.mail.fromAddr}")
 	private String from;
+
 	@Value("${spring.mail.nickName}")
 	private String nickName;
+
 	private String to = "xcg992224@163.com";
 
-	
-	@ApiOperation("文本邮件")
+	/**
+	 * 发送文本邮件
+	 * @return
+	 */
 	@RequestMapping(value = "/sendTextMail", method = RequestMethod.POST)
-	public CommonResult<?> sendTextMail() {
+	public String sendTextMail() {
 		SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
 		simpleMailMessage.setFrom(nickName + "<" + from + ">");
 		simpleMailMessage.setTo(to);
@@ -59,17 +59,19 @@ public class MailController {
 		simpleMailMessage.setText("文本邮件内容在这里");
 		try {
 			javaMailSender.send(simpleMailMessage);
-			LOGGER.info("文本邮件发送成功");
+			log.debug("文本邮件发送成功");
 		} catch (Exception e) {
-			LOGGER.error("文本邮件发送异常", e);
+			log.error("文本邮件发送异常", e);
 		}
-		return CommonResult.success(System.currentTimeMillis());
+		return "发送成功";
 	}
 
-	
-	@ApiOperation("html邮件")
+	/**
+	 * 发送html邮件
+	 * @return
+	 */
 	@RequestMapping(value = "/sendHtmlEmail", method = RequestMethod.POST)
-	public CommonResult<?> sendHtmlEmail() {
+	public String sendHtmlEmail() {
 		MimeMessage message = javaMailSender.createMimeMessage();
 		try {
 			MimeMessageHelper messageHelper = new MimeMessageHelper(message, true);
@@ -78,43 +80,49 @@ public class MailController {
 			messageHelper.setSubject("这是一个html邮件");
 			messageHelper.setText("html邮件内容在<a>这里<a>", true);
 			javaMailSender.send(message);
-			LOGGER.info("html邮件发送成功");
+			log.debug("html邮件发送成功");
 		} catch (MessagingException e) {
-			LOGGER.error("html邮件发送失败，{}", e);
+			log.error("html邮件发送失败，{}", e);
 		} catch (UnsupportedEncodingException e) {
-			LOGGER.error("html邮件编码异常，{}", e);
+			log.error("html邮件编码异常，{}", e);
 		}
-		return CommonResult.success(System.currentTimeMillis());
+		return "发送成功";
 	}
 
-	@ApiOperation("html模板邮件")
+	/**
+	 * 发送html模板邮件
+	 * @return
+	 */
 	@RequestMapping(value = "/sendHtmlemplateMail", method = RequestMethod.POST)
-	public CommonResult<?> sendHtmlemplateMail() {
+	public String sendHtmlemplateMail() {
 		Context context = new Context();
 		context.setVariable("code", "123456");
-		String emailHTMLContent = templateEngine.process("email", context);
+		String htmlTemplate = templateEngine.process("email", context);
 		MimeMessage message = javaMailSender.createMimeMessage();
 		try {
 			MimeMessageHelper messageHelper = new MimeMessageHelper(message, true);
 			messageHelper.setFrom(new InternetAddress(from, nickName, "UTF-8"));
 			messageHelper.setTo(to);
 			messageHelper.setSubject("这是一个html模板邮件");
-			messageHelper.setText(emailHTMLContent, true);
+			messageHelper.setText(htmlTemplate, true);
 			javaMailSender.send(message);
-			LOGGER.info("html模板邮件发送成功");
-		}catch (MessagingException e) {
-			LOGGER.error("html模板邮件发送失败，{}", e);
+			log.debug("html模板邮件发送成功");
+		} catch (MessagingException e) {
+			log.error("html模板邮件发送失败，{}", e);
 		} catch (UnsupportedEncodingException e) {
-			LOGGER.error("html模板邮件编码异常，{}", e);
+			log.error("html模板邮件编码异常，{}", e);
 		}
-		return CommonResult.success(System.currentTimeMillis());
+		return "发送成功";
 	}
-
-	@ApiOperation("附件邮件")
+	
+	/**
+	 * 发送附件邮件
+	 * @return
+	 */
 	@RequestMapping(value = "/sendAttachmentsMail", method = RequestMethod.POST)
-	public CommonResult<?> sendAttachmentsMail() {
+	public String sendAttachmentsMail() {
 		String fileName = "图片.jpg";
-		String filePath = "D:\\aa.jpg";
+		String filePath = "D:\\1791.jpg";
 		MimeMessage message = javaMailSender.createMimeMessage();
 		try {
 			MimeMessageHelper messageHelper = new MimeMessageHelper(message, true);
@@ -125,12 +133,12 @@ public class MailController {
 			FileSystemResource file = new FileSystemResource(new File(filePath));
 			messageHelper.addAttachment(fileName, file);
 			javaMailSender.send(message);
-			LOGGER.info("附件邮件发送成功");
+			log.debug("附件邮件发送成功");
 		} catch (MessagingException e) {
-			LOGGER.error("附件邮件发送失败，{}", e);
+			log.error("附件邮件发送失败，{}", e);
 		} catch (UnsupportedEncodingException e) {
-			LOGGER.error("附件邮件编码异常，{}", e);
+			log.error("附件邮件编码异常，{}", e);
 		}
-		return CommonResult.success(System.currentTimeMillis());
+		return "发送成功";
 	}
 }

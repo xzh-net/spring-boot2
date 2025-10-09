@@ -1,0 +1,16 @@
+# SMTP发送邮件
+
+### 发送文本邮件
+POST http://127.0.0.1:8080/sendTextMail
+
+
+### 发送html邮件
+POST http://127.0.0.1:8080/sendHtmlEmail
+
+
+### 发送html模板邮件
+POST http://127.0.0.1:8080/sendHtmlemplateMail
+
+
+### 发送附件邮件
+POST http://127.0.0.1:8080/sendAttachmentsMail
