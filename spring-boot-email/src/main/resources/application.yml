@@ -4,7 +4,7 @@ spring:
    mail:
       host: smtp.163.com
       username: xcg992224
-      password: FWjnmu7CF2TdEc8T
+      password: 授权码
       default-encoding: UTF-8
       fromAddr: xcg992224@163.com
       nickName: young
