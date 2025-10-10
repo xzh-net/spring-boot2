@@ -3,9 +3,11 @@ package net.xzh.hikaricp.model;
 import java.io.Serializable;
 import java.util.Date;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-
-@Schema(description = "用户数据")
+/**
+ * 用户
+ * @author CR7
+ *
+ */
 public class UmsAdmin implements Serializable {
     private Long id;
 
@@ -13,25 +15,39 @@ public class UmsAdmin implements Serializable {
 
     private String password;
 
-    @Schema(description = "头像")
+    /**
+     * 头像
+     */
     private String icon;
 
-    @Schema(description = "邮箱")
+    /**
+     * 邮箱
+     */
     private String email;
 
-    @Schema(description = "昵称")
+    /**
+     * 昵称
+     */
     private String nickName;
 
-    @Schema(description = "备注信息")
+    /**
+     * 备注信息
+     */
     private String note;
 
-    @Schema(description = "创建时间")
+    /**
+     * 创建时间
+     */
     private Date createTime;
 
-    @Schema(description = "最后登录时间")
+    /**
+     * 最后登录时间
+     */
     private Date loginTime;
 
-    @Schema(description = "帐号启用状态：0->禁用；1->启用")
+    /**
+     * 帐号启用状态：0->禁用；1->启用
+     */
     private Integer status;
 
     private static final long serialVersionUID = 1L;
