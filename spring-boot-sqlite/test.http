@@ -1,0 +1,32 @@
+# JPA操作SQLite数据库
+
+### 初始化数据
+GET http://127.0.0.1:8080/users/init
+
+
+### 查询所有用户
+GET http://127.0.0.1:8080/users/page
+
+
+### 查询所有ID ≤ maxId 用户
+GET http://127.0.0.1:8080/users/page/5
+
+
+### 用户名密码登录
+GET http://127.0.0.1:8080/users/login?username=zhangsan&password=000000
+
+
+### 按照用户名查找
+GET http://127.0.0.1:8080/users/userByName/zhangsan
+
+
+### 按照用户id查找
+GET http://127.0.0.1:8080/users/userById/10
+
+
+### 更新指定用户的名称
+GET http://127.0.0.1:8080/users/update/1/zhangsan
+
+
+### 重置密码000000
+GET http://127.0.0.1:8080/users/resetPwd/1

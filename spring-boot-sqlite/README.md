@@ -2,7 +2,11 @@
 
 SQLite是比 Access 更优秀的文件型数据库，支持复杂的 SQL 语句，支持索引、触发器，速度很快，开源等。
 
-```bash
-mvn clean compile
-mvn clean package
-```
+**注意事项**
+
+1. **SQLite限制**：SQLite不支持完整的JPA功能，如外键约束的级联操作可能有限制
+2. **并发访问**：SQLite的写操作是串行的，不适合高并发写场景
+3. **数据类型**：SQLite的数据类型比较灵活，但JPA映射时需要注意类型兼容性
+
+
+
