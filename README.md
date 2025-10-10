@@ -102,7 +102,7 @@
 - 2025-10-09 stand入门项目，去掉hutool依赖，springboot升级到2.7.0
 - 2025-10-06 多数据源和动态数据源，springboot升级到2.7.0
 - 2025-10-04 自定义审计日志，springboot升级到2.7.0，swagger升级为springdoc 1.7.0
-- 2025-10-04 knife4j升级到springdoc 1.7.0【无认证，有结构】
+- 2025-10-04 knife4j升级到springdoc 1.7.0【无认证】
 - 2025-10-03 mybatis-plus脚手架升级到springdoc 1.7.0【有认证】
 - 2025-10-03 pulsar-java-spring-boot-starter升级到1.1.2，springboot升级到2.7.0
 - 2025-10-03 fisco升级到2.9.1，springboot升级到2.7.0
@@ -112,5 +112,5 @@
 - 2025-09-18 优化任务调度和自定义线程池参数，springboot升级到2.7.0
 - 2025-09-17 HikariCP参数优化，springboot升级到2.7.0
 - 2025-09-17 日志拦截器逻辑优化，增加记录字段
-- 2025-09-16 完善Redis限流功能和优化template注入逻辑，springboot升级到2.7.0
+- 2025-09-16 完善Redis限流功能和优化template注入逻辑，springboot升级到2.7.0【无认证】
 
