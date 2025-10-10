@@ -2,27 +2,23 @@
 
 - 官网地址：https://www.kawaks.org/
 
-1. 提取html内容
+1. 获取游戏列表，生成cps1、cps2、neogeo的文件列表txt
+	
+2. 执行下载html批处理
 
-   > jsoup解析html获取标签内容，得到预览图下载地址和Rom文件下载地址
-
-2. 文件批量下载
-
-   ```bash
-   !/bin/bash
-    
-   filename="cps1-172.txt"  
-   
-   while read line
-     do
-       wget -c -b -P roms $line
-     done < $filename
+   ```
+   # linux下由于换行符Unix格式问题执行失败的处理办法
+   sed -i 's/\r$//' shell.sh
+   sed -i 's/\r$//' cps1-172.txt
    ```
 
-   > 遍历文件，支持端点续传、后台执行、并下载到指定路径下
+   执行成功后，会在当前路径下生成roms文件夹，包含每个游戏的html文件
 
-3. 图片格式转换
+3. 通过解析本地html文件，扫描出每个rom的下载地址和缩略图下载地址
 
-   > sshots格式为bmp
+4. 通过批处理下载缩略图和rom文件
 
-4. 图片处理（可选）
+5. 图片格式转换，将sshots格式为bmp
+
+6. 图片质量（可选）
+
