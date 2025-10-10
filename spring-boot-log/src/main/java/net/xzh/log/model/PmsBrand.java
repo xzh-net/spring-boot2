@@ -2,36 +2,53 @@ package net.xzh.log.model;
 
 import java.io.Serializable;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-
+/**
+ * 品牌管理
+ * @author CR7
+ *
+ */
 public class PmsBrand implements Serializable {
     private Long id;
 
     private String name;
 
-    @Schema(description = "首字母")
+    /**
+     * 首字母
+     */
     private String firstLetter;
 
     private Integer sort;
 
-    @Schema(description = "是否为品牌制造商：0->不是；1->是")
+    /**
+     * 是否为品牌制造商：0->不是；1->是
+     */
     private Integer factoryStatus;
 
     private Integer showStatus;
 
-    @Schema(description = "产品数量")
+    /**
+     * 产品数量
+     */
     private Integer productCount;
 
-    @Schema(description = "产品评论数量")
+    /**
+     * 产品评论数量
+     */
     private Integer productCommentCount;
 
-    @Schema(description = "品牌logo")
+    /**
+     * 品牌logo
+     */
     private String logo;
 
-    @Schema(description = "专区大图")
+    /**
+     * 专区大图
+     */
     private String bigPic;
-
-    @Schema(description = "品牌故事")
+    
+    /**
+     * 品牌故事
+     */
     private String brandStory;
 
     private static final long serialVersionUID = 1L;

@@ -1,0 +1,41 @@
+# 品牌管理
+
+### 查询所有列表
+GET http://127.0.0.1:8080/brand/listAll
+
+
+### 分页查询
+GET http://127.0.0.1:8080/brand/list?pageNum=1&pageSize=5
+
+
+### 新增品牌
+POST http://127.0.0.1:8080/brand/create
+Content-Type: application/json
+
+{
+  "name": "品牌名称",
+  "firstLetter": "品牌首字母",
+  "logo": "品牌logo",
+  "bigPic": "品牌图片"
+}
+
+
+### 修改品牌
+POST http://127.0.0.1:8080/brand/update/62
+Content-Type: application/json
+
+{
+  "id": 62,
+  "name": "品牌名称-改",
+  "firstLetter": "品牌首字母-改",
+  "logo": "品牌logo-改",
+  "bigPic": "品牌图片-改"
+}
+
+
+### 删除品牌
+GET http://127.0.0.1:8080/brand/delete/67
+
+
+### 查询品牌
+GET http://127.0.0.1:8080/brand/67
