@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import net.xzh.mall.common.model.CommonResult;
+import net.xzh.mall.i18n.I18nMessages;
 
 /**
  * 全局异常处理
@@ -42,7 +43,7 @@ public class GlobalExceptionHandler {
         if (bindingResult.hasErrors()) {
             FieldError fieldError = bindingResult.getFieldError();
             if (fieldError != null) {
-                message = fieldError.getField()+fieldError.getDefaultMessage();
+                message = I18nMessages.getMessage(fieldError.getDefaultMessage());
             }
         }
         return CommonResult.validateFailed(message);

@@ -7,55 +7,77 @@ import javax.validation.constraints.NotEmpty;
 
 import org.springframework.core.annotation.Order;
 
-import io.swagger.annotations.ApiModelProperty;
 import net.xzh.mall.common.annotation.FlagValidator;
 
 public class PmsBrand implements Serializable {
-    private Long id;
+	
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4662747980720086872L;
 
+	private Long id;
+
+    /**
+     * 品牌名称
+     */
     @Order(1)
 //    @NotEmpty(message="品牌名称不能为空")
     @NotEmpty(message="PmsBrand.name")
-    @ApiModelProperty(value = "品牌名称",required = true)
     private String name;
 
-    @ApiModelProperty(value = "首字母")
+    /**
+     * 首字母
+     */
     private String firstLetter;
 
+    
     @Order(5)
     @Min(value = 0)
     private Integer sort;
 
+    /**
+     * 是否为品牌制造商：0->不是；1->是
+     */
     @Order(2)
 //    @FlagValidator(value = {"0","1"}, message = "厂家状态不正确")
     @FlagValidator(value = {"0","1"}, message = "PmsBrand.factoryStatus")
-    @ApiModelProperty(value = "是否为品牌制造商：0->不是；1->是")
     private Integer factoryStatus;
 
+    /**
+     * 是否进行显示
+     */
     @Order(4)
     @FlagValidator(value = {"0","1"}, message = "显示状态不正确")
-    @ApiModelProperty(value = "是否进行显示")
     private Integer showStatus;
 
-    @ApiModelProperty(value = "产品数量")
+    /**
+     * 产品数量
+     */
     private Integer productCount;
 
-    @ApiModelProperty(value = "产品评论数量")
+    /**
+     * 产品评论数量
+     */
     private Integer productCommentCount;
 
+    /**
+     * 品牌logo
+     */
     @Order(3)
 //    @NotEmpty(message="品牌logo不能为空")
     @NotEmpty(message="PmsBrand.logo")
-    @ApiModelProperty(value = "品牌logo",required = true)
     private String logo;
 
-    @ApiModelProperty(value = "专区大图")
+    /**
+     * 专区大图
+     */
     private String bigPic;
 
-    @ApiModelProperty(value = "品牌故事")
+    /**
+     * 品牌故事
+     */
     private String brandStory;
-
-    private static final long serialVersionUID = 1L;
 
     public Long getId() {
         return id;

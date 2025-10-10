@@ -1,9 +1,7 @@
-package net.xzh.mall.common.component;
+package net.xzh.mall.common.annotation;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-
-import net.xzh.mall.common.annotation.FlagValidator;
 
 /**
  * 状态标记校验器

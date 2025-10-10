@@ -9,21 +9,19 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-import net.xzh.mall.common.component.FlagValidatorClass;
-
 /**
  * 用户验证状态是否在指定范围内的注解
  */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.FIELD,ElementType.PARAMETER})
+@Target({ ElementType.FIELD, ElementType.PARAMETER })
 @Constraint(validatedBy = FlagValidatorClass.class)
 public @interface FlagValidator {
-    String[] value() default {};
+	String[] value() default {};
 
-    String message() default "flag is not found";
+	String message() default "flag is not found";
 
-    Class<?>[] groups() default {};
+	Class<?>[] groups() default {};
 
-    Class<? extends Payload>[] payload() default {};
+	Class<? extends Payload>[] payload() default {};
 }

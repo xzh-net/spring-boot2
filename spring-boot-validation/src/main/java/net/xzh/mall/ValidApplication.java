@@ -8,11 +8,15 @@ import org.springframework.context.annotation.Bean;
 import net.xzh.mall.i18n.MyLocaleResolver;
 
 @SpringBootApplication
-public class Application {
+public class ValidApplication {
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        SpringApplication.run(ValidApplication.class, args);
     }
     
+    /**
+     * 国际化
+     * @return
+     */
     @Bean
 	public LocaleResolver localeResolver() {
 		return new MyLocaleResolver();

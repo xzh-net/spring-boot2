@@ -1,0 +1,57 @@
+# 非空校验
+
+### 查询所有列表
+GET http://127.0.0.1:8080/brand/listAll
+
+
+### 分页查询
+GET http://127.0.0.1:8080/brand/list?pageNum=1&pageSize=5
+
+
+### 新增品牌（英文）
+POST http://127.0.0.1:8080/brand/create
+Content-Type: application/json
+lang: en_US
+
+{
+  "name": "",
+  "firstLetter": "品牌首字母",
+  "logo": "品牌logo",
+  "factoryStatus": "1",
+  "bigPic": "品牌图片"
+}
+
+### 新增品牌（中文）
+POST http://127.0.0.1:8080/brand/create
+Content-Type: application/json
+lang: zh_CN
+
+{
+  "name": "",
+  "firstLetter": "品牌首字母",
+  "logo": "品牌logo",
+  "factoryStatus": "-1",
+  "bigPic": "品牌图片"
+}
+
+
+### 修改品牌
+POST http://127.0.0.1:8080/brand/update/775
+Content-Type: application/json
+
+{
+  "id": 62,
+  "name": "",
+  "firstLetter": "品牌首字母-改",
+  "logo": "品牌logo-改",
+  "factoryStatus": "8",
+  "bigPic": "品牌图片-改"
+}
+
+
+### 删除品牌
+GET http://127.0.0.1:8080/brand/delete/75
+
+
+### 查询品牌
+GET http://127.0.0.1:8080/brand/75
