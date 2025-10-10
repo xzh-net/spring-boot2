@@ -97,6 +97,7 @@
 
 ## 更新记录
 
+- 2025-10-10 表单提交实体类非空校验框架，springboot升级到2.7.0
 - 2025-10-10 JPA操作SQLite数据库，springboot升级到2.7.0
 - 2025-10-09 发送email，去掉hutool依赖，springboot升级到2.7.0
 - 2025-10-09 stand入门项目，去掉hutool依赖，springboot升级到2.7.0
