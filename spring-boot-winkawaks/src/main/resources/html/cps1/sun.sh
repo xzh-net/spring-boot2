@@ -1,6 +1,6 @@
-!/bin/bash
+#!/bin/bash
  
-filename="cps2-252.txt"  
+filename="cps1-172.txt"  
 
 
 while read line

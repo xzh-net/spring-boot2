@@ -1,4 +1,4 @@
-!/bin/bash
+#!/bin/bash
  
 filename="img1.txt"  
 

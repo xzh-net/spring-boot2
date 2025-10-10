@@ -1,6 +1,6 @@
-!/bin/bash
+#!/bin/bash
  
-filename="neogeo-285.txt"  
+filename="cps2-252.txt"  
 
 
 while read line
