@@ -1,6 +1,6 @@
 # WinKawaks1.65
 
-- 官网地址：https://www.kawaks.org/
+官网地址：https://www.kawaks.org/
 
 1. 获取游戏列表，生成cps1、cps2、neogeo的文件列表txt
 	
