@@ -11,7 +11,7 @@ import java.util.Date;
  * 用户管理数据传输对象
  *
  * @author xzh
- * @date 2025-10-14 19:45:23
+ * @date 2025-10-14 20:48:36
  */
 @Data
 @Schema(description = "用户管理数据传输对象")

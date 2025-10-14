@@ -6,3 +6,9 @@
 4. 雪花ID精度丢失处理
 5. MySQL建表示例
 6. 常用工具类
+
+```
+# 模板下载
+http://localhost:8080/generator/code?tables=sys_user
+```
+

@@ -9,7 +9,7 @@ import net.xzh.generator.model.po.SysUserPO;
  * 用户管理数据库访问对象
  * 
  * @author xzh
- * @date 2025-10-14 19:45:23
+ * @date 2025-10-14 20:48:36
  */
 @Mapper
 @Repository

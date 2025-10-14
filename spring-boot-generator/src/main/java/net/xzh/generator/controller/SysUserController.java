@@ -32,7 +32,7 @@ import net.xzh.generator.framework.aspectj.annotation.AuditLog;
  * 用户管理控制层
  *
  * @author xzh
- * @date 2025-10-14 19:45:23
+ * @date 2025-10-14 20:48:36
  */
 @RestController
 @RequestMapping("/sysuser")
@@ -133,7 +133,7 @@ public class SysUserController {
     /**
      * 查询用户管理全部数据
      *
-     * @return CommonResult<List<${className}ListVO>> 所有用户管理数据列表返回结果
+     * @return CommonResult<List<SysUserListVO>> 所有用户管理数据列表返回结果
      */
     @GetMapping("listAll")
     @Operation(summary = "查询全部数据", description = "查询全部数据")
