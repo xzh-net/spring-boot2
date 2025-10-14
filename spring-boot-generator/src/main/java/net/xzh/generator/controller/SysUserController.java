@@ -133,7 +133,7 @@ public class SysUserController {
     /**
      * 查询用户管理全部数据
      *
-     * @return CommonResult<List < VjspDictDataVO>> 所有用户管理数据列表返回结果
+     * @return CommonResult<List<${className}ListVO>> 所有用户管理数据列表返回结果
      */
     @GetMapping("listAll")
     @Operation(summary = "查询全部数据", description = "查询全部数据")
