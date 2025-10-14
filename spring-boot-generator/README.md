@@ -1,10 +1,10 @@
-# MyBatis Generator(MySql)
+# 代码生成
 
-访问地址：http://127.0.0.1:8080/doc.html
+1. Velocity模板引擎（包括权限注解和审计注解框架）
+2. SpringDoc整合
+3. MyBatis-Plus增删改使用IService实现
+4. 雪花ID精度丢失处理
+5. MySQL建表示例
+6. 常用工具类
 
-只生成了model和mapper以及xml文件，例子包含所有mbatis基本操作
 
-```bash
-mvn clean compile
-mvn clean package
-```
