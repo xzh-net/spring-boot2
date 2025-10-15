@@ -1,4 +1,4 @@
-# Spring Boot整合JWT和Spring Security进行权限校验
+# Spring Boot整合JWT和Spring Security进行权限校验【有文档，有认证】
 
 ## 方式一：注解和配置类
 
