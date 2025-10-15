@@ -1,4 +1,4 @@
-package net.xzh.log.modules.common.model.api;
+package net.xzh.log.modules.common.model;
 
 import com.github.pagehelper.PageInfo;
 

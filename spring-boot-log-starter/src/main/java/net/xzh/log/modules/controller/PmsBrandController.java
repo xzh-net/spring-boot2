@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import net.xzh.log.aspect.annotation.AuditLog;
 import net.xzh.log.model.BusinessType;
-import net.xzh.log.modules.common.model.api.CommonPage;
-import net.xzh.log.modules.common.model.api.CommonResult;
+import net.xzh.log.modules.common.model.CommonPage;
+import net.xzh.log.modules.common.model.CommonResult;
 import net.xzh.log.modules.model.PmsBrand;
 import net.xzh.log.modules.service.PmsBrandService;
 import net.xzh.log.utils.PointUtil;

@@ -1,4 +1,4 @@
-package net.xzh.log.modules.common.model.api;
+package net.xzh.log.modules.common.model;
 
 /**
  * 通用返回对象

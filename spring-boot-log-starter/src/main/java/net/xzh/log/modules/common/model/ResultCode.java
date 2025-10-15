@@ -1,4 +1,4 @@
-package net.xzh.log.modules.common.model.api;
+package net.xzh.log.modules.common.model;
 
 /**
  * 枚举了一些常用API操作码
