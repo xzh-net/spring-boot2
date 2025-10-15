@@ -1,7 +1,7 @@
 package ${package}.${moduleName}.service.impl;
 
 import org.springframework.stereotype.Service;
-import ${package}.${moduleName}.common.model.api.CommonPage;
+import ${package}.${moduleName}.common.model.CommonPage;
 import ${package}.${moduleName}.common.utils.StringUtils;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;

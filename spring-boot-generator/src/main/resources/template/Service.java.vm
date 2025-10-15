@@ -5,7 +5,7 @@ import ${package}.${moduleName}.model.vo.view.${className}VO;
 import ${package}.${moduleName}.model.vo.query.${className}QueryVO;
 import ${package}.${moduleName}.model.vo.form.${className}FormVO;
 import ${package}.${moduleName}.model.vo.list.${className}ListVO;
-import ${package}.${moduleName}.common.model.api.CommonPage;
+import ${package}.${moduleName}.common.model.CommonPage;
 import ${package}.${moduleName}.framework.service.SuperService;
 
 import java.util.List;

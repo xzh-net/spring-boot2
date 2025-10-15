@@ -23,9 +23,9 @@ import ${package}.${moduleName}.model.vo.list.${className}ListVO;
 import ${package}.${moduleName}.model.vo.form.${className}FormVO;
 import ${package}.${moduleName}.model.vo.view.${className}VO;
 import ${package}.${moduleName}.service.${className}Service;
-import ${package}.${moduleName}.common.model.api.CommonPage;
-import ${package}.${moduleName}.common.model.api.CommonResult;
-import ${package}.${moduleName}.common.model.enums.BusinessType;
+import ${package}.${moduleName}.common.model.CommonPage;
+import ${package}.${moduleName}.common.model.CommonResult;
+import ${package}.${moduleName}.common.model.BusinessType;
 import ${package}.${moduleName}.framework.aspectj.annotation.AuditLog;
 
 /**
