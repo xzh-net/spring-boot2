@@ -328,7 +328,7 @@ public class GenUtils {
 		 */
 		if (template.contains(FILE_NAME_PAGE)) {
 			return "main" + File.separator + "view" + File.separator + "pages" + File.separator + moduleName
-					+ File.separator + "index.html";
+					+ File.separator + StringUtils.lowerCase(className) + File.separator + "index.html";
 		}
 
 		return null;

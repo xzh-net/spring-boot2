@@ -10,7 +10,7 @@ import java.util.Date;
  * 用户管理详情对象
  *
  * @author xzh
- * @date 2025-10-14 20:48:36
+ * @date 2025-10-15 16:53:14
  */
 @Data
 @Schema(description = "用户管理详情对象")

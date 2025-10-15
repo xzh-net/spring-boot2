@@ -16,7 +16,7 @@ import java.util.List;
  * 使用MapStruct实现对象之间的自动映射
  *
  * @author xzh
- * @date 2025-10-14 20:48:36
+ * @date 2025-10-15 16:53:14
  */
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface SysUserConvert {

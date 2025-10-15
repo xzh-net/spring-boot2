@@ -1,7 +1,6 @@
 package net.xzh.generator.service.impl;
 
 import org.springframework.stereotype.Service;
-
 import net.xzh.generator.common.model.CommonPage;
 import net.xzh.generator.common.utils.StringUtils;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -23,7 +22,7 @@ import java.util.List;
  * 用户管理服务接口实现
  *
  * @author xzh
- * @date 2025-10-14 20:48:36
+ * @date 2025-10-15 16:53:14
  */
 @Service
 public class SysUserServiceImpl extends SuperServiceImpl<SysUserMapper, SysUserPO> implements SysUserService {

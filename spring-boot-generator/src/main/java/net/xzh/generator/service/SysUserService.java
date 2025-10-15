@@ -14,7 +14,7 @@ import java.util.List;
  * 用户管理服务接口
  *
  * @author xzh
- * @date 2025-10-14 20:48:36
+ * @date 2025-10-15 16:53:14
  */
 public interface SysUserService extends SuperService<SysUserPO> {
 
