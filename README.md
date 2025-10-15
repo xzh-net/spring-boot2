@@ -97,7 +97,7 @@
 
 ## 更新记录
 
-- 2025-10-14 generator代码生成，springboot升级到2.7.0【有文档，无认证】
+- 2025-10-14 generator代码生成，springboot升级到2.7.0
 - 2025-10-10 Jsoup解析补充操作说明，springboot升级到2.7.0
 - 2025-10-10 表单提交实体类非空校验框架，springboot升级到2.7.0
 - 2025-10-10 JPA操作SQLite数据库，springboot升级到2.7.0
@@ -105,15 +105,15 @@
 - 2025-10-09 stand入门项目，去掉hutool依赖，springboot升级到2.7.0
 - 2025-10-06 多数据源和动态数据源，springboot升级到2.7.0
 - 2025-10-04 自定义审计日志，springboot升级到2.7.0
-- 2025-10-04 knife4j升级到springdoc 1.7.0【有文档，无认证】
-- 2025-10-03 mybatis-plus脚手架升级到springdoc 1.7.0【有文档，有认证】
+- 2025-10-04 knife4j升级到springdoc 1.7.0
+- 2025-10-03 mybatis-plus脚手架升级到springdoc 1.7.0
 - 2025-10-03 pulsar-java-spring-boot-starter升级到1.1.2，springboot升级到2.7.0
 - 2025-10-03 fisco升级到2.9.1，springboot升级到2.7.0
 - 2025-10-03 Jasypt整合SM4，springboot升级到2.7.0
 - 2025-09-24 优化了防范XSS攻击和伪造Referrer，springboot升级到2.7.0
-- 2025-09-22 security权限框架，springboot升级到2.7.0【有文档，有认证】
+- 2025-09-22 security权限框架，springboot升级到2.7.0
 - 2025-09-18 优化任务调度和自定义线程池参数，springboot升级到2.7.0
 - 2025-09-17 HikariCP参数优化，springboot升级到2.7.0
 - 2025-09-17 日志拦截器逻辑优化，增加记录字段
-- 2025-09-16 完善Redis限流功能和优化template注入逻辑，springboot升级到2.7.0【有文档，无认证】
+- 2025-09-16 完善Redis限流功能和优化template注入逻辑，springboot升级到2.7.0
 
