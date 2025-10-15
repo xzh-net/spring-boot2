@@ -11,14 +11,14 @@
 
 ## 2. 官方Starter
 
-- [整合JWT和Spring Security进行权限校验](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-security)
+- [【文档】整合JWT和Spring Security进行权限校验](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-security)
 - [SMTP发送邮件](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-email)
 - [Quartz作业调度和自定义线程池](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-quartz)
 - [整合Validation处理非空校验拦截（支持国际化）](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-validation)
 - [整合ActiveMQ基于JSM规范进行消息发送和订阅](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-jms)
 - [整合RabbitMQ应用场景实战](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-rabbitmq)
 - [整合MongoDB读写分离的浏览记录和商品收藏](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-mongo)
-- [整合Redis流控和缓存穿透解决方案](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-redis)
+- [【文档】整合Redis流控和缓存穿透解决方案](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-redis)
 - [整合Elasticsearch实现商品搜索和索引管理](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-elasticsearch)
 - [高性能的异步非阻塞web框架](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-webflux)
 - [原生WebSocket示例](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-websocket)
@@ -30,7 +30,7 @@
 
 - [整合CXF发布WebService以及调用的方法](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-cxf)
 - [整合Dubbo调用示例](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-dubbo)
-- [整合SpringDoc文档生成工具](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-springdoc)
+- [【文档】整合SpringDoc文档生成工具](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-springdoc)
 - [整合Apache Pulsar云原生消息平台的王者](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-pulsar)
 - [整合RocketMQ进行消息发送和订阅](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-rocketmq)
 - [整合Shardingjdbc实现分库分表](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-sharding-jdbc)
@@ -39,9 +39,9 @@
 - [Captcha行为验证码，包含滑动拼图、文字点选](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-captcha)
 - [Zipkin实现分布式全链路监控](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-zipkin)
 - [多数据源自动切换和动态数据源手动切换](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-datasource)
-- [【自定义】审计日志拦截器](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-log)
-- [【自定义】分布式文件存储S3和FastDFS](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-oss-starter)
 - [替代Hystrix和Sentinel的轻量级熔断器Resilience4j](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-resilience4j)
+- [自定义审计日志拦截器](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-log)
+- [自定义分布式文件存储S3和FastDFS](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-oss-starter)
 
 ---
 
@@ -74,7 +74,7 @@
 > 不使用中间件技术，调试工具代码合辑
 
 - [API版本控制](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-api-version)
-- [Mybatis代码生成器](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-generator)
+- [【文档】Mybatis代码生成器](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-generator)
 - [使用Maven插件构建Docker镜像,并推送到Harbor仓库](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-harbor)
 - [基于SonarQube的Web API实现代码质量和安全管理](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-sonar)
 - [基于Emqx为客户端实现自定义登录授权](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-emqx)
@@ -90,7 +90,7 @@
 
 ## 6. 项目
 
-- [基于MyBatis-Plus快速开发脚手架](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-mybatis-plus)
+- [【文档】基于MyBatis-Plus快速开发脚手架](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-mybatis-plus)
 - [整合Activiti工作流设计器和数据验证分组校验](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-activiti)
 
 
