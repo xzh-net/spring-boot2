@@ -1,7 +1,8 @@
 package net.xzh.generator.service.impl;
 
 import org.springframework.stereotype.Service;
-import net.xzh.generator.common.model.api.CommonPage;
+
+import net.xzh.generator.common.model.CommonPage;
 import net.xzh.generator.common.utils.StringUtils;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;

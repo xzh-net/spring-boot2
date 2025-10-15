@@ -5,7 +5,7 @@ import net.xzh.generator.model.vo.view.SysUserVO;
 import net.xzh.generator.model.vo.query.SysUserQueryVO;
 import net.xzh.generator.model.vo.form.SysUserFormVO;
 import net.xzh.generator.model.vo.list.SysUserListVO;
-import net.xzh.generator.common.model.api.CommonPage;
+import net.xzh.generator.common.model.CommonPage;
 import net.xzh.generator.framework.service.SuperService;
 
 import java.util.List;

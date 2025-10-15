@@ -17,16 +17,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-
-import net.xzh.generator.model.vo.query.SysUserQueryVO;
-import net.xzh.generator.model.vo.list.SysUserListVO;
+import net.xzh.generator.common.model.BusinessType;
+import net.xzh.generator.common.model.CommonPage;
+import net.xzh.generator.common.model.CommonResult;
+import net.xzh.generator.framework.aspectj.annotation.AuditLog;
 import net.xzh.generator.model.vo.form.SysUserFormVO;
+import net.xzh.generator.model.vo.list.SysUserListVO;
+import net.xzh.generator.model.vo.query.SysUserQueryVO;
 import net.xzh.generator.model.vo.view.SysUserVO;
 import net.xzh.generator.service.SysUserService;
-import net.xzh.generator.common.model.api.CommonPage;
-import net.xzh.generator.common.model.api.CommonResult;
-import net.xzh.generator.common.model.enums.BusinessType;
-import net.xzh.generator.framework.aspectj.annotation.AuditLog;
 
 /**
  * 用户管理控制层

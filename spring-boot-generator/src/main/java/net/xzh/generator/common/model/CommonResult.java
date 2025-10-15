@@ -1,9 +1,8 @@
-package net.xzh.generator.common.model.api;
+package net.xzh.generator.common.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import net.xzh.generator.common.model.enums.ResultCode;
 
 /**
  * 通用返回结果类，用于封装API接口的返回数据 泛型T表示返回的数据类型

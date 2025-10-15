@@ -1,4 +1,4 @@
-package net.xzh.generator.common.model.enums;
+package net.xzh.generator.common.model;
 
 
 /**

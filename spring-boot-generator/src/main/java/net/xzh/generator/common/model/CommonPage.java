@@ -1,4 +1,4 @@
-package net.xzh.generator.common.model.api;
+package net.xzh.generator.common.model;
 
 import java.util.List;
 
