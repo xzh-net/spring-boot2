@@ -35,7 +35,6 @@ public class JwtController {
     
     @Operation(summary = "对称加密生成token", description = "HMAC算法")
     @RequestMapping(value = "/hmac/generate", method = RequestMethod.POST)
-    @ResponseBody
     public CommonResult<?> generateTokenByHMAC() {
         try {
             PayloadDto payloadDto = jwtTokenService.getDefaultPayloadDto();
@@ -49,7 +48,6 @@ public class JwtController {
 
     @Operation(summary = "对称加密验证token", description = "HMAC算法")
     @RequestMapping(value = "/hmac/verify", method = RequestMethod.GET)
-    @ResponseBody
     public CommonResult<?> verifyTokenByHMAC(String token) {
         try {
             PayloadDto payloadDto  = jwtTokenService.verifyTokenByHMAC(token, SecureUtil.md5("test"));
@@ -64,7 +62,6 @@ public class JwtController {
     
     @Operation(summary = "非对称加密生成token", description = "RSA算法")
     @RequestMapping(value = "/rsa/generate", method = RequestMethod.POST)
-    @ResponseBody
     public CommonResult<?> generateTokenByRSA() {
         try {
             PayloadDto payloadDto = jwtTokenService.getDefaultPayloadDto();
@@ -78,7 +75,6 @@ public class JwtController {
 
     @Operation(summary = "非对称加密验证token", description = "RSA算法")
     @RequestMapping(value = "/rsa/verify", method = RequestMethod.GET)
-    @ResponseBody
     public CommonResult<?> verifyTokenByRSA(String token) {
         try {
             PayloadDto payloadDto  = jwtTokenService.verifyTokenByRSA(token, jwtTokenService.getDefaultRSAKey());
@@ -92,7 +88,6 @@ public class JwtController {
     
     @Operation(summary = "获取非对称加密公钥", description = "RSA算法")
     @RequestMapping(value = "/rsa/publicKey", method = RequestMethod.GET)
-    @ResponseBody
     public Object getRSAPublicKey() {
         RSAKey key = jwtTokenService.getDefaultRSAKey();
         return new JWKSet(key).toJSONObject();
