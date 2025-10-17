@@ -25,7 +25,6 @@ import net.xzh.security.domain.UmsResource;
 import net.xzh.security.model.UmsAdmin;
 import net.xzh.security.security.domain.LoginUser;
 import net.xzh.security.security.util.JwtTokenUtil;
-import net.xzh.security.security.util.SecurityUtil;
 import net.xzh.security.service.UmsAdminService;
 
 /**
@@ -115,7 +114,7 @@ public class UmsAdminServiceImpl implements UmsAdminService {
 	@Override
 	public String login2(String username, String password) {
 		UserDetails userDetails = getLoginByUsername(username);
-		if (!SecurityUtil.matchesPassword(password, userDetails.getPassword())) {
+		if (!passwordEncoder.matches(password, userDetails.getPassword())) {
 			throw new BusinessException(ResultCode.A0005);
 		}
 		if (!userDetails.isEnabled()) {

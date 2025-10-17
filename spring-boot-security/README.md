@@ -53,12 +53,17 @@
 
 
 
-## 认证机制
+## 认证的两种方式
 
-使用 Spring Security 的 AuthenticationManager 进行认证，委托给 UserDetailsService 执行实际的认证逻辑，标准化流程。
+问：为什么登录的代码出现两个login？
 
-> 其他方式：手动获取 UserDetails 并检查密码，直接操作 SecurityContextHolder，绕过 Spring Security 的认证管理器。
-> 参考项目：spring-boot-mybatis-plus
+答：
+
+1. `login`标准化流程，使用 Spring Security 的 AuthenticationManager 进行认证，委托给 UserDetailsService 执行。
+
+2. `login2`自定义流程，绕过 Spring Security 的认证管理器（SecurityConfig中声明），手动获取 UserDetails 并检查密码。
+
+   参考：spring-boot-mybatis-plus。
 
 
 
