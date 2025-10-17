@@ -53,20 +53,6 @@
 
 
 
-## 认证的两种方式
-
-问：为什么登录的代码出现两个login？
-
-答：
-
-1. `login`标准化流程，使用 Spring Security 的 AuthenticationManager 进行认证，委托给 UserDetailsService 执行。
-
-2. `login2`自定义流程，绕过 Spring Security 的认证管理器（SecurityConfig中声明），手动获取 UserDetails 并检查密码。
-
-   参考：spring-boot-mybatis-plus。
-
-
-
 
 ## 总结对比
 
@@ -86,9 +72,23 @@
 
 
 
-## 其他
+## 认证的两种方式
 
-JWT、JWS、JWE三者之间的关系，其实JWT(JSON Web Token)指的是一种规范，这种规范允许我们使用JWT在两个组织之间传递安全可靠的信息。而JWS(JSON Web Signature)和JWE(JSON Web Encryption)是JWT规范的两种不同实现，我们平时最常使用的实现就是JWS。
+问：为什么登录的代码出现两个login？
+
+答：
+
+1. `login`标准化流程，使用 Spring Security 的 AuthenticationManager 进行认证，委托给 UserDetailsService 执行。
+
+2. `login2`自定义流程，绕过 Spring Security 的认证管理器（SecurityConfig中声明），手动获取 UserDetails 并检查密码。
+
+   参考：spring-boot-mybatis-plus。
+
+
+
+## JSON Web Token
+
+JWT、JWS、JWE 三者之间的关系，其实 JWT（JSON Web Token）指的是一种规范，这种规范允许我们使用 JWT 在两个组织之间传递安全可靠的信息。而JWS（JSON Web Signature）和 JWE（JSON Web Encryption）是 JWT 规范的两种不同实现，我们平时最常使用的实现就是 JWS。
 
 jwt对称非对称使用方式：
 
@@ -105,7 +105,19 @@ jwt对称非对称使用方式：
 
 
 
-## 整合SpringDoc 1.7.0
+## 类库技术标准
+
+| 特性           | nimbus-jose-jwt | jjwt     |
+| :------------- | :-------------- | :------- |
+| JWS签名算法    | 完整支持        | 完整支持 |
+| JWE加密算法    | **完整支持**    | 有限支持 |
+| 嵌套JWT        | **支持**        | 不支持   |
+| Key Management | **强大支持**    | 基础支持 |
+| 标准符合性     | **严格遵循RFC** | 实用主义 |
+
+
+
+## 整合API文档
 
 http://127.0.0.1:8080/swagger-ui/index.html
 
