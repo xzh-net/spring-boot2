@@ -64,17 +64,6 @@ springdoc:
   packages-to-scan: net.xzh.project
   paths-to-match: /**
 
-# SpringDoc自定义配置
-app:
-  info:
-    title: SpringDoc Demo API
-    description: SpringBoot 2.7.0 整合 SpringDoc 示例
-    version: 1.0.0
-    contact:
-      name: API Support
-      email: support@example.com
-      url: https://example.com
-
 # 安全路径白名单
 secure:
   ignored:
@@ -86,5 +75,3 @@ secure:
       - /admin/register
       - /admin/info
       - /admin/logout
-
-
