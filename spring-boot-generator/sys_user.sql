@@ -5,13 +5,13 @@
  Source Server Type    : MySQL
  Source Server Version : 50734
  Source Host           : 172.17.17.137:3306
- Source Schema         : user-center
+ Source Schema         : mall
 
  Target Server Type    : MySQL
  Target Server Version : 50734
  File Encoding         : 65001
 
- Date: 14/10/2025 20:10:55
+ Date: 20/10/2025 10:39:54
 */
 
 SET NAMES utf8mb4;
@@ -33,12 +33,12 @@ CREATE TABLE `sys_user`  (
   `status` tinyint(4) NOT NULL DEFAULT 0 COMMENT '状态（0正常 1禁用 ）',
   `del_flag` tinyint(4) NOT NULL DEFAULT 0 COMMENT '删除标志（0正常 1删除）',
   `regist_date` date NULL DEFAULT NULL COMMENT '注册日期',
-  `create_user_id` bigint(64) NULL DEFAULT NULL COMMENT '创建人ID',
+  `create_user_id` bigint(20) NULL DEFAULT NULL COMMENT '创建人ID',
   `create_time` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
-  `update_user_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '修改人ID',
+  `update_user_id` bigint(20) NULL DEFAULT NULL COMMENT '修改人ID',
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   `sort_by` int(11) NULL DEFAULT NULL COMMENT '排序',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1978069689391718402 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户管理' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1978081188533334018 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户管理' ROW_FORMAT = Dynamic;
 
 SET FOREIGN_KEY_CHECKS = 1;
