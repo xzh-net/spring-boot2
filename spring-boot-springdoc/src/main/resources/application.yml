@@ -22,16 +22,7 @@ springdoc:
     tags-sorter: alpha
     # 操作排序方式
     operations-sorter: alpha
+    # 隐藏models
+    default-models-expand-depth: -1
   packages-to-scan: net.xzh.springdoc
   paths-to-match: /**
-
-# SpringDoc自定义配置
-app:
-  info:
-    title: SpringDoc Demo API
-    description: SpringBoot 2.7.0 整合 SpringDoc 示例
-    version: 1.0.0
-    contact:
-      name: API Support
-      email: support@example.com
-      url: https://example.com
