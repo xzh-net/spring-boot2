@@ -25,7 +25,7 @@ import net.xzh.redis.service.RedisService;
 @Tag(name = "基本数据类型测试", description = "基本数据类型测试")
 @RestController
 @RequestMapping("/redis")
-public class TestController {
+public class RedisBaseController {
 	
     @Autowired
     private RedisService redisService;
