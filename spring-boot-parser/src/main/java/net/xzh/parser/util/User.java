@@ -51,7 +51,6 @@ public class User implements Serializable {
 	 * 
 	 * @param username
 	 */
-	@SuppressWarnings("rawtypes")
 	public void add(String username) {
 		items.add(username);
 	}
@@ -61,7 +60,6 @@ public class User implements Serializable {
 	 * 
 	 * @return
 	 */
-	@SuppressWarnings("rawtypes")
 	public List<String> list() {
 		for (int i = 0; i < 10; i++) {
 			if (i % 2 == 0) {

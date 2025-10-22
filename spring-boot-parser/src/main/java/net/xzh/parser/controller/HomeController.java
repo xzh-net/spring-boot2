@@ -5,9 +5,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * test
- * 
- * @author Administrator
+ * 测试
+ * @author xzh
+ *
  */
 @RestController
 public class HomeController {

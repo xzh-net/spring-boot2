@@ -9,7 +9,6 @@ import org.springframework.context.annotation.ComponentScan;
 import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.Modifier;
-import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.FieldDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
@@ -76,7 +75,7 @@ public class SymbolSolverExample {
 		// 9. 访问者模式遍历 AST
 //		getAST();
 		// 10. 解析Lambda 表达式
-//		getLambda();
+		getLambda();
 		// 11. 解析异常处理
 //		getException();
 
