@@ -1,0 +1,40 @@
+# 会员收藏管理
+
+### 添加商品收藏
+POST http://127.0.0.1:8080/member/productCollection/add
+Content-Type: application/json
+
+{
+  "productId": "300"
+}
+
+### 商品收藏列表
+GET http://127.0.0.1:8080/member/productCollection/list
+
+### 商品收藏详情
+GET http://127.0.0.1:8080/member/productCollection/detail?productId=200
+
+### 删除商品收藏
+POST http://127.0.0.1:8080/member/productCollection/delete?productId=100
+
+### 清空商品收藏
+POST http://127.0.0.1:8080/member/productCollection/clear
+
+# 会员商品浏览记录管理
+
+### 添加浏览记录
+POST http://127.0.0.1:8080/member/readHistory/create
+Content-Type: application/json
+
+{
+  "productId": "300"
+}
+
+### 浏览记录列表
+GET http://127.0.0.1:8080/member/readHistory/list
+
+### 删除记录列表
+POST http://127.0.0.1:8080/member/readHistory/delete?ids=68f87db4f05c624b037496a5,68f87db3f05c624b037496a4
+
+### 清空记录列表
+POST http://127.0.0.1:8080/member/readHistory/clear

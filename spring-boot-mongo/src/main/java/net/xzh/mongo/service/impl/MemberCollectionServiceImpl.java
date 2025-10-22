@@ -9,7 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import net.xzh.mongo.domain.MemberProductCollection;
-import net.xzh.mongo.model.UmsMember;
+import net.xzh.mongo.domain.UmsMember;
 import net.xzh.mongo.repository.MemberProductCollectionRepository;
 import net.xzh.mongo.service.MemberCollectionService;
 
@@ -26,8 +26,10 @@ public class MemberCollectionServiceImpl implements MemberCollectionService {
     @PostConstruct
     public void init() {
     	member=new UmsMember();
-    	member.setId(1000L);
-    	member.setUsername("xzh");
+    	member.setId(999L);
+    	member.setUsername("zhangsan");
+    	member.setIcon("header");
+    	member.setNickname("张三");
     }
     @Override
     public int add(MemberProductCollection productCollection) {

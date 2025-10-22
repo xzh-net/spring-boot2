@@ -12,9 +12,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-
 import net.xzh.mongo.domain.MemberReadHistory;
-import net.xzh.mongo.model.UmsMember;
+import net.xzh.mongo.domain.UmsMember;
 import net.xzh.mongo.repository.MemberReadHistoryRepository;
 import net.xzh.mongo.service.MemberReadHistoryService;
 
