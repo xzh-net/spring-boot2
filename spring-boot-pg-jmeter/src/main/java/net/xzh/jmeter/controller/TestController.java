@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * pg百万性能查询调优
+ * 查询性能调优
  * 
  * @author xzh
  *

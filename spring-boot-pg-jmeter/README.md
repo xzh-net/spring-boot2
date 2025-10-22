@@ -1,7 +1,6 @@
 # postgres百万性能查询调优
 
-
-## 1. 创建表
+## 1. 表结构
 
 ```sql
 drop table test;
@@ -19,14 +18,5 @@ create table test as (
 create index test_idx on test ("id");
 ```
 
-## 2. 测试结果
-
-![](dashboard.png)
-
-```bash
-mvn clean compile
-mvn clean package
-```
-
-## 3. 数据库对比工具
+## 2. 数据库对比工具
 
