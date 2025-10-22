@@ -1,0 +1,10 @@
+# Python
+
+### 执行‌任意代码块
+POST http://localhost:8080/api/python/execute
+
+### 直接执行表达式
+POST http://localhost:8080/api/python/eval
+
+### 获取函数对象，再调用
+POST http://localhost:8080/api/python/call
