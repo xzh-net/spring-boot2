@@ -97,6 +97,7 @@
 
 ## 更新记录
 
+- 2025-10-15 RocketMQ，springboot升级到2.7.0
 - 2025-10-15 OSS上传文件，springboot升级到2.7.0
 - 2025-10-14 generator代码生成，springboot升级到2.7.0
 - 2025-10-10 Jsoup解析补充操作说明，springboot升级到2.7.0
