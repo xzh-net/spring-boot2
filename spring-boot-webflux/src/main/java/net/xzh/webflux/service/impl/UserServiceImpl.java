@@ -10,8 +10,7 @@ import net.xzh.webflux.service.UserSerivice;
 import reactor.core.publisher.Mono;
 
 /**
- * @Version: 1.0
- * @Desc:
+ * 用户管理业务实现
  */
 @Service
 public class UserServiceImpl implements UserSerivice {

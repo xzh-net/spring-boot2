@@ -4,8 +4,7 @@ import net.xzh.webflux.model.User;
 import reactor.core.publisher.Mono;
 
 /**
- * @Version: 1.0
- * @Desc:
+ * 用户管理业务接口
  */
 public interface UserSerivice {
     Mono<User> getUserById(Long id);
