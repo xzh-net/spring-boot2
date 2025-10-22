@@ -17,7 +17,6 @@ spring:
          connection-timeout: 30000          # 连接超时时间（默认30秒）
          idle-timeout: 600000               # 空闲连接最大存活时间（默认:10分钟）
          max-lifetime: 1800000              # 连接最大生命周期（30分钟），小于pg的tcp_keepalive时间
-         connection-test-query: SELECT 1    # 连接检测查询
          # 优化参数
          leak-detection-threshold: 5000     # 连接泄漏检测阈值（毫秒）
          pool-name: hikari                  # 连接池名
