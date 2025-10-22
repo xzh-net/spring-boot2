@@ -1,0 +1,17 @@
+# RocketMq
+
+### 同步发送
+GET http://127.0.0.1:8080/rocketmq/sync/12345678
+
+### 异步发送
+GET http://127.0.0.1:8080/rocketmq/async/12345678
+
+### 单向发送
+GET http://127.0.0.1:8080/rocketmq/sendOneWay/12345678
+
+### 单向顺序消息
+GET http://127.0.0.1:8080/rocketmq/sendOneWayOrderly/12345678
+
+
+### 发送延时消息
+GET http://127.0.0.1:8080/rocketmq/sendDelay/12345678

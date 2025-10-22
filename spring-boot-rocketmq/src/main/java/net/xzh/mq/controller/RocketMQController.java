@@ -12,17 +12,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import net.xzh.mq.common.model.CommonResult;
 import net.xzh.mq.domain.Order;
 
-@Api(tags = "消息发送测试")
 @RestController
-@RequestMapping("/rocket")
-public class IndexController {
+@RequestMapping("/rocketmq")
+public class RocketMQController {
 
-	private static final Logger log = LoggerFactory.getLogger(IndexController.class);
+	private static final Logger log = LoggerFactory.getLogger(RocketMQController.class);
 	
 	@Autowired
 	private RocketMQTemplate rocketMQTemplate;
@@ -33,10 +29,8 @@ public class IndexController {
 	 * @param pid
 	 * @return
 	 */
-	
-	@ApiOperation("同步发送")
-	@RequestMapping(value = "/syncSend/{pid}", method = RequestMethod.GET)
-	public CommonResult syncSend(@PathVariable("pid") Integer pid) {
+	@RequestMapping(value = "/sync/{pid}", method = RequestMethod.GET)
+	public String syncSend(@PathVariable("pid") Integer pid) {
 		Order order = new Order();
 		order.setUid(1);
 		order.setUsername("xzh");
@@ -45,7 +39,7 @@ public class IndexController {
 		order.setPprice(698.50);
 		order.setNumber(1);
 		rocketMQTemplate.convertAndSend("order-topic", order);
-		return CommonResult.success(System.currentTimeMillis());
+		return "同步发送成功";
 	}
 
 	/**
@@ -53,9 +47,8 @@ public class IndexController {
 	 * @param pid
 	 * @return
 	 */
-	@ApiOperation("异步发送")
-	@RequestMapping(value = "/asyncSend/{pid}", method = RequestMethod.GET)
-	public CommonResult asyncSend(@PathVariable("pid") Integer pid) {
+	@RequestMapping(value = "/async/{pid}", method = RequestMethod.GET)
+	public String asyncSend(@PathVariable("pid") Integer pid) {
 		Order order = new Order();
 		order.setUid(1);
 		order.setUsername("异步消息");
@@ -77,7 +70,7 @@ public class IndexController {
 				log.info("发送失败，{}",throwable);
 			}
 		});
-		return CommonResult.success(System.currentTimeMillis());
+		return "异步发送成功";
 	}
 
 	/**
@@ -85,9 +78,8 @@ public class IndexController {
 	 * @param pid
 	 * @return
 	 */
-	@ApiOperation("单向发送")
 	@RequestMapping(value = "/sendOneWay/{pid}", method = RequestMethod.GET)
-	public CommonResult sendOneWay(@PathVariable("pid") Integer pid) {
+	public String sendOneWay(@PathVariable("pid") Integer pid) {
 		// 参数一: topic, 如果想添加tag 可以使用"topic:tag"的写法
 		// 参数二: 消息内容
 		// 参数三: 回调函数, 处理返回结果
@@ -101,13 +93,16 @@ public class IndexController {
 			order.setNumber(1);
 			rocketMQTemplate.sendOneWay("order-topic", order);
 		}
-		return CommonResult.success(System.currentTimeMillis());
+		return "单向发送成功";
 	}
 
-	// 单向顺序消息
-	@ApiOperation("单向顺序消息")
+	/**
+	 * 单向顺序消息
+	 * @param pid
+	 * @return
+	 */
 	@RequestMapping(value = "/sendOneWayOrderly/{pid}", method = RequestMethod.GET)
-	public CommonResult sendOneWayOrderly(@PathVariable("pid") Integer pid) {
+	public String sendOneWayOrderly(@PathVariable("pid") Integer pid) {
 		for (int i = 0; i < 10; i++) {
 			// 第三个参数的作用是用来决定这些消息发送到哪个队列的上的
 			Order order = new Order();
@@ -119,13 +114,17 @@ public class IndexController {
 			order.setNumber(1);
 			rocketMQTemplate.sendOneWayOrderly("order-topic", order, "xx");
 		}
-		return CommonResult.success(System.currentTimeMillis());
+		return "单向顺序发送成功";
 	}
 
-	@ApiOperation("延时2s消息")
+	/**
+	 * 延时2s消息
+	 * @param pid
+	 * @return
+	 */
 	@RequestMapping(value = "/sendDelay/{pid}", method = RequestMethod.GET)
-	public CommonResult sendDelay(@PathVariable("pid") Integer pid) {
+	public String sendDelay(@PathVariable("pid") Integer pid) {
 		SendResult result = rocketMQTemplate.syncSend("delay-topic", MessageBuilder.withPayload(pid).build(), 3000, 2);
-		return CommonResult.success(result.getMsgId());
+		return "延时发送成功："+ result.getMsgId();
 	}
 }
