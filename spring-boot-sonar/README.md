@@ -9,11 +9,3 @@ SonarQube的Web API是一组HTTP REST API，允许开发人员与SonarQube服务
 ## 指标明细
 
 ![](doc/assets/2.png)
-
-
-## 编译构建
-
-```bash
-mvn clean compile
-mvn clean package
-```
