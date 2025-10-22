@@ -1,40 +1,7 @@
-# Groovy脚本动态编程
+### 动态脚本，从容器中自动获取
+POST http://127.0.0.1:8080/groovy/script/execute
+Content-Type: application/json
 
-Groovy是一种基于Java平台的动态语言，支持静态类型和静态编译。广泛应用于脚本编写、领域特定语言（DSL）设计、元编程和函数式编程等领域。
-
-## 静态脚本，手动New对象（main函数）
-
-```java
-public static void main(String[] args) {
-    Binding groovyBinding = new Binding();
-    GroovyShell groovyShell = new GroovyShell(groovyBinding);
-
-    String scriptContent = "import net.xzh.groovy.service.UserService; \n"
-    + "def query = new UserService().testQuery(100L); \n"
-    + "query";
-    Script script = groovyShell.parse(scriptContent);
-	System.out.println(script.run());
-}
-```
-
-## 静态脚本，从环境变量中获取（main函数）
-
-```java
-public static void main(String[] args) {
-    Binding groovyBinding = new Binding();
-    groovyBinding.setVariable("userService", new UserService());
-    GroovyShell groovyShell = new GroovyShell(groovyBinding);
-
-    String scriptContent = "def query = userService.testQuery(200L); \n"
-    + "query";
-    Script script = groovyShell.parse(scriptContent);
-    System.out.println(script.run());
-}
-```
-
-## 动态脚本，从容器中自动获取
-
-```groovy
 import net.xzh.groovy.model.User;
 import net.xzh.groovy.service.UserService;
 import java.util.List;
@@ -60,11 +27,12 @@ for (def i = 0; i < userList.size(); i++) {
 userService.sendDataS(userList);
 
 return "执行成功";
-```
 
-## 动态脚本，从容器中手动获取
 
-```groovy
+### 动态脚本，从容器中手动获取
+POST http://127.0.0.1:8080/groovy/script/execute
+Content-Type: application/json
+
 import net.xzh.groovy.model.User;
 import net.xzh.groovy.service.UserService;
 import java.util.List;
@@ -92,5 +60,3 @@ for (def i = 0; i < userList.size(); i++) {
 userService.sendDataS(userList);
 
 return "执行成功";
-```
-

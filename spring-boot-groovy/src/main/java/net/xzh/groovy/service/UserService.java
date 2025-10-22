@@ -3,7 +3,6 @@ package net.xzh.groovy.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
 import org.springframework.stereotype.Service;
 
 import groovy.lang.Binding;
@@ -12,7 +11,7 @@ import groovy.lang.Script;
 import net.xzh.groovy.model.User;
 
 @Service
-public class TestService {
+public class UserService {
 
 	public  List<User> list = new ArrayList<>();
 	
@@ -35,24 +34,28 @@ public class TestService {
         System.out.println("数据："+ objs);
     }
 
-	public static void main(String[] args) {
+    // 静态脚本，手动New对象
+    public static void main(String[] args) {
+        Binding groovyBinding = new Binding();
+        GroovyShell groovyShell = new GroovyShell(groovyBinding);
+        
+        String scriptContent = "import net.xzh.groovy.service.UserService; \n"
+        + "def query = new UserService().testQuery(100L); \n"
+        + "query";
+        Script script = groovyShell.parse(scriptContent);
+        System.out.println(script.run());
+    }
+	
+    // 静态脚本，从环境变量中获取
+    public static void main2(String[] args) {
 		Binding groovyBinding = new Binding();
-		groovyBinding.setVariable("testService", new TestService());
+		groovyBinding.setVariable("userService", new UserService());
 		GroovyShell groovyShell = new GroovyShell(groovyBinding);
 
-		// 静态脚本
-		String scriptContent = "import net.xzh.groovy.service.TestService; \n"
-				+ "def query = new TestService().testQuery(100L); \n"
+		String scriptContent = "def query = userService.testQuery(200L); \n"
 				+ "query";
-
-		// 动态脚本，从容器中获取类
-//		String scriptContent = "def query = testService.testQuery(200L); \n"
-//				+ "query";
-
 		Script script = groovyShell.parse(scriptContent);
 		System.out.println(script.run());
 		
 	}
-	
-	
 }
