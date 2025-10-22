@@ -13,7 +13,7 @@ import groovy.lang.Binding;
 import groovy.lang.GroovyClassLoader;
 import groovy.lang.GroovyShell;
 import groovy.lang.Script;
-import net.xzh.groovy.component.TestScript;
+import net.xzh.groovy.component.BaseScript;
 import net.xzh.groovy.util.SpringContextUtil;
 
 @RestController
@@ -33,7 +33,7 @@ public class GroovyScriptController {
         GroovyClassLoader groovyClassLoader = new GroovyClassLoader(this.getClass().getClassLoader());
         CompilerConfiguration compilerConfiguration = new CompilerConfiguration();
         compilerConfiguration.setSourceEncoding("utf-8");
-        compilerConfiguration.setScriptBaseClass(TestScript.class.getName());
+        compilerConfiguration.setScriptBaseClass(BaseScript.class.getName());
         groovyShell = new GroovyShell(groovyClassLoader, groovyBinding, compilerConfiguration);
     }
 

@@ -40,6 +40,8 @@ import java.util.Random;
 
 // 使用SpringContextUtil获取UserService
 UserService userService = SpringContextUtil.getBean(UserService.class);
+// 另外一种方式：基类脚本中提供了通用工具类，编码重复编写相同的方法
+//UserService userService = getBean(UserService.class);
 
 def userList = userService.list;
 
