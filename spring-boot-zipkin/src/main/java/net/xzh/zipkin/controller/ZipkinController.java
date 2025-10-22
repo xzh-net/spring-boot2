@@ -19,7 +19,7 @@ public class ZipkinController {
     @RequestMapping("ping")
     public Object ping() {
         log.info("进入ping");
-        return "pong study";
+        return "pong ok";
     }
 
     @RequestMapping("log")
@@ -29,7 +29,7 @@ public class ZipkinController {
         log.debug("this is debug log");
         log.warn("this is warn log");
         log.trace("this is trace log");
-        return "123";
+        return "log ok";
     }
 
     @RequestMapping("http")

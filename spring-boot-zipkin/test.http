@@ -1,0 +1,10 @@
+# 链路跟踪
+
+### ping
+GET http://127.0.0.1:8080/ping
+
+### log
+GET http://127.0.0.1:8080/log
+
+### http
+GET http://127.0.0.1:8080/http
