@@ -27,9 +27,4 @@ http://localhost:8080/index.html
 - orderAdmin 123456 无权限 
 
 
-```bash
-mvn clean compile
-mvn clean package
-```
-
 
