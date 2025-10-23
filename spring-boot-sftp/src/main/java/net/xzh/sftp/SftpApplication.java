@@ -6,8 +6,8 @@ import org.springframework.integration.config.EnableIntegration;
 
 @EnableIntegration
 @SpringBootApplication
-public class Application {
+public class SftpApplication {
 	public static void main(String[] args) {
-		SpringApplication.run(Application.class, args);
+		SpringApplication.run(SftpApplication.class, args);
 	}
 }

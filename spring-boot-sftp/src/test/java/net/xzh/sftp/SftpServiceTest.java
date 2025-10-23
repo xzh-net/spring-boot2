@@ -3,7 +3,6 @@ package net.xzh.sftp;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.Map;
 import java.util.UUID;
 
 import javax.annotation.Resource;
@@ -11,9 +10,6 @@ import javax.annotation.Resource;
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.ApplicationContext;
-import org.springframework.integration.channel.DirectChannel;
-import org.springframework.integration.core.MessagingTemplate;
 
 import net.xzh.sftp.service.SftpService;
 
