@@ -2,8 +2,6 @@ package net.xzh.sockjs.service.impl;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
@@ -33,7 +31,6 @@ import net.xzh.sockjs.service.UmsAdminService;
 @Service
 public class UmsAdminServiceImpl implements UmsAdminService {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(UmsAdminServiceImpl.class);
 	@Autowired
 	private JwtTokenUtil jwtTokenUtil;
 	@Autowired
