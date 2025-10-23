@@ -1,0 +1,21 @@
+server:
+  port: 8080
+
+spring:
+  redis:
+    host: 172.17.17.192 # Redis服务器地址
+    database: 0
+    port: 16380 # Redis服务器连接端口
+    password: 'redis16380' # Redis服务器连接密码（默认为空）
+    timeout: 3000ms # 连接超时时间（毫秒）
+    ssl: false
+    jedis:
+      pool:
+        max-idle: 10
+        max-wait: 60000
+redis:
+  channel:
+    msgToAll: websocket.msgToAll
+    userStatus: websocket.userStatus
+  set:
+    onlineUsers: websocket.onlineUsers
