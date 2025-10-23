@@ -1,4 +1,0 @@
-# Spring Integration框架
-
-### 向指定主题发送消息
-GET http://127.0.0.1:8080/mqtt/send?topic=testtopic&payload=我们都是好孩子
