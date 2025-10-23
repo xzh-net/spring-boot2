@@ -44,14 +44,6 @@ const eventSource = new EventSource();
 此接口从其父接口 EventTarget 继承属性。
 
 - 登录地址：http://localhost:8080/index.html
-- 向x发消息：http://localhost:8080/send/admin?message=hello
-- 向所有发消息：http://localhost:8080/send/all?message=wahaha
-
-
-
-
-```bash
-mvn clean compile
-mvn clean package
-```
+- 向【admin】发消息：http://localhost:8080/send/admin?message=hello
+- 向所有人发消息：http://localhost:8080/send/all?message=wahaha
 
