@@ -1,0 +1,7 @@
+# ActiveMQ发送消息
+
+### 发送queue消息
+GET http://127.0.0.1:8080/sendQueueMsg?msg=我们都是好孩子
+
+### 发送topic消息
+GET http://127.0.0.1:8080/sendTopicMsg?msg=我是个大盗贼

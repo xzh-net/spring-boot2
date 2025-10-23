@@ -3,13 +3,13 @@ server:
 
 spring:
   application:
-    name: activemq-jms
+    name: activemq
   jms:
     pub-sub-domain: false
     template:
       delivery-mode: persistent
   activemq:
-    broker-url: tcp://xuzhihao:61616
+    broker-url: tcp://172.17.17.161:61616
     user: admin
     password: admin
     packages:

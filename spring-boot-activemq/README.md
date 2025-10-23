@@ -6,11 +6,11 @@ JMS提供了两种消息模型：点对点、发布订阅。支持五种消息�
 
 spring-jms提供了JMS的支持，JmsMessagingTemplate对JmsTemplate进行了封装，使用@JmsListener监听消息。
 
-访问地址：http://127.0.0.1:8080/doc.html 
-
-
 ```bash
-mvn clean compile
-mvn clean package
+# 安装
+docker run -d --name activemq -p 8161:8161 -p 1883:1883 -p 61614:61614 -p 61616:61616  webcenter/activemq:5.14.3
 ```
+
+控制台地址：http://0.0.0.0:8161 默认账号密码 admin/admin
+
 

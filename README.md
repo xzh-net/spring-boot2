@@ -15,7 +15,7 @@
 - [SMTP发送邮件](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-email)
 - [Quartz作业调度和自定义线程池](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-quartz)
 - [整合Validation处理非空校验拦截（支持国际化）](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-validation)
-- [整合ActiveMQ基于JSM规范进行消息发送和订阅](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-jms)
+- [整合ActiveMQ基于JSM规范进行消息发送和订阅](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-activemq)
 - [整合RabbitMQ应用场景实战](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-rabbitmq)
 - [整合MongoDB读写分离的浏览记录和商品收藏](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-mongo)
 - [【文档】整合Redis流控和缓存穿透解决方案](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-redis)
