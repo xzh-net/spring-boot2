@@ -1,12 +1,12 @@
 server:
-  port: 8083
+  port: 8080
 
 mqtt:
   broker-url: tcp://172.17.17.161:1883
   server-id: java-server-mg
   client-id: java-client-mg
   username: admin
-  password: admin
+  password: 123456
   cleanSession: true
   reconnect: true
   timeout: 1000

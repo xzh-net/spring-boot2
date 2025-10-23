@@ -3,6 +3,7 @@ package net.xzh.mqtt.gateway;
 import org.springframework.integration.annotation.MessagingGateway;
 import org.springframework.integration.mqtt.support.MqttHeaders;
 import org.springframework.messaging.handler.annotation.Header;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
 /**
@@ -14,5 +15,5 @@ public interface MqttGateway {
     /**
      * 发送消息到指定topic并设置QOS
      */
-    void sendToMqtt(@Header(MqttHeaders.TOPIC) String topic, String payload, @Header(MqttHeaders.QOS) int qos);
+    void sendToMqtt(@Header(MqttHeaders.TOPIC) String topic, @Payload String payload, @Header(MqttHeaders.QOS) int qos);
 }
