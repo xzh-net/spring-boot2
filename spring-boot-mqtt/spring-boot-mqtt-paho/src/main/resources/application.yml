@@ -1,14 +1,14 @@
 server:
-  port: 8081
+  port: 8080
 spring:
   application:
     name: mqtt-paho
     
 mqtt:
-  broker-url: tcp://xuzhihao:1883
+  broker-url: tcp://172.17.17.161:1883
   client-id: java-server-paho
   username: admin
-  password: admin
+  password: 123456
   cleanSession: true
   reconnect: true
   timeout: 1000

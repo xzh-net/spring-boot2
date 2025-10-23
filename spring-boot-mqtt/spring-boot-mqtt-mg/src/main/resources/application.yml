@@ -2,7 +2,7 @@ server:
   port: 8083
 
 mqtt:
-  broker-url: tcp://xuzhihao:1883
+  broker-url: tcp://172.17.17.161:1883
   server-id: java-server-mg
   client-id: java-client-mg
   username: admin
