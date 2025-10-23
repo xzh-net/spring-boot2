@@ -1,5 +1,6 @@
 package net.xzh.sockjs.common.exception;
 
+
 import net.xzh.sockjs.common.model.IErrorCode;
 
 /**
@@ -7,10 +8,10 @@ import net.xzh.sockjs.common.model.IErrorCode;
  */
 public class Asserts {
     public static void fail(String message) {
-        throw new ApiException(message);
+        throw new BusinessException(message);
     }
 
     public static void fail(IErrorCode errorCode) {
-        throw new ApiException(errorCode);
+        throw new BusinessException(errorCode);
     }
 }

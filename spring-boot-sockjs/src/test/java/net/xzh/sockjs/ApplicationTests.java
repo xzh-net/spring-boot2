@@ -13,8 +13,6 @@ public class ApplicationTests {
 	@Test
 	public void contextLoads() {
 
-		String pw = BCrypt.hashpw("123456", BCrypt.gensalt());
-		System.out.println(pw);
 	}
 
 

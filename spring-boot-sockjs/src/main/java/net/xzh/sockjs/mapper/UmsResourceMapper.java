@@ -1,13 +1,12 @@
 package net.xzh.sockjs.mapper;
 
 
-import org.apache.ibatis.annotations.Mapper;
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 import net.xzh.sockjs.entity.UmsResource;
 import net.xzh.sockjs.entity.UmsResourceExample;
-
-import java.util.List;
 
 public interface UmsResourceMapper {
     long countByExample(UmsResourceExample example);

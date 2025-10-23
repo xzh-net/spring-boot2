@@ -1,30 +1,30 @@
-var stompClient = null;
+var client = null;
 var wsCreateHandler = null;
 var userId = null;
 
 function connect() {
 	var host = window.location.host; // 带有端口号
-	var socket = new SockJS("http://" + host + "/websocket");
-	stompClient = Stomp.over(socket);
-	var storage=window.localStorage;
-	var token = storage.getItem("token");
-	stompClient.connect({'token': token}, function(frame) {
+	var socket = new SockJS("http://" + host + "/ws");
+	client = Stomp.over(socket);
+	var token = window.localStorage.getItem("token");
+	
+	client.connect({'token': token}, function(frame) {
 		console.log("连接成功");
 		$("#log-container").append("<div class='text-success'>" + frame + "</div></div><br>");
 		userId = frame.headers['user-name']
 		$("#user").text(userId);
 		// 服务端广播
-		stompClient.subscribe('/topic/chat', function(response) {
+		client.subscribe('/topic/chat', function(response) {
 			$("#log-container").append("<div class='bg-info'><div class='text-success'><label class='text-danger'>服务端广播：</label>" + response.body + "</div></div><br>");
 		});
 		
 		// 前端广播
-		stompClient.subscribe('/topic/web', function(response) {
+		client.subscribe('/topic/web', function(response) {
 			$("#log-container").append("<div class='bg-info'><div class='text-success'><label class='text-danger'>前端广播：</label>" + response.body + "</div></div><br>");
 		});
 		
 		// 点对点
-		stompClient.subscribe("/queue/user_" + userId, function(response) {
+		client.subscribe("/queue/user_" + userId, function(response) {
 			var data = JSON.parse(response.body);
 			$("#log-container").append("<div class='bg-info'><label class='text-danger'>" + data.fromUserId + ":</label><div class='text-success'>" + data.msg + "</div></div><br>");
 		});

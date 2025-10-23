@@ -73,19 +73,19 @@
 	//后端调用1
 	$("#sendToAll1").click(function () {
 		var msg = $("#msg").val();
-		stompClient.send("/app/sendToAll1", {}, msg);
+		client.send("/app/sendToAll1", {}, msg);
 	});
 	
 	//后端调用2
 	$("#sendToAll2").click(function () {
 		var msg = $("#msg").val();
-		stompClient.send("/app/sendToAll2", {}, msg);
+		client.send("/app/sendToAll2", {}, msg);
 	});
 	
 	//前端调用
 	$("#sendToAll3").click(function () {
 		var msg = $("#msg").val();
-		stompClient.send("/topic/web", {}, msg);
+		client.send("/topic/web", {}, msg);
 	});
 	
 	//非客户端，ajax调用
@@ -116,7 +116,7 @@
 	    data["fromUserId"] = userId;
 	    data["toUserId"] = toUserId;
 	    data["msg"] = msg;
-		stompClient.send("/app/sendToUser", {}, JSON.stringify(data));
+		client.send("/app/sendToUser", {}, JSON.stringify(data));
 		$("#log-container").append("<div class='bg-success'><label class='text-info'>我</label><div class='text-info'>" + $("#myinfo").val() + "</div></div><br>");
 		scrollToBottom();
 	    $("#myinfo").val("");

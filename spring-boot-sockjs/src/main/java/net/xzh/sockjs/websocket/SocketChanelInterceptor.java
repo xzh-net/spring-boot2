@@ -1,8 +1,5 @@
 package net.xzh.sockjs.websocket;
 
-import java.util.Collection;
-import java.util.Iterator;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.lang.Nullable;
@@ -13,19 +10,15 @@ import org.springframework.messaging.simp.stomp.StompCommand;
 import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.messaging.support.ChannelInterceptor;
 import org.springframework.messaging.support.MessageHeaderAccessor;
-import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 
-import cn.hutool.core.collection.CollUtil;
-import net.xzh.sockjs.common.util.JwtTokenUtil;
-import net.xzh.sockjs.component.DynamicSecurityMetadataSource;
-import net.xzh.sockjs.services.UmsAdminService;
+import net.xzh.sockjs.security.component.DynamicSocketSecurityService;
+import net.xzh.sockjs.security.util.JwtTokenUtil;
 
 /**
  * 功能:频道拦截器,类似管道,获取消息的一些meta数据
@@ -39,45 +32,42 @@ public class SocketChanelInterceptor implements ChannelInterceptor {
 	@Autowired
 	public UserDetailsService userDetailsService;
 
-	@Value("${jwt.tokenHead}")
-	public String tokenHead;
 
 	@Autowired
-	UmsAdminService umsAdminService;
+    private DynamicSocketSecurityService webSocketSecurityService;
 
-	@Autowired
-	DynamicSecurityMetadataSource dynamicSecurityMetadataSource;
-
+	// 令牌前缀
+    @Value("${token.prefix}")
+    private String prefix;
+    
 	/**
 	 * 实际消息发送到频道之前调用
 	 */
 	@Override
 	public Message<?> preSend(Message<?> message, MessageChannel channel) {
 		StompHeaderAccessor accessor = MessageHeaderAccessor.getAccessor(message, StompHeaderAccessor.class);
-
+		String authHeader  = accessor.getFirstNativeHeader("token");
+		
 		if (StompCommand.CONNECT.equals(accessor.getCommand())) {
-			String jwtToken = accessor.getFirstNativeHeader("token");
-			if (jwtToken == null || jwtToken.length() < tokenHead.length()) {
-				throw new IllegalArgumentException("抱歉，您没有访问权限");
-			}
-			jwtToken = jwtToken.substring(tokenHead.length());
-			String username = jwtTokenUtil.getUserNameFromToken(jwtToken);
-			if (username != null) {
-				UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
-				if (jwtTokenUtil.validateToken(jwtToken, userDetails)) {
-					UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-							userDetails, null, userDetails.getAuthorities());
-					SecurityContextHolder.getContext().setAuthentication(authentication);
-					accessor.setUser(authentication);
+			if (authHeader != null && authHeader.startsWith(prefix)) {
+				String authToken = authHeader.substring(prefix.length());// The part after "Bearer "
+				String username = jwtTokenUtil.getUserNameFromToken(authToken);
+				if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+					UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
+					if (jwtTokenUtil.validateToken(authToken, userDetails)) {
+						UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
+								userDetails, null, userDetails.getAuthorities());
+						SecurityContextHolder.getContext().setAuthentication(authentication);
+						accessor.setUser(authentication);
+					}
+				} else {
+					throw new IllegalArgumentException("抱歉，您没有访问权限");
 				}
-			} else {
-				throw new IllegalArgumentException("抱歉，您没有访问权限");
 			}
 		} else if (StompCommand.SUBSCRIBE.equals(accessor.getCommand())) {
 			String topic = accessor.getDestination().toString();
 			Authentication authentication = (Authentication) accessor.getUser();
-			System.out.println(topic);
-			boolean result = checkPermission(authentication, topic);
+			boolean result = webSocketSecurityService.checkTopicPermission(authentication, topic);
 			if (!result) {
 				// 这里返回一个自定义提示消息，由于没有指令和相关参数，所以不会真正执行订阅
 				Message<String> msg = new Message<String>() {
@@ -98,37 +88,13 @@ public class SocketChanelInterceptor implements ChannelInterceptor {
 		} else if (StompCommand.SEND.equals(accessor.getCommand())) {
 			String topic = accessor.getDestination().toString();
 			Authentication authentication = (Authentication) accessor.getUser();
-			boolean result = checkPermission(authentication, topic);
-
+			boolean result = webSocketSecurityService.checkTopicPermission(authentication, topic);
 			if (!result) {
 				throw new IllegalArgumentException("抱歉，没有权限发送消息到该主题");
 			}
 		}
 
 		return message;
-	}
-
-	/**
-	 * 验证当前用户是否有权限订阅主题
-	 */
-	private boolean checkPermission(Authentication authentication, String topic) {
-
-		Collection<ConfigAttribute> configAttributes = dynamicSecurityMetadataSource.getAttributes(topic);
-		if (CollUtil.isEmpty(configAttributes)) {
-			return false;
-		}
-		Iterator<ConfigAttribute> iterator = configAttributes.iterator();
-		while (iterator.hasNext()) {
-			ConfigAttribute configAttribute = iterator.next();
-			// 将访问所需资源或用户拥有资源进行比对
-			String needAuthority = configAttribute.getAttribute();
-			for (GrantedAuthority grantedAuthority : authentication.getAuthorities()) {
-				if (needAuthority.trim().equals(grantedAuthority.getAuthority())) {
-					return true;
-				}
-			}
-		}
-		return false;
 	}
 
 	/**

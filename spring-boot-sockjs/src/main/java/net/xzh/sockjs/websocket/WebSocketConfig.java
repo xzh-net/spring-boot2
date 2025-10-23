@@ -33,9 +33,9 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry){
         //客户端连接端点
-        registry.addEndpoint("/websocket")
-                .setAllowedOrigins("*")
-                .withSockJS();
+    	registry.addEndpoint("/ws")
+        .setAllowedOriginPatterns("*")  // 使用 allowedOriginPatterns
+        .withSockJS();
     }
 
     /**
