@@ -1,0 +1,13 @@
+# Paho测试
+
+### 向默认主题testtopic发送消息
+GET http://127.0.0.1:8080/mqtt/pub?topic=testtopic&message=hello
+
+### 订阅主题test2
+GET http://127.0.0.1:8080/mqtt/sub?topic=test2
+
+### 向主题test2发送消息
+GET http://127.0.0.1:8080/mqtt/pub?topic=test2&message=hello
+
+### 取消订阅主题test2
+GET http://127.0.0.1:8080/mqtt/unsub?topic=test2
