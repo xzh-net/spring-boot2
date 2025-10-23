@@ -5,8 +5,3 @@
 xmpp参考资料：https://github.com/igniterealtime/tinder
 
 访问地址：http://localhost:8080/
-
-```bash
-mvn clean compile
-mvn clean package
-```

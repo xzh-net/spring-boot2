@@ -6,9 +6,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.socket.server.standard.ServerEndpointExporter;
 
 @SpringBootApplication
-public class Application {
+public class SocketApplication {
+	
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        SpringApplication.run(SocketApplication.class, args);
     }
 
     /**

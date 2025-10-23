@@ -1,8 +1,6 @@
 package net.xzh.websocket.service;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -22,7 +20,7 @@ import net.xzh.websocket.domain.Message;
 
 @ServerEndpoint(value = "/websocket/{userId}")
 @Component
-public class WebSocketServer {
+public class SocketServer {
 
 	// 静态变量，用来记录当前在线连接数。应该把它设计成线程安全的。
 	private static AtomicInteger onlineNum = new AtomicInteger();
