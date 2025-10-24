@@ -119,8 +119,6 @@
 
    
 
-
-
 ## JSON Web Token
 
 JWT、JWS、JWE 三者之间的关系，其实 JWT（JSON Web Token）指的是一种规范，这种规范允许我们使用 JWT 在两个组织之间传递安全可靠的信息。而JWS（JSON Web Signature）和 JWE（JSON Web Encryption）是 JWT 规范的两种不同实现，我们平时最常使用的实现就是 JWS。
