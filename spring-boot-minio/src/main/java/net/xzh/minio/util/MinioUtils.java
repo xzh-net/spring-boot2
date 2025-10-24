@@ -4,16 +4,17 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Base64;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
-import cn.hutool.core.util.StrUtil;
 import io.minio.BucketExistsArgs;
 import io.minio.CopyObjectArgs;
 import io.minio.CopySource;
@@ -37,7 +38,6 @@ import io.minio.messages.Item;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import sun.misc.BASE64Decoder;
 
 /**
  * MinIO Utils
@@ -276,11 +276,11 @@ public class MinioUtils {
      * @return
      */
     public ObjectWriteResponse uploadImage(String bucketName, String imageBase64, String imageName) {
-        if (StrUtil.isNotEmpty(imageBase64)) {
+        if (StringUtils.isNotEmpty(imageBase64)) {
             InputStream in = base64ToInputStream(imageBase64);
             String newName = System.currentTimeMillis() + "_" + imageName + ".jpg";
-            String year = String.valueOf(new Date().getYear());
-            String month = String.valueOf(new Date().getMonth());
+            String year = String.valueOf(LocalDate.now().getYear());
+            String month = String.valueOf(LocalDate.now().getMonth());
             return uploadFile(bucketName, year + "/" + month + "/" + newName, in);
 
         }
@@ -290,7 +290,7 @@ public class MinioUtils {
     public static InputStream base64ToInputStream(String base64) {
         ByteArrayInputStream stream = null;
         try {
-            byte[] bytes = new BASE64Decoder().decodeBuffer(base64.trim());
+            byte[] bytes = Base64.getDecoder().decode(base64.trim());
             stream = new ByteArrayInputStream(bytes);
         } catch (Exception e) {
             e.printStackTrace();

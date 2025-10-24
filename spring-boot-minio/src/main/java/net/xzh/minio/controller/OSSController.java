@@ -4,6 +4,7 @@ import java.io.InputStream;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.FilenameUtils;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,9 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import cn.hutool.core.io.FileUtil;
 import lombok.extern.slf4j.Slf4j;
-import net.xzh.minio.config.MinioConfig;
 import net.xzh.minio.util.MinioUtils;
 
 @Slf4j
@@ -42,7 +41,7 @@ public class OSSController {
         try {
             //file name
             String fileName = file.getOriginalFilename();
-            String newFileName = System.currentTimeMillis() + "." + FileUtil.extName(fileName);
+            String newFileName = System.currentTimeMillis() + "." + FilenameUtils.getExtension(fileName);
             //type
             String contentType = file.getContentType();
             minioUtils.uploadFile(bucketName, file, newFileName, contentType);

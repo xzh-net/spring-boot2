@@ -1,10 +1,6 @@
 package net.xzh.minio.controller;
 
-import java.util.HashMap;
 import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,7 +32,7 @@ public class WebhookController {
 			// 将payload字符串转换为Map，便于处理数据
 			ObjectMapper mapper = new ObjectMapper();
 			Map<String, Object> data = mapper.readValue(payload, Map.class);
-			System.out.println("Received webhook: " + data);
+			System.out.println("Received Webhook: " + data);
 			// 在这里添加你的逻辑，例如调用构建或部署脚本等
 			// 例如：deployProject(data);
 			return ResponseEntity.ok("Webhook received");
