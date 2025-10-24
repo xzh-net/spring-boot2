@@ -86,7 +86,7 @@
 
 1. 声明式
 
-   官方推荐，更简洁
+   官方推荐，更简洁（见 spring-boot-activiti 代码示例）
 
    ```java
    @Bean
@@ -104,7 +104,7 @@
 
 2. 编程式
 
-   自定义多个Provider，需要精细控制
+   自定义多个Provider，需要精细控制（本工程包含该示例）
 
    ```java
    @Bean
