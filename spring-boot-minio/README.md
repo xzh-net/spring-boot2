@@ -1,13 +1,15 @@
-# MinIO使用Webhook和AMPQ实现上传回调
+# MinIO 使用 Webhook 和 AMQP 实现上传回调
 
-**MinIO 库**：使用自建/多平台存储，或追求轻量级、灵活的客户端。
+MinIO 库：使用自建/多平台存储，或追求轻量级、灵活的客户端。
 
-**AWS SDK**：项目深度依赖 AWS，或需使用 S3 独有功能
+AWS SDK：项目深度依赖 AWS，或需使用 S3 独有功能
 
 - 查询信息：http://172.17.17.165:8080/oss/info?fileName=1743488658933.jpg
 - 下载地址：http://172.17.17.165:8080/oss/url?fileName=1743488658933.jpg
 - 下载：http://172.17.17.165:8080/oss/download?fileName=1743488658933.jpg
 - 删除：http://172.17.17.165:8080/oss/?fileName=1743488658933.jpg
+
+## 安装中间件
 
 ```bash
 # 安装 minio
@@ -34,13 +36,16 @@ rabbitmqctl set_permissions -p "/" admin ".*" ".*" ".*"
 
 访问地址：http://172.17.17.161:9001/ ，账户密码：minioadmin/minioadmin
 
-创建事件
+## 创建事件
+
 ![](doc/assets/1.png)
 
-创建Webhook
+## 创建Webhook事件
+
 ![](doc/assets/2.png)
 
-填写回调地址
+## 填写回调地址
+
 ![](doc/assets/3.png)
 
 ```
@@ -49,7 +54,8 @@ http://172.17.17.165:8080/minio/webhook/{id}
 Bearer 123456
 ```
 
-创建AMPQ
+## 创建AMQP事件
+
 ![:](doc/assets/4.png)
 
 ```
@@ -58,9 +64,11 @@ amqp://admin:123456@172.17.17.161:5672
 bucketevents
 direct
 bucketlogs
+2
 ```
 
-绑定桶
+## 绑定桶事件
+
 ![](doc/assets/5.png)
 
 > AMQP创建回调后，默认没有将交换机与队列进行绑定，绑定过程是在项目代码中完成。
