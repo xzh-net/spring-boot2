@@ -8,9 +8,16 @@ spring:
    messages:
       basename: i18n.messages
       encoding: utf-8
-xzh:
-   noAuthUrls:
-   - /
-   - /login
-   - /user/**
-   - /api/?/test
+
+secure:
+  ignored:
+    urls:
+      - /
+      - /error
+      - /webjars/**
+      - /images/**
+      - /js/**
+      - /css/**
+      - /plugins/**
+      - /login
+      - /user/**
