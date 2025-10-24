@@ -5,7 +5,7 @@
  Source Server Type    : MySQL
  Source Server Version : 50721
  Source Host           : localhost:3306
- Source Schema         : shiro_action
+ Source Schema         : activiti
 
  Target Server Type    : MySQL
  Target Server Version : 50721

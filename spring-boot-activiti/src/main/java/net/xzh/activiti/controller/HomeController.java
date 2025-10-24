@@ -14,16 +14,16 @@ import net.xzh.activiti.model.Menu;
 import net.xzh.activiti.service.MenuService;
 
 @Controller
-public class IndexController {
+public class HomeController {
 
 	@Resource
 	private MenuService menuService;
 
-	@GetMapping(value = { "/", "/main" })
+	@GetMapping("/home")
 	public String index(Model model) {
 		List<Menu> menus = menuService.selectMenuTree();
 		model.addAttribute("menus", menus);
-		return "index";
+		return "home";
 	}
 
 	@GetMapping("/welcome")
@@ -37,10 +37,10 @@ public class IndexController {
 		return "welcome";
 	}
 
-    @GetMapping("/weekLoginCount")
-    @ResponseBody
-    public List<Integer> recentlyWeekLoginCount() {
-		List<Integer> rtn=new ArrayList<Integer>();
+	@GetMapping("/weekLoginCount")
+	@ResponseBody
+	public List<Integer> recentlyWeekLoginCount() {
+		List<Integer> rtn = new ArrayList<Integer>();
 		rtn.add(22);
 		rtn.add(4);
 		rtn.add(31);
@@ -48,6 +48,6 @@ public class IndexController {
 		rtn.add(11);
 		rtn.add(22);
 		rtn.add(9);
-        return rtn;
-    }
+		return rtn;
+	}
 }

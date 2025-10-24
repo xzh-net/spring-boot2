@@ -8,9 +8,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,21 +28,31 @@ import net.xzh.activiti.model.User;
 @Controller
 public class LoginController {
 
-
-    @GetMapping("/login")
+	@Autowired
+	private AuthenticationManager authenticationManager;
+	
+    @GetMapping("/index")
     public String login(Model model) {
-        return "login";
+        return "index";
     }
 
     @PostMapping("/login")
     @ResponseBody
-    public ResultBean<?> login(HttpSession session,User user, @RequestParam(value = "captcha", required = false) String captcha,BindingResult result) {
-        String realCaptcha = (String)session.getAttribute("captcha");
+    public ResultBean<?> login(HttpSession session,User user, @RequestParam(value = "captcha", required = false) String captcha) {
+        String sessionCaptcha = (String)session.getAttribute("captcha");
         // session 中的验证码过期了
-        if (realCaptcha == null || !realCaptcha.equals(captcha.toLowerCase())) {
+        if (sessionCaptcha == null || !sessionCaptcha.equals(captcha.toLowerCase())) {
         	Asserts.fail("验证码错误");
         }
-        session.setAttribute("user", user);
+        /**
+         * 这是一段调试代码，生产环境不允许使用
+         * 使用 AuthenticationManager 进行正式认证
+         */
+        UsernamePasswordAuthenticationToken authenticationToken = 
+            new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword());
+        Authentication authentication = authenticationManager.authenticate(authenticationToken);
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        
         return ResultBean.success("登录成功");
     }
 

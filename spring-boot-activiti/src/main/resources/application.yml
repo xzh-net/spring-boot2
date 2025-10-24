@@ -3,7 +3,7 @@ server:
 spring:
    datasource:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://127.0.0.1:3306/activiti?useSSL=false&characterEncoding=UTF8&serverTimezone=UTC
+      url: jdbc:mysql://172.17.17.137:3306/activiti?useSSL=false&characterEncoding=UTF8&serverTimezone=UTC
       username: root
       password: root
    thymeleaf:
@@ -20,9 +20,3 @@ spring:
             enabled: true
 mybatis:
    map-underscore-to-camel-case: true
-xzh:
-   noAuthUrls:
-   - /
-   - /login
-   - /logout
-   - /captcha

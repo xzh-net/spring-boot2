@@ -14,13 +14,13 @@ import net.xzh.activiti.service.DeptService;
 @RequestMapping("/dept")
 public class DeptController {
 
-    @Resource
-    private DeptService deptService;
+  @Resource
+  private DeptService deptService;
 
-    @GetMapping("/tree")
-    @ResponseBody
-    public ResultBean<?> tree() {
-        return ResultBean.success(deptService.selectAllDeptTree());
-    }
+  @GetMapping("/tree")
+  @ResponseBody
+  public ResultBean< ? > tree() {
+    return ResultBean.success(deptService.selectAllDeptTree());
+  }
 
 }
