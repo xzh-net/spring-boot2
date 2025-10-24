@@ -8,7 +8,8 @@
         var contextPath= [[@{/}]];      
 </script>
 
-<script th:src="|${#servletContext.contextPath}/webjars/jquery/3.1.1/jquery.min.js|"></script>
+<script
+	th:src="|${#servletContext.contextPath}/webjars/jquery/3.7.1/jquery.min.js|"></script>
 
 <script>
 	function logout() {
@@ -23,12 +24,38 @@
 </script>
 </head>
 <body>
-<div><a href="?lang=en_US">English</a> | <a href="?lang=zh_CN">中文</a></div>
-
-<body th:inline="text">
-    [[${session.user}]]，[[#{welcome}]]
-</body>
-<div>[[${#dates.format(new java.util.Date().getTime(), 'yyyy-MM-dd HH:mm:ss')}]]</div> 
-<div><input type="submit" onclick="logout();" th:value="#{login.logout}"/></div>
+	<table width="100%" cellpadding="10">
+		<!-- 语言选择区域 -->
+		<tr>
+			<td>
+				<div>
+					<a href="?lang=en_US">English</a> | <a href="?lang=zh_CN">中文</a>
+				</div>
+			</td>
+		</tr>
+		<!-- 欢迎信息区域 -->
+		<tr>
+			<td>
+				<div style="font-size: 20px; font-weight: bold;">
+					<span th:inline="text"> [[${session.user}]]，[[#{welcome}]]</span>
+				</div>
+			</td>
+		</tr>
+		<!-- 时间显示区域 -->
+		<tr>
+			<td>
+				<div style="font-size: 16px;">[[${#dates.format(new
+					java.util.Date().getTime(), 'yyyy-MM-dd HH:mm:ss')}]]</div>
+			</td>
+		</tr>
+		<!-- 退出按钮区域 -->
+		<tr>
+			<td>
+				<div>
+					<input type="submit" onclick="logout();" th:value="#{login.logout}" />
+				</div>
+			</td>
+		</tr>
+	</table>
 </body>
 </html>
