@@ -24,9 +24,6 @@ import io.kubernetes.client.openapi.models.V1ServicePort;
 import io.kubernetes.client.openapi.models.V1ServicePortBuilder;
 import io.kubernetes.client.openapi.models.V1ServiceSpecBuilder;
 import io.kubernetes.client.openapi.models.V1Status;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import net.xzh.k8s.common.model.CommonResult;
 
 /**
  * 用于管理 Kubernetes 核心 API 对象，如 Pod、Service、Namespace、Node 和 PersistentVolume
@@ -34,16 +31,19 @@ import net.xzh.k8s.common.model.CommonResult;
  * @author CR7
  *
  */
-@Api(tags = "CoreV1Api管理Service")
 @RestController
 @RequestMapping("/svc")
 public class ServiceController {
 
 	private static final Logger logger = LoggerFactory.getLogger(ServiceController.class);
-
-	@ApiOperation("查询所有Service")
-	@RequestMapping(value = "/listService", method = RequestMethod.GET)
-	public CommonResult<?> listService(@RequestParam String namespace) {
+	/**
+	 * 查询所有Service
+	 * 
+	 * @param namespace
+	 * @return
+	 */
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ArrayList<String> list(@RequestParam String namespace) {
 		CoreV1Api apiInstance = new CoreV1Api();
 		ArrayList<String> list = new ArrayList<String>();
 		try {
@@ -54,12 +54,17 @@ public class ServiceController {
 			logger.error("Exception when calling CoreV1Api#listPodForAllNamespaces");
 			e.printStackTrace();
 		}
-		return CommonResult.success(list);
+		return list;
 	}
 
-	@ApiOperation("创建NodePort类型Service")
-	@RequestMapping(value = "/createService", method = RequestMethod.GET)
-	public CommonResult<?> createService(@RequestParam String namespace) {
+	/**
+	 * 创建NodePort类型Service
+	 * 
+	 * @param namespace
+	 * @return
+	 */
+	@RequestMapping(value = "/addNodePort", method = RequestMethod.GET)
+	public String add(@RequestParam String namespace) {
 		CoreV1Api apiInstance = new CoreV1Api();
 
 		Map<String, String> selectLabels = new HashMap<>();
@@ -84,19 +89,25 @@ public class ServiceController {
 						.withSelector(selectLabels) // 设置选择器
 						.withPorts(servicePorts).build())
 				.build();
-		V1Service v1Service = null;
+		V1Service svc = null;
 		try {
-			v1Service = apiInstance.createNamespacedService(namespace, body, null, null, null);
+			svc = apiInstance.createNamespacedService(namespace, body, null, null, null);
 		} catch (ApiException e) {
 			logger.error("Exception when calling CoreV1Api#createNamespacedService");
 			e.printStackTrace();
 		}
-		return CommonResult.success(v1Service.getMetadata().getName());
+		return "创建成功：" + svc.getMetadata().getName();
 	}
 
-	@ApiOperation("删除Service")
-	@RequestMapping(value = "/deleteService", method = RequestMethod.GET)
-	public CommonResult<?> deleteService(@RequestParam String namespace, @RequestParam String svcname) {
+	/**
+	 * 删除Service
+	 * 
+	 * @param namespace
+	 * @param svcname
+	 * @return
+	 */
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public String delete(@RequestParam String namespace, @RequestParam String svcname) {
 		CoreV1Api apiInstance = new CoreV1Api();
 		V1Status v1Status = null;
 		try {
@@ -105,7 +116,7 @@ public class ServiceController {
 			logger.error("Exception when calling CoreV1Api#deleteNamespacedService");
 			e.printStackTrace();
 		}
-		return CommonResult.success(v1Status);
+		return "刪除成功：" + v1Status;
 	}
 
 }

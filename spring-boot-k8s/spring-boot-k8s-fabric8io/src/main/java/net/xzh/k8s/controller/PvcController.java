@@ -3,8 +3,6 @@ package net.xzh.k8s.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,9 +15,6 @@ import io.fabric8.kubernetes.api.model.networking.v1beta1.Ingress;
 import io.fabric8.kubernetes.api.model.networking.v1beta1.IngressClass;
 import io.fabric8.kubernetes.api.model.storage.StorageClass;
 import io.fabric8.kubernetes.client.KubernetesClient;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import net.xzh.k8s.common.model.CommonResult;
 
 /**
  * 管理PVC
@@ -27,52 +22,69 @@ import net.xzh.k8s.common.model.CommonResult;
  * @author CR7
  *
  */
-@Api(tags = "管理pvc")
 @RestController
 @RequestMapping("/pvc")
 public class PvcController {
 
-	private static final Logger logger = LoggerFactory.getLogger(ServiceController.class);
-
 	@Autowired
 	private KubernetesClient kubernetesClient;
-	
-	@ApiOperation("查询所有PVC")
-	@RequestMapping(value = "/listPvc", method = RequestMethod.GET)
-	public CommonResult<?> listPvc(@RequestParam String namespace) {
+
+	/**
+	 * 查询所有
+	 * 
+	 * @param namespace
+	 * @return
+	 */
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ArrayList<String> list(@RequestParam String namespace) {
 		ArrayList<String> list = new ArrayList<String>();
-		List<PersistentVolumeClaim> pvcList = kubernetesClient.persistentVolumeClaims().inNamespace(namespace).list().getItems();
+		List<PersistentVolumeClaim> pvcList = kubernetesClient.persistentVolumeClaims().inNamespace(namespace).list()
+				.getItems();
 		pvcList.forEach(pvc -> list.add(pvc.getMetadata().getName()));
-		return CommonResult.success(list);
+		return list;
 	}
-	
-	@ApiOperation("查询所有StorageClass")
-	@RequestMapping(value = "/listStorageClass", method = RequestMethod.GET)
-	public CommonResult<?> listStorageClass(@RequestParam String namespace) {
-		ArrayList<String> list = new ArrayList<String>();
+
+	/**
+	 * 查询所有StorageClass
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/listSC", method = RequestMethod.GET)
+	public List<StorageClass> listStorageClass() {
 		List<StorageClass> storageClasses = kubernetesClient.storage().storageClasses().list().getItems();
-		return CommonResult.success(storageClasses);
+		return storageClasses;
 	}
-	
-	
-	@ApiOperation("查询所有IngressClass")
-	@RequestMapping(value = "/listIngressClass", method = RequestMethod.GET)
-	public CommonResult<?> listIngressClass(@RequestParam String namespace) {
+
+	/**
+	 * 查询所有IngressClass
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/listIC", method = RequestMethod.GET)
+	public List<IngressClass> listIngressClass() {
 		List<IngressClass> ingressClasses = kubernetesClient.network().v1beta1().ingressClasses().list().getItems();
-		return CommonResult.success(ingressClasses);
+		return ingressClasses;
 	}
-	
-	@ApiOperation("查询所有Ingress")
+
+	/**
+	 * 查询所有Ingress
+	 * 
+	 * @return
+	 */
 	@RequestMapping(value = "/listIngress", method = RequestMethod.GET)
-	public CommonResult<?> listIngress() {
+	public List<Ingress> listIngress() {
 		List<Ingress> ingresses = kubernetesClient.network().ingresses().list().getItems();
-		return CommonResult.success(ingresses);
+		return ingresses;
 	}
-	
-	@ApiOperation("查询所有集群节点")
+
+	/**
+	 * 查询所有集群节点
+	 * 
+	 * @return
+	 */
 	@RequestMapping(value = "/listNodes", method = RequestMethod.GET)
-	public CommonResult<?> listNodes() {
+	public List<Node> listNodes() {
 		List<Node> nodes = kubernetesClient.nodes().list().getItems();
-		return CommonResult.success(nodes);
+		return nodes;
 	}
 }

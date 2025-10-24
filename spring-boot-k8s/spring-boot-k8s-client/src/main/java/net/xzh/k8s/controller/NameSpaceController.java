@@ -1,10 +1,10 @@
 package net.xzh.k8s.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,7 +20,6 @@ import io.kubernetes.client.openapi.models.V1ServiceList;
 import io.kubernetes.client.openapi.models.V1Status;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import net.xzh.k8s.common.model.CommonResult;
 
 /**
  * 用于管理 Kubernetes 核心 API 对象，如 Pod、Service、Namespace、Node 和 PersistentVolume
@@ -36,8 +35,8 @@ public class NameSpaceController {
 	private static final Logger logger = LoggerFactory.getLogger(NameSpaceController.class);
 
 	@ApiOperation("查询所有命名空间")
-	@RequestMapping(value = "/listNamespace", method = RequestMethod.GET)
-	public CommonResult<?> listNamespace() {
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ArrayList<String> list() {
 		CoreV1Api apiInstance = new CoreV1Api();
 		ArrayList<String> list = new ArrayList<String>();
 		try {
@@ -48,12 +47,16 @@ public class NameSpaceController {
 			logger.error("Exception when calling CoreV1Api#listNamespace");
 			e.printStackTrace();
 		}
-		return CommonResult.success(list);
+		return list;
 	}
 
-	@ApiOperation("创建命名空间")
-	@RequestMapping(value = "/createNamespace", method = RequestMethod.POST)
-	public CommonResult<?> createNamespace(@RequestParam String namespace) {
+	/**
+	 * 创建命名空间
+	 * @param namespace
+	 * @return
+	 */
+	@RequestMapping(value = "/add", method = RequestMethod.POST)
+	public String add(@RequestParam String namespace) {
 		CoreV1Api apiInstance = new CoreV1Api();
 		V1Namespace rtn = null;
 
@@ -67,12 +70,16 @@ public class NameSpaceController {
 			logger.error("Exception when calling CoreV1Api#createNamespace");
 			e.printStackTrace();
 		}
-		return CommonResult.success(rtn);
+		return "创建成功：" + rtn;
 	}
 
-	@ApiOperation("删除命名空间")
-	@RequestMapping(value = "/deleteNamespace", method = RequestMethod.POST)
-	public CommonResult<?> deleteNamespace(@RequestParam String namespace) {
+	/**
+	 * 删除命名空间
+	 * @param namespace
+	 * @return
+	 */
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	public String delete(@RequestParam String namespace) {
 		V1Status rtn = null;
 		CoreV1Api apiInstance = new CoreV1Api();
 		try {
@@ -81,12 +88,16 @@ public class NameSpaceController {
 			logger.error("Exception when calling CoreV1Api#deleteNamespace");
 			e.printStackTrace();
 		}
-		return CommonResult.success(rtn);
+		return "删除成功：" + rtn;
 	}
 
-	@ApiOperation("查询某个命名空间下的所有service")
-	@RequestMapping(value = "/listServiceByNamespace", method = RequestMethod.GET)
-	public CommonResult<?> listServiceByNamespaced(@RequestParam String namespace) {
+	/**
+	 * 查询某个命名空间下的所有service
+	 * @param namespace
+	 * @return
+	 */
+	@RequestMapping(value = "/listService", method = RequestMethod.GET)
+	public ArrayList<String> listService(@PathVariable String namespace) {
 		CoreV1Api apiInstance = new CoreV1Api();
 		ArrayList<String> rtn = new ArrayList<String>();
 		try {
@@ -98,12 +109,16 @@ public class NameSpaceController {
 			logger.error("Exception when calling CoreV1Api#listNamespacedService");
 			e.printStackTrace();
 		}
-		return CommonResult.success(rtn);
+		return rtn;
 	}
 
-	@ApiOperation("查询某个命名空间下的所有Pod")
-	@RequestMapping(value = "/listPodByNamespace", method = RequestMethod.GET)
-	public CommonResult<?> listPodByNamespace(@RequestParam String namespace) {
+	/**
+	 * 查询某个命名空间下的所有Pod
+	 * @param namespace
+	 * @return
+	 */
+	@RequestMapping(value = "/listPod/{namespace}", method = RequestMethod.GET)
+	public ArrayList<String> listPodByNamespace(@RequestParam String namespace) {
 		CoreV1Api apiInstance = new CoreV1Api();
 		ArrayList<String> rtn = new ArrayList<String>();
 		try {
@@ -115,12 +130,15 @@ public class NameSpaceController {
 			logger.error("Exception when calling CoreV1Api#listNamespacedPod");
 			e.printStackTrace();
 		}
-		return CommonResult.success(rtn);
+		return rtn;
 	}
 	
-	@ApiOperation("查询所有Service")
+	/**
+	 * 查询所有Service
+	 * @return
+	 */
 	@RequestMapping(value = "/listService", method = RequestMethod.GET)
-	public CommonResult<?> listService() {
+	public ArrayList<String> listService() {
 		CoreV1Api apiInstance = new CoreV1Api();
 		ArrayList<String> rtn = new ArrayList<String>();
 		try {
@@ -131,12 +149,15 @@ public class NameSpaceController {
 			logger.error("Exception when calling CoreV1Api#listNamespacedService");
 			e.printStackTrace();
 		}
-		return CommonResult.success(rtn);
+		return rtn;
 	}
 
-	@ApiOperation("查询所有Pod")
+	/**
+	 * 查询所有Pod
+	 * @return
+	 */
 	@RequestMapping(value = "/listPod", method = RequestMethod.GET)
-	public CommonResult<?> listPod() {
+	public ArrayList<String> listPod() {
 		CoreV1Api apiInstance = new CoreV1Api();
 		ArrayList<String> rtn = new ArrayList<String>();
 		try {
@@ -148,7 +169,7 @@ public class NameSpaceController {
 			logger.error("Exception when calling CoreV1Api#listNamespacedPod");
 			e.printStackTrace();
 		}
-		return CommonResult.success(rtn);
+		return rtn;
 	}
 
 }

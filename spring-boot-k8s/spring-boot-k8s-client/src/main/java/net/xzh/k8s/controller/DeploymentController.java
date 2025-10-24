@@ -22,9 +22,6 @@ import io.kubernetes.client.openapi.models.V1ObjectMeta;
 import io.kubernetes.client.openapi.models.V1PodSpec;
 import io.kubernetes.client.openapi.models.V1PodTemplateSpec;
 import io.kubernetes.client.openapi.models.V1Status;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import net.xzh.k8s.common.model.CommonResult;
 
 /**
  * 用于管理 Kubernetes 应用程序的 API 对象，如 Deployment、StatefulSet、DaemonSet 和 ReplicaSet
@@ -33,81 +30,84 @@ import net.xzh.k8s.common.model.CommonResult;
  * @author CR7
  *
  */
-@Api(tags = "AppsV1Api管理Deployment")
 @RestController
 @RequestMapping("/deploy")
 public class DeploymentController {
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(DeploymentController.class);
 
-	@ApiOperation("创建Deployment")
-	@RequestMapping(value = "/createDeployment", method = RequestMethod.GET)
-	public CommonResult<?> createDeployments(@RequestParam String namespace) {
+	/**
+	 * 创建Deployment
+	 * 
+	 * @param namespace
+	 * @return
+	 */
+	@RequestMapping(value = "/add", method = RequestMethod.GET)
+	public String add(@RequestParam String namespace) {
 		AppsV1Api apiInstance = new AppsV1Api();
 		String deploymentName = "test-deploy-nginx";
-	    String imageName = "nginx:1.22.1";
+		String imageName = "nginx:1.22.1";
 
-	    // Create an example deployment
-	    V1DeploymentBuilder deploymentBuilder =
-	        new V1DeploymentBuilder()
-	            .withApiVersion("apps/v1")
-	            .withKind("Deployment")
-	            .withMetadata(new V1ObjectMeta().name(deploymentName).namespace(namespace))
-	            .withSpec(
-	                new V1DeploymentSpec()
-	                    .replicas(1)
-	                    .selector(new V1LabelSelector().putMatchLabelsItem("name", deploymentName))
-	                    .template(
-	                        new V1PodTemplateSpec()
-	                            .metadata(new V1ObjectMeta().putLabelsItem("name", deploymentName))
-	                            .spec(
-	                                new V1PodSpec()
-	                                    .containers(
-	                                        Collections.singletonList(
-	                                            new V1Container()
-	                                                .name(deploymentName)
-	                                                .image(imageName))))));
-	    V1Deployment v1Deployment =  null;
-	    try {
-	    	v1Deployment = apiInstance.createNamespacedDeployment(
-			    namespace, deploymentBuilder.build(), null, null, null);
+		// Create an example deployment
+		V1DeploymentBuilder deploymentBuilder = new V1DeploymentBuilder().withApiVersion("apps/v1")
+				.withKind("Deployment").withMetadata(new V1ObjectMeta().name(deploymentName).namespace(namespace))
+				.withSpec(new V1DeploymentSpec().replicas(1)
+						.selector(new V1LabelSelector().putMatchLabelsItem("name", deploymentName))
+						.template(new V1PodTemplateSpec()
+								.metadata(new V1ObjectMeta().putLabelsItem("name", deploymentName))
+								.spec(new V1PodSpec().containers(Collections
+										.singletonList(new V1Container().name(deploymentName).image(imageName))))));
+		V1Deployment v1Deployment = null;
+		try {
+			v1Deployment = apiInstance.createNamespacedDeployment(namespace, deploymentBuilder.build(), null, null,
+					null);
 		} catch (ApiException e) {
 			logger.error("Exception when calling AppsV1Api#createNamespacedDeployment");
 			e.printStackTrace();
 		}
-		return CommonResult.success(v1Deployment.getMetadata().getName());
+		return "创建成功：" + v1Deployment.getMetadata().getName();
 	}
-	
-	
-	@ApiOperation("删除Deployment")
-	@RequestMapping(value = "/deleteDeployment", method = RequestMethod.GET)
-	public CommonResult<?> deleteDeployment(@RequestParam String namespace,@RequestParam String deployName) {
+
+	/**
+	 * 删除Deployment
+	 * 
+	 * @param namespace
+	 * @param deployName
+	 * @return
+	 */
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	public String delete(@RequestParam String namespace, @RequestParam String deployName) {
 		AppsV1Api apiInstance = new AppsV1Api();
-		V1Status v1Status =  null;
-	    try {
-	    	v1Status = apiInstance.deleteNamespacedDeployment(deployName,namespace, null, null, null, null, null, null);
+		V1Status v1Status = null;
+		try {
+			v1Status = apiInstance.deleteNamespacedDeployment(deployName, namespace, null, null, null, null, null,
+					null);
 		} catch (ApiException e) {
 			logger.error("Exception when calling AppsV1Api#deleteNamespacedDeployment");
 			e.printStackTrace();
 		}
-		return CommonResult.success(v1Status);
+		return "刪除成功：" + v1Status;
 	}
-	
-	@ApiOperation("查询所有Deployment")
-	@RequestMapping(value = "/listDeployment", method = RequestMethod.GET)
-	public CommonResult<?> listDeployment(@RequestParam String namespace) {
+
+	/**
+	 * 查询所有Deployment
+	 * @param namespace
+	 * @return
+	 */
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ArrayList<String> list(@RequestParam String namespace) {
 		AppsV1Api apiInstance = new AppsV1Api();
 		ArrayList<String> list = new ArrayList<String>();
-		V1DeploymentList deploymentList =  null;
-	    try {
-	    	 deploymentList  = apiInstance.listNamespacedDeployment(namespace, null, null, null, null, null, null, null, null, null, null);
-	    	 deploymentList.getItems().forEach(deployment -> list.add(deployment.getMetadata().getName()));
+		V1DeploymentList deploymentList = null;
+		try {
+			deploymentList = apiInstance.listNamespacedDeployment(namespace, null, null, null, null, null, null, null,
+					null, null, null);
+			deploymentList.getItems().forEach(deployment -> list.add(deployment.getMetadata().getName()));
 		} catch (ApiException e) {
 			logger.error("Exception when calling AppsV1Api#listNamespacedDeployment");
 			e.printStackTrace();
 		}
-		return CommonResult.success(list);
+		return list;
 	}
-
 
 }
