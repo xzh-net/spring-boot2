@@ -72,17 +72,52 @@
 
 
 
-## 认证的两种方式
+## 常见问题
 
-问：为什么登录的代码出现两个login？
-
-答：
+#### 问：为什么登录的代码出现两个login？
 
 1. `login`标准化流程，使用 Spring Security 的 AuthenticationManager 进行认证，委托给 UserDetailsService 执行。
 
 2. `login2`自定义流程，绕过 Spring Security 的认证管理器（SecurityConfig中声明），手动获取 UserDetails 并检查密码。
 
    参考：spring-boot-mybatis-plus。
+
+#### 问：身份验证器两种方式
+
+1. 声明式
+
+   官方推荐，更简洁
+
+   ```java
+   @Bean
+   public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
+       AuthenticationManagerBuilder authenticationManagerBuilder = 
+           http.getSharedObject(AuthenticationManagerBuilder.class);
+       authenticationManagerBuilder
+           .userDetailsService(userDetailsService())
+           .passwordEncoder(passwordEncoder);
+       return authenticationManagerBuilder.build();
+   }
+   ```
+
+   
+
+2. 编程式
+
+   自定义多个Provider，需要精细控制
+
+   ```java
+   @Bean
+   public AuthenticationManager authenticationManager(UserDetailsService userDetailsService,
+                                                      PasswordEncoder passwordEncoder) {
+       DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
+       daoAuthenticationProvider.setUserDetailsService(userDetailsService);
+       daoAuthenticationProvider.setPasswordEncoder(passwordEncoder);
+       return new ProviderManager(daoAuthenticationProvider);
+   }
+   ```
+
+   
 
 
 
