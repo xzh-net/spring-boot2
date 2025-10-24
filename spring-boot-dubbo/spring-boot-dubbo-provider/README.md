@@ -6,7 +6,3 @@
 2. 服务端使用@DubboService暴漏service
 3. yml使用sdubbo.scan扫描service
 
-```bash
-mvn clean compile
-mvn clean package
-```

@@ -5,8 +5,3 @@
 
 1. 使用zk为注册中心
 2. 不使用zk可以配置url进行点对点调 @DubboReference(url = "${dubbo.testurl}")
-
-```bash
-mvn clean compile
-mvn clean package
-```

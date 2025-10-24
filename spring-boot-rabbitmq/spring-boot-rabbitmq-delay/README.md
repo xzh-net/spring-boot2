@@ -8,7 +8,3 @@
 4. 消费限流（未）
 5. 消息追踪（未）
 
-```bash
-mvn clean compile
-mvn clean package
-```

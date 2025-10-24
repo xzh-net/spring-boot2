@@ -5,7 +5,3 @@
 
 1. 聚合查询bug未处理
 
-```bash
-mvn clean compile
-mvn clean package
-```

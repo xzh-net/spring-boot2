@@ -11,7 +11,3 @@
       - `*` ：匹配不多不少恰好1个词
 
 
-```bash
-mvn clean compile
-mvn clean package
-```

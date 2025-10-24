@@ -6,9 +6,3 @@ admin/123456
 
 1. 整合流程设计器
 2. groups验证分组
-
-
-```bash
-mvn clean compile
-mvn clean package
-```

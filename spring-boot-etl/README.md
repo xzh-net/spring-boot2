@@ -1,9 +1,6 @@
 # pdi-ce-7.1.0.0-12
 
-```bash
-mvn clean compile
-mvn clean package
-```
+
 
 访问地址：http://127.0.0.1:8080/doc.html，所有任务实例和表结构见：https://www.xuzhihao.net/#/deploy/kettle
 

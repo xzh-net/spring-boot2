@@ -2,10 +2,7 @@
 
 未整合knife4j，入门代码，自行测试
 
-```bash
-mvn clean compile
-mvn clean package
-```
+
 
 ## windows设置
 

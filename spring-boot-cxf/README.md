@@ -4,8 +4,3 @@
 
 1. 代理客户端
 2. 动态调用
-
-```bash
-mvn clean compile
-mvn clean package
-```
