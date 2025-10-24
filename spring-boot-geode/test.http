@@ -1,0 +1,19 @@
+# 测试数据插入和查询
+
+### 创建用户
+POST http://127.0.0.1:8080/add
+Content-Type: application/json
+
+{
+  "id": "123456",
+  "name": "张三"
+}
+
+### 查询所有
+GET http://127.0.0.1:8080/list
+
+### 按用户id查询
+GET http://127.0.0.1:8080/findById?id=123456
+
+### 删除用户
+DELETE http://127.0.0.1:8080/removeById?id=123456

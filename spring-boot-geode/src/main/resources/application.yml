@@ -4,5 +4,16 @@ server:
 spring:
   data:
     gemfire:
-      pool: 
-        locators: 172.17.17.160[10334]
+      # 缓存配置
+      cache:
+        log-level: info
+      # 连接池配置
+      pool:
+        locators: 172.17.17.161[10334]
+        subscription-enabled: true
+        pr-single-hop-enabled: true
+        read-timeout: 15000
+        connect-timeout: 5000
+        min-connections: 10
+        max-connections: 50
+        idle-timeout: 10000
