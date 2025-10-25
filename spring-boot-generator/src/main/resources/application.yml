@@ -10,6 +10,15 @@ mybatis-plus:
   #实体扫描，多个package用逗号或者分号分隔
   typeAliasesPackage: com.central.generator.model
 
+# 安全路径白名单
+secure:
+  ignored:
+    urls:
+      - /generator/**
+      - /sysuser/**
+      - /swagger-ui/**
+      - /api-docs/**
+
 ## SpringDoc 配置
 springdoc:
   api-docs:
