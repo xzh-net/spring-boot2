@@ -20,3 +20,14 @@ spring:
             enabled: true
 mybatis:
    map-underscore-to-camel-case: true
+
+secure:
+  ignored:
+    urls:
+      - /webjars/**
+      - /images/**
+      - /js/**
+      - /css/**
+      - /webjars/**
+      - /login
+      - /captcha/
