@@ -9,7 +9,6 @@ import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -80,31 +79,35 @@ public class SecurityConfig {
 	}
 
 	@Bean
-	SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
-		ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry = httpSecurity
-				.authorizeRequests();
-		// 不需要保护的资源路径允许访问
-		for (String url : ignoreUrlsConfig.getUrls()) {
-			registry.antMatchers(url).permitAll();
-		}
-		// 允许跨域请求的OPTIONS请求
-		registry.antMatchers(HttpMethod.OPTIONS).permitAll();
-		httpSecurity.csrf()// 由于使用的是JWT，我们这里不需要csrf
-				.disable().sessionManagement()// 基于token，所以不需要session
-				.sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests().anyRequest()// 除上面外的所有请求全部需要鉴权认证
-				.authenticated();
-		// 禁用缓存
-		httpSecurity.headers().cacheControl();
-		// 添加JWT filter
-		httpSecurity.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
-		// 添加自定义未授权和未登录结果返回
-		httpSecurity.exceptionHandling().accessDeniedHandler(restfulAccessDeniedHandler)
-				.authenticationEntryPoint(restAuthenticationEntryPoint);
-		// 有动态权限配置时添加动态权限校验过滤器
-		if (dynamicSecurityService != null) {
-			registry.and().addFilterBefore(dynamicSecurityFilter, FilterSecurityInterceptor.class);
-		}
-		return httpSecurity.build();
+	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+		HttpSecurity httpSecurity = http
+	        .authorizeHttpRequests(authz -> authz
+	            // 不需要保护的资源路径允许访问
+	            .antMatchers(ignoreUrlsConfig.getUrls().toArray(new String[0])).permitAll()
+	            // 允许跨域请求的OPTIONS请求
+	            .antMatchers(HttpMethod.OPTIONS).permitAll()
+	            // 任何请求需要身份认证
+	            .anyRequest().authenticated()
+	        )
+	        // 由于使用的是JWT，我们这里不需要csrf
+	        .csrf(csrf -> csrf.disable())
+	        // 基于token，所以不需要session
+	        .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+	        // 禁用缓存
+	        .headers(headers -> headers.cacheControl())
+	        // 添加JWT filter
+	        .addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class)
+	        // 添加自定义未授权和未登录结果返回
+	        .exceptionHandling(exception -> exception
+	            .accessDeniedHandler(restfulAccessDeniedHandler)
+	            .authenticationEntryPoint(restAuthenticationEntryPoint)
+	        );
+		
+			// 有动态权限配置时添加动态权限校验过滤器
+			if (dynamicSecurityService != null) {
+				httpSecurity.addFilterBefore(dynamicSecurityFilter, FilterSecurityInterceptor.class);
+			}
+	    
+	    return httpSecurity.build();
 	}
-
 }
