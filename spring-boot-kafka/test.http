@@ -1,0 +1,13 @@
+# KafkaTemplate消息发送测试
+
+### 发送简单消息（系统设置回调）
+GET http://127.0.0.1:8080/sendMessage?message=我们都是好孩子
+
+### 发送自定义回调简单消息
+GET http://127.0.0.1:8080/sendMessageWithCallback?message=这一个自定义回调函数的消息
+
+### 发送对象消息（系统设置回调）
+GET http://127.0.0.1:8080/sendObjectMessage
+
+### 批量发送消息（系统设置回调）
+GET http://127.0.0.1:8080/sendMultiple?message=我们都是好孩子

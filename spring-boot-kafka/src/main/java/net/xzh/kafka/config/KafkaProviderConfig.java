@@ -14,7 +14,7 @@ import org.springframework.kafka.core.ProducerFactory;
 import org.springframework.kafka.support.serializer.JsonSerializer;
 import org.springframework.kafka.transaction.KafkaTransactionManager;
 
-import net.xzh.kafka.handler.KafkaSendResultHandler;
+import net.xzh.kafka.handler.KafkaResultHandler;
 
 /**
  * kafka配置，也可以写在yml，这个文件会覆盖yml
@@ -36,7 +36,7 @@ public class KafkaProviderConfig {
 	private String bufferMemory;
 
 	@Autowired
-	KafkaSendResultHandler kafkaSendResultHandler;
+	KafkaResultHandler kafkaResultHandler;
 
 	@Bean
 	public Map<String, Object> producerConfigs() {
@@ -66,6 +66,10 @@ public class KafkaProviderConfig {
 		return props;
 	}
 
+	/**
+	 * 生产者工厂配置
+	 * @return
+	 */
 	@Bean
 	public ProducerFactory<Object, Object> producerFactory() {
 		DefaultKafkaProducerFactory<Object, Object> factory = new DefaultKafkaProducerFactory<>(producerConfigs());
@@ -84,7 +88,7 @@ public class KafkaProviderConfig {
 	public KafkaTemplate<Object, Object> kafkaTemplate() {
 		KafkaTemplate<Object, Object> template = new KafkaTemplate<>(producerFactory());
 		// 设置发送回调
-		template.setProducerListener(kafkaSendResultHandler);
+		template.setProducerListener(kafkaResultHandler);
 		return template;
 	}
 }

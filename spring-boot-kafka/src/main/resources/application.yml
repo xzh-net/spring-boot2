@@ -4,7 +4,7 @@ spring:
   kafka:
     producer:
       # Kafka服务器
-      bootstrap-servers: xuzhihao:9092
+      bootstrap-servers: 172.17.17.161:9092
       # 开启事务，必须在开启了事务的方法中发送，否则报错
       transaction-id-prefix: kafkaTx-
       # 发生错误后，消息重发的次数，开启事务必须设置大于0。
@@ -24,8 +24,8 @@ spring:
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
     consumer:
       # Kafka服务器
-      bootstrap-servers: xuzhihao:9092
-      group-id: etl
+      bootstrap-servers: 172.17.17.161:9092
+      group-id: my-group
       # 自动提交的时间间隔 在spring boot 2.X 版本中这里采用的是值的类型为Duration 需要符合特定的格式，如1S,1M,2H,5D
       #auto-commit-interval: 2s
       # 该属性指定了消费者在读取一个没有偏移量的分区或者偏移量无效的情况下该作何处理：

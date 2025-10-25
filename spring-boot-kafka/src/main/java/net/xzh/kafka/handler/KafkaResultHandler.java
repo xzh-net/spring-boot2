@@ -8,21 +8,21 @@ import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
 /**
- * 消息回调类
+ * 消息发送回调
  */
 @Component
-public class KafkaSendResultHandler implements ProducerListener<Object, Object> {
+public class KafkaResultHandler implements ProducerListener<Object, Object> {
 	
-	private static final Logger log = LoggerFactory.getLogger(KafkaSendResultHandler.class);
+	private static final Logger log = LoggerFactory.getLogger(KafkaResultHandler.class);
 	
     @Override
     public void onSuccess(ProducerRecord<Object, Object> producerRecord, RecordMetadata recordMetadata) {
-        log.info("发送成功 ,{}",producerRecord.toString());
+        log.info("【系统回调】发送成功 ,{}",producerRecord.toString());
     }
 
 	@Override
     public void onError(ProducerRecord<Object, Object> producerRecord, @Nullable RecordMetadata recordMetadata, Exception exception) {
-    	log.info("发送失败 ,{}",producerRecord.toString());
+    	log.info("【系统回调】发送失败 ,{}",producerRecord.toString());
     }
 }
 
