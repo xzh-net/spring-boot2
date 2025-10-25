@@ -9,7 +9,6 @@ import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -80,29 +79,29 @@ public class SecurityConfig {
 	}
 
 	@Bean
-	SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
-		ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry = httpSecurity
-				.authorizeRequests();
-		// 不需要保护的资源路径允许访问
-		for (String url : ignoreUrlsConfig.getUrls()) {
-			registry.antMatchers(url).permitAll();
-		}
-		// 允许跨域请求的OPTIONS请求
-		registry.antMatchers(HttpMethod.OPTIONS).permitAll();
-		httpSecurity.csrf()// 由于使用的是JWT，我们这里不需要csrf
-				.disable().sessionManagement()// 基于token，所以不需要session
-				.sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests().anyRequest()// 除上面外的所有请求全部需要鉴权认证
-				.authenticated();
-		// 禁用缓存
-		httpSecurity.headers().cacheControl();
-		// 添加JWT filter
-		httpSecurity.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
-		// 添加自定义未授权和未登录结果返回
-		httpSecurity.exceptionHandling().accessDeniedHandler(restfulAccessDeniedHandler)
-				.authenticationEntryPoint(restAuthenticationEntryPoint);
+	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        HttpSecurity httpSecurity = http
+        .authorizeHttpRequests(authz -> authz
+        	.antMatchers(HttpMethod.OPTIONS).permitAll()
+            .antMatchers(ignoreUrlsConfig.getUrls().toArray(new String[0])).permitAll()
+            .anyRequest().authenticated()
+        )
+        .csrf(csrf -> csrf.disable())
+        .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+        // 禁用缓存
+        .headers(headers -> headers.cacheControl())
+        // 自定义权限拦截器JWT过滤器
+        .addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class)
+        .exceptionHandling(exception -> exception
+        	// 自定义权限拒绝处理类
+            .accessDeniedHandler(restfulAccessDeniedHandler)
+            // 自定义认证拒绝处理类
+            .authenticationEntryPoint(restAuthenticationEntryPoint)
+        );
+    
 		// 有动态权限配置时添加动态权限校验过滤器
 		if (dynamicSecurityService != null) {
-			registry.and().addFilterBefore(dynamicSecurityFilter, FilterSecurityInterceptor.class);
+			httpSecurity.addFilterBefore(dynamicSecurityFilter, FilterSecurityInterceptor.class);
 		}
 		return httpSecurity.build();
 	}
