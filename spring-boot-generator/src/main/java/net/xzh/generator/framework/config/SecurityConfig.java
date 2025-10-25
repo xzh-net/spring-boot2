@@ -24,7 +24,7 @@ public class SecurityConfig {
 
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		return http.authorizeRequests(authz -> authz
+		return http.authorizeHttpRequests(authz -> authz
 				// 允许跨域请求的OPTIONS请求
 				.antMatchers(HttpMethod.OPTIONS).permitAll()
 				.antMatchers(ignoreUrlsProperties.getUrls().toArray(new String[0])).permitAll()
