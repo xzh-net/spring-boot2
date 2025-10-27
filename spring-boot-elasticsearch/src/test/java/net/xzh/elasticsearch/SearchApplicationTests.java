@@ -7,10 +7,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ElasticSearchApplicationTests {
+public class SearchApplicationTests {
 
     @Test
     public void contextLoads() {
     }
-
 }

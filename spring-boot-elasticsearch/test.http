@@ -1,0 +1,10 @@
+# 搜索
+
+### 所有产品导入到ES
+POST http://127.0.0.1:8080/product/importAll
+
+### 简单搜索
+GET http://127.0.0.1:8080/search/simple?keyword=海澜之家
+
+### 综合搜索 0->按相关度；1->按新品；2->按销量；3->价格从低到高；4->价格从高到低）
+GET http://127.0.0.1:8080/search?keyword=海澜之家&sort=4

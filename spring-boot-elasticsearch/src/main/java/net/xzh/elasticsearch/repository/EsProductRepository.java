@@ -12,7 +12,7 @@ import net.xzh.elasticsearch.domain.EsProduct;
  */
 public interface EsProductRepository extends ElasticsearchRepository<EsProduct, Long> {
     /**
-     * 搜索查询
+     * 搜索查询（商品名称，商品标题，商品关键字任一匹配）
      *
      * @param name              商品名称
      * @param subTitle          商品标题

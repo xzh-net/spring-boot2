@@ -8,6 +8,6 @@ import org.springframework.context.annotation.Configuration;
  * Created 2019/4/8.
  */
 @Configuration
-@MapperScan({"net.xzh.elasticsearch.mapper","net.xzh.elasticsearch.dao"})
+@MapperScan("net.xzh.elasticsearch.dao")
 public class MyBatisConfig {
 }
