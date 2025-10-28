@@ -3,7 +3,8 @@ package net.xzh.api.annotation;
 import java.lang.annotation.*;
 
 /**
- * 自定义版本注解
+ * 定义版本控制注解，可标注在类和方法上
+ * 运行时生效，支持从1开始的版本号
  * @author xzh
  * @date 2024/9/18
  */

@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.web.servlet.mvc.condition.RequestCondition;
 /**
- * 自定义匹配逻辑
+ * 版本匹配条件
  * @author CR7
  *
  */
