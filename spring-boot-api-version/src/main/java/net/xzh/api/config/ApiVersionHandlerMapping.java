@@ -2,38 +2,25 @@ package net.xzh.api.config;
 
 import java.lang.reflect.Method;
 
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.condition.RequestCondition;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 import net.xzh.api.annotation.ApiVersion;
 
 /**
- * 自定义匹配处理器
+ * 自定义匹配处理器 - 支持参数版本
  * @author CR7
  *
  */
 public class ApiVersionHandlerMapping extends RequestMappingHandlerMapping {
-    private static final String VERSION_FLAG = "{version}";
 
     /**
      * 扫描类上的 @ApiVersion
      */
     private static RequestCondition<ApiVersionCondition> createCondition(Class<?> clazz) {
-        RequestMapping classRequestMapping = clazz.getAnnotation(RequestMapping.class);
-        if (classRequestMapping == null) {
-            return null;
-        }
-        StringBuilder mappingUrlBuilder = new StringBuilder();
-        if (classRequestMapping.value().length > 0) {
-            mappingUrlBuilder.append(classRequestMapping.value()[0]);
-        }
-        String mappingUrl = mappingUrlBuilder.toString();
-        if (!mappingUrl.contains(VERSION_FLAG)) {
-            return null;
-        }
         ApiVersion apiVersion = clazz.getAnnotation(ApiVersion.class);
-        return apiVersion == null ? new ApiVersionCondition(1) : new ApiVersionCondition(apiVersion.value());
+        // 不再检查URL中是否包含{version}，直接根据注解创建条件
+        return apiVersion == null ? null : new ApiVersionCondition(apiVersion.value());
     }
 
     /**
@@ -51,7 +38,6 @@ public class ApiVersionHandlerMapping extends RequestMappingHandlerMapping {
 
     @Override
     protected RequestCondition<?> getCustomMethodCondition(Method method) {
-        // 修复：检查方法上的 @ApiVersion 注解
         return createCondition(method);
     }
 

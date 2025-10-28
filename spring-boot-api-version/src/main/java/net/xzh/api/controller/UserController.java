@@ -8,27 +8,27 @@ import org.springframework.web.bind.annotation.RestController;
 import net.xzh.api.annotation.ApiVersion;
 
 /**
- * 订单管理 - 支持URL版本
+ * 用户管理 - 支持参数版本
  * 
  * @author xzh
  *
  */
 @ApiVersion(1)  // 类级别版本
 @RestController
-@RequestMapping("/api/{version}/order")
-public class OrderController {
+@RequestMapping("/api/user")
+public class UserController {
 	
 	//默认继承方法级别
     @GetMapping("/{id}")
     public String get(@PathVariable String id){
-        return "v1查询订单" + id;
+        return "v1查询用户" + id;
     }
 	
 	
 	@ApiVersion(3)
 	@GetMapping("/{id}")
     public String get3(@PathVariable String id){
-        return "v3查询订单" + id;
+        return "v3查询用户" + id;
     }
 
 	
