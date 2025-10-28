@@ -2,8 +2,8 @@ package net.xzh.cxf.service;
 
 import java.util.Map;
 
-import net.xzh.cxf.core.domain.UserDto;
 import net.xzh.cxf.core.model.CommonResult;
+import net.xzh.cxf.dto.UserDto;
 
 
 /**

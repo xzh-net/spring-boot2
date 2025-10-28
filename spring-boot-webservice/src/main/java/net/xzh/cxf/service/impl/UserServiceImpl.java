@@ -5,8 +5,8 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 
 import net.xzh.cxf.core.annotation.SoapMapping;
-import net.xzh.cxf.core.domain.UserDto;
 import net.xzh.cxf.core.model.CommonResult;
+import net.xzh.cxf.dto.UserDto;
 import net.xzh.cxf.service.UserService;
 
 @Service
