@@ -1,0 +1,7 @@
+# webservice客户端
+
+### 使用代理类工厂调用
+GET http://127.0.0.1:8080/client/proxyFactory
+
+### 动态调用
+GET http://127.0.0.1:8080/client/dynamic

@@ -1,0 +1,4 @@
+server:
+   port: 8080
+cxf:
+   remoteurl: http://localhost:8080/webservice/gateway?wsdl
