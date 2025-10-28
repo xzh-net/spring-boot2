@@ -1,39 +1,40 @@
 package net.xzh.dubbo.controller;
 
 import org.apache.dubbo.config.annotation.DubboReference;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import net.xzh.dubbo.common.model.CommonResult;
-import net.xzh.dubbo.service.TicketService;
+import net.xzh.dubbo.service.UserService;
 
 /**
- * dubbo客戶端
- * 
- * @author Administrator
+ * dubbo客户端
+ * @author xzh
  *
  */
-@Api(tags = "dubbo客戶端")
 @RestController
 public class IndexlController {
 	
-	private static final Logger LOGGER = LoggerFactory.getLogger(IndexlController.class);
+	/**
+	 * 直连服务端地址
+	 */
+	@DubboReference(url = "${dubbo.testurl}")
+	UserService userService2;
 	
-//	@DubboReference(url = "${dubbo.testurl}")
+	/**
+	 * 从注册中心获取地址
+	 */
 	@DubboReference
-	TicketService ticketService;
+	UserService userService;
 
-	@ApiOperation("test")
-	@RequestMapping(value = "/test", method = RequestMethod.GET)
-	public CommonResult test(@RequestParam String userName) {
-		LOGGER.info("hello,{}",userName);
-		return CommonResult.success(ticketService.getTicket(userName));
+	@GetMapping(value = "/getUser")
+	public String getUser(@RequestParam String userName) {
+		return userService.getUserName(userName);
+	}
+	
+	@GetMapping(value = "/getUser2")
+	public String getUser2(@RequestParam String userName) {
+		return userService2.getUserName(userName);
 	}
 
 }

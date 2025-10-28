@@ -1,0 +1,7 @@
+# 客户端
+
+### 从注册中心获取地址
+GET http://127.0.0.1:8090/getUser?userName=zhangsan
+
+### 直接调用服务端地址
+GET http://127.0.0.1:8090/getUser2?userName=lisi

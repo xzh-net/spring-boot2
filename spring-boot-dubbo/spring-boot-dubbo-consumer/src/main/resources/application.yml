@@ -4,5 +4,5 @@ dubbo:
    application:
       name: dubbo-consumer
    registry:
-      address: zookeeper://xuzhihao:2181 #N/A
+      address: zookeeper://172.17.17.161:2181 #N/A
    testurl: dubbo://localhost:20880

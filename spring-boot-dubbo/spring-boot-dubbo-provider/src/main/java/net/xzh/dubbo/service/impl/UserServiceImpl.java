@@ -3,7 +3,7 @@ package net.xzh.dubbo.service.impl;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.stereotype.Component;
 
-import net.xzh.dubbo.service.TicketService;
+import net.xzh.dubbo.service.UserService;
 
 /**
  * 
@@ -12,9 +12,10 @@ import net.xzh.dubbo.service.TicketService;
  */
 @Component
 @DubboService
-public class TickerServiceImpl implements TicketService {
+public class UserServiceImpl implements UserService {
+
 	@Override
-	public String getTicket(String userName) {
-		return userName+": <厉害了，我的国》";
+	public String getUserName(String userName) {
+		return "你好："+ userName;
 	}
 }

@@ -3,17 +3,16 @@ package net.xzh.dubbo;
 import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
 /**
- * 
- * @author Administrator
+ * dubbo服务端
+ * @author xzh
  *
  */
 @EnableDubbo
-@SpringBootApplication(exclude = DataSourceAutoConfiguration.class)//排除自动配置
-public class Application {
+@SpringBootApplication
+public class ProviderApplication {
 	public static void main(String[] args) {
-		SpringApplication.run(Application.class, args);
+		SpringApplication.run(ProviderApplication.class, args);
 	}
 }
