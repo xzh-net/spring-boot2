@@ -3,8 +3,8 @@
     <contextName>${APP_NAME}</contextName>
     <springProperty name="APP_NAME" scope="context" source="spring.application.name"/>
     <springProperty name="LOG_FILE" scope="context" source="logging.file" defaultValue="logs/application/${APP_NAME}"/>
-    <springProperty name="LOG_POINT_FILE" scope="context" source="logging.file" defaultValue="logs/point"/>
     <springProperty name="LOG_AUDIT_FILE" scope="context" source="logging.file" defaultValue="logs/audit"/>
+    <springProperty name="LOG_POINT_FILE" scope="context" source="logging.file" defaultValue="logs/point"/>
     <springProperty name="LOG_MAXFILESIZE" scope="context" source="logback.filesize" defaultValue="50MB"/>
     <springProperty name="LOG_FILEMAXDAY" scope="context" source="logback.filemaxday" defaultValue="7"/>
     <springProperty name="ServerIP" scope="context" source="spring.cloud.client.ip-address" defaultValue="0.0.0.0"/>
@@ -24,7 +24,8 @@
     <property name="CONSOLE_LOG_PATTERN_NO_COLOR" value="[${APP_NAME}:${ServerIP}:${ServerPort}] %d{yyyy-MM-dd HH:mm:ss.SSS} %level ${PID} [%X{traceId}-%X{spanId}] [%thread] %-40.40logger{39} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}" />
 
     <!-- 控制台日志 -->
-    <appender name="StdoutAppender" class="ch.qos.logback.core.ConsoleAppender">
+    <appender name="ConsoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+    	<withJansi>true</withJansi>
         <encoder>
             <pattern>${CONSOLE_LOG_PATTERN}</pattern>
             <charset>UTF-8</charset>
@@ -49,24 +50,6 @@
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <level>INFO</level>
         </filter>
-    </appender>
-
-	<!-- 审计日志（文件） -->
-    <appender name="audit_log" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${LOG_AUDIT_FILE}/audit.log</file>
-        <encoder>
-            <pattern>%msg%n</pattern>
-            <charset>UTF-8</charset>
-        </encoder>
-        <!-- 基于时间的分包策略 -->
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_AUDIT_FILE}/audit.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
-            <!--保留时间,单位:天-->
-            <maxHistory>${LOG_FILEMAXDAY}</maxHistory>
-            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <maxFileSize>${LOG_MAXFILESIZE}</maxFileSize>
-            </timeBasedFileNamingAndTriggeringPolicy>
-        </rollingPolicy>
     </appender>
     
     <!-- 埋点日志（文件） -->
@@ -118,6 +101,24 @@
             </providers>
         </encoder>
     </appender>
+
+	<!-- 审计日志（文件） -->
+    <appender name="audit_log" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_AUDIT_FILE}/audit.log</file>
+        <encoder>
+            <pattern>%msg%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <!-- 基于时间的分包策略 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_AUDIT_FILE}/audit.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <!--保留时间,单位:天-->
+            <maxHistory>${LOG_FILEMAXDAY}</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>${LOG_MAXFILESIZE}</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+    </appender>
     
     <!-- 异步设置 -->
     <appender name="file_async" class="ch.qos.logback.classic.AsyncAppender">
@@ -137,18 +138,18 @@
         <appender-ref ref="point_log_stash"/>
     </appender>
     
-    
-    <logger name="net.xzh.log.service.impl.LoggerAuditServiceImpl" level="debug" addtivity="false">
-        <appender-ref ref="audit_log_async" />
-    </logger>
     <logger name="net.xzh.elk" level="debug" additivity="false">
         <appender-ref ref="point_log_async" />
         <appender-ref ref="point_log_stash_async" />
     </logger>
+    <logger name="net.xzh.log.service.impl.LoggerAuditServiceImpl" level="debug" addtivity="false">
+        <appender-ref ref="audit_log_async" />
+    </logger>
+    
 
 	<!-- 控制台和文件只输出INFO以上级别，WARN，ERROR -->
     <root level="INFO">
-        <appender-ref ref="StdoutAppender"/>
+        <appender-ref ref="ConsoleAppender"/>
         <appender-ref ref="file_async"/>
     </root>
 </configuration>
