@@ -1,7 +1,9 @@
 server:
    port: 8080
+
 spring:
    application:
-      name: elk
+      name: elk-test
+
 logstash:
    host: 172.17.17.161
