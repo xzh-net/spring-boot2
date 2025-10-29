@@ -66,12 +66,17 @@
 - [Jsoup解析html下载游戏Rom和图片处理](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-winkawaks)
 - [Java调用Python的几种方式](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-python)
 - [使用Apache Geode解决千万级QPS并发查询](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-geode)
+- [基于Elasticsearch技术栈实现统一日志收集](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-elk)
+- [SockJS + STOMP + RabbitMQ实时聊天](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-sockjs)
+- [SockJS + STOMP + Redis聊天集群](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-sockjs-redis)
+- [【文档】基于MyBatis-Plus快速开发脚手架](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-mybatis-plus)
+- [整合Activiti工作流设计器和数据验证分组校验](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-activiti)
 
 ---
 
 ## 5. 工具
 
-> 不使用中间件技术，调试工具代码合辑
+> 不依赖中间件，不引用非框架依赖包的工具代码合辑
 
 - [API版本控制](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-api-version)
 - [【文档】Mybatis代码生成器](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-generator)
@@ -79,44 +84,8 @@
 - [基于SonarQube的Web API实现代码质量和安全管理](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-sonar)
 - [基于Emqx为客户端实现自定义登录授权](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-emqx)
 - [集成Collabora Online实现在线文档编辑](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-wopi)
-- [基于Elasticsearch技术栈实现统一日志收集](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-elk)
-- [SockJS + STOMP + RabbitMQ实时聊天](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-sockjs)
-- [SockJS + STOMP + Redis聊天集群](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-sockjs-redis)
 - [SSE流式传输协议](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-sse)
 - [微信公众号和企业微信开发](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-wechat)
 - [使用Filter防范XSS攻击和伪造Referrer拦截](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-xss)
 
 ---
-
-## 6. 项目
-
-- [【文档】基于MyBatis-Plus快速开发脚手架](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-mybatis-plus)
-- [整合Activiti工作流设计器和数据验证分组校验](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-activiti)
-
-
-
-## 更新记录
-
-- 2025-10-22 jmeter，springboot升级到2.7.0
-- 2025-10-22 RocketMQ，springboot升级到2.7.0
-- 2025-10-15 OSS上传文件，springboot升级到2.7.0
-- 2025-10-14 generator代码生成，springboot升级到2.7.0
-- 2025-10-10 Jsoup解析补充操作说明，springboot升级到2.7.0
-- 2025-10-10 表单提交实体类非空校验框架，springboot升级到2.7.0
-- 2025-10-10 JPA操作SQLite数据库，springboot升级到2.7.0
-- 2025-10-09 发送email，去掉hutool依赖，springboot升级到2.7.0
-- 2025-10-09 stand入门项目，去掉hutool依赖，springboot升级到2.7.0
-- 2025-10-06 多数据源和动态数据源，springboot升级到2.7.0
-- 2025-10-04 自定义审计日志，springboot升级到2.7.0
-- 2025-10-04 knife4j升级到springdoc 1.7.0
-- 2025-10-03 mybatis-plus脚手架升级到springdoc 1.7.0
-- 2025-10-03 pulsar-java-spring-boot-starter升级到1.1.2，springboot升级到2.7.0
-- 2025-10-03 fisco升级到2.9.1，springboot升级到2.7.0
-- 2025-10-03 Jasypt整合SM4，springboot升级到2.7.0
-- 2025-09-24 优化了防范XSS攻击和伪造Referrer，springboot升级到2.7.0
-- 2025-09-22 security权限框架，springboot升级到2.7.0
-- 2025-09-18 优化任务调度和自定义线程池参数，springboot升级到2.7.0
-- 2025-09-17 HikariCP参数优化，springboot升级到2.7.0
-- 2025-09-17 日志拦截器逻辑优化，增加记录字段
-- 2025-09-16 完善Redis限流功能和优化template注入逻辑，springboot升级到2.7.0
-
