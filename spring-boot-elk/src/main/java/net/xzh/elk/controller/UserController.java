@@ -15,8 +15,8 @@ public class UserController {
 
     @GetMapping(value = "getUserName")
     public String getUserName() {
-    	PointUtil.info("我是个大盗贼info,{}",123);
-    	PointUtil.debug("我是个大盗贼debug,{}",456);
-        return "admin";
+    	PointUtil.info("这是INFO,{}",System.currentTimeMillis());
+    	PointUtil.debug("这是DEBUG,{}",System.currentTimeMillis());
+        return System.currentTimeMillis()+"";
     }
 }
