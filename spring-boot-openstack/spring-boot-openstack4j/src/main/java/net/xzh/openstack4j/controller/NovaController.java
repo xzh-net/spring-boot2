@@ -1,12 +1,12 @@
 package net.xzh.openstack4j.controller;
 
+import java.util.List;
+
+import org.openstack4j.model.compute.Flavor;
+import org.openstack4j.model.compute.Image;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import net.xzh.openstack4j.common.model.CommonResult;
 
 /**
  * 计算管理
@@ -14,28 +14,36 @@ import net.xzh.openstack4j.common.model.CommonResult;
  * @author Administrator
  *
  */
-@Api(tags = "计算")
 @RestController
 public class NovaController extends BaseController {
 	
 
-	@ApiOperation("获取token")
+	/**
+	 * 获取token
+	 * @return
+	 */
 	@RequestMapping(value = "/token", method = RequestMethod.GET)
-	public CommonResult<?> token() {
-		return CommonResult.success(OSClient().getToken().getId());
+	public String token() {
+		return OSClient().getToken().getId();
 	}
 	
-	@ApiOperation("实例类型")
+	/**
+	 * 实例类型
+	 * @return
+	 */
 	@RequestMapping(value = "/flavors", method = RequestMethod.GET)
-	public CommonResult<?> flavors() {
-		return CommonResult.success(OSClient().compute().flavors().list());
+	public List<? extends Flavor> flavors() {
+		return OSClient().compute().flavors().list();
 	}
 	
-	@ApiOperation("镜像")
+	/**
+	 * 查询镜像
+	 * @return
+	 */
 	@RequestMapping(value = "/images", method = RequestMethod.GET)
-	public CommonResult<?> images() {
+	public List<? extends Image> images() {
 //		OSClient().imagesV2().list()
-		return CommonResult.success(OSClient().compute().images().list());
+		return OSClient().compute().images().list();
 	}
 
 }

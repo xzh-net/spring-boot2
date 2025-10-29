@@ -1,12 +1,11 @@
 package net.xzh.openstack4j.controller;
 
+import java.util.List;
+
+import org.openstack4j.model.network.Network;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import net.xzh.openstack4j.common.model.CommonResult;
 
 /**
  * 网络管理
@@ -14,14 +13,16 @@ import net.xzh.openstack4j.common.model.CommonResult;
  * @author Administrator
  *
  */
-@Api(tags = "网络")
 @RestController
 public class NetWorkController extends BaseController {
 
-	@ApiOperation("查询")
+	/**
+	 * 查询网络
+	 * @return
+	 */
 	@RequestMapping(value = "/network", method = RequestMethod.GET)
-	public CommonResult<?> network() {
-		return CommonResult.success(OSClient().networking().network().list());
+	public List<? extends Network> network() {
+		return OSClient().networking().network().list();
 	}
 
 }

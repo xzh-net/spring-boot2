@@ -1,21 +1,20 @@
 package net.xzh.openstack4j.controller;
 
 import java.util.Arrays;
+import java.util.List;
 
 import org.openstack4j.api.Builders;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.compute.Action;
 import org.openstack4j.model.compute.RebootType;
 import org.openstack4j.model.compute.Server;
 import org.openstack4j.model.compute.ServerCreate;
+import org.openstack4j.model.compute.VNCConsole;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import net.xzh.openstack4j.common.model.CommonResult;
 
 /**
  * 实例管理
@@ -23,58 +22,87 @@ import net.xzh.openstack4j.common.model.CommonResult;
  * @author Administrator
  *
  */
-@Api(tags = "实例")
 @RestController
 public class InstanceController extends BaseController {
 
 
-	@ApiOperation("新建实例")
+	/**
+	 * 新建实例
+	 * @param instanceName
+	 * @param networks
+	 * @param image
+	 * @param flavor
+	 * @return
+	 */
 	@RequestMapping(value = "/instance", method = RequestMethod.POST)
-	public CommonResult<?> instanceAdd(@RequestParam String instanceName, @RequestParam String networks,
+	public String instanceAdd(@RequestParam String instanceName, @RequestParam String networks,
 			@RequestParam String image, @RequestParam String flavor) {
 		ServerCreate request = Builders.server().name(instanceName + System.currentTimeMillis())
 				.networks(Arrays.asList(networks)).image(image).flavor(flavor)
 				// .keypairName("keypairName")
 				.build();
 		Server server = OSClient().compute().servers().bootAndWaitActive(request, 600);
-		return CommonResult.success(server.getId());
+		return server.getId();
 	}
 	
-	@ApiOperation("查询实例")
+	/**
+	 * 查询实例
+	 * @return
+	 */
 	@RequestMapping(value = "/instances", method = RequestMethod.GET)
-	public CommonResult<?> instances() {
-		return CommonResult.success(OSClient().compute().servers().list());
+	public List<? extends Server> instances() {
+		return OSClient().compute().servers().list();
 	}
 	
 
-	@ApiOperation("实例详情")
+	/**
+	 * 实例详情
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping(value = "/instance/{id}", method = RequestMethod.GET)
-	public CommonResult<?> instanceDetail(@PathVariable String id) {
-		return CommonResult.success(OSClient().compute().servers().get(id));
+	public Server instanceDetail(@PathVariable String id) {
+		return OSClient().compute().servers().get(id);
 	}
 	
-	@ApiOperation("获取vnc地址")
+	/**
+	 * 获取vnc地址
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping(value = "/vncConsole/{id}", method = RequestMethod.GET)
-	public CommonResult<?> vncConsole(@PathVariable String id) {
-		return CommonResult.success(OSClient().compute().servers().getVNCConsole(id, null));
+	public VNCConsole vncConsole(@PathVariable String id) {
+		return OSClient().compute().servers().getVNCConsole(id, null);
 	}
 
-	@ApiOperation("删除实例")
+	/**
+	 * 删除实例
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping(value = "/instance/{id}", method = RequestMethod.DELETE)
-	public CommonResult<?> instanceRemove(@PathVariable String id) {
-		return CommonResult.success(OSClient().compute().servers().delete(id));
+	public ActionResponse instanceRemove(@PathVariable String id) {
+		return OSClient().compute().servers().delete(id);
 	}
 
-	@ApiOperation("重启实例")
+	/**
+	 * 重启实例
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping(value = "/instance/reboot/{id}", method = RequestMethod.GET)
-	public CommonResult<?> instanceReboot(@PathVariable String id) {
-		return CommonResult.success(OSClient().compute().servers().reboot(id, RebootType.SOFT));
+	public ActionResponse instanceReboot(@PathVariable String id) {
+		return OSClient().compute().servers().reboot(id, RebootType.SOFT);
 	}
 
-	@ApiOperation("销毁实例")
+	/**
+	 * 销毁实例
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping(value = "/node/destroy/{id}", method = RequestMethod.GET)
-	public CommonResult<?> nodeDestroy(@PathVariable String id) {
-		return CommonResult.success(OSClient().compute().servers().action(id, Action.FORCEDELETE));
+	public ActionResponse nodeDestroy(@PathVariable String id) {
+		return OSClient().compute().servers().action(id, Action.FORCEDELETE);
 	}
 
 }
