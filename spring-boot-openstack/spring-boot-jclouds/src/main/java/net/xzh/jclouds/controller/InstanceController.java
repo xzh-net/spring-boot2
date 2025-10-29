@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Set;
 
 import org.jclouds.compute.RunNodesException;
+import org.jclouds.compute.domain.ComputeMetadata;
 import org.jclouds.compute.domain.NodeMetadata;
 import org.jclouds.compute.domain.Template;
 import org.jclouds.compute.options.TemplateOptions;
@@ -13,9 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import net.xzh.jclouds.common.model.CommonResult;
 import net.xzh.jclouds.model.VirtualMachine;
 
 /**
@@ -24,13 +22,16 @@ import net.xzh.jclouds.model.VirtualMachine;
  * @author Administrator
  *
  */
-@Api(tags = "实例")
 @RestController
 public class InstanceController extends BaseController {
 
-	@ApiOperation("新建实例")
+	/**
+	 * 新建实例
+	 * @param vm
+	 * @return
+	 */
 	@RequestMapping(value = "/instance", method = RequestMethod.POST)
-	public CommonResult<?> instanceAdd(@RequestBody VirtualMachine vm) {
+	public Set<? extends NodeMetadata> instanceAdd(@RequestBody VirtualMachine vm) {
 		// 自定义参数
 		TemplateOptions options = TemplateOptions.Builder
 				.networks(Arrays.asList(vm.getNetworks()));
@@ -46,33 +47,48 @@ public class InstanceController extends BaseController {
 			e.printStackTrace();
 		}
 
-		return CommonResult.success(nodes);
+		return nodes;
 	}
 
-	@ApiOperation("查询实例")
+	/**
+	 * 查询实例
+	 * @return
+	 */
 	@RequestMapping(value = "/instances", method = RequestMethod.GET)
-	public CommonResult<?> instances() {
-		return CommonResult.success(computeService().listNodes());
+	public Set<? extends ComputeMetadata> instances() {
+		return computeService().listNodes();
 	}
 
-	@ApiOperation("实例详情")
+	/**
+	 * 实例详情
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping(value = "/instance/{id}", method = RequestMethod.GET)
-	public CommonResult<?> instanceDetail(@PathVariable String id) {
-		return CommonResult.success(computeService().getNodeMetadata("RegionOne/" + id));
+	public NodeMetadata instanceDetail(@PathVariable String id) {
+		return computeService().getNodeMetadata("RegionOne/" + id);
 	}
 
-	@ApiOperation("销毁实例")
+	/**
+	 * 销毁实例
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping(value = "/instance/{id}", method = RequestMethod.DELETE)
-	public CommonResult<?> instanceRemove(@PathVariable String id) {
+	public String instanceRemove(@PathVariable String id) {
 		computeService().destroyNode("RegionOne/" + id);
-		return CommonResult.success(null);
+		return "success";
 	}
 
-	@ApiOperation("重启实例")
+	/**
+	 * 重启实例
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping(value = "/instance/reboot/{id}", method = RequestMethod.GET)
-	public CommonResult<?> instanceReboot(@PathVariable String id) {
+	public String instanceReboot(@PathVariable String id) {
 		computeService().rebootNode("RegionOne/" + id);
-		return CommonResult.success(null);
+		return "success";
 	}
 
 }

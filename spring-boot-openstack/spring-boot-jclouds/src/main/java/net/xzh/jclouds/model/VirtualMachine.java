@@ -3,29 +3,33 @@ package net.xzh.jclouds.model;
 
 import java.io.Serializable;
 
-import io.swagger.annotations.ApiModelProperty;
-
 public class VirtualMachine implements Serializable {
 	
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
-
-    @ApiModelProperty(value = "区域ID，默认RegionOne")
+    /**
+     * 区域ID，默认RegionOne
+     */
     private String regionId;
     
-    @ApiModelProperty(value = "实例名称")
+    /**
+     * 实例名称
+     */
     private String serverName;
 
-    @ApiModelProperty(value = "镜像ID")
+    /**
+     * 镜像ID
+     */
     private String imageId;
 
-    @ApiModelProperty(value = "实例规格ID")
+    /**
+     * 实例规格ID
+     */
     private String hardwareId;
     
-    @ApiModelProperty(value = "网络ID(lan)")
+    /**
+     * 网络ID(lan)
+     */
     private String networks;
 
 	public String getRegionId() {

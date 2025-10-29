@@ -1,12 +1,12 @@
 package net.xzh.jclouds.controller;
 
+import java.util.Set;
+
+import org.jclouds.compute.domain.Hardware;
+import org.jclouds.compute.domain.Image;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import net.xzh.jclouds.common.model.CommonResult;
 
 /**
  * 计算管理
@@ -14,26 +14,34 @@ import net.xzh.jclouds.common.model.CommonResult;
  * @author Administrator
  *
  */
-@Api(tags = "计算")
 @RestController
 public class NovaController extends BaseController {
 	
-	@ApiOperation("区域")
+	/**
+	 * 查询区域
+	 * @return
+	 */
 	@RequestMapping(value = "/regions", method = RequestMethod.GET)
-	public CommonResult<?> regions() {
-		return CommonResult.success(novaApi().getConfiguredRegions());
+	public Set<String> regions() {
+		return novaApi().getConfiguredRegions();
 	}
 	
-	@ApiOperation("实例类型")
+	/**
+	 * 查询实例类型
+	 * @return
+	 */
 	@RequestMapping(value = "/flavors", method = RequestMethod.GET)
-	public CommonResult<?> flavors() {
-		return CommonResult.success(computeService().listHardwareProfiles());
+	public Set<? extends Hardware> flavors() {
+		return computeService().listHardwareProfiles();
 	}
 	
-	@ApiOperation("镜像")
+	/**
+	 * 查询镜像
+	 * @return
+	 */
 	@RequestMapping(value = "/images", method = RequestMethod.GET)
-	public CommonResult<?> images() {
-		return CommonResult.success(computeService().listImages());
+	public Set<? extends Image> images() {
+		return computeService().listImages();
 	}
 
 }
