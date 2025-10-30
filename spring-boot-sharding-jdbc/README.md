@@ -22,6 +22,4 @@
    
 6. 分库分表公共表
 
-   配置文件`sharding-databases4`，通过配置
-
-http://localhost:8080/order/init
+   配置文件`sharding-databases4`
