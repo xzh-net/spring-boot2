@@ -71,7 +71,7 @@
 - [SockJS + STOMP + Redis聊天集群](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-sockjs-redis)
 - [【文档】基于MyBatis-Plus快速开发脚手架](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-mybatis-plus)
 - [整合Activiti工作流设计器和数据验证分组校验](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-activiti)
-
+- [YAML格式校验](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-yaml)
 ---
 
 ## 5. 工具
