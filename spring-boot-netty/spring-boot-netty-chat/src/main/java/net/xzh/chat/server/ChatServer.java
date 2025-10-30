@@ -8,10 +8,10 @@ import io.netty.channel.ChannelFuture;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import net.xzh.chat.server.initializer.SocketChannelInitializer;
 
-/*
- * 聊天服务
- * @author Kevin
+/**
+ * 服务器启动类
  * @date 2020/12/25 12:02
  *
  */

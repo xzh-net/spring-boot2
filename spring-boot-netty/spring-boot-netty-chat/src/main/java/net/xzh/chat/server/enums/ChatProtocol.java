@@ -1,4 +1,4 @@
-package net.xzh.chat.server;
+package net.xzh.chat.server.enums;
 
 
 /**

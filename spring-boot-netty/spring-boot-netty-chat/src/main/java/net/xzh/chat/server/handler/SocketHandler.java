@@ -1,4 +1,4 @@
-package net.xzh.chat.server;
+package net.xzh.chat.server.handler;
 
 import java.time.LocalDateTime;
 
@@ -8,10 +8,10 @@ import org.slf4j.LoggerFactory;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
+import net.xzh.chat.server.service.MessageProcess;
 
 /**
- * 处理webSocket请求连接
- * @author Kevin
+ * WebSocket消息处理器
  * @date 2020/12/25 17:24
  *
  */
@@ -19,7 +19,9 @@ public class SocketHandler extends SimpleChannelInboundHandler<TextWebSocketFram
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(SocketHandler.class);
 	
-    /*消息处理器*/
+    /**
+     * 消息处理器
+     */
     private static MessageProcess messageProcess=new MessageProcess();
 
     @Override
