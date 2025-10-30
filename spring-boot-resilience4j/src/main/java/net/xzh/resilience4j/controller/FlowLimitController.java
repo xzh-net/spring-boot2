@@ -18,7 +18,7 @@ import java.util.Random;
 public class FlowLimitController {
 
 	/**
-	 * 调用失败重试5次，每次等待1s
+	 * 重试：调用失败最多5次，每次间隔1秒
 	 * 
 	 * @return
 	 */
@@ -31,7 +31,7 @@ public class FlowLimitController {
 	}
 
 	/**
-	 * 熔断器circuitBreakerApi
+	 * 熔断器：当调用量达到5次且失败率超过20%时，断路器会进入开路状态并持续5秒，之后进入半开状态允许试探性调用3次来检测服务是否恢复
 	 * 
 	 * @return
 	 */
@@ -47,7 +47,7 @@ public class FlowLimitController {
 	}
 
 	/**
-	 * 限流
+	 * 限流：1秒内最多只能调用1次
 	 * 
 	 * @return
 	 */
@@ -59,7 +59,7 @@ public class FlowLimitController {
 	}
 
 	/**
-	 * 信号量控制
+	 * 信号量：最大并发数量10
 	 * 
 	 * @return
 	 */
