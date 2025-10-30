@@ -1,0 +1,44 @@
+# YAML校验
+
+### 转换成BEAN验证
+POST http://127.0.0.1:8080/api/yaml/validate
+Content-Type: application/json
+
+name: Sample model
+version: 1.0.0
+schema: v1
+
+models:
+  - name: 'Qwen3-Coder-30B-A3B-Instruct'
+    model: 'Qwen3-Coder-30B-A3B-Instruct'
+    apiBase: 'https://www.xuzhihao.net/v1'
+    apiKey: 'df2024b5-f429-4e10-a79b-1922b01864fb'
+    roles:
+      - 'chat'
+      - 'edit'
+      - 'apply'
+    capabilities:
+      - 'tool_use'
+    provider: 'openai'
+
+
+### 转换成Map验证
+POST http://127.0.0.1:8080/api/yaml/validateMap
+Content-Type: application/json
+
+name: Sample model
+version: 1.0.0
+schema: v1
+
+models:
+  - name: 'Qwen3-Coder-30B-A3B-Instruct'
+    model: 'Qwen3-Coder-30B-A3B-Instruct'
+    apiBase: 'https://www.xuzhihao.net/v1'
+    apiKey: 'df2024b5-f429-4e10-a79b-1922b01864fb'
+    roles:
+      - 'chat'
+      - 'edit'
+      - 'apply'
+    capabilities:
+      - 'tool_use'
+    provider: 'openai'
