@@ -1,0 +1,17 @@
+# sharding-jdbc测试
+
+### 数据初始化
+GET http://127.0.0.1:8080/user/init
+
+### 查询全部
+GET http://127.0.0.1:8080/user/list
+
+### 查询详情
+GET http://127.0.0.1:8080/user/1983744408338120706
+
+### 清空数据
+GET http://127.0.0.1:8080/user/clean
+
+
+### 混合模式
+GET http://localhost:8080/order/init

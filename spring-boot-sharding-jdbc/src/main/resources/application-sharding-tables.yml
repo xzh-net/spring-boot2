@@ -5,7 +5,7 @@ sharding:
       ds:
         type: com.zaxxer.hikari.HikariDataSource
         driver-class-name: org.postgresql.Driver
-        jdbcUrl: jdbc:postgresql://127.0.0.1:5432/aa?useUnicode=true&characterEncoding=utf8&currentSchema=public&stringtype=unspecified
+        jdbcUrl: jdbc:postgresql://172.17.17.161:5432/ec_demo_0?useUnicode=true&characterEncoding=utf8&currentSchema=public&stringtype=unspecified
         username: postgres
         password: postgres
     config:

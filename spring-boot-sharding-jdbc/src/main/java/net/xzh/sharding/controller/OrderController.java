@@ -3,15 +3,11 @@ package net.xzh.sharding.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import net.xzh.sharding.common.model.CommonResult;
 import net.xzh.sharding.model.Area;
 import net.xzh.sharding.model.Order;
 import net.xzh.sharding.model.User;
@@ -20,9 +16,9 @@ import net.xzh.sharding.service.IOrderService;
 import net.xzh.sharding.service.IUserService;
 
 /**
+ * 订单管理
  * @author xzh
  */
-@Api(tags = "订单管理混合模式")
 @RestController
 @RequestMapping("/order")
 public class OrderController {
@@ -35,11 +31,11 @@ public class OrderController {
 	private IAreaService areaService;
 
 	/**
-	 * 初始化数据
+	 * 数据初始化
+	 * @return
 	 */
-	@ApiOperation("数据初始化")
     @RequestMapping(value = "/init", method = RequestMethod.GET)
-	public CommonResult initDate() {
+	public String init() {
 		Area area = new Area();
 		area.setName("大连");
 		areaService.save(area);
@@ -62,34 +58,35 @@ public class OrderController {
 			u.setUserId(user.getId());
 			orderService.save(u);
 		}
-		return CommonResult.success("success");
+		return "success";
 	}
 
 	/**
-     * 查询列表
-     */
-	@ApiOperation("查询列表")
+	 * 查询列表
+	 * @return
+	 */
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public CommonResult<List<Order>> list() {
-		return CommonResult.success(orderService.list());
+	public List<Order> list() {
+		return orderService.list();
 	}
 
 	/**
-     * 查询单条记录
-     */
-    @ApiOperation("获取指定id的订单详情")
+	 * 获取订单详情
+	 * @param id
+	 * @return
+	 */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public CommonResult<Order> user(@PathVariable("id") Long id) {
-        return CommonResult.success(orderService.getById(id));
+    public Order get(@PathVariable("id") Long id) {
+        return orderService.getById(id);
     }
 
     /**
      * 清除数据
+     * @return
      */
-    @ApiOperation("清除数据")
     @RequestMapping(value = "/clean", method = RequestMethod.GET)
-    public CommonResult clean() {
+    public String clean() {
     	orderService.remove(null);
-        return CommonResult.success("success");
+        return "success";
     }
 }
