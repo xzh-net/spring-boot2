@@ -10,8 +10,6 @@
       - `#` ：匹配一个或多个词
       - `*` ：匹配不多不少恰好1个词
 
-
-
 ## 死信队列
 
 **死信队列的本质是：通过将消息路由到一个特定的"中转队列"，在该队列中等待满足特定条件（如TTL过期、达到重试上限等）后，自动将消息重新投递到另一个专门处理这些"失败"消息的队列中。**
@@ -33,9 +31,7 @@
 
 ## 投递确认
 
-
-
-
+TODO
 
 ## 安装RabbitMQ
 
@@ -64,8 +60,6 @@ rabbitmqctl set_permissions -p "/" admin ".*" ".*" ".*"
 rabbitmqctl add_vhost /xzh
 rabbitmqctl set_permissions -p "/xzh" admin ".*" ".*" ".*"
 ```
-
-
 
 ### 访问地址
 

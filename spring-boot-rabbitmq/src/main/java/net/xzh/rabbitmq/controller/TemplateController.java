@@ -1,8 +1,5 @@
 package net.xzh.rabbitmq.controller;
 
-import org.springframework.amqp.core.Message;
-import org.springframework.amqp.core.MessageBuilder;
-import org.springframework.amqp.core.MessageProperties;
 import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,13 +10,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import cn.hutool.json.JSONUtil;
 import net.xzh.rabbitmq.common.constant.AMPQConstant;
-import net.xzh.rabbitmq.config.exchange.AcknowledgeExchangeConfig;
 import net.xzh.rabbitmq.config.exchange.DeadLetterExchangeConfig;
 import net.xzh.rabbitmq.config.exchange.DelayedExchangeConfig;
 import net.xzh.rabbitmq.domain.OrderDTO;
 
 /**
  * RabbitTemplate测试
+ * 
  * @author xzh
  *
  */
@@ -29,15 +26,10 @@ public class TemplateController {
 
 	@Autowired
 	private RabbitTemplate rabbitTemplate;
-	
-	/**
-	 * 有回执的template
-	 */
-	@Autowired
-	private RabbitTemplate acknowledgeRabbitTemplate;
 
 	/**
 	 * 简单模式
+	 * 
 	 * @param msg
 	 * @return
 	 */
@@ -49,6 +41,7 @@ public class TemplateController {
 
 	/**
 	 * 工作模式
+	 * 
 	 * @param msg
 	 * @return
 	 */
@@ -60,6 +53,7 @@ public class TemplateController {
 
 	/**
 	 * 订阅模式，扇形交换机
+	 * 
 	 * @param msg
 	 * @return
 	 */
@@ -71,6 +65,7 @@ public class TemplateController {
 
 	/**
 	 * 路由模式，直接交换机
+	 * 
 	 * @param msg
 	 * @return
 	 */
@@ -94,6 +89,7 @@ public class TemplateController {
 
 	/**
 	 * 主题模式，主题交换机
+	 * 
 	 * @param msg
 	 * @return
 	 */
@@ -102,9 +98,10 @@ public class TemplateController {
 		rabbitTemplate.convertAndSend(AMPQConstant.EXCHANGE_TOPIC, msg, msg);
 		return "Topic 发送成功";
 	}
-	
+
 	/**
 	 * dxl死信消息
+	 * 
 	 * @param orderId
 	 * @return
 	 */
@@ -120,10 +117,10 @@ public class TemplateController {
 				}, new CorrelationData(orderId));
 		return "DXL 发送成功";
 	}
-	
 
 	/**
 	 * 延迟消息
+	 * 
 	 * @param orderId
 	 * @return
 	 */
@@ -132,7 +129,7 @@ public class TemplateController {
 		// 给延迟队列发送消息，彼此间隔不同无任何影响
 		OrderDTO order = new OrderDTO();
 		order.setId(Long.valueOf(orderId));
-		order.setProductName("延迟战甲" + System.currentTimeMillis());
+		order.setProductName("延迟插件战甲" + System.currentTimeMillis());
 		rabbitTemplate.convertAndSend(AMPQConstant.EXCHANGE_DELAY, DelayedExchangeConfig.DELAYED_ROUTING_KEY,
 				JSONUtil.toJsonStr(order), message -> {
 					// 配置消息的过期时间
@@ -141,22 +138,5 @@ public class TemplateController {
 				}, new CorrelationData(orderId));
 		return "delay 发送成功";
 	}
-	
-	/**
-	 * 投递确认 
-	 * @param orderId
-	 * @return
-	 */
-	@RequestMapping(value = "/ack", method = RequestMethod.GET)
-	public String ack(@RequestParam String orderId) {
-		Message message = MessageBuilder.withBody(orderId.getBytes())
-				.setContentType(MessageProperties.CONTENT_TYPE_JSON).setContentEncoding("utf-8").setMessageId(orderId)
-				.build();
-		// 构建回调返回的数据
-		CorrelationData correlationData = new CorrelationData(orderId);
-		// 发送消息
-		acknowledgeRabbitTemplate.convertAndSend(AMPQConstant.EXCHANGE_ACK, AcknowledgeExchangeConfig.ACK_ROUTING_KEY, message,
-				correlationData);
-		return "ack 发送成功";
-	}
+
 }
