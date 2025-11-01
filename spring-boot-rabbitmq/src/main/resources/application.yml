@@ -5,9 +5,7 @@ spring:
     addresses: 172.17.17.161:5672
     virtual-host: /xzh  # 虚拟host
     username: admin     # 用户名
-    password: 123456    # 密码  
-    publisher-confirm-type: correlated	# 开启确认机制
-    publisher-returns: true   			# 开启退回机制 
+    password: 123456    # 密码
     listener:
       simple:  
         acknowledge-mode: manual	# 手动确认模式
