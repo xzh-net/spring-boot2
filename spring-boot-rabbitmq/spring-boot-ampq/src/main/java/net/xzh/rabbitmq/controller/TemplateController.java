@@ -7,66 +7,84 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import net.xzh.rabbitmq.common.model.CommonResult;
-import net.xzh.rabbitmq.config.CommonConstant;
+import net.xzh.rabbitmq.common.constant.CommonConstant;
 
 /**
- * RabbitTemplate
+ * RabbitTemplate测试
+ * @author xzh
+ *
  */
-@Api(tags = "RabbitTemplate测试")
 @RestController
 @RequestMapping("/rabbit")
 public class TemplateController {
 
 	@Autowired
-	private RabbitTemplate template;
+	private RabbitTemplate rabbitTemplate;
 
-	@ApiOperation("简单模式")
+	/**
+	 * 简单模式
+	 * @param msg
+	 * @return
+	 */
 	@RequestMapping(value = "/simple", method = RequestMethod.GET)
-	public CommonResult<?> simple(@RequestParam String messgaes) {
-		template.convertAndSend(CommonConstant.QUEUE_SIMPLE, messgaes);
-		return CommonResult.success(System.currentTimeMillis());
+	public String simple(@RequestParam String msg) {
+		rabbitTemplate.convertAndSend(CommonConstant.QUEUE_SIMPLE, msg);
+		return "Simple 发送成功";
 	}
 
-	@ApiOperation("工作模式")
+	/**
+	 * 工作模式
+	 * @param msg
+	 * @return
+	 */
 	@RequestMapping(value = "/work", method = RequestMethod.GET)
-	public CommonResult<?> work(@RequestParam String messgaes) {
-		template.convertAndSend(CommonConstant.QUEUE_WORK, messgaes);
-		return CommonResult.success(System.currentTimeMillis());
+	public String work(@RequestParam String msg) {
+		rabbitTemplate.convertAndSend(CommonConstant.QUEUE_WORK, msg);
+		return "Work 发送成功";
 	}
 
-	@ApiOperation("发布/订阅模式")
-	@RequestMapping(value = "/fanout", method = RequestMethod.GET)
-	public CommonResult<?> fanout(@RequestParam String messgaes) {
-		template.convertAndSend(CommonConstant.EXCHANGE_FANOUT, "", messgaes);
-		return CommonResult.success(System.currentTimeMillis());
+	/**
+	 * 订阅模式，扇形交换机
+	 * @param msg
+	 * @return
+	 */
+	@RequestMapping(value = "/publish", method = RequestMethod.GET)
+	public String publish(@RequestParam String msg) {
+		rabbitTemplate.convertAndSend(CommonConstant.EXCHANGE_FANOUT, "", msg);
+		return "Publish 发送成功";
 	}
 
-	@ApiOperation("路由模式")
-	@RequestMapping(value = "/direct", method = RequestMethod.GET)
-	public CommonResult<?> direct(@RequestParam String messgaes) {
+	/**
+	 * 路由模式，直接交换机
+	 * @param msg
+	 * @return
+	 */
+	@RequestMapping(value = "/route", method = RequestMethod.GET)
+	public String direct(@RequestParam String msg) {
 		String key = "";
-		if (messgaes.startsWith("1")) {
+		if (msg.startsWith("error")) {
 			key = "error";
-		} else if (messgaes.startsWith("2")) {
+		} else if (msg.startsWith("warn")) {
 			key = "warn";
-		} else if (messgaes.startsWith("3")) {
+		} else if (msg.startsWith("info")) {
 			key = "info";
-		} else if (messgaes.startsWith("4")) {
+		} else if (msg.startsWith("debug")) {
 			key = "debug";
 		} else {
 			key = "other";
 		}
-		template.convertAndSend(CommonConstant.EXCHANGE_DIRECT, key, messgaes);
-		return CommonResult.success(System.currentTimeMillis());
+		rabbitTemplate.convertAndSend(CommonConstant.EXCHANGE_DIRECT, key, msg);
+		return "Direct 发送成功";
 	}
 
-	@ApiOperation("通配符模式")
-	@RequestMapping(value = "/topic", method = RequestMethod.GET)
-	public CommonResult<?> topic(@RequestParam String messgaes) {
-		template.convertAndSend(CommonConstant.EXCHANGE_TOPIC, messgaes, messgaes);
-		return CommonResult.success(System.currentTimeMillis());
+	/**
+	 * 主题模式，主题交换机
+	 * @param msg
+	 * @return
+	 */
+	@RequestMapping(value = "/match", method = RequestMethod.GET)
+	public String match(@RequestParam String msg) {
+		rabbitTemplate.convertAndSend(CommonConstant.EXCHANGE_TOPIC, msg, msg);
+		return "Topic 发送成功";
 	}
 }
