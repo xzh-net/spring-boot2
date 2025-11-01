@@ -1,0 +1,35 @@
+# 消息类型和5个业务场景
+
+### 简单模式
+GET http://127.0.0.1:8080/rabbit/simple?msg=这是一个简单模式消息
+
+### 工作模式
+GET http://127.0.0.1:8080/rabbit/work?msg=工作模式测试消息
+
+### 订阅模式
+GET http://127.0.0.1:8080/rabbit/publish?msg=订阅消息abc
+
+### 路由模式error
+GET http://127.0.0.1:8080/rabbit/route?msg=error123
+### 路由模式warn
+GET http://127.0.0.1:8080/rabbit/route?msg=warn456
+### 路由模式info
+GET http://127.0.0.1:8080/rabbit/route?msg=info789
+### 路由模式debug
+GET http://127.0.0.1:8080/rabbit/route?msg=debug000
+
+### 主题模式1
+GET http://127.0.0.1:8080/rabbit/match?msg=我有一个.orange.橡皮
+### 主题模式2
+GET http://127.0.0.1:8080/rabbit/match?msg=你看.彩色的.rabbit
+### 主题模式3
+GET http://127.0.0.1:8080/rabbit/match?msg=lazy.大盗贼
+
+### 死信队列
+GET http://127.0.0.1:8080/rabbit/dlx?orderId=13579
+
+### 延迟队列
+GET http://127.0.0.1:8080/rabbit/delay?orderId=24680
+
+### 有发送和回执的消息
+GET http://127.0.0.1:8080/rabbit/ack?orderId=我是个大盗贼
