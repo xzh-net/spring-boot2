@@ -5,7 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,20 +21,23 @@ public class HBaseUtilsTest {
     @Autowired
     private HBaseRepository hBaseRepository;
 
+    @Test
+    void contextLoads() {
+    }
+    
+    
     /**
      * 创建命名空间
      */
-    
-//    @Test
+    @Test
     public void createNamespace() {
-        hBaseRepository.createNamespace("xzh");
+    	hBaseRepository.createNamespace("xzh");
     }
     
     /**
      * 创建多表
      */
-    
-//    @Test
+    @Test
     public void createTable() {
         Map<String, List<String>> tableMap = new HashMap<>();
         tableMap.put("xzh:actionFlow", Arrays.asList("info", "logs"));
