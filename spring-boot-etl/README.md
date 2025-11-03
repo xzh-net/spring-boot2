@@ -1,71 +1,81 @@
 # pdi-ce-7.1.0.0-12
 
+安装说明：https://www.xuzhihao.net/#/deploy/kettle
 
+## 设置仓库地址
 
-访问地址：http://127.0.0.1:8080/doc.html，所有任务实例和表结构见：https://www.xuzhihao.net/#/deploy/kettle
+kattle依赖jar，在官方仓库里面，在`settings.xml`中增加官方仓库下载地址
 
-
-## 1. Kettle无法下载jar修改maven配置
-
-```conf
-<profile>
-      <id>pentaho</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
-      <repositories>
-        <repository>
-          <id>pentaho-public</id>
-          <name>Pentaho Public</name>
-          <url>http://nexus.pentaho.org/content/groups/omni</url>
-          <releases>
-            <enabled>true</enabled>
-            <updatePolicy>always</updatePolicy>
-          </releases>
-          <snapshots>
-            <enabled>true</enabled>
-            <updatePolicy>always</updatePolicy>
-          </snapshots>
-        </repository>
-      </repositories>
-      <pluginRepositories>
-        <pluginRepository>
-          <id>pentaho-public</id>
-          <name>Pentaho Public</name>
-          <url>http://nexus.pentaho.org/content/groups/omni</url>
-          <releases>
-            <enabled>true</enabled>
-            <updatePolicy>always</updatePolicy>
-          </releases>
-          <snapshots>
-            <enabled>true</enabled>
-            <updatePolicy>always</updatePolicy>
-          </snapshots>
-        </pluginRepository>
-      </pluginRepositories>
-    </profile>
+```xml
+<profiles>
+	<profile>
+	  <id>pentaho</id>
+	  <activation>
+		<activeByDefault>true</activeByDefault>
+	  </activation>
+	  <repositories>
+		<repository>
+		  <id>pentaho-public</id>
+		  <name>Pentaho Public</name>
+		  <url>http://nexus.pentaho.org/content/groups/omni</url>
+		  <releases>
+			<enabled>true</enabled>
+			<updatePolicy>always</updatePolicy>
+		  </releases>
+		  <snapshots>
+			<enabled>true</enabled>
+			<updatePolicy>always</updatePolicy>
+		  </snapshots>
+		</repository>
+	  </repositories>
+	  <pluginRepositories>
+		<pluginRepository>
+		  <id>pentaho-public</id>
+		  <name>Pentaho Public</name>
+		  <url>http://nexus.pentaho.org/content/groups/omni</url>
+		  <releases>
+			<enabled>true</enabled>
+			<updatePolicy>always</updatePolicy>
+		  </releases>
+		  <snapshots>
+			<enabled>true</enabled>
+			<updatePolicy>always</updatePolicy>
+		  </snapshots>
+		</pluginRepository>
+	  </pluginRepositories>
+	</profile>
 </profiles>
 ```
 
-## 2. 无法加载oracle驱动
+## 安装Oracle驱动
 
 ```bash
-mvn install:install-file -Dfile=D:\ojdbc6.jar -DgroupId=com.oracle -DartifactId=ojdbc6 -Dversion=10.2.0.5.0 -Dpackaging=jar -DgeneratePom=true -DcreateChecksum=true  
+mvn install:install-file -Dfile=D:\ojdbc6.jar -DgroupId=com.oracle -DartifactId=ojdbc6 -Dversion=11.2.0.3.0 -Dpackaging=jar -DgeneratePom=true -DcreateChecksum=true
 ```
 
 ```conf
 <dependency>
 	<groupId>com.oracle</groupId>
 	<artifactId>ojdbc6</artifactId>
-	<version>10.2.0.5.0</version>
+	<version>11.2.0.3.0</version>
 </dependency>
 ```
 
-## 3. 交互式调用
+## 调用过程
 
-### 3.1 运行ktr文件
+```sql
+CREATE TABLE TEST(
+  ID   VARCHAR2(100),
+  NAME VARCHAR2(100),
+  YEAR NUMBER
+)
 
-### 3.2 运行kjb文件
+CREATE OR REPLACE PROCEDURE TEST_KATTLE(I_NAME VARCHAR2, I_YEAR NUMBER) AS
+  P_ID VARCHAR2(100);
+BEGIN
+  SELECT SYS_GUID() INTO P_ID FROM DUAL;
+  INSERT INTO TEST (ID, NAME, YEAR) VALUES (P_ID, I_NAME, I_YEAR);
+END;
+```
 
-## 4. 编程式调用
-
+## 调用Job
