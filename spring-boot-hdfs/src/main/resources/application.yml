@@ -1,3 +1,14 @@
 server:
   port: 8080
-hadoop.name-node: hdfs://192.168.2.201:8020
+
+hadoop:
+  name-node: hdfs://172.17.17.161:8020
+  home-dir: D:/tools/hadoop-3.1.4  # Windows开发环境
+  user-name: root
+  dfs-replication: 1
+
+# 对于Linux环境
+# hadoop:
+#   name-node: hdfs://172.17.17.161:8020
+#   user-name: hdfs
+#   dfs-replication: 

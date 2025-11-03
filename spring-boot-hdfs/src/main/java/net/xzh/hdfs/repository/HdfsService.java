@@ -1,405 +1,360 @@
 package net.xzh.hdfs.repository;
 
-
-import java.io.IOException;
-import java.nio.charset.Charset;
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.apache.hadoop.conf.Configuration;
-import org.apache.hadoop.fs.BlockLocation;
-import org.apache.hadoop.fs.FSDataInputStream;
-import org.apache.hadoop.fs.FileStatus;
-import org.apache.hadoop.fs.FileSystem;
-import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.fs.PathFilter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
+import org.apache.hadoop.fs.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
-import com.alibaba.fastjson.JSON;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
- * HDFS相关的基本操作
- *
+ * HDFS服务类
  */
+@Slf4j
+@Component
 public class HdfsService {
 
-    private Logger logger = LoggerFactory.getLogger(HdfsService.class);
-    
-    private Configuration conf = null;
-    
-    @Value("${hadoop.name-node}")
-	private String defaultHdfsUri;
+    private final FileSystem fileSystem;
+    @SuppressWarnings("unused")
+	private final Configuration configuration;
 
-    public HdfsService(Configuration conf,String defaultHdfsUri) {
-        this.conf = conf;
-        this.defaultHdfsUri = defaultHdfsUri;
+    @Autowired
+    public HdfsService(FileSystem fileSystem, Configuration configuration) {
+        this.fileSystem = fileSystem;
+        this.configuration = configuration;
     }
 
-    /**
-     * 获取HDFS文件系统
-     * @return org.apache.hadoop.fs.FileSystem
-     */
-    private FileSystem getFileSystem() throws IOException {
-        return FileSystem.get(conf);
-    }
+    // ==================== 目录操作 ====================
 
     /**
      * 创建HDFS目录
-     * @since 1.0.0
-     * @param path HDFS的相对目录路径，比如：/testDir
-     * @return boolean 是否创建成功
      */
-    public boolean mkdir(String path){
-        //如果目录已经存在，则直接返回
-        if(checkExists(path)){
+    public boolean mkdir(String path) {
+        try {
+            Path hdfsPath = new Path(path);
+            if (!fileSystem.exists(hdfsPath)) {
+                return fileSystem.mkdirs(hdfsPath);
+            }
+            log.info("目录已存在: {}", path);
             return true;
-        }else{
-        	 FileSystem fileSystem = null;
-             try {
-                 fileSystem = getFileSystem();
-                //最终的HDFS文件目录
-                String hdfsPath = generateHdfsPath(path);
-                //创建目录
-                return fileSystem.mkdirs(new Path(hdfsPath));
-            } catch (IOException e) {
-                logger.error(MessageFormat.format("创建HDFS目录失败，path:{0}",path),e);
-                return false;
-            }finally {
-                close(fileSystem);
-            }
-        }
-    }
-
-    /**
-     * 上传文件至HDFS
-     * @param srcFile 本地文件路径，比如：D:/test.txt
-     * @param dstPath HDFS的相对目录路径，比如：/testDir
-     */
-    public void uploadFileToHdfs(String srcFile, String dstPath){
-        this.uploadFileToHdfs(false, true, srcFile, dstPath);
-    }
-
-    /**
-     * 上传文件至HDFS
-     * @param delSrc 是否删除本地文件
-     * @param overwrite 是否覆盖HDFS上面的文件
-     * @param srcFile 本地文件路径，比如：D:/test.txt
-     * @param dstPath HDFS的相对目录路径，比如：/testDir
-     */
-    public void uploadFileToHdfs(boolean delSrc, boolean overwrite, String srcFile, String dstPath){
-        //源文件路径
-        Path localSrcPath = new Path(srcFile);
-        //目标文件路径
-        Path hdfsDstPath = new Path(generateHdfsPath(dstPath));
-
-        FileSystem fileSystem = null;
-        try {
-            fileSystem = getFileSystem();
-
-            fileSystem.copyFromLocalFile(delSrc,overwrite,localSrcPath,hdfsDstPath);
         } catch (IOException e) {
-            logger.error(MessageFormat.format("上传文件至HDFS失败，srcFile:{0},dstPath:{1}",srcFile,dstPath),e);
-        }finally {
-            close(fileSystem);
-        }
-    }
-
-    /**
-     * 判断文件或者目录是否在HDFS上面存在
-     * @param path HDFS的相对目录路径，比如：/testDir、/testDir/a.txt
-     * @return boolean
-     */
-    public boolean checkExists(String path){
-        FileSystem fileSystem = null;
-        try {
-            fileSystem = getFileSystem();
-
-            //最终的HDFS文件目录
-            String hdfsPath = generateHdfsPath(path);
-
-            //创建目录
-            return fileSystem.exists(new Path(hdfsPath));
-        } catch (IOException e) {
-            logger.error(MessageFormat.format("'判断文件或者目录是否在HDFS上面存在'失败，path:{0}",path),e);
+            log.error("创建HDFS目录失败: {}", path, e);
             return false;
-        }finally {
-            close(fileSystem);
         }
     }
 
     /**
-     * 获取HDFS上面的某个路径下面的所有文件或目录（不包含子目录）信息
-     * @param path HDFS的相对目录路径，比如：/testDir
-     * @return java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
+     * 递归创建目录
      */
-    public List<Map<String,Object>> listFiles(String path, PathFilter pathFilter){
-        //返回数据
-        List<Map<String,Object>> result = new ArrayList<>();
-
-        //如果目录已经存在，则继续操作
-        if(checkExists(path)){
-            FileSystem fileSystem = null;
-            try {
-                fileSystem = getFileSystem();
-                //最终的HDFS文件目录
-                String hdfsPath = generateHdfsPath(path);
-                FileStatus[] statuses;
-                //根据Path过滤器查询
-                if(pathFilter != null){
-                    statuses = fileSystem.listStatus(new Path(hdfsPath),pathFilter);
-                }else{
-                    statuses = fileSystem.listStatus(new Path(hdfsPath));
-                }
-                if(statuses != null){
-                    for(FileStatus status : statuses){
-                        //每个文件的属性
-                        Map<String,Object> fileMap = new HashMap<>(2);
-                        fileMap.put("path",status.getPath().toString());
-                        fileMap.put("isDir",status.isDirectory());
-                        result.add(fileMap);
-                    }
-                }
-            } catch (IOException e) {
-                logger.error(MessageFormat.format("获取HDFS上面的某个路径下面的所有文件失败，path:{0}",path),e);
-            }finally {
-                close(fileSystem);
-            }
-        }
-
-        return result;
-    }
-
-
-    /**
-     * 从HDFS下载文件至本地
-     * @param srcFile HDFS的相对目录路径，比如：/testDir/a.txt
-     * @param dstFile 下载之后本地文件路径（如果本地文件目录不存在，则会自动创建），比如：D:/test.txt
-     */
-    public void downloadFileFromHdfs(String srcFile, String dstFile){
-        //HDFS文件路径
-        Path hdfsSrcPath = new Path(generateHdfsPath(srcFile));
-        //下载之后本地文件路径
-        Path localDstPath = new Path(dstFile);
-
-        FileSystem fileSystem = null;
+    public boolean mkdirs(String path) {
         try {
-            fileSystem = getFileSystem();
-
-            fileSystem.copyToLocalFile(hdfsSrcPath,localDstPath);
+            return fileSystem.mkdirs(new Path(path));
         } catch (IOException e) {
-            logger.error(MessageFormat.format("从HDFS下载文件至本地失败，srcFile:{0},dstFile:{1}",srcFile,dstFile),e);
-        }finally {
-            close(fileSystem);
+            log.error("递归创建HDFS目录失败: {}", path, e);
+            return false;
         }
     }
 
+    // ==================== 文件上传 ====================
+
     /**
-     * 打开HDFS上面的文件并返回 InputStream
-     * @author zifangsky
-     * @date 2018/7/23 17:08
-     * @since 1.0.0
-     * @param path HDFS的相对目录路径，比如：/testDir/c.txt
-     * @return FSDataInputStream
+     * 上传本地文件到HDFS
      */
-    public FSDataInputStream open(String path){
-        //HDFS文件路径
-        Path hdfsPath = new Path(generateHdfsPath(path));
+    public boolean uploadFile(String localFilePath, String hdfsPath) {
+        return uploadFile(localFilePath, hdfsPath, false, true);
+    }
 
-        FileSystem fileSystem = null;
+    /**
+     * 上传本地文件到HDFS（可配置参数）
+     */
+    public boolean uploadFile(String localFilePath, String hdfsPath, 
+                            boolean deleteSource, boolean overwrite) {
         try {
-            fileSystem = getFileSystem();
-
-            return fileSystem.open(hdfsPath);
+            Path localPath = new Path(localFilePath);
+            Path hdfsTargetPath = new Path(hdfsPath);
+            
+            fileSystem.copyFromLocalFile(deleteSource, overwrite, localPath, hdfsTargetPath);
+            log.info("文件上传成功: {} -> {}", localFilePath, hdfsPath);
+            return true;
         } catch (IOException e) {
-            logger.error(MessageFormat.format("打开HDFS上面的文件失败，path:{0}",path),e);
+            log.error("文件上传失败: {} -> {}", localFilePath, hdfsPath, e);
+            return false;
         }
-
-        return null;
     }
 
     /**
-     * 打开HDFS上面的文件并返回byte数组，方便Web端下载文件
-     * <p>new ResponseEntity<byte[]>(byte数组, headers, HttpStatus.CREATED);</p>
-     * <p>或者：new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(templateFile), headers, HttpStatus.CREATED);</p>
-     * @param path HDFS的相对目录路径，比如：/testDir/b.txt
-     * @return FSDataInputStream
+     * 上传字节数组到HDFS
      */
-    public byte[] openWithBytes(String path){
-        //HDFS文件路径
-        Path hdfsPath = new Path(generateHdfsPath(path));
+    public boolean uploadBytes(byte[] data, String hdfsPath) {
+        try (InputStream inputStream = new ByteArrayInputStream(data)) {
+            return uploadStream(inputStream, hdfsPath);
+        } catch (IOException e) {
+            log.error("字节数组上传失败: {}", hdfsPath, e);
+            return false;
+        }
+    }
 
-        FileSystem fileSystem = null;
-        FSDataInputStream inputStream = null;
+    /**
+     * 上传字符串到HDFS
+     */
+    public boolean uploadString(String content, String hdfsPath) {
+        return uploadBytes(content.getBytes(StandardCharsets.UTF_8), hdfsPath);
+    }
+
+    /**
+     * 上传输入流到HDFS
+     */
+    public boolean uploadStream(InputStream inputStream, String hdfsPath) {
+        try (FSDataOutputStream outputStream = fileSystem.create(new Path(hdfsPath))) {
+            IOUtils.copy(inputStream, outputStream);
+            log.info("文件流上传成功: {}", hdfsPath);
+            return true;
+        } catch (IOException e) {
+            log.error("文件流上传失败: {}", hdfsPath, e);
+            return false;
+        }
+    }
+
+    /**
+     * 上传MultipartFile到HDFS
+     */
+    public boolean uploadMultipartFile(MultipartFile file, String hdfsPath) {
         try {
-            fileSystem = getFileSystem();
-            inputStream = fileSystem.open(hdfsPath);
+            return uploadStream(file.getInputStream(), hdfsPath);
+        } catch (IOException e) {
+            log.error("MultipartFile上传失败: {}", hdfsPath, e);
+            return false;
+        }
+    }
 
+    // ==================== 文件下载 ====================
+
+    /**
+     * 下载HDFS文件到本地
+     */
+    public boolean downloadFile(String hdfsPath, String localPath) {
+        try {
+            Path hdfsSrcPath = new Path(hdfsPath);
+            Path localDstPath = new Path(localPath);
+            
+            fileSystem.copyToLocalFile(false, hdfsSrcPath, localDstPath, true);
+            log.info("文件下载成功: {} -> {}", hdfsPath, localPath);
+            return true;
+        } catch (IOException e) {
+            log.error("文件下载失败: {} -> {}", hdfsPath, localPath, e);
+            return false;
+        }
+    }
+
+    /**
+     * 下载HDFS文件为字节数组
+     */
+    public byte[] downloadAsBytes(String hdfsPath) {
+        try (FSDataInputStream inputStream = fileSystem.open(new Path(hdfsPath))) {
             return IOUtils.toByteArray(inputStream);
         } catch (IOException e) {
-            logger.error(MessageFormat.format("打开HDFS上面的文件失败，path:{0}",path),e);
-        }finally {
-            if(inputStream != null){
-                try {
-                    inputStream.close();
-                } catch (IOException e) {
-                    // ignore
-                }
-            }
+            log.error("下载文件为字节数组失败: {}", hdfsPath, e);
+            return null;
         }
-
-        return null;
     }
 
     /**
-     * 打开HDFS上面的文件并返回String字符串
-     * @param path HDFS的相对目录路径，比如：/testDir/b.txt
-     * @return FSDataInputStream
+     * 下载HDFS文件为字符串
      */
-    public String openWithString(String path){
-        //HDFS文件路径
-        Path hdfsPath = new Path(generateHdfsPath(path));
+    public String downloadAsString(String hdfsPath) {
+        byte[] bytes = downloadAsBytes(hdfsPath);
+        return bytes != null ? new String(bytes, StandardCharsets.UTF_8) : null;
+    }
 
-        FileSystem fileSystem = null;
-        FSDataInputStream inputStream = null;
+    /**
+     * 获取HDFS文件输入流
+     */
+    public FSDataInputStream openStream(String hdfsPath) {
         try {
-            fileSystem = getFileSystem();
-            inputStream = fileSystem.open(hdfsPath);
-
-            return IOUtils.toString(inputStream, Charset.forName("UTF-8"));
+            return fileSystem.open(new Path(hdfsPath));
         } catch (IOException e) {
-            logger.error(MessageFormat.format("打开HDFS上面的文件失败，path:{0}",path),e);
-        }finally {
-            if(inputStream != null){
-                try {
-                    inputStream.close();
-                } catch (IOException e) {
-                    // ignore
-                }
-            }
+            log.error("打开HDFS文件流失败: {}", hdfsPath, e);
+            return null;
         }
+    }
 
-        return null;
+    // ==================== 文件列表操作 ====================
+
+    /**
+     * 列出目录内容
+     */
+    public List<FileInfo> listFiles(String path) {
+        return listFiles(path, null);
     }
 
     /**
-     * 打开HDFS上面的文件并转换为Java对象（需要HDFS上门的文件内容为JSON字符串）
-     * @param path HDFS的相对目录路径，比如：/testDir/c.txt
-     * @return FSDataInputStream
+     * 列出目录内容（带过滤器）
      */
-    public <T extends Object> T openWithObject(String path, Class<T> clazz){
-        //1、获得文件的json字符串
-        String jsonStr = this.openWithString(path);
-
-        //2、使用com.alibaba.fastjson.JSON将json字符串转化为Java对象并返回
-        return JSON.parseObject(jsonStr, clazz);
-    }
-
-    /**
-     * 重命名
-     * @param srcFile 重命名之前的HDFS的相对目录路径，比如：/testDir/b.txt
-     * @param dstFile 重命名之后的HDFS的相对目录路径，比如：/testDir/b_new.txt
-     */
-    public boolean rename(String srcFile, String dstFile) {
-        //HDFS文件路径
-        Path srcFilePath = new Path(generateHdfsPath(srcFile));
-        //下载之后本地文件路径
-        Path dstFilePath = new Path(dstFile);
-
-        FileSystem fileSystem = null;
+    public List<FileInfo> listFiles(String path, PathFilter filter) {
         try {
-            fileSystem = getFileSystem();
+            Path hdfsPath = new Path(path);
+            if (!fileSystem.exists(hdfsPath)) {
+                return Collections.emptyList();
+            }
 
-            return fileSystem.rename(srcFilePath,dstFilePath);
+            FileStatus[] statuses = filter != null ? 
+                fileSystem.listStatus(hdfsPath, filter) : 
+                fileSystem.listStatus(hdfsPath);
+
+            return Arrays.stream(statuses)
+                    .map(this::convertToFileInfo)
+                    .collect(Collectors.toList());
         } catch (IOException e) {
-            logger.error(MessageFormat.format("重命名失败，srcFile:{0},dstFile:{1}",srcFile,dstFile),e);
-        }finally {
-            close(fileSystem);
+            log.error("列出目录内容失败: {}", path, e);
+            return Collections.emptyList();
         }
-
-        return false;
     }
 
     /**
-     * 删除HDFS文件或目录
-     * @param path HDFS的相对目录路径，比如：/testDir/c.txt
-     * @return boolean
+     * 递归列出所有文件
+     */
+    public List<FileInfo> listFilesRecursive(String path) {
+        try {
+            RemoteIterator<LocatedFileStatus> fileIterator = 
+                fileSystem.listFiles(new Path(path), true);
+            
+            List<FileInfo> result = new ArrayList<>();
+            while (fileIterator.hasNext()) {
+                result.add(convertToFileInfo(fileIterator.next()));
+            }
+            return result;
+        } catch (IOException e) {
+            log.error("递归列出文件失败: {}", path, e);
+            return Collections.emptyList();
+        }
+    }
+
+    private FileInfo convertToFileInfo(FileStatus status) {
+        return FileInfo.builder()
+                .path(status.getPath().toString())
+                .isDirectory(status.isDirectory())
+                .length(status.getLen())
+                .modificationTime(status.getModificationTime())
+                .owner(status.getOwner())
+                .group(status.getGroup())
+                .permission(status.getPermission().toString())
+                .build();
+    }
+
+    // ==================== 文件操作 ====================
+
+    /**
+     * 检查文件/目录是否存在
+     */
+    public boolean exists(String path) {
+        try {
+            return fileSystem.exists(new Path(path));
+        } catch (IOException e) {
+            log.error("检查文件存在失败: {}", path, e);
+            return false;
+        }
+    }
+
+    /**
+     * 重命名文件/目录
+     */
+    public boolean rename(String srcPath, String dstPath) {
+        try {
+            return fileSystem.rename(new Path(srcPath), new Path(dstPath));
+        } catch (IOException e) {
+            log.error("重命名失败: {} -> {}", srcPath, dstPath, e);
+            return false;
+        }
+    }
+
+    /**
+     * 删除文件/目录
      */
     public boolean delete(String path) {
-        //HDFS文件路径
-        Path hdfsPath = new Path(generateHdfsPath(path));
-
-        FileSystem fileSystem = null;
-        try {
-            fileSystem = getFileSystem();
-
-            return fileSystem.delete(hdfsPath,true);
-        } catch (IOException e) {
-            logger.error(MessageFormat.format("删除HDFS文件或目录失败，path:{0}",path),e);
-        }finally {
-            close(fileSystem);
-        }
-
-        return false;
+        return delete(path, true);
     }
 
     /**
-     * 获取某个文件在HDFS集群的位置
-     * @param path HDFS的相对目录路径，比如：/testDir/a.txt
-     * @return org.apache.hadoop.fs.BlockLocation[]
+     * 删除文件/目录
+     */
+    public boolean delete(String path, boolean recursive) {
+        try {
+            return fileSystem.delete(new Path(path), recursive);
+        } catch (IOException e) {
+            log.error("删除失败: {}", path, e);
+            return false;
+        }
+    }
+
+    /**
+     * 获取文件块位置信息
      */
     public BlockLocation[] getFileBlockLocations(String path) {
-        //HDFS文件路径
-        Path hdfsPath = new Path(generateHdfsPath(path));
-
-        FileSystem fileSystem = null;
         try {
-            fileSystem = getFileSystem();
-            FileStatus fileStatus = fileSystem.getFileStatus(hdfsPath);
-
+            FileStatus fileStatus = fileSystem.getFileStatus(new Path(path));
             return fileSystem.getFileBlockLocations(fileStatus, 0, fileStatus.getLen());
         } catch (IOException e) {
-            logger.error(MessageFormat.format("获取某个文件在HDFS集群的位置失败，path:{0}",path),e);
-        }finally {
-            close(fileSystem);
+            log.error("获取文件块位置失败: {}", path, e);
+            return new BlockLocation[0];
         }
-
-        return null;
     }
-
 
     /**
-     * 将相对路径转化为HDFS文件路径
-     * @param dstPath 相对路径，比如：/data
-     * @return java.lang.String
+     * 获取文件状态
      */
-    private String generateHdfsPath(String dstPath){
-        String hdfsPath = defaultHdfsUri;
-        if(dstPath.startsWith("/")){
-            hdfsPath += dstPath;
-        }else{
-            hdfsPath = hdfsPath + "/" + dstPath;
+    public FileStatus getFileStatus(String path) {
+        try {
+            return fileSystem.getFileStatus(new Path(path));
+        } catch (IOException e) {
+            log.error("获取文件状态失败: {}", path, e);
+            return null;
         }
-
-        return hdfsPath;
     }
-    
+
+    // ==================== 工具方法 ====================
+
     /**
-     * close方法
+     * 获取HDFS使用情况
      */
-    private void close(FileSystem fileSystem){
-        if(fileSystem != null){
-            try {
-                fileSystem.close();
-            } catch (IOException e) {
-                logger.error(e.getMessage());
-            }
+    public FsStatus getFsStatus() {
+        try {
+            return fileSystem.getStatus();
+        } catch (IOException e) {
+            log.error("获取HDFS状态失败", e);
+            return null;
         }
     }
 
+    /**
+     * 生成带时间戳的文件路径
+     */
+    public String generateTimestampPath(String basePath, String filename) {
+        String datePath = new java.text.SimpleDateFormat("yyyy/MM/dd")
+                .format(new Date());
+        return basePath + "/" + datePath + "/" + 
+               System.currentTimeMillis() + "_" + filename;
+    }
+
+    /**
+     * 文件信息DTO
+     */
+    @lombok.Builder
+    @lombok.Data
+    public static class FileInfo {
+        private String path;
+        private boolean isDirectory;
+        private long length;
+        private long modificationTime;
+        private String owner;
+        private String group;
+        private String permission;
+    }
 }
