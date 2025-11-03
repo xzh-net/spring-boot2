@@ -30,3 +30,6 @@ GET http://127.0.0.1:8080/rabbit/dlx?orderId=13579
 
 ### 延迟队列
 GET http://127.0.0.1:8080/rabbit/delay?orderId=24680
+
+### 发送确认的消息
+GET http://127.0.0.1:8080/rabbit/confirm?orderId=这是一个有回执确认的消息

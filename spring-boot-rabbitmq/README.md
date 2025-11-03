@@ -1,4 +1,4 @@
-# AMPQ
+# spring-boot-starter-amqp
 
 ## 工作模式
 
@@ -31,9 +31,47 @@
 
 ## 投递确认
 
-TODO
+全局开启消息投递确认
 
-## 安装RabbitMQ
+```yaml
+publisher-confirm-type: correlated	# 开启确认机制
+publisher-returns: true   			# 开启退回机制 
+```
+
+注册两个工具类，`rabbitTemplateWithCallback`有回调机制
+
+```java
+@Configuration
+public class RabbitMQConfig {
+    
+    @Bean
+    @Primary  // 默认实例，不设置回调
+    public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
+        RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
+        // 设置JSON消息转换器
+        rabbitTemplate.setMessageConverter(new Jackson2JsonMessageConverter());
+        // 不设置回调
+        return rabbitTemplate;
+    }
+    
+    @Bean("rabbitTemplateWithCallback")
+    public RabbitTemplate rabbitTemplateWithCallback(ConnectionFactory connectionFactory, RabbitMQCallback callback) {
+        RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
+        
+        // 设置JSON消息转换器
+        rabbitTemplate.setMessageConverter(new Jackson2JsonMessageConverter());
+        
+        //启用回调机制
+        rabbitTemplate.setConfirmCallback(callback);
+        rabbitTemplate.setReturnsCallback(callback);
+        rabbitTemplate.setMandatory(true);
+        
+        return rabbitTemplate;
+    }
+}
+```
+
+## 安装MQ
 
 ```bash
 docker run -p 5672:5672 -p 61613:61613 -p 15672:15672 --name rabbitmq -d rabbitmq:3.7.15

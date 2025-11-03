@@ -1,8 +1,12 @@
 package net.xzh.rabbitmq.controller;
 
+import org.springframework.amqp.core.Message;
+import org.springframework.amqp.core.MessageBuilder;
+import org.springframework.amqp.core.MessageProperties;
 import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,7 +30,11 @@ public class TemplateController {
 
 	@Autowired
 	private RabbitTemplate rabbitTemplate;
-
+	
+	@Autowired
+	@Qualifier("rabbitTemplateWithCallback")
+	private RabbitTemplate rabbitTemplateWithCallback;
+	
 	/**
 	 * 简单模式
 	 * 
@@ -139,4 +147,21 @@ public class TemplateController {
 		return "delay 发送成功";
 	}
 
+	/**
+	 * 确认消息投递成功
+	 * @param orderId
+	 * @return
+	 */
+	@RequestMapping(value = "/confirm", method = RequestMethod.GET)
+	public String confirm(@RequestParam String orderId) {
+		Message message = MessageBuilder.withBody(orderId.getBytes())
+				.setContentType(MessageProperties.CONTENT_TYPE_JSON).setContentEncoding("utf-8").setMessageId(orderId)
+				.build();
+		// 构建回调返回的数据
+		CorrelationData correlationData = new CorrelationData(orderId);
+		// 发送消息
+		rabbitTemplateWithCallback.convertAndSend(AMPQConstant.QUEUE_SIMPLE, message,
+				correlationData);
+		return "ack 发送成功";
+	}
 }
