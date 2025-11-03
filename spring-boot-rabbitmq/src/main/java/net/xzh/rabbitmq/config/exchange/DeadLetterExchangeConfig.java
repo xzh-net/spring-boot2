@@ -13,7 +13,8 @@ import org.springframework.context.annotation.Configuration;
 import net.xzh.rabbitmq.common.constant.AMPQConstant;
 
 /**
- * 死信队列配置 
+ * 死信队列配置
+ * 
  * @author xzh
  *
  */
@@ -37,11 +38,7 @@ public class DeadLetterExchangeConfig {
 	}
 
 	/**
-	 * 死信队列 - 设置TTL和死信转发参数 
-	 * 队列参数说明： 
-	 * - x-dead-letter-exchange: 死信转发交换机 
-	 * - x-dead-letter-routing-key: 死信转发路由键 
-	 * - x-message-ttl: 消息存活时间（可在发送消息时单独设置）
+	 * 死信队列 - 设置TTL和死信转发参数
 	 */
 	@Bean
 	public Queue deadLetterQueue() {
@@ -96,14 +93,4 @@ public class DeadLetterExchangeConfig {
 		return BindingBuilder.bind(deadLetterReceiveQueue()).to(deadLetterReceiveExchange())
 				.with(DEAD_LETTER_RECEIVE_ROUTING_KEY);
 	}
-
-	  /**
-     * 死信队列工作流程：
-     * 1. 生产者发送消息到 deadLetterExchange，路由键为 DEAD_LETTER_ROUTING_KEY
-     * 2. 消息进入 deadLetterQueue，并设置TTL（消息级别或队列级别）
-     * 3. 消息在 deadLetterQueue 中等待TTL过期
-     * 4. TTL过期后，消息成为死信，被转发到 deadLetterReceiveExchange
-     * 5. 死信接收交换机将消息路由到 deadLetterReceiveQueue
-     * 6. 消费者从 deadLetterReceiveQueue 获取消息进行业务处理
-     */
 }

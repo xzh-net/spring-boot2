@@ -31,7 +31,7 @@ public class WorkQueueListener {
 	 * 
 	 * @param message 接收到的消息内容
 	 */
-//	@RabbitListener(queues = CommonConstant.QUEUE_WORK)
+	@RabbitListener(queues = AMPQConstant.QUEUE_WORK)
 	public void handleWorkMessage(String message) {
 		long startTime = System.currentTimeMillis();
 
@@ -120,9 +120,10 @@ public class WorkQueueListener {
 
 	/**
 	 * 如果需要获取更多消息属性，可以使用Message对象
+	 * 
 	 * @param message
 	 */
-	@RabbitListener(queues = AMPQConstant.QUEUE_WORK)
+//	@RabbitListener(queues = AMPQConstant.QUEUE_WORK)
 	public void handleWorkMessageWithDetails(Message message) {
 		String body = new String(message.getBody());
 		int priority = message.getMessageProperties().getPriority();
