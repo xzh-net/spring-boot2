@@ -3,7 +3,6 @@
 ## 1. 基础
 
 - [Spring Boot入门Thymeleaf、i18n、自定义Banner、拦截器](https://github.com/xzh-net/spring-boot2-demo/tree/main/spring-boot-stand)
-
 - [性能卓越的数据库连接池HikariCP](https://github.com/xzh-net/spring-boot2-demo/tree/main/spring-boot-hikaricp)
 
 ---
@@ -36,6 +35,7 @@
 - [整合Shardingjdbc实现分库分表](https://github.com/xzh-net/spring-boot2-demo/tree/main/spring-boot-sharding-jdbc)
 - [整合Druid数据库连接池监控PostgreSQL和SQL调优](https://github.com/xzh-net/spring-boot2-demo/tree/main/spring-boot-pg-jmeter)
 - [敏感数据的保护伞，基于Jasypt使用SM4加密配置文件](https://github.com/xzh-net/spring-boot2-demo/tree/main/spring-boot-jasypt)
+- [kaptcha验证码](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-kaptcha)
 - [Zipkin实现分布式全链路监控](https://github.com/xzh-net/spring-boot2-demo/tree/main/spring-boot-zipkin)
 - [多数据源自动切换和动态数据源手动切换](https://github.com/xzh-net/spring-boot2-demo/tree/main/spring-boot-datasource)
 - [替代Hystrix和Sentinel的轻量级熔断器Resilience4j](https://github.com/xzh-net/spring-boot2-demo/tree/main/spring-boot-resilience4j)
@@ -71,6 +71,7 @@
 - [【文档】基于MyBatis-Plus快速开发脚手架](https://github.com/xzh-net/spring-boot2-demo/tree/main/spring-boot-mybatis-plus)
 - [整合Activiti工作流设计器和数据验证分组校验](https://github.com/xzh-net/spring-boot2-demo/tree/main/spring-boot-activiti)
 - [YAML格式校验](https://github.com/xzh-net/spring-boot2-demo/tree/main/spring-boot-yaml)
+
 ---
 
 ## 5. 工具
