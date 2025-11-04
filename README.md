@@ -36,7 +36,6 @@
 - [整合Shardingjdbc实现分库分表](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-sharding-jdbc)
 - [整合Druid数据库连接池监控PostgreSQL和SQL调优](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-pg-jmeter)
 - [敏感数据的保护伞，基于Jasypt使用SM4加密配置文件](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-jasypt)
-- [Captcha行为验证码，包含滑动拼图、文字点选](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-captcha)
 - [Zipkin实现分布式全链路监控](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-zipkin)
 - [多数据源自动切换和动态数据源手动切换](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-datasource)
 - [替代Hystrix和Sentinel的轻量级熔断器Resilience4j](https://github.com/xzh-net/spring-boot2/tree/main/spring-boot-resilience4j)
