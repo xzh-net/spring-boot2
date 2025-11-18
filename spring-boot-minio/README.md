@@ -16,7 +16,7 @@ AWS SDK：项目深度依赖 AWS，或需使用 S3 独有功能
 docker run -dit -p 9000:9000 -p 9001:9001 --name minio \
   -v /data/minio/data:/data \
   -v /data/minio/config:/root/.minio \
-  minio/minio:RELEASE.2024-10-29T16-01-48Z \
+  minio/minio:RELEASE.2025-04-22T22-12-26Z \
   server /data \
   --console-address ":9001" 
 # 查看日志
